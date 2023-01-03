@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class AdviserController extends Controller
 {
@@ -37,6 +38,14 @@ class AdviserController extends Controller
                 'gender'=>$gender,
                 'address'=>$address,
             ]);
+
+            DB::table('users')->insert([
+                'name'=>$firstname. ' '. $middlename. ' '. $lastname,
+                'username'=>strtolower($firstname). strtolower($middlename),
+                'user_type'=>'adviser',
+                'password'=>Hash::make('123')
+            ]);
+
             return response()->json('Success', 200);
         } catch (\Throwable $th) {
             return response()->json($th->getMessage(), 500);

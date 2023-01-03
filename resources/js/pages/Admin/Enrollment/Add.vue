@@ -2,7 +2,7 @@
     <div>
         <v-app-bar>
             <v-toolbar-title class="text-overline primary--text">
-                Add Section
+                Add New Enrollment Data
             </v-toolbar-title>
             <v-spacer></v-spacer>
             <v-btn dense iconx text color="primary" @click="saveSection()">
@@ -11,13 +11,21 @@
         </v-app-bar>
 
         <v-container class="pt-6">
-            <v-select outlined densex filledx label="Grade"
-                :items="AppStore.state.gradeLevels" v-model="form.grade"></v-select>
-            <v-text-field
-                label="Section Name"
+            <v-select outlined densex filledx label="Grade & Section"
                 v-model="form.section"
-                outlined densex filledx
-            ></v-text-field>
+                :items="sections"
+                item-value="id"
+                return-object
+                hint="Only the sections with a class adviser are selectable"
+                persistent-hint
+            >
+                <template slot="item" slot-scope="data">
+                    {{ data.item.grade }} - {{ data.item.section }}
+                </template>
+                <template slot="selection" slot-scope="data">
+                    {{ data.item.grade }} - {{ data.item.section }}
+                </template>
+            </v-select>
         </v-container>
     </div>
 </template>
@@ -28,10 +36,17 @@ export default {
     data() {
         return {
             form: {
-                section: '',
-                grade: ''
+                section: null
             },
         };
+    },
+
+    computed: {
+        sections() {
+            return this.AdminSectionsStore.state.sections.filter(e=>{
+                return e.adviser_id != null;
+            });
+        }
     },
 
     methods: {
@@ -57,6 +72,10 @@ export default {
             let setAll = (obj, val) => Object.keys(obj).forEach(k => obj[k] = val);
             setAll(obj, "");
         }
+    },
+
+    created() {
+
     }
 };
 </script>

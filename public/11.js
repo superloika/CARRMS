@@ -75,6 +75,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         text: "Level",
         value: "level"
       }, {
+        text: "Class Adviser",
+        value: "adviser_name"
+      }, {
         text: "Actions",
         value: "actions"
       }]
@@ -185,26 +188,27 @@ var render = function() {
         scopedSlots: _vm._u(
           [
             {
+              key: "item.adviser_name",
+              fn: function(ref) {
+                var item = ref.item
+                return [
+                  _c("span", [
+                    _vm._v(
+                      _vm._s(item.firstname) +
+                        " " +
+                        _vm._s(item.middlename) +
+                        " " +
+                        _vm._s(item.lastname)
+                    )
+                  ])
+                ]
+              }
+            },
+            {
               key: "item.actions",
               fn: function(ref) {
                 var item = ref.item
                 return [
-                  _c(
-                    "v-btn",
-                    {
-                      attrs: {
-                        small: "",
-                        color: "primary",
-                        title: "Assign Adviser"
-                      }
-                    },
-                    [
-                      _c("v-icon", [_vm._v("mdi-account")]),
-                      _vm._v(" Assign Class Adviser\n            ")
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
                   _c(
                     "v-btn",
                     {

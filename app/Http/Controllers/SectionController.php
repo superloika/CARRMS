@@ -9,7 +9,10 @@ class SectionController extends Controller
 {
     public function getSections() {
         try {
-            $res = DB::table('sections')->orderBy('order')->get();
+            $res = DB::table('sections')
+                ->select('sections.*','advisers.firstname','advisers.middlename','advisers.lastname')
+                ->leftJoin('advisers','advisers.id','sections.adviser_id')
+                ->orderBy('order')->get();
             return response()->json($res, 200);
         } catch (\Throwable $th) {
             return response()->json($th->getMessage(), 500);

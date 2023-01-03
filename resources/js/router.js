@@ -92,6 +92,14 @@ const router = new VueRouter({
                         name: "Subjects"
                     }
                 },
+                {
+                    path: "enrollment",
+                    name: "admin.enrollment",
+                    component: ()=>import("./pages/Admin/Enrollment"),
+                    meta: {
+                        name: "Enrollment"
+                    }
+                },
             ]
         },
         // /ADMIN ====================================================

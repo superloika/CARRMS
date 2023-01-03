@@ -2649,6 +2649,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     console.log("NavSide mounted");
@@ -5460,6 +5469,26 @@ var render = function() {
               _c(
                 "v-list-item-content",
                 [_c("v-list-item-title", [_vm._v("Dashboard")])],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-list-item",
+            { attrs: { link: "", to: "/admin/enrollment" } },
+            [
+              _c(
+                "v-list-item-icon",
+                { staticClass: "mr-2" },
+                [_c("v-icon", [_vm._v("mdi-account-multiple")])],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-list-item-content",
+                [_c("v-list-item-title", [_vm._v("Enrollment Data")])],
                 1
               )
             ],
@@ -69130,6 +69159,15 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       },
       meta: {
         name: "Subjects"
+      }
+    }, {
+      path: "enrollment",
+      name: "admin.enrollment",
+      component: function component() {
+        return __webpack_require__.e(/*! import() */ 21).then(__webpack_require__.bind(null, /*! ./pages/Admin/Enrollment */ "./resources/js/pages/Admin/Enrollment/index.vue"));
+      },
+      meta: {
+        name: "Enrollment"
       }
     }]
   }, // /ADMIN ====================================================

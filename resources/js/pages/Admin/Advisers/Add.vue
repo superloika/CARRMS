@@ -5,8 +5,8 @@
                 Add Adviser
             </v-toolbar-title>
             <v-spacer></v-spacer>
-            <v-btn dense icon color="primary" title="Save" @click="saveAdviser()">
-                <v-icon>mdi-floppy</v-icon>
+            <v-btn dense iconx text color="primary" title="Save" @click="saveAdviser()">
+                <v-icon>mdi-floppy</v-icon> Save
             </v-btn>
         </v-app-bar>
 

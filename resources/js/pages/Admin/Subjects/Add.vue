@@ -5,8 +5,8 @@
                 Add Subject
             </v-toolbar-title>
             <v-spacer></v-spacer>
-            <v-btn dense icon color="primary" @click="saveSubject()">
-                <v-icon>mdi-floppy</v-icon>
+            <v-btn dense iconx text color="primary" @click="saveSubject()">
+                <v-icon>mdi-floppy</v-icon> Save
             </v-btn>
         </v-app-bar>
 

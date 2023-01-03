@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 20, 2022 at 11:01 PM
+-- Generation Time: Jan 03, 2023 at 08:20 AM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 7.4.30
 
@@ -45,7 +45,62 @@ CREATE TABLE `advisers` (
 
 INSERT INTO `advisers` (`id`, `firstname`, `middlename`, `lastname`, `gender`, `address`, `status`, `created_at`, `updated_at`) VALUES
 (1, 'John', 'Dummy', 'Doe', 'Male', 'Tagbilaran', 'active', '2022-12-16 04:20:05', '2022-12-16 04:20:05'),
-(5, 'Kim', 'sdfsdfdsf', 'Orilla', 'Female', 'Haguilanan Grande, Balilihan, Bohol', 'active', '2022-12-21 04:18:24', '2022-12-21 04:18:24');
+(5, 'Kim', 'sdfsdfdsf', 'Orilla', 'Female', 'Haguilanan Grande, Balilihan, Bohol', 'active', '2022-12-21 04:18:24', '2022-12-21 04:18:24'),
+(10, 'Jane', 'Dummy', 'Smith', 'Female', 'Bohol', 'active', '2023-01-03 14:04:20', '2023-01-03 14:04:20');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `enrollment_head`
+--
+
+CREATE TABLE `enrollment_head` (
+  `id` int(11) NOT NULL,
+  `sy_id` int(11) NOT NULL,
+  `adviser_id` int(11) NOT NULL,
+  `section_id` int(11) NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
+  `updated_at` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `enrollment_head`
+--
+
+INSERT INTO `enrollment_head` (`id`, `sy_id`, `adviser_id`, `section_id`, `created_at`, `updated_at`) VALUES
+(1, 0, 0, 0, '2022-12-16 04:20:05', '2022-12-21 02:47:43'),
+(12, 0, 0, 0, '2022-12-21 02:42:47', '2022-12-21 03:20:28'),
+(13, 0, 0, 0, '2022-12-21 02:42:47', '2022-12-21 03:20:29'),
+(14, 0, 0, 0, '2022-12-21 02:42:47', '2022-12-21 03:20:29'),
+(15, 0, 0, 0, '2022-12-21 02:42:47', '2022-12-21 03:20:30'),
+(18, 0, 0, 0, '2022-12-16 04:20:05', '2022-12-21 03:20:10'),
+(30, 0, 0, 0, '2023-01-03 12:24:17', '2023-01-03 12:24:17');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `enrollment_line`
+--
+
+CREATE TABLE `enrollment_line` (
+  `id` int(11) NOT NULL,
+  `student_id` int(11) NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
+  `updated_at` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `enrollment_line`
+--
+
+INSERT INTO `enrollment_line` (`id`, `student_id`, `created_at`, `updated_at`) VALUES
+(1, 0, '2022-12-16 04:20:05', '2022-12-21 02:47:43'),
+(12, 0, '2022-12-21 02:42:47', '2022-12-21 03:20:28'),
+(13, 0, '2022-12-21 02:42:47', '2022-12-21 03:20:29'),
+(14, 0, '2022-12-21 02:42:47', '2022-12-21 03:20:29'),
+(15, 0, '2022-12-21 02:42:47', '2022-12-21 03:20:30'),
+(18, 0, '2022-12-16 04:20:05', '2022-12-21 03:20:10'),
+(30, 0, '2023-01-03 12:24:17', '2023-01-03 12:24:17');
 
 -- --------------------------------------------------------
 
@@ -99,6 +154,28 @@ CREATE TABLE `password_resets` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `schoolyears`
+--
+
+CREATE TABLE `schoolyears` (
+  `id` int(11) NOT NULL,
+  `sy` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` float NOT NULL DEFAULT 0,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
+  `updated_at` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `schoolyears`
+--
+
+INSERT INTO `schoolyears` (`id`, `sy`, `status`, `created_at`, `updated_at`) VALUES
+(12, '2021-2022', 0, '2023-01-03 11:42:27', '2023-01-03 12:07:29'),
+(13, '2022-2023', 1, '2023-01-03 11:43:40', '2023-01-03 12:07:29');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `sections`
 --
 
@@ -108,6 +185,7 @@ CREATE TABLE `sections` (
   `grade` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `level` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `section` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `adviser_id` int(11) DEFAULT NULL,
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
   `updated_at` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
@@ -116,15 +194,14 @@ CREATE TABLE `sections` (
 -- Dumping data for table `sections`
 --
 
-INSERT INTO `sections` (`id`, `order`, `grade`, `level`, `section`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Preschool', 'Preschool', '1', '2022-12-16 04:20:05', '2022-12-21 02:47:43'),
-(12, 4, 'Grade 7', 'Junior High', '1', '2022-12-21 02:42:47', '2022-12-21 03:20:28'),
-(13, 4, 'Grade 8', 'Junior High', '1', '2022-12-21 02:42:47', '2022-12-21 03:20:29'),
-(14, 4, 'Grade 9', 'Junior High', '1', '2022-12-21 02:42:47', '2022-12-21 03:20:29'),
-(15, 4, 'Grade 10', 'Junior High', '1', '2022-12-21 02:42:47', '2022-12-21 03:20:30'),
-(18, 2, 'Kinder 1', 'Kinder', '1', '2022-12-16 04:20:05', '2022-12-21 03:20:10'),
-(24, 5, 'Grade 12', 'Senior High', 'Bobos', '2022-12-21 04:46:16', '2022-12-21 04:46:16'),
-(29, 5, 'Grade 12', 'Senior High', 'noooob', '2022-12-21 05:59:47', '2022-12-21 05:59:47');
+INSERT INTO `sections` (`id`, `order`, `grade`, `level`, `section`, `adviser_id`, `created_at`, `updated_at`) VALUES
+(1, 1, 'Preschool', 'Preschool', '1', NULL, '2022-12-16 04:20:05', '2022-12-21 02:47:43'),
+(12, 4, 'Grade 7', 'Junior High', '1', 10, '2022-12-21 02:42:47', '2023-01-03 15:19:10'),
+(13, 4, 'Grade 8', 'Junior High', '1', NULL, '2022-12-21 02:42:47', '2022-12-21 03:20:29'),
+(14, 4, 'Grade 9', 'Junior High', '1', NULL, '2022-12-21 02:42:47', '2022-12-21 03:20:29'),
+(15, 4, 'Grade 10', 'Junior High', '1', NULL, '2022-12-21 02:42:47', '2022-12-21 03:20:30'),
+(18, 2, 'Kinder 1', 'Kinder', '1', NULL, '2022-12-16 04:20:05', '2022-12-21 03:20:10'),
+(30, 5, 'Grade 12', 'Senior High', '1', NULL, '2023-01-03 12:24:17', '2023-01-03 12:24:17');
 
 -- --------------------------------------------------------
 
@@ -160,6 +237,30 @@ INSERT INTO `students` (`id`, `firstname`, `middlename`, `lastname`, `extname`, 
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `subjects`
+--
+
+CREATE TABLE `subjects` (
+  `id` int(11) NOT NULL,
+  `grade` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `subject_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `subject_description` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
+  `updated_at` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `subjects`
+--
+
+INSERT INTO `subjects` (`id`, `grade`, `subject_name`, `subject_description`, `created_at`, `updated_at`) VALUES
+(32, 'Grade 1', 'English 1', 'test', '2023-01-03 12:51:09', '2023-01-03 12:51:09'),
+(35, 'Grade 1', 'Math 1', 'test test', '2023-01-03 12:52:20', '2023-01-03 12:52:20'),
+(36, 'Grade 2', 'English 2', 'test', '2023-01-03 12:52:29', '2023-01-03 12:52:29');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -172,8 +273,8 @@ CREATE TABLE `users` (
   `password` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `user_type` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -182,7 +283,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `username`, `email`, `email_verified_at`, `password`, `user_type`, `remember_token`, `created_at`, `updated_at`) VALUES
 (1, 'Test Admin', 'admin', 'admin@test.com', NULL, '$2y$10$5UKZ19tzX1eIz.Na8MrC3e0mv.bkg3XvTysaoXMCugUo2.q95aOTe', 'admin', NULL, '2022-10-23 02:08:21', '2022-10-23 02:08:21'),
-(5, 'AdviserTest', 'adviser', NULL, NULL, '$2y$10$5o3wNl9HnQq953zzxlifF.PI46FiX4Yu4TqJDXVEGYYt/aV/gikpW', 'adviser', NULL, '2022-12-20 21:44:43', '2022-12-20 21:44:44');
+(5, 'AdviserTest', 'adviser', NULL, NULL, '$2y$10$5o3wNl9HnQq953zzxlifF.PI46FiX4Yu4TqJDXVEGYYt/aV/gikpW', 'adviser', NULL, '2022-12-20 21:44:43', '2022-12-20 21:44:44'),
+(6, 'Jane Dummy Smith', 'janedummy', NULL, NULL, '$2y$10$gYH85JQSLneALF0kTnyYLue39uWwltIKp5.libdZUct9QHBbBlif6', 'adviser', NULL, '2023-01-03 06:04:20', '2023-01-03 06:04:20');
 
 -- --------------------------------------------------------
 
@@ -219,6 +321,24 @@ ALTER TABLE `advisers`
   ADD KEY `status` (`status`);
 
 --
+-- Indexes for table `enrollment_head`
+--
+ALTER TABLE `enrollment_head`
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD KEY `created_at` (`created_at`) USING BTREE,
+  ADD KEY `updated_at` (`updated_at`) USING BTREE,
+  ADD KEY `firstname` (`adviser_id`) USING BTREE,
+  ADD KEY `sy_id` (`sy_id`);
+
+--
+-- Indexes for table `enrollment_line`
+--
+ALTER TABLE `enrollment_line`
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD KEY `created_at` (`created_at`) USING BTREE,
+  ADD KEY `updated_at` (`updated_at`) USING BTREE;
+
+--
 -- Indexes for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
@@ -235,6 +355,16 @@ ALTER TABLE `migrations`
 --
 ALTER TABLE `password_resets`
   ADD KEY `password_resets_email_index` (`email`);
+
+--
+-- Indexes for table `schoolyears`
+--
+ALTER TABLE `schoolyears`
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD KEY `created_at` (`created_at`) USING BTREE,
+  ADD KEY `updated_at` (`updated_at`) USING BTREE,
+  ADD KEY `firstname` (`sy`) USING BTREE,
+  ADD KEY `middlename` (`status`) USING BTREE;
 
 --
 -- Indexes for table `sections`
@@ -267,6 +397,17 @@ ALTER TABLE `students`
   ADD KEY `updated_at` (`updated_at`);
 
 --
+-- Indexes for table `subjects`
+--
+ALTER TABLE `subjects`
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD KEY `created_at` (`created_at`) USING BTREE,
+  ADD KEY `updated_at` (`updated_at`) USING BTREE,
+  ADD KEY `firstname` (`grade`) USING BTREE,
+  ADD KEY `subject_name` (`subject_name`),
+  ADD KEY `subject_description` (`subject_description`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -288,7 +429,19 @@ ALTER TABLE `websockets_statistics_entries`
 -- AUTO_INCREMENT for table `advisers`
 --
 ALTER TABLE `advisers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `enrollment_head`
+--
+ALTER TABLE `enrollment_head`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+
+--
+-- AUTO_INCREMENT for table `enrollment_line`
+--
+ALTER TABLE `enrollment_line`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -303,22 +456,34 @@ ALTER TABLE `migrations`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT for table `schoolyears`
+--
+ALTER TABLE `schoolyears`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
 -- AUTO_INCREMENT for table `sections`
 --
 ALTER TABLE `sections`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `subjects`
+--
+ALTER TABLE `subjects`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `websockets_statistics_entries`

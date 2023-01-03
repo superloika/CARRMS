@@ -152,14 +152,20 @@ var render = function() {
           _c(
             "v-btn",
             {
-              attrs: { dense: "", icon: "", color: "primary", title: "Save" },
+              attrs: {
+                dense: "",
+                iconx: "",
+                text: "",
+                color: "primary",
+                title: "Save"
+              },
               on: {
                 click: function($event) {
                   return _vm.saveAdviser()
                 }
               }
             },
-            [_c("v-icon", [_vm._v("mdi-floppy")])],
+            [_c("v-icon", [_vm._v("mdi-floppy")]), _vm._v(" Save\n        ")],
             1
           )
         ],

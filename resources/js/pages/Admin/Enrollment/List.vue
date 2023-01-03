@@ -2,7 +2,10 @@
     <div>
         <v-app-bar>
             <v-toolbar-title class="text-overline font-weight-bold">
-                Sections List
+                Enrollment Data
+                <v-chip small color="accent">
+                    {{ AdminSYStore.state.activeSY }}
+                </v-chip>
             </v-toolbar-title>
             <v-spacer></v-spacer>
             <v-text-field
@@ -21,15 +24,11 @@
 
         <v-data-table
             :headers="tblHeaders"
-            :items="AdminSectionsStore.state.sections"
+            :items="[]"
             class="elevation-1"
             pagination.sync="pagination"
             :search="searchKey"
-            group-by="level"
         >
-            <template v-slot:[`item.adviser_name`]="{item}">
-                <span>{{ item.firstname }} {{ item.middlename }} {{ item.lastname }}</span>
-            </template>
             <template v-slot:[`item.actions`]="{item}">
                 <v-btn small color="primary" title="Edit" disabled>
                     <v-icon>mdi-pencil</v-icon> Edit
@@ -48,32 +47,14 @@ export default {
         return {
             searchKey: "",
             tblHeaders: [
-                { text: "Grade", value: "grade" },
                 { text: "Section Name", value: "section" },
-                { text: "Level", value: "level" },
-                { text: "Class Adviser", value: "adviser_name" },
                 { text: "Actions", value: "actions" },
             ],
         };
     },
 
     methods:{
-        async deleteSection(id) {
-            if(confirm('Are you sure you want to delete the selected section?')){
-                await axios.post(
-                    `${this.AppStore.state.siteUrl}admin/sections/deleteSection`,
-                    {
-                        id: id
-                    }
-                ).then(e=>{
-                    this.AppStore.toast(e.data,3000,'success');
-                    this.AdminSectionsStore.getSections();
-                }).catch(e=>{
-                    this.AppStore.toast(e,3000,'error');
-                })
-                ;
-            }
-        },
+
     },
 
     created(){
