@@ -1,5 +1,5 @@
 <template>
     <div>
-        Teachers Dashboard
+        Adviser Dashboard
     </div>
 </template>

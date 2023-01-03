@@ -2,7 +2,7 @@
     <v-container>
         <v-row>
             <v-col cols="12" md="3" lg="2">
-                <v-card color="primary" outlined>
+                <v-card color="primary" dark outlined>
                     <v-card-title>
                         Students
                     </v-card-title>
@@ -12,12 +12,12 @@
                 </v-card>
             </v-col>
             <v-col cols="12" md="3" lg="2">
-                <v-card color="primary" outlined>
+                <v-card color="primary" dark outlined>
                     <v-card-title>
-                        Teachers
+                        Advisers
                     </v-card-title>
                     <v-card-text>
-                        <h1>{{ AdminTeachersStore.state.teachers.length }}</h1>
+                        <h1>{{ AdminAdvisersStore.state.advisers.length }}</h1>
                     </v-card-text>
                 </v-card>
             </v-col>
@@ -29,7 +29,7 @@
 export default {
     created() {
         this.AdminStudentsStore.getStudents();
-        this.AdminTeachersStore.getTeachers();
+        this.AdminAdvisersStore.getTeachers();
     }
 }
 </script>

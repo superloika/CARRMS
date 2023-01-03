@@ -2,7 +2,7 @@
     <div>
         <v-app-bar dense>
             <v-toolbar-title class="text-overline">
-                Students List
+                Grade Levels
             </v-toolbar-title>
             <v-spacer></v-spacer>
             <v-text-field

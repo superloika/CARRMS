@@ -19,23 +19,23 @@ Vue.use(VueRouter);
 const router = new VueRouter({
     mode: "history",
     routes: [
-        // TEACHER =================================================
+        // ADVISER =================================================
         {
-            path: "/teacher",
-            name: "teacher",
+            path: "/adviser",
+            name: "adviser",
             component: { render: h => h('router-view') },
             children: [
                 {
                     path: "dashboard",
-                    name: "teacher.dashboard",
-                    component: ()=>import("./pages/Teacher"),
+                    name: "adviser.dashboard",
+                    component: ()=>import("./pages/Adviser"),
                     meta: {
                         name: "Dashboard"
                     }
                 },
             ]
         },
-        // /TEACHER =================================================
+        // /ADVISER =================================================
 
 
         // ADMIN ====================================================
@@ -61,11 +61,19 @@ const router = new VueRouter({
                     }
                 },
                 {
-                    path: "teachers",
-                    name: "admin.teachers",
-                    component: ()=>import("./pages/Admin/Teachers"),
+                    path: "advisers",
+                    name: "admin.advisers",
+                    component: ()=>import("./pages/Admin/Advisers"),
                     meta: {
-                        name: "Teachers"
+                        name: "Advisers"
+                    }
+                },
+                {
+                    path: "sections",
+                    name: "admin.sections",
+                    component: ()=>import("./pages/Admin/Sections"),
+                    meta: {
+                        name: "Sections"
                     }
                 },
             ]

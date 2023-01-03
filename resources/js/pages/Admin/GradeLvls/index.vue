@@ -7,25 +7,25 @@
             <v-spacer></v-spacer>
 
             <div>
-                <v-btn icon color="primary" @click="AdminTeachersStore.state.tabsMain=0"
-                    title="Teachers List"
+                <v-btn icon color="primary" @click="AdminStudentsStore.state.tabsMain=0"
+                    title="Students List"
                 >
                     <v-icon>mdi-file-outline</v-icon>
                 </v-btn>
-                <v-btn icon color="primary" @click="AdminTeachersStore.state.tabsMain=1"
-                    title="Add Teacher"
+                <v-btn icon color="primary" @click="AdminStudentsStore.state.tabsMain=1"
+                    title="Add Student"
                 >
                     <v-icon>mdi-file-plus-outline</v-icon>
                 </v-btn>
             </div>
         </v-app-bar>
 
-        <v-tabs-items v-model="AdminTeachersStore.state.tabsMain">
+        <v-tabs-items v-model="AdminStudentsStore.state.tabsMain">
             <v-tab-item>
-                <TeacherList></TeacherList>
+                <StudentList></StudentList>
             </v-tab-item>
             <v-tab-item>
-                <TeacherAdd></TeacherAdd>
+                <StudentAdd></StudentAdd>
             </v-tab-item>
         </v-tabs-items>
     </div>
@@ -36,8 +36,8 @@ import { cancel } from "raf";
 
 export default {
     components:{
-        TeacherList: ()=>import('./TeacherList.vue'),
-        TeacherAdd: ()=>import('./TeacherAdd.vue'),
+        List: ()=>import('./List.vue'),
+        Add: ()=>import('./Add.vue'),
     },
     data() {
         return {

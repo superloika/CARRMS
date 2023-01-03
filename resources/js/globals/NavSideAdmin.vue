@@ -37,12 +37,21 @@
                 </v-list-item-content>
             </v-list-item>
 
-            <v-list-item link to="/admin/teachers">
+            <v-list-item link to="/admin/advisers">
                 <v-list-item-icon class="mr-2">
                     <v-icon>mdi-account-multiple</v-icon>
                 </v-list-item-icon>
                 <v-list-item-content>
-                    <v-list-item-title>Teachers</v-list-item-title>
+                    <v-list-item-title>Advisers</v-list-item-title>
+                </v-list-item-content>
+            </v-list-item>
+
+            <v-list-item link to="/admin/sections">
+                <v-list-item-icon class="mr-2">
+                    <v-icon>mdi-account-multiple</v-icon>
+                </v-list-item-icon>
+                <v-list-item-content>
+                    <v-list-item-title>Sections</v-list-item-title>
                 </v-list-item-content>
             </v-list-item>
 

@@ -7,20 +7,20 @@
             <v-spacer></v-spacer>
 
             <div>
-                <v-btn color="primary" @click="AdminStudentsStore.state.tabsMain=0"
-                    title="Students List"
+                <v-btn color="primary" @click="AdminSectionsStore.state.tabsMain=0"
+                    title="Sections List"
                 >
                     <v-icon>mdi-file-outline</v-icon> List
                 </v-btn>
-                <v-btn color="primary" @click="AdminStudentsStore.state.tabsMain=1"
-                    title="Add Student"
+                <v-btn color="primary" @click="AdminSectionsStore.state.tabsMain=1"
+                    title="Add Section"
                 >
                     <v-icon>mdi-file-plus-outline</v-icon> Add
                 </v-btn>
             </div>
         </v-app-bar>
 
-        <v-tabs-items v-model="AdminStudentsStore.state.tabsMain">
+        <v-tabs-items v-model="AdminSectionsStore.state.tabsMain">
             <v-tab-item>
                 <List></List>
             </v-tab-item>

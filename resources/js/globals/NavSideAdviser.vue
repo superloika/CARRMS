@@ -1,7 +1,7 @@
 <template>
     <v-list shaped dense>
         <v-list-item-group color="primary">
-            <v-list-item link to="/teacher/dashboard">
+            <v-list-item link to="/adviser/dashboard">
                 <v-list-item-icon class="mr-2">
                     <v-icon>mdi-cube</v-icon>
                 </v-list-item-icon>

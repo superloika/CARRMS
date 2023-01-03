@@ -43,15 +43,20 @@ Route::group(['prefix' => 'accounts'], function() {
 
 // admin
 Route::group(['prefix'=>'admin'], function(){
-    Route::group(['prefix'=>'students'], function(){
+    Route::group(['prefix'=>'students'], function() {
         Route::get('getStudents', 'StudentController@getStudents');
         Route::post('saveStudent', 'StudentController@saveStudent');
         Route::post('deleteStudent', 'StudentController@deleteStudent');
     });
-    Route::group(['prefix'=>'teachers'], function(){
-        Route::get('getTeachers', 'TeacherController@getTeachers');
-        Route::post('saveTeacher', 'TeacherController@saveTeacher');
-        Route::post('deleteTeacher', 'TeacherController@deleteTeacher');
+    Route::group(['prefix'=>'advisers'], function() {
+        Route::get('getAdvisers', 'AdviserController@getAdvisers');
+        Route::post('saveAdviser', 'AdviserController@saveAdviser');
+        Route::post('deleteAdviser', 'AdviserController@deleteAdviser');
+    });
+    Route::group(['prefix'=>'sections'], function() {
+        Route::get('getSections', 'SectionController@getSections');
+        Route::post('saveSection', 'SectionController@saveSection');
+        Route::post('deleteSection', 'SectionController@deleteSection');
     });
 });
 

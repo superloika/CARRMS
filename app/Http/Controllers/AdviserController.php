@@ -5,32 +5,32 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class TeacherController extends Controller
+class AdviserController extends Controller
 {
-    public function getTeachers() {
+    public function getAdvisers() {
         try {
-            $res = DB::table('teachers')->latest()->get();
+            $res = DB::table('advisers')->latest()->get();
             return response()->json($res, 200);
         } catch (\Throwable $th) {
             return response()->json($th->getMessage(), 500);
         }
     }
 
-    public function saveTeacher() {
+    public function saveAdviser() {
         try {
             $form = request()->data;
             extract($form);
 
             // check if student already exists
-            if(DB::table('teachers')->where('firstname',$firstname)
+            if(DB::table('advisers')->where('firstname',$firstname)
                 ->where('middlename',$middlename)
                 ->where('lastname',$lastname)
                 ->exists()
             ) {
-                return response()->json('Teacher already exists', 303);
+                return response()->json('Adviser already exists', 303);
             }
 
-            DB::table('teachers')->insert([
+            DB::table('advisers')->insert([
                 'firstname'=>$firstname,
                 'middlename'=>$middlename,
                 'lastname'=>$lastname,
@@ -43,11 +43,11 @@ class TeacherController extends Controller
         }
     }
 
-    public function deleteTeacher() {
+    public function deleteAdviser() {
         try {
             $id = request()->id;
-            DB::table('teachers')->where('id',$id)->delete();
-            return response()->json('Teacher Deleted', 200);
+            DB::table('advisers')->where('id',$id)->delete();
+            return response()->json('Adviser Deleted', 200);
         } catch (\Throwable $th) {
             return response()->json($th->getMessage(), 500);
         }

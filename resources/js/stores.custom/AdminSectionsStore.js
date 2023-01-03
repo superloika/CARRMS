@@ -4,16 +4,16 @@ import AppStore from "./AppStore";
 
 const state = Vue.observable({
     tabsMain: 0,
-    teachers: [],
+    sections: [],
 });
 
 
 const actions = {
-    async getTeachers() {
+    async getSections() {
         await axios.get(
-            `${AppStore.state.siteUrl}admin/teachers/getTeachers`
+            `${AppStore.state.siteUrl}admin/sections/getSections`
         ).then(e=>{
-            state.teachers = e.data;
+            state.sections = e.data;
         });
     },
 };

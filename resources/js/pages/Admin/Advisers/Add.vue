@@ -2,10 +2,10 @@
     <div>
         <v-app-bar dense>
             <v-toolbar-title class="text-overline primary--text">
-                Add Teacher
+                Add Adviser
             </v-toolbar-title>
             <v-spacer></v-spacer>
-            <v-btn dense icon color="primary" @click="saveTeacher()">
+            <v-btn dense icon color="primary" @click="saveAdviser()">
                 <v-icon>mdi-floppy</v-icon>
             </v-btn>
         </v-app-bar>
@@ -62,16 +62,16 @@ export default {
     },
 
     methods: {
-        async saveTeacher() {
+        async saveAdviser() {
             await axios.post(
-                `${this.AppStore.state.siteUrl}admin/teachers/saveTeacher`,
+                `${this.AppStore.state.siteUrl}admin/advisers/saveAdviser`,
                 {
                     data: this.form
                 }
             ).then(e=>{
                 this.AppStore.toast(e.data,3000,'success');
                 this.resetForm(this.form);
-                this.AdminTeachersStore.getTeachers();
+                this.AdminAdvisersStore.getAdvisers();
             }).catch(e=>{
                 if(e.response) {
                     this.AppStore.toast(e.response.data,3000,'error');

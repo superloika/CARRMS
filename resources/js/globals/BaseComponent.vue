@@ -62,7 +62,7 @@
 
             <!-- Side Navigation (Main Nav) -->
             <NavSideAdmin v-if="AppStore.isAdmin()"></NavSideAdmin>
-            <NavSideTeacher v-else-if="AppStore.isTeacher()"></NavSideTeacher>
+            <NavSideAdviser v-else-if="AppStore.isAdviser()"></NavSideAdviser>
 
             <!-- Side Nav Footer -->
             <template v-slot:append>
@@ -120,11 +120,11 @@
 
 <script>
 import NavSideAdmin from './NavSideAdmin.vue';
-import NavSideTeacher from './NavSideTeacher.vue';
+import NavSideAdviser from './NavSideAdviser.vue';
 
 
 export default {
-    components: { NavSideAdmin, NavSideTeacher },
+    components: { NavSideAdmin, NavSideAdviser },
     data: () => ({
         navDrawerState: null,
     }),
