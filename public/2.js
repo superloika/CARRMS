@@ -48,10 +48,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     List: function List() {
-      return __webpack_require__.e(/*! import() */ 9).then(__webpack_require__.bind(null, /*! ./List.vue */ "./resources/js/pages/Admin/Students/List.vue"));
+      return __webpack_require__.e(/*! import() */ 13).then(__webpack_require__.bind(null, /*! ./List.vue */ "./resources/js/pages/Admin/Students/List.vue"));
     },
     Add: function Add() {
-      return __webpack_require__.e(/*! import() */ 8).then(__webpack_require__.bind(null, /*! ./Add.vue */ "./resources/js/pages/Admin/Students/Add.vue"));
+      return __webpack_require__.e(/*! import() */ 12).then(__webpack_require__.bind(null, /*! ./Add.vue */ "./resources/js/pages/Admin/Students/Add.vue"));
     }
   },
   data: function data() {
@@ -216,7 +216,7 @@ var render = function() {
     [
       _c(
         "v-app-bar",
-        { attrs: { app: "" } },
+        { attrs: { app: "", elevation: "0" } },
         [
           _c("v-toolbar-title", [
             _vm._v(
@@ -232,34 +232,28 @@ var render = function() {
               _c(
                 "v-btn",
                 {
-                  attrs: { color: "primary", title: "Students List" },
+                  attrs: { icon: "", color: "primary", title: "Students List" },
                   on: {
                     click: function($event) {
                       _vm.AdminStudentsStore.state.tabsMain = 0
                     }
                   }
                 },
-                [
-                  _c("v-icon", [_vm._v("mdi-file-outline")]),
-                  _vm._v(" List\n            ")
-                ],
+                [_c("v-icon", [_vm._v("mdi-file-outline")])],
                 1
               ),
               _vm._v(" "),
               _c(
                 "v-btn",
                 {
-                  attrs: { color: "primary", title: "Add Student" },
+                  attrs: { icon: "", color: "primary", title: "Add Student" },
                   on: {
                     click: function($event) {
                       _vm.AdminStudentsStore.state.tabsMain = 1
                     }
                   }
                 },
-                [
-                  _c("v-icon", [_vm._v("mdi-file-plus-outline")]),
-                  _vm._v(" Add\n            ")
-                ],
+                [_c("v-icon", [_vm._v("mdi-file-plus-outline")])],
                 1
               )
             ],

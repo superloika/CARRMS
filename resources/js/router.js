@@ -53,6 +53,14 @@ const router = new VueRouter({
                     }
                 },
                 {
+                    path: "sy",
+                    name: "admin.sy",
+                    component: ()=>import("./pages/Admin/SY"),
+                    meta: {
+                        name: "School Year"
+                    }
+                },
+                {
                     path: "students",
                     name: "admin.students",
                     component: ()=>import("./pages/Admin/Students"),
@@ -74,6 +82,14 @@ const router = new VueRouter({
                     component: ()=>import("./pages/Admin/Sections"),
                     meta: {
                         name: "Sections"
+                    }
+                },
+                {
+                    path: "subjects",
+                    name: "admin.subjects",
+                    component: ()=>import("./pages/Admin/Subjects"),
+                    meta: {
+                        name: "Subjects"
                     }
                 },
             ]

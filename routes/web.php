@@ -43,6 +43,13 @@ Route::group(['prefix' => 'accounts'], function() {
 
 // admin
 Route::group(['prefix'=>'admin'], function(){
+    Route::group(['prefix'=>'sy'], function() {
+        Route::get('activeSY', 'SYController@activeSY');
+        Route::get('getSYs', 'SYController@getSYs');
+        Route::post('saveSY', 'SYController@saveSY');
+        Route::post('deleteSY', 'SYController@deleteSY');
+        Route::post('toggleSY', 'SYController@toggleSY');
+    });
     Route::group(['prefix'=>'students'], function() {
         Route::get('getStudents', 'StudentController@getStudents');
         Route::post('saveStudent', 'StudentController@saveStudent');
@@ -57,6 +64,11 @@ Route::group(['prefix'=>'admin'], function(){
         Route::get('getSections', 'SectionController@getSections');
         Route::post('saveSection', 'SectionController@saveSection');
         Route::post('deleteSection', 'SectionController@deleteSection');
+    });
+    Route::group(['prefix'=>'subjects'], function() {
+        Route::get('getSubjects', 'SubjectController@getSubjects');
+        Route::post('saveSubject', 'SubjectController@saveSubject');
+        Route::post('deleteSubject', 'SubjectController@deleteSubject');
     });
 });
 

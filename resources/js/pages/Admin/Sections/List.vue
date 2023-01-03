@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-app-bar dense>
+        <v-app-bar>
             <v-toolbar-title class="text-overline font-weight-bold">
                 Sections List
             </v-toolbar-title>
@@ -12,7 +12,9 @@
                 clearable
                 hide-details
                 solo-inverted
+                rounded
                 dense
+                flat
                 v-model="searchKey"
             ></v-text-field>
         </v-app-bar>

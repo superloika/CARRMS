@@ -1,21 +1,21 @@
 <template>
     <div>
-        <v-app-bar app>
+        <v-app-bar app elevation="0">
             <v-toolbar-title>
                 {{ $route.meta.name }}
             </v-toolbar-title>
             <v-spacer></v-spacer>
 
             <div>
-                <v-btn color="primary" @click="AdminAdvisersStore.state.tabsMain=0"
+                <v-btn icon color="primary" @click="AdminAdvisersStore.state.tabsMain=0"
                     title="Advisers List"
                 >
-                    <v-icon>mdi-file-outline</v-icon> List
+                    <v-icon>mdi-file-outline</v-icon>
                 </v-btn>
-                <v-btn color="primary" @click="AdminAdvisersStore.state.tabsMain=1"
+                <v-btn icon color="primary" @click="AdminAdvisersStore.state.tabsMain=1"
                     title="Add Adviser"
                 >
-                    <v-icon>mdi-file-plus-outline</v-icon> Add
+                    <v-icon>mdi-file-plus-outline</v-icon>
                 </v-btn>
             </div>
         </v-app-bar>

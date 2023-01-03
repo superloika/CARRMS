@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-app-bar dense>
+        <v-app-bar>
             <v-toolbar-title class="text-overline primary--text">
                 Add Student
             </v-toolbar-title>
@@ -10,26 +10,26 @@
             </v-btn>
         </v-app-bar>
 
-        <v-container>
+        <v-container class="pt-6">
             <v-text-field
                 label="First Name"
                 v-model="form.firstname"
-                outlined dense filled
+                outlined densex filledx
             ></v-text-field>
             <v-text-field
                 label="Middle Name"
                 v-model="form.middlename"
-                outlined dense filled
+                outlined densex filledx
             ></v-text-field>
             <v-text-field
                 label="Last Name"
                 v-model="form.lastname"
-                outlined dense filled
+                outlined densex filledx
             ></v-text-field>
             <v-text-field
                 label="Extension Name"
                 v-model="form.extname"
-                outlined dense filled
+                outlined densex filledx
             ></v-text-field>
             <v-radio-group v-model="form.gender" row>
                 <template v-slot:label>
@@ -53,7 +53,7 @@
                         readonly
                         v-bind="attrs"
                         v-on="on"
-                        outlined dense filled
+                        outlined densex filledx
                     ></v-text-field>
                 </template>
                 <v-date-picker
@@ -67,22 +67,22 @@
             <v-text-field
                 label="Place of Birth"
                 v-model="form.pob"
-                outlined dense filled
+                outlined densex filledx
             ></v-text-field>
             <v-text-field
                 label="Address"
                 v-model="form.address"
-                outlined dense filled
+                outlined densex filledx
             ></v-text-field>
             <v-text-field
                 label="Parent/Guardian"
                 v-model="form.guardian"
-                outlined dense filled
+                outlined densex filledx
             ></v-text-field>
             <v-text-field
                 label="Parent/Guardian Address"
                 v-model="form.guardian_address"
-                outlined dense filled
+                outlined densex filledx
             ></v-text-field>
         </v-container>
     </div>

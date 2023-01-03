@@ -1,6 +1,6 @@
 <template>
     <v-list shaped dense>
-        <v-list-item-group color="primary">
+        <v-list-item-group color="accent lighten-3">
             <v-list-item link to="/admin/dashboard">
                 <v-list-item-icon class="mr-2">
                     <v-icon>mdi-cube</v-icon>
@@ -10,7 +10,7 @@
                 </v-list-item-content>
             </v-list-item>
 
-            <v-list-item link to="/admin/schoolyear">
+            <v-list-item link to="/admin/sy">
                 <v-list-item-icon class="mr-2">
                     <v-icon>mdi-cube</v-icon>
                 </v-list-item-icon>
@@ -55,7 +55,7 @@
                 </v-list-item-content>
             </v-list-item>
 
-            <v-list-group no-action color="primary">
+            <v-list-group no-action>
                 <template v-slot:activator>
                     <v-list-item-icon class="mr-2">
                         <v-icon>mdi-file-multiple</v-icon>

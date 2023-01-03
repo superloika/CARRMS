@@ -37,15 +37,15 @@
         </v-system-bar> -->
 
         <!-- SIDE NAV -->
-        <v-navigation-drawer v-model="navDrawerState" app>
-            <v-list>
+        <v-navigation-drawer v-model="navDrawerState" app color="primary darken-1" dark>
+            <v-list color="primary darken-1">
                 <v-list-item>
-                    <v-list-item-content >
-                        <v-list-item-title class="text-h6 primary--text">
+                    <v-list-item-content>
+                        <v-list-item-title class="text-h6" dark>
                             {{ AppStore.state.appName }}
                         </v-list-item-title>
 
-                        <small class="primary--text darken-4">
+                        <small class="" dark>
                             {{ AppStore.state.appLongName }}
                         </small>
                     </v-list-item-content>
@@ -66,11 +66,10 @@
 
             <!-- Side Nav Footer -->
             <template v-slot:append>
-                <v-footer>
+                <v-footer color="primary">
                     <v-col class="text-center pa-0">
                         <div class="text-caption" >
-                            &copy; 2021-{{ new Date().getFullYear() }}
-                            <!-- <a href="https://superloika.github.io">superloika</a> -->
+                            Active SY {{ AdminSYStore.state.activeSY}}
                         </div>
                     </v-col>
                 </v-footer>
@@ -80,11 +79,11 @@
 
         <!-- MAIN -->
         <v-main>
-            <!-- <v-container class="pa-0" fluid> -->
+            <v-container class="pa-0" fluid>
                 <!-- <keep-alive> -->
                     <router-view></router-view>
                 <!-- </keep-alive> -->
-            <!-- </v-container> -->
+            </v-container>
 
         </v-main>
 
@@ -139,6 +138,9 @@ export default {
     mounted() {
         console.log("BaseComponent mounted");
     },
+    created() {
+        this.AdminSYStore.activeSY();
+    }
 };
 </script>
 
@@ -157,7 +159,7 @@ export default {
     } */
     .v-data-table__wrapper table tbody tr td.text-start{
         /* color: #222222; */
-        font-size: 12px;
+        /* font-size: 12px; */
     }
 
     .theme--dark.v-data-table

@@ -9,7 +9,7 @@ Vue.use(Vuetify);
 const opts = {
     theme: {
         // light: true,
-        dark: true,
+        // dark: true,
         variations: false,
 
         themes: {

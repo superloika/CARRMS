@@ -48,10 +48,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     List: function List() {
-      return __webpack_require__.e(/*! import() */ 7).then(__webpack_require__.bind(null, /*! ./List.vue */ "./resources/js/pages/Admin/Sections/List.vue"));
+      return __webpack_require__.e(/*! import() */ 11).then(__webpack_require__.bind(null, /*! ./List.vue */ "./resources/js/pages/Admin/Sections/List.vue"));
     },
     Add: function Add() {
-      return __webpack_require__.e(/*! import() */ 6).then(__webpack_require__.bind(null, /*! ./Add.vue */ "./resources/js/pages/Admin/Sections/Add.vue"));
+      return __webpack_require__.e(/*! import() */ 10).then(__webpack_require__.bind(null, /*! ./Add.vue */ "./resources/js/pages/Admin/Sections/Add.vue"));
     }
   },
   data: function data() {
@@ -216,7 +216,7 @@ var render = function() {
     [
       _c(
         "v-app-bar",
-        { attrs: { app: "" } },
+        { attrs: { app: "", elevation: "0" } },
         [
           _c("v-toolbar-title", [
             _vm._v(
@@ -232,34 +232,28 @@ var render = function() {
               _c(
                 "v-btn",
                 {
-                  attrs: { color: "primary", title: "Sections List" },
+                  attrs: { icon: "", color: "primary", title: "Sections List" },
                   on: {
                     click: function($event) {
                       _vm.AdminSectionsStore.state.tabsMain = 0
                     }
                   }
                 },
-                [
-                  _c("v-icon", [_vm._v("mdi-file-outline")]),
-                  _vm._v(" List\n            ")
-                ],
+                [_c("v-icon", [_vm._v("mdi-file-outline")])],
                 1
               ),
               _vm._v(" "),
               _c(
                 "v-btn",
                 {
-                  attrs: { color: "primary", title: "Add Section" },
+                  attrs: { icon: "", color: "primary", title: "Add Section" },
                   on: {
                     click: function($event) {
                       _vm.AdminSectionsStore.state.tabsMain = 1
                     }
                   }
                 },
-                [
-                  _c("v-icon", [_vm._v("mdi-file-plus-outline")]),
-                  _vm._v(" Add\n            ")
-                ],
+                [_c("v-icon", [_vm._v("mdi-file-plus-outline")])],
                 1
               )
             ],

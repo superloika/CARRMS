@@ -2,21 +2,19 @@
     <div>
         <v-app-bar>
             <v-toolbar-title class="text-overline primary--text">
-                Add Section
+                Add School Year
             </v-toolbar-title>
             <v-spacer></v-spacer>
-            <v-btn dense icon color="primary" @click="saveSection()">
+            <v-btn dense icon color="primary" @click="saveSY()">
                 <v-icon>mdi-floppy</v-icon>
             </v-btn>
         </v-app-bar>
 
         <v-container class="pt-6">
-            <v-select outlined densex filledx label="Grade"
-                :items="AppStore.state.gradeLevels" v-model="form.grade"></v-select>
             <v-text-field
-                label="Section Name"
-                v-model="form.section"
-                outlined densex filledx
+                label="School Year"
+                v-model="form.sy"
+                outlined
             ></v-text-field>
         </v-container>
     </div>
@@ -28,23 +26,23 @@ export default {
     data() {
         return {
             form: {
-                section: '',
-                grade: ''
+                sy: '',
             },
         };
     },
 
     methods: {
-        async saveSection() {
+
+        async saveSY() {
             await axios.post(
-                `${this.AppStore.state.siteUrl}admin/sections/saveSection`,
+                `${this.AppStore.state.siteUrl}admin/sy/saveSY`,
                 {
                     data: this.form
                 }
             ).then(e=>{
-                this.AppStore.toast(e.data,2000,'success');
+                this.AppStore.toast(e.data,3000,'success');
                 this.resetForm(this.form);
-                this.AdminSectionsStore.getSections();
+                this.AdminSYStore.getSYs();
             }).catch(e=>{
                 if(e.response) {
                     this.AppStore.toast(e.response.data,3000,'error');

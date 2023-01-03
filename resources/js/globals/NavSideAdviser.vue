@@ -1,6 +1,6 @@
 <template>
     <v-list shaped dense>
-        <v-list-item-group color="primary">
+        <v-list-item-group color="accent lighten-3">
             <v-list-item link to="/adviser/dashboard">
                 <v-list-item-icon class="mr-2">
                     <v-icon>mdi-cube</v-icon>
@@ -9,8 +9,6 @@
                     <v-list-item-title>Dashboard</v-list-item-title>
                 </v-list-item-content>
             </v-list-item>
-
-            <v-divider class="mt-2 mb-2"></v-divider>
 
             <v-list-item link to="/about">
                 <v-list-item-icon class="mr-2">

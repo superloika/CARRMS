@@ -1,30 +1,30 @@
 <template>
     <div>
-        <v-app-bar dense>
+        <v-app-bar>
             <v-toolbar-title class="text-overline primary--text">
                 Add Adviser
             </v-toolbar-title>
             <v-spacer></v-spacer>
-            <v-btn dense icon color="primary" @click="saveAdviser()">
+            <v-btn dense icon color="primary" title="Save" @click="saveAdviser()">
                 <v-icon>mdi-floppy</v-icon>
             </v-btn>
         </v-app-bar>
 
-        <v-container>
+        <v-container class="pt-6">
             <v-text-field
                 label="First Name"
                 v-model="form.firstname"
-                outlined dense filled
+                outlined densex filledx
             ></v-text-field>
             <v-text-field
                 label="Middle Name"
                 v-model="form.middlename"
-                outlined dense filled
+                outlined densex filledx
             ></v-text-field>
             <v-text-field
                 label="Last Name"
                 v-model="form.lastname"
-                outlined dense filled
+                outlined densex filledx
             ></v-text-field>
             <v-radio-group v-model="form.gender" row>
                 <template v-slot:label>
@@ -36,7 +36,7 @@
             <v-text-field
                 label="Address"
                 v-model="form.address"
-                outlined dense filled
+                outlined densex filledx
             ></v-text-field>
         </v-container>
     </div>

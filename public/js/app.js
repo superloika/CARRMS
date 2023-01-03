@@ -2435,7 +2435,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2458,6 +2457,9 @@ __webpack_require__.r(__webpack_exports__);
   watch: {},
   mounted: function mounted() {
     console.log("BaseComponent mounted");
+  },
+  created: function created() {
+    this.AdminSYStore.activeSY();
   }
 });
 
@@ -2664,8 +2666,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
 //
 //
 //
@@ -3123,7 +3123,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     AccountsAdd: function AccountsAdd() {
-      return __webpack_require__.e(/*! import() */ 11).then(__webpack_require__.bind(null, /*! ./AccountsAdd.vue */ "./resources/js/pages/ManageAccounts/AccountsAdd.vue"));
+      return __webpack_require__.e(/*! import() */ 17).then(__webpack_require__.bind(null, /*! ./AccountsAdd.vue */ "./resources/js/pages/ManageAccounts/AccountsAdd.vue"));
     },
     AccountsEdit: function AccountsEdit() {
       return __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ./AccountsEdit.vue */ "./resources/js/pages/ManageAccounts/AccountsEdit.vue"));
@@ -3205,7 +3205,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.v-toolbar__content {\n    /* border-bottom: 1px solid #222222; */\n    /* border-bottom: 1px solid #e9e9e9; */\n}\n.search-field{\n    border: 1px solid #f1f1f1;\n}\n\n/* .v-data-table__wrapper table tbody tr{\n\n} */\n.v-data-table__wrapper table tbody tr td.text-start{\n    /* color: #222222; */\n    font-size: 12px;\n}\n.theme--dark.v-data-table\n> .v-data-table__wrapper\n> table\n> tbody\n> tr:hover:not(.v-data-table__expanded__content):not(.v-data-table__empty-wrapper) {\n    background-color: #000000;\n}\ndiv.v-tab {\n    padding: 0px 5px;\n}\n\n", ""]);
+exports.push([module.i, "\n.v-toolbar__content {\n    /* border-bottom: 1px solid #222222; */\n    /* border-bottom: 1px solid #e9e9e9; */\n}\n.search-field{\n    border: 1px solid #f1f1f1;\n}\n\n/* .v-data-table__wrapper table tbody tr{\n\n} */\n.v-data-table__wrapper table tbody tr td.text-start{\n    /* color: #222222; */\n    /* font-size: 12px; */\n}\n.theme--dark.v-data-table\n> .v-data-table__wrapper\n> table\n> tbody\n> tr:hover:not(.v-data-table__expanded__content):not(.v-data-table__empty-wrapper) {\n    background-color: #000000;\n}\ndiv.v-tab {\n    padding: 0px 5px;\n}\n\n", ""]);
 
 // exports
 
@@ -5092,7 +5092,7 @@ var render = function() {
       _c(
         "v-navigation-drawer",
         {
-          attrs: { app: "" },
+          attrs: { app: "", color: "primary darken-1", dark: "" },
           scopedSlots: _vm._u([
             {
               key: "append",
@@ -5100,13 +5100,14 @@ var render = function() {
                 return [
                   _c(
                     "v-footer",
+                    { attrs: { color: "primary" } },
                     [
                       _c("v-col", { staticClass: "text-center pa-0" }, [
                         _c("div", { staticClass: "text-caption" }, [
                           _vm._v(
-                            "\n                        © 2021-" +
-                              _vm._s(new Date().getFullYear()) +
-                              "\n                        "
+                            "\n                        Active SY " +
+                              _vm._s(_vm.AdminSYStore.state.activeSY) +
+                              "\n                    "
                           )
                         ])
                       ])
@@ -5129,6 +5130,7 @@ var render = function() {
         [
           _c(
             "v-list",
+            { attrs: { color: "primary darken-1" } },
             [
               _c(
                 "v-list-item",
@@ -5138,7 +5140,7 @@ var render = function() {
                     [
                       _c(
                         "v-list-item-title",
-                        { staticClass: "text-h6 primary--text" },
+                        { staticClass: "text-h6", attrs: { dark: "" } },
                         [
                           _vm._v(
                             "\n                        " +
@@ -5148,7 +5150,7 @@ var render = function() {
                         ]
                       ),
                       _vm._v(" "),
-                      _c("small", { staticClass: "primary--text darken-4" }, [
+                      _c("small", { attrs: { dark: "" } }, [
                         _vm._v(
                           "\n                        " +
                             _vm._s(_vm.AppStore.state.appLongName) +
@@ -5182,7 +5184,18 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c("v-main", [_c("router-view")], 1),
+      _c(
+        "v-main",
+        [
+          _c(
+            "v-container",
+            { staticClass: "pa-0", attrs: { fluid: "" } },
+            [_c("router-view")],
+            1
+          )
+        ],
+        1
+      ),
       _vm._v(" "),
       _c(
         "v-snackbar",
@@ -5431,7 +5444,7 @@ var render = function() {
     [
       _c(
         "v-list-item-group",
-        { attrs: { color: "primary" } },
+        { attrs: { color: "accent lighten-3" } },
         [
           _c(
             "v-list-item",
@@ -5455,7 +5468,7 @@ var render = function() {
           _vm._v(" "),
           _c(
             "v-list-item",
-            { attrs: { link: "", to: "/admin/schoolyear" } },
+            { attrs: { link: "", to: "/admin/sy" } },
             [
               _c(
                 "v-list-item-icon",
@@ -5556,7 +5569,7 @@ var render = function() {
           _c(
             "v-list-group",
             {
-              attrs: { "no-action": "", color: "primary" },
+              attrs: { "no-action": "" },
               scopedSlots: _vm._u([
                 {
                   key: "activator",
@@ -5661,7 +5674,7 @@ var render = function() {
     [
       _c(
         "v-list-item-group",
-        { attrs: { color: "primary" } },
+        { attrs: { color: "accent lighten-3" } },
         [
           _c(
             "v-list-item",
@@ -5682,8 +5695,6 @@ var render = function() {
             ],
             1
           ),
-          _vm._v(" "),
-          _c("v-divider", { staticClass: "mt-2 mb-2" }),
           _vm._v(" "),
           _c(
             "v-list-item",
@@ -68985,7 +68996,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuetify__WEBPACK_IMPORTED_MODULE_
 var opts = {
   theme: {
     // light: true,
-    dark: true,
+    // dark: true,
     variations: false,
     themes: {
       light: {//     error: '#FF5252',
@@ -69050,7 +69061,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       path: "dashboard",
       name: "adviser.dashboard",
       component: function component() {
-        return __webpack_require__.e(/*! import() */ 14).then(__webpack_require__.bind(null, /*! ./pages/Adviser */ "./resources/js/pages/Adviser/index.vue"));
+        return __webpack_require__.e(/*! import() */ 20).then(__webpack_require__.bind(null, /*! ./pages/Adviser */ "./resources/js/pages/Adviser/index.vue"));
       },
       meta: {
         name: "Dashboard"
@@ -69070,10 +69081,19 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       path: "dashboard",
       name: "admin.dashboard",
       component: function component() {
-        return __webpack_require__.e(/*! import() */ 10).then(__webpack_require__.bind(null, /*! ./pages/Admin */ "./resources/js/pages/Admin/index.vue"));
+        return __webpack_require__.e(/*! import() */ 16).then(__webpack_require__.bind(null, /*! ./pages/Admin */ "./resources/js/pages/Admin/index.vue"));
       },
       meta: {
         name: "Dashboard"
+      }
+    }, {
+      path: "sy",
+      name: "admin.sy",
+      component: function component() {
+        return __webpack_require__.e(/*! import() */ 9).then(__webpack_require__.bind(null, /*! ./pages/Admin/SY */ "./resources/js/pages/Admin/SY/index.vue"));
+      },
+      meta: {
+        name: "School Year"
       }
     }, {
       path: "students",
@@ -69088,7 +69108,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       path: "advisers",
       name: "admin.advisers",
       component: function component() {
-        return __webpack_require__.e(/*! import() */ 5).then(__webpack_require__.bind(null, /*! ./pages/Admin/Advisers */ "./resources/js/pages/Admin/Advisers/index.vue"));
+        return __webpack_require__.e(/*! import() */ 6).then(__webpack_require__.bind(null, /*! ./pages/Admin/Advisers */ "./resources/js/pages/Admin/Advisers/index.vue"));
       },
       meta: {
         name: "Advisers"
@@ -69101,6 +69121,15 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       },
       meta: {
         name: "Sections"
+      }
+    }, {
+      path: "subjects",
+      name: "admin.subjects",
+      component: function component() {
+        return __webpack_require__.e(/*! import() */ 3).then(__webpack_require__.bind(null, /*! ./pages/Admin/Subjects */ "./resources/js/pages/Admin/Subjects/index.vue"));
+      },
+      meta: {
+        name: "Subjects"
       }
     }]
   }, // /ADMIN ====================================================
@@ -69154,8 +69183,10 @@ router.beforeEach(function (to, from, next) {
 
 var map = {
 	"./AdminAdvisersStore.js": "./resources/js/stores.custom/AdminAdvisersStore.js",
+	"./AdminSYStore.js": "./resources/js/stores.custom/AdminSYStore.js",
 	"./AdminSectionsStore.js": "./resources/js/stores.custom/AdminSectionsStore.js",
 	"./AdminStudentsStore.js": "./resources/js/stores.custom/AdminStudentsStore.js",
+	"./AdminSubjectsStore.js": "./resources/js/stores.custom/AdminSubjectsStore.js",
 	"./AppStore.js": "./resources/js/stores.custom/AppStore.js",
 	"./ManageAccounts.js": "./resources/js/stores.custom/ManageAccounts.js",
 	"./SampleStore.js": "./resources/js/stores.custom/SampleStore.js"
@@ -69236,6 +69267,88 @@ var actions = {
           }
         }
       }, _callee);
+    }))();
+  }
+};
+/* harmony default export */ __webpack_exports__["default"] = (_objectSpread({
+  state: state
+}, actions));
+
+/***/ }),
+
+/***/ "./resources/js/stores.custom/AdminSYStore.js":
+/*!****************************************************!*\
+  !*** ./resources/js/stores.custom/AdminSYStore.js ***!
+  \****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _AppStore__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./AppStore */ "./resources/js/stores.custom/AppStore.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+
+
+var state = vue__WEBPACK_IMPORTED_MODULE_2___default.a.observable({
+  tabsMain: 0,
+  sy: [],
+  activeSY: null
+});
+var actions = {
+  activeSY: function activeSY() {
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("".concat(_AppStore__WEBPACK_IMPORTED_MODULE_3__["default"].state.siteUrl, "admin/sy/activeSY")).then(function (e) {
+                state.activeSY = e.data.sy;
+              });
+
+            case 2:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }))();
+  },
+  getSYs: function getSYs() {
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.next = 2;
+              return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("".concat(_AppStore__WEBPACK_IMPORTED_MODULE_3__["default"].state.siteUrl, "admin/sy/getSYs")).then(function (e) {
+                state.sy = e.data;
+              });
+
+            case 2:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2);
     }))();
   }
 };
@@ -69352,6 +69465,68 @@ var actions = {
               _context.next = 2;
               return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("".concat(_AppStore__WEBPACK_IMPORTED_MODULE_3__["default"].state.siteUrl, "admin/students/getStudents")).then(function (e) {
                 state.students = e.data;
+              });
+
+            case 2:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }))();
+  }
+};
+/* harmony default export */ __webpack_exports__["default"] = (_objectSpread({
+  state: state
+}, actions));
+
+/***/ }),
+
+/***/ "./resources/js/stores.custom/AdminSubjectsStore.js":
+/*!**********************************************************!*\
+  !*** ./resources/js/stores.custom/AdminSubjectsStore.js ***!
+  \**********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _AppStore__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./AppStore */ "./resources/js/stores.custom/AppStore.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+
+
+var state = vue__WEBPACK_IMPORTED_MODULE_2___default.a.observable({
+  tabsMain: 0,
+  subjects: []
+});
+var actions = {
+  getSubjects: function getSubjects() {
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("".concat(_AppStore__WEBPACK_IMPORTED_MODULE_3__["default"].state.siteUrl, "admin/subjects/getSubjects")).then(function (e) {
+                state.subjects = e.data;
               });
 
             case 2:
@@ -69502,7 +69677,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 var state = vue__WEBPACK_IMPORTED_MODULE_1___default.a.observable({
   users: [],
-  userTypes: ["super_admin", "admin", "adviser"],
+  userTypes: ["admin"],
   // usersLoading: false,
   modalAddIsOpen: false,
   modalEditIsOpen: false,

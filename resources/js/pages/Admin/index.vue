@@ -29,7 +29,8 @@
 export default {
     created() {
         this.AdminStudentsStore.getStudents();
-        this.AdminAdvisersStore.getTeachers();
+        // this.AdminAdvisersStore.getTeachers();
+        this.AdminAdvisersStore.getAdvisers();
     }
 }
 </script>
