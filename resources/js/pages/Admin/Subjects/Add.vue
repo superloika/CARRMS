@@ -11,18 +11,34 @@
         </v-app-bar>
 
         <v-container class="pt-6">
-            <v-text-field
-                label="Subject Name"
-                v-model="form.subject_name"
-                outlined densex
-            ></v-text-field>
-            <v-text-field
-                label="Subject Description"
-                v-model="form.subject_description"
-                outlined densex
-            ></v-text-field>
-            <v-select outlined densex label="Grade"
-                :items="AppStore.state.gradeLevels" v-model="form.grade"></v-select>
+            <v-row>
+                <v-col cols="12" md="2">
+                    <v-select outlined densex label="Grade"
+                        :items="AppStore.state.gradeLevels"
+                        item-text="grade"
+                        item-value="grade"
+                        v-model="form.grade"
+                    >
+                    </v-select>
+                </v-col>
+
+                <v-col cols="12" md="4">
+                    <v-text-field
+                        label="Subject Name"
+                        v-model="form.subject_name"
+                        outlined densex
+                    ></v-text-field>
+                </v-col>
+
+                <v-col cols="12" md="6">
+                    <v-text-field
+                        label="Subject Description"
+                        v-model="form.subject_description"
+                        outlined densex
+                    ></v-text-field>
+                </v-col>
+
+            </v-row>
         </v-container>
     </div>
 </template>

@@ -7,15 +7,15 @@
             <v-spacer></v-spacer>
 
             <div>
-                <v-btn icon color="primary" @click="AdminSectionsStore.state.tabsMain=0"
+                <v-btn iconx dense color="primary" @click="AdminSectionsStore.state.tabsMain=0"
                     title="Sections List"
                 >
-                    <v-icon>mdi-file-outline</v-icon>
+                    <v-icon>mdi-file-outline</v-icon> Section List
                 </v-btn>
-                <v-btn icon color="primary" @click="AdminSectionsStore.state.tabsMain=1"
+                <v-btn iconx dense color="primary" @click="AdminSectionsStore.state.tabsMain=1"
                     title="Add Section"
                 >
-                    <v-icon>mdi-file-plus-outline</v-icon>
+                    <v-icon>mdi-file-plus-outline</v-icon> Add Section
                 </v-btn>
             </div>
         </v-app-bar>

@@ -64,6 +64,7 @@ Route::group(['prefix'=>'admin'], function(){
         Route::get('getSections', 'SectionController@getSections');
         Route::post('saveSection', 'SectionController@saveSection');
         Route::post('deleteSection', 'SectionController@deleteSection');
+        Route::post('updateAdviser', 'SectionController@updateAdviser');
     });
     Route::group(['prefix'=>'subjects'], function() {
         Route::get('getSubjects', 'SubjectController@getSubjects');

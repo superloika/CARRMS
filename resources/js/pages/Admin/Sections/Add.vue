@@ -12,7 +12,12 @@
 
         <v-container class="pt-6">
             <v-select outlined densex filledx label="Grade"
-                :items="AppStore.state.gradeLevels" v-model="form.grade"></v-select>
+                :items="AppStore.state.gradeLevels"
+                item-text="grade"
+                item-value="grade"
+                v-model="form.grade"
+            >
+            </v-select>
             <v-text-field
                 label="Section Name"
                 v-model="form.section"

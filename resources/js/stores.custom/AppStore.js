@@ -30,21 +30,28 @@ const state = Vue.observable({
         .substr(0, 10)],
 
     gradeLevels: [
-        "Preschool",
-        "Kinder 1",
-        "Kinder 2",
-        "Grade 1",
-        "Grade 2",
-        "Grade 3",
-        "Grade 4",
-        "Grade 5",
-        "Grade 6",
-        "Grade 7",
-        "Grade 8",
-        "Grade 9",
-        "Grade 10",
-        "Grade 11",
-        "Grade 12"
+        {grade:"Preschool",level: "Preschool"},
+        {grade:"Kinder 1",level: "Kinder"},
+        {grade:"Kinder 2",level: "Kinder"},
+        {grade:"Grade 1",level: "Elementary"},
+        {grade:"Grade 2",level: "Elementary"},
+        {grade:"Grade 3",level: "Elementary"},
+        {grade:"Grade 4",level: "Elementary"},
+        {grade:"Grade 5",level: "Elementary"},
+        {grade:"Grade 6",level: "Elementary"},
+        {grade:"Grade 7",level: "Junior High"},
+        {grade:"Grade 8",level: "Junior High"},
+        {grade:"Grade 9",level: "Junior High"},
+        {grade:"Grade 10",level: "Junior High"},
+        {grade:"Grade 11",level: "Senior High"},
+        {grade:"Grade 12",level: "Senior High"},
+    ],
+    levels: [
+        'Preschool',
+        'Kinder',
+        'Elementary',
+        'Junior High School',
+        'Senior High School'
     ]
 });
 

@@ -5,8 +5,24 @@
                 Subject List
             </v-toolbar-title>
             <v-spacer></v-spacer>
+            <v-select
+                hide-details
+                dense
+                outlined
+                rounded
+                placeholder="Grade Level"
+                clearable
+                class="ml-2"
+                style="max-width:200px;"
+                :items="AppStore.state.gradeLevels"
+                v-model="gradeLevel"
+                item-text="grade"
+                item-value="grade"
+            >
+
+            </v-select>
             <v-text-field
-                class=""
+                class="ml-2"
                 placeholder="Search"
                 style="max-width:200px;"
                 clearable
@@ -21,17 +37,18 @@
 
         <v-data-table
             :headers="tblHeaders"
-            :items="AdminSubjectsStore.state.subjects"
+            :items="subjects"
             class="elevation-1"
             pagination.sync="pagination"
             :search="searchKey"
-            group-by="grade"
         >
             <template v-slot:[`item.actions`]="{item}">
                 <v-btn small color="primary" title="Edit" disabled>
                     <v-icon>mdi-pencil</v-icon> Edit
                 </v-btn>
-                <v-btn small color="error" title="Delete" @click="deleteSubject(item.id)">
+                <v-btn small color="error" title="Delete" @click="deleteSubject(item.id)"
+                    v-if="AppStore.isSuperAdmin()"
+                >
                     <v-icon>mdi-delete</v-icon> Delete
                 </v-btn>
             </template>
@@ -50,6 +67,7 @@ export default {
                 { text: "Grade", value: "grade" },
                 { text: "Actions", value: "actions" },
             ],
+            gradeLevel: '',
         };
     },
 
@@ -70,6 +88,22 @@ export default {
                 ;
             }
         },
+    },
+
+    computed: {
+        subjects() {
+            if(this.gradeLevel=='' || this.gradeLevel==null) {
+                return this.AdminSubjectsStore.state.subjects;
+            } else {
+                try {
+                    return this.AdminSubjectsStore.state.subjects.filter(e=>{
+                        return e.grade==this.gradeLevel
+                    })
+                } catch (error) {
+                    return [];
+                }
+            }
+        }
     },
 
     created(){

@@ -90,4 +90,17 @@ class SectionController extends Controller
             return response()->json($th->getMessage(), 500);
         }
     }
+
+    public function updateAdviser() {
+        try {
+            $section_id = request()->section_id;
+            $adviser_id = request()->adviser_id;
+            DB::table('sections')->where('id',$section_id)->update([
+                'adviser_id'=>$adviser_id
+            ]);
+            return response()->json('Adviser updated', 200);
+        } catch (\Throwable $th) {
+            return response()->json($th->getMessage(), 500);
+        }
+    }
 }

@@ -25,16 +25,40 @@
             class="elevation-1"
             pagination.sync="pagination"
             :search="searchKey"
-            group-by="level"
         >
             <template v-slot:[`item.adviser_name`]="{item}">
                 <span>{{ item.firstname }} {{ item.middlename }} {{ item.lastname }}</span>
             </template>
+            <template v-slot:[`item.adviser`]="{item}">
+                <v-select
+                    dense
+                    clearable
+                    hide-details
+                    outlined
+                    :items="AdminAdvisersStore.state.advisers"
+                    item-value="id"
+                    v-model="item.adviser_id"
+                    v-on:input="updateAdviser(item.id, item.adviser_id)"
+                >
+                    <template slot="selection" slot-scope="data">
+                        {{ data.item.firstname }} {{ data.item.middlename }} {{ data.item.lastname }}
+                    </template>
+                    <template slot="item" slot-scope="data">
+                        {{ data.item.firstname }} {{ data.item.middlename }} {{ data.item.lastname }}
+                    </template>
+                </v-select>
+            </template>
             <template v-slot:[`item.actions`]="{item}">
+                <!-- <v-btn small color="primary" title="Edit">
+                    <v-icon>mdi-account</v-icon> Set Adviser
+                </v-btn> -->
                 <v-btn small color="primary" title="Edit" disabled>
                     <v-icon>mdi-pencil</v-icon> Edit
                 </v-btn>
-                <v-btn small color="error" title="Delete" @click="deleteSection(item.id)">
+                <v-btn small color="error" title="Delete"
+                    @click="deleteSection(item.id)"
+                    v-if="AppStore.isSuperAdmin()"
+                >
                     <v-icon>mdi-delete</v-icon> Delete
                 </v-btn>
             </template>
@@ -51,7 +75,8 @@ export default {
                 { text: "Grade", value: "grade" },
                 { text: "Section Name", value: "section" },
                 { text: "Level", value: "level" },
-                { text: "Class Adviser", value: "adviser_name" },
+                // { text: "Class Adviser", value: "adviser_name" },
+                { text: "Class Adviser", value: "adviser" },
                 { text: "Actions", value: "actions" },
             ],
         };
@@ -74,10 +99,23 @@ export default {
                 ;
             }
         },
+        async updateAdviser(section_id, adviser_id) {
+            await axios.post(
+                `${this.AppStore.state.siteUrl}admin/sections/updateAdviser`,
+                { section_id: section_id, adviser_id: adviser_id }
+            ).then(e=>{
+                this.AppStore.toast(e.data,3000,'success');
+                // this.AdminSectionsStore.getSections();
+            }).catch(e=>{
+                this.AppStore.toast(e,3000,'error');
+            })
+            ;
+        }
     },
 
     created(){
         this.AdminSectionsStore.getSections();
+        this.AdminAdvisersStore.getAdvisers();
     }
 };
 </script>

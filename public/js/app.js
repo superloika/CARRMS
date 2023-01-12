@@ -3132,7 +3132,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     AccountsAdd: function AccountsAdd() {
-      return __webpack_require__.e(/*! import() */ 17).then(__webpack_require__.bind(null, /*! ./AccountsAdd.vue */ "./resources/js/pages/ManageAccounts/AccountsAdd.vue"));
+      return __webpack_require__.e(/*! import() */ 20).then(__webpack_require__.bind(null, /*! ./AccountsAdd.vue */ "./resources/js/pages/ManageAccounts/AccountsAdd.vue"));
     },
     AccountsEdit: function AccountsEdit() {
       return __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ./AccountsEdit.vue */ "./resources/js/pages/ManageAccounts/AccountsEdit.vue"));
@@ -5598,7 +5598,7 @@ var render = function() {
           _c(
             "v-list-group",
             {
-              attrs: { "no-action": "" },
+              attrs: { "no-action": "", color: "dark" },
               scopedSlots: _vm._u([
                 {
                   key: "activator",
@@ -69024,15 +69024,23 @@ __webpack_require__.r(__webpack_exports__);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuetify__WEBPACK_IMPORTED_MODULE_1___default.a);
 var opts = {
   theme: {
-    // light: true,
+    light: true,
     // dark: true,
     variations: false,
     themes: {
-      light: {//     error: '#FF5252',
-        //     info: '#2196F3',
-        //     success: '#4CAF50',
-        //     primary: '#2dba02',
-        //     accent: "#7dd663",
+      // light: {
+      //     error: '#FF5252',
+      //     info: '#2196F3',
+      //     success: '#4CAF50',
+      //     primary: '#2dba02',
+      //     accent: "#7dd663",
+      // },
+      light: {
+        error: '#FF5252',
+        info: '#2196F3',
+        success: '#4CAF50',
+        primary: '#027843',
+        accent: "#7dd663"
       },
       dark: {// error: '#FF5252',
         // info: '#2196F3',
@@ -69090,7 +69098,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       path: "dashboard",
       name: "adviser.dashboard",
       component: function component() {
-        return __webpack_require__.e(/*! import() */ 20).then(__webpack_require__.bind(null, /*! ./pages/Adviser */ "./resources/js/pages/Adviser/index.vue"));
+        return __webpack_require__.e(/*! import() */ 23).then(__webpack_require__.bind(null, /*! ./pages/Adviser */ "./resources/js/pages/Adviser/index.vue"));
       },
       meta: {
         name: "Dashboard"
@@ -69110,7 +69118,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       path: "dashboard",
       name: "admin.dashboard",
       component: function component() {
-        return __webpack_require__.e(/*! import() */ 16).then(__webpack_require__.bind(null, /*! ./pages/Admin */ "./resources/js/pages/Admin/index.vue"));
+        return __webpack_require__.e(/*! import() */ 19).then(__webpack_require__.bind(null, /*! ./pages/Admin */ "./resources/js/pages/Admin/index.vue"));
       },
       meta: {
         name: "Dashboard"
@@ -69119,7 +69127,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       path: "sy",
       name: "admin.sy",
       component: function component() {
-        return __webpack_require__.e(/*! import() */ 9).then(__webpack_require__.bind(null, /*! ./pages/Admin/SY */ "./resources/js/pages/Admin/SY/index.vue"));
+        return __webpack_require__.e(/*! import() */ 12).then(__webpack_require__.bind(null, /*! ./pages/Admin/SY */ "./resources/js/pages/Admin/SY/index.vue"));
       },
       meta: {
         name: "School Year"
@@ -69128,7 +69136,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       path: "students",
       name: "admin.students",
       component: function component() {
-        return __webpack_require__.e(/*! import() */ 2).then(__webpack_require__.bind(null, /*! ./pages/Admin/Students */ "./resources/js/pages/Admin/Students/index.vue"));
+        return __webpack_require__.e(/*! import() */ 3).then(__webpack_require__.bind(null, /*! ./pages/Admin/Students */ "./resources/js/pages/Admin/Students/index.vue"));
       },
       meta: {
         name: "Students"
@@ -69137,7 +69145,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       path: "advisers",
       name: "admin.advisers",
       component: function component() {
-        return __webpack_require__.e(/*! import() */ 6).then(__webpack_require__.bind(null, /*! ./pages/Admin/Advisers */ "./resources/js/pages/Admin/Advisers/index.vue"));
+        return __webpack_require__.e(/*! import() */ 7).then(__webpack_require__.bind(null, /*! ./pages/Admin/Advisers */ "./resources/js/pages/Admin/Advisers/index.vue"));
       },
       meta: {
         name: "Advisers"
@@ -69146,7 +69154,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       path: "sections",
       name: "admin.sections",
       component: function component() {
-        return __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ./pages/Admin/Sections */ "./resources/js/pages/Admin/Sections/index.vue"));
+        return __webpack_require__.e(/*! import() */ 2).then(__webpack_require__.bind(null, /*! ./pages/Admin/Sections */ "./resources/js/pages/Admin/Sections/index.vue"));
       },
       meta: {
         name: "Sections"
@@ -69155,7 +69163,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       path: "subjects",
       name: "admin.subjects",
       component: function component() {
-        return __webpack_require__.e(/*! import() */ 3).then(__webpack_require__.bind(null, /*! ./pages/Admin/Subjects */ "./resources/js/pages/Admin/Subjects/index.vue"));
+        return __webpack_require__.e(/*! import() */ 4).then(__webpack_require__.bind(null, /*! ./pages/Admin/Subjects */ "./resources/js/pages/Admin/Subjects/index.vue"));
       },
       meta: {
         name: "Subjects"
@@ -69164,7 +69172,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       path: "enrollment",
       name: "admin.enrollment",
       component: function component() {
-        return __webpack_require__.e(/*! import() */ 21).then(__webpack_require__.bind(null, /*! ./pages/Admin/Enrollment */ "./resources/js/pages/Admin/Enrollment/index.vue"));
+        return __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ./pages/Admin/Enrollment */ "./resources/js/pages/Admin/Enrollment/index.vue"));
       },
       meta: {
         name: "Enrollment"
@@ -69625,7 +69633,53 @@ var state = vue__WEBPACK_IMPORTED_MODULE_0___default.a.observable({
   },
   showTopLoading: false,
   strDate: [new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().substr(0, 10)],
-  gradeLevels: ["Preschool", "Kinder 1", "Kinder 2", "Grade 1", "Grade 2", "Grade 3", "Grade 4", "Grade 5", "Grade 6", "Grade 7", "Grade 8", "Grade 9", "Grade 10", "Grade 11", "Grade 12"]
+  gradeLevels: [{
+    grade: "Preschool",
+    level: "Preschool"
+  }, {
+    grade: "Kinder 1",
+    level: "Kinder"
+  }, {
+    grade: "Kinder 2",
+    level: "Kinder"
+  }, {
+    grade: "Grade 1",
+    level: "Elementary"
+  }, {
+    grade: "Grade 2",
+    level: "Elementary"
+  }, {
+    grade: "Grade 3",
+    level: "Elementary"
+  }, {
+    grade: "Grade 4",
+    level: "Elementary"
+  }, {
+    grade: "Grade 5",
+    level: "Elementary"
+  }, {
+    grade: "Grade 6",
+    level: "Elementary"
+  }, {
+    grade: "Grade 7",
+    level: "Junior High"
+  }, {
+    grade: "Grade 8",
+    level: "Junior High"
+  }, {
+    grade: "Grade 9",
+    level: "Junior High"
+  }, {
+    grade: "Grade 10",
+    level: "Junior High"
+  }, {
+    grade: "Grade 11",
+    level: "Senior High"
+  }, {
+    grade: "Grade 12",
+    level: "Senior High"
+  }],
+  levels: ['Preschool', 'Kinder', 'Elementary', 'Junior High School', 'Senior High School']
 });
 var actions = {
   toast: function toast(text, timeout) {
@@ -69919,8 +69973,8 @@ var actions = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\JD\Documents\DEV\Kim\CARRMS\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\JD\Documents\DEV\Kim\CARRMS\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! E:\KALOY\DEV\Kim\CARRMS\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! E:\KALOY\DEV\Kim\CARRMS\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

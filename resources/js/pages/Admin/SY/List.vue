@@ -39,7 +39,10 @@
                     @click="toggleSY(item.id, 0)" :disabled="item.status==0">
                     <v-icon>mdi-close</v-icon>
                 </v-btn>
-                <v-btn icon dense color="error" title="Delete" @click="deleteSY(item.id)">
+                <v-btn icon dense color="error" title="Delete"
+                    @click="deleteSY(item.id)"
+                    v-if="AppStore.isSuperAdmin()"
+                >
                     <v-icon>mdi-delete</v-icon>
                 </v-btn>
             </template>

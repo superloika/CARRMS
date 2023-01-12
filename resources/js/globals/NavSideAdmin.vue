@@ -64,7 +64,7 @@
                 </v-list-item-content>
             </v-list-item>
 
-            <v-list-group no-action>
+            <v-list-group no-action color="dark">
                 <template v-slot:activator>
                     <v-list-item-icon class="mr-2">
                         <v-icon>mdi-file-multiple</v-icon>
