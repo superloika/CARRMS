@@ -109,6 +109,11 @@ const actions = {
         return formatter.format(number).replace('php','').replace('₱','');
     },
 
+    resetForm(obj) {
+        let setAll = (obj, val) => Object.keys(obj).forEach(k => obj[k] = val);
+        setAll(obj, "");
+    }
+
 };
 
 export default {

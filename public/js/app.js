@@ -2658,6 +2658,69 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     console.log("NavSide mounted");
@@ -5476,19 +5539,131 @@ var render = function() {
           ),
           _vm._v(" "),
           _c(
-            "v-list-item",
-            { attrs: { link: "", to: "/admin/enrollment" } },
+            "v-list-group",
+            {
+              attrs: { "no-action": "", color: "dark" },
+              scopedSlots: _vm._u([
+                {
+                  key: "activator",
+                  fn: function() {
+                    return [
+                      _c(
+                        "v-list-item-icon",
+                        { staticClass: "mr-2" },
+                        [_c("v-icon", [_vm._v("mdi-file-multiple")])],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-list-item-content",
+                        [_c("v-list-item-title", [_vm._v("Enrollment Data")])],
+                        1
+                      )
+                    ]
+                  },
+                  proxy: true
+                }
+              ])
+            },
             [
+              _vm._v(" "),
               _c(
-                "v-list-item-icon",
-                { staticClass: "mr-2" },
-                [_c("v-icon", [_vm._v("mdi-account-multiple")])],
+                "v-list-item",
+                { attrs: { link: "", to: "/admin/enrollment/preschool" } },
+                [
+                  _c(
+                    "v-list-item-icon",
+                    { staticClass: "mr-2" },
+                    [_c("v-icon", [_vm._v("mdi-account-multiple")])],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-list-item-content",
+                    [_c("v-list-item-title", [_vm._v("Preschool")])],
+                    1
+                  )
+                ],
                 1
               ),
               _vm._v(" "),
               _c(
-                "v-list-item-content",
-                [_c("v-list-item-title", [_vm._v("Enrollment Data")])],
+                "v-list-item",
+                { attrs: { link: "", to: "/admin/enrollment/kinder" } },
+                [
+                  _c(
+                    "v-list-item-icon",
+                    { staticClass: "mr-2" },
+                    [_c("v-icon", [_vm._v("mdi-account-multiple")])],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-list-item-content",
+                    [_c("v-list-item-title", [_vm._v("Kinder")])],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-list-item",
+                { attrs: { link: "", to: "/admin/enrollment/elementary" } },
+                [
+                  _c(
+                    "v-list-item-icon",
+                    { staticClass: "mr-2" },
+                    [_c("v-icon", [_vm._v("mdi-account-multiple")])],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-list-item-content",
+                    [_c("v-list-item-title", [_vm._v("Elementary")])],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-list-item",
+                { attrs: { link: "", to: "/admin/enrollment/jhs" } },
+                [
+                  _c(
+                    "v-list-item-icon",
+                    { staticClass: "mr-2" },
+                    [_c("v-icon", [_vm._v("mdi-account-multiple")])],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-list-item-content",
+                    [_c("v-list-item-title", [_vm._v("Junior High")])],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-list-item",
+                { attrs: { link: "", to: "/admin/enrollment/shs" } },
+                [
+                  _c(
+                    "v-list-item-icon",
+                    { staticClass: "mr-2" },
+                    [_c("v-icon", [_vm._v("mdi-account-multiple")])],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-list-item-content",
+                    [_c("v-list-item-title", [_vm._v("Senior High")])],
+                    1
+                  )
+                ],
                 1
               )
             ],
@@ -5496,99 +5671,131 @@ var render = function() {
           ),
           _vm._v(" "),
           _c(
-            "v-list-item",
-            { attrs: { link: "", to: "/admin/sy" } },
+            "v-list-group",
+            {
+              attrs: { "no-action": "", color: "dark" },
+              scopedSlots: _vm._u([
+                {
+                  key: "activator",
+                  fn: function() {
+                    return [
+                      _c(
+                        "v-list-item-icon",
+                        { staticClass: "mr-2" },
+                        [_c("v-icon", [_vm._v("mdi-cog")])],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-list-item-content",
+                        [_c("v-list-item-title", [_vm._v("Setup")])],
+                        1
+                      )
+                    ]
+                  },
+                  proxy: true
+                }
+              ])
+            },
             [
+              _vm._v(" "),
               _c(
-                "v-list-item-icon",
-                { staticClass: "mr-2" },
-                [_c("v-icon", [_vm._v("mdi-cube")])],
+                "v-list-item",
+                { attrs: { link: "", to: "/admin/sy" } },
+                [
+                  _c(
+                    "v-list-item-icon",
+                    { staticClass: "mr-2" },
+                    [_c("v-icon", [_vm._v("mdi-cube")])],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-list-item-content",
+                    [_c("v-list-item-title", [_vm._v("School Year")])],
+                    1
+                  )
+                ],
                 1
               ),
               _vm._v(" "),
               _c(
-                "v-list-item-content",
-                [_c("v-list-item-title", [_vm._v("School Year")])],
-                1
-              )
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "v-list-item",
-            { attrs: { link: "", to: "/admin/subjects" } },
-            [
-              _c(
-                "v-list-item-icon",
-                { staticClass: "mr-2" },
-                [_c("v-icon", [_vm._v("mdi-cube")])],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "v-list-item-content",
-                [_c("v-list-item-title", [_vm._v("Subjects")])],
-                1
-              )
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "v-list-item",
-            { attrs: { link: "", to: "/admin/students" } },
-            [
-              _c(
-                "v-list-item-icon",
-                { staticClass: "mr-2" },
-                [_c("v-icon", [_vm._v("mdi-account-multiple")])],
+                "v-list-item",
+                { attrs: { link: "", to: "/admin/subjects" } },
+                [
+                  _c(
+                    "v-list-item-icon",
+                    { staticClass: "mr-2" },
+                    [_c("v-icon", [_vm._v("mdi-cube")])],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-list-item-content",
+                    [_c("v-list-item-title", [_vm._v("Subjects")])],
+                    1
+                  )
+                ],
                 1
               ),
               _vm._v(" "),
               _c(
-                "v-list-item-content",
-                [_c("v-list-item-title", [_vm._v("Students")])],
-                1
-              )
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "v-list-item",
-            { attrs: { link: "", to: "/admin/advisers" } },
-            [
-              _c(
-                "v-list-item-icon",
-                { staticClass: "mr-2" },
-                [_c("v-icon", [_vm._v("mdi-account-multiple")])],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "v-list-item-content",
-                [_c("v-list-item-title", [_vm._v("Advisers")])],
-                1
-              )
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "v-list-item",
-            { attrs: { link: "", to: "/admin/sections" } },
-            [
-              _c(
-                "v-list-item-icon",
-                { staticClass: "mr-2" },
-                [_c("v-icon", [_vm._v("mdi-account-multiple")])],
+                "v-list-item",
+                { attrs: { link: "", to: "/admin/students" } },
+                [
+                  _c(
+                    "v-list-item-icon",
+                    { staticClass: "mr-2" },
+                    [_c("v-icon", [_vm._v("mdi-account-multiple")])],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-list-item-content",
+                    [_c("v-list-item-title", [_vm._v("Students")])],
+                    1
+                  )
+                ],
                 1
               ),
               _vm._v(" "),
               _c(
-                "v-list-item-content",
-                [_c("v-list-item-title", [_vm._v("Sections")])],
+                "v-list-item",
+                { attrs: { link: "", to: "/admin/advisers" } },
+                [
+                  _c(
+                    "v-list-item-icon",
+                    { staticClass: "mr-2" },
+                    [_c("v-icon", [_vm._v("mdi-account-multiple")])],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-list-item-content",
+                    [_c("v-list-item-title", [_vm._v("Advisers")])],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-list-item",
+                { attrs: { link: "", to: "/admin/sections" } },
+                [
+                  _c(
+                    "v-list-item-icon",
+                    { staticClass: "mr-2" },
+                    [_c("v-icon", [_vm._v("mdi-account-multiple")])],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-list-item-content",
+                    [_c("v-list-item-title", [_vm._v("Sections")])],
+                    1
+                  )
+                ],
                 1
               )
             ],
@@ -69176,7 +69383,58 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       },
       meta: {
         name: "Enrollment"
-      }
+      },
+      children: [{
+        path: "preschool",
+        name: "admin.enrollment.preschool",
+        component: function component() {
+          return __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ./pages/Admin/Enrollment */ "./resources/js/pages/Admin/Enrollment/index.vue"));
+        },
+        meta: {
+          name: "Enrollment (Preschool)",
+          level: "Preschool"
+        }
+      }, {
+        path: "kinder",
+        name: "admin.enrollment.kinder",
+        component: function component() {
+          return __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ./pages/Admin/Enrollment */ "./resources/js/pages/Admin/Enrollment/index.vue"));
+        },
+        meta: {
+          name: "Enrollment (Kinder)",
+          level: "Kinder"
+        }
+      }, {
+        path: "elementary",
+        name: "admin.enrollment.elementary",
+        component: function component() {
+          return __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ./pages/Admin/Enrollment */ "./resources/js/pages/Admin/Enrollment/index.vue"));
+        },
+        meta: {
+          name: "Enrollment (Elementary)",
+          level: "Elementary"
+        }
+      }, {
+        path: "jhs",
+        name: "admin.enrollment.jhs",
+        component: function component() {
+          return __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ./pages/Admin/Enrollment */ "./resources/js/pages/Admin/Enrollment/index.vue"));
+        },
+        meta: {
+          name: "Enrollment (Junior High)",
+          level: "Junior High"
+        }
+      }, {
+        path: "shs",
+        name: "admin.enrollment.shs",
+        component: function component() {
+          return __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ./pages/Admin/Enrollment */ "./resources/js/pages/Admin/Enrollment/index.vue"));
+        },
+        meta: {
+          name: "Enrollment (Senior High)",
+          level: "Senior High"
+        }
+      }]
     }]
   }, // /ADMIN ====================================================
   // OTHER PAGES ===============================================
@@ -69229,6 +69487,7 @@ router.beforeEach(function (to, from, next) {
 
 var map = {
 	"./AdminAdvisersStore.js": "./resources/js/stores.custom/AdminAdvisersStore.js",
+	"./AdminEnrollmentStore.js": "./resources/js/stores.custom/AdminEnrollmentStore.js",
 	"./AdminSYStore.js": "./resources/js/stores.custom/AdminSYStore.js",
 	"./AdminSectionsStore.js": "./resources/js/stores.custom/AdminSectionsStore.js",
 	"./AdminStudentsStore.js": "./resources/js/stores.custom/AdminStudentsStore.js",
@@ -69305,6 +69564,74 @@ var actions = {
               _context.next = 2;
               return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("".concat(_AppStore__WEBPACK_IMPORTED_MODULE_3__["default"].state.siteUrl, "admin/advisers/getAdvisers")).then(function (e) {
                 state.advisers = e.data;
+              });
+
+            case 2:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }))();
+  }
+};
+/* harmony default export */ __webpack_exports__["default"] = (_objectSpread({
+  state: state
+}, actions));
+
+/***/ }),
+
+/***/ "./resources/js/stores.custom/AdminEnrollmentStore.js":
+/*!************************************************************!*\
+  !*** ./resources/js/stores.custom/AdminEnrollmentStore.js ***!
+  \************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _AppStore__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./AppStore */ "./resources/js/stores.custom/AppStore.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+
+
+var state = vue__WEBPACK_IMPORTED_MODULE_2___default.a.observable({
+  tabsMain: {
+    'Preschool': 0,
+    'Kinder': 0,
+    'Elementary': 0,
+    'Junior High': 0,
+    'Senior High': 0
+  },
+  sections: []
+});
+var actions = {
+  getxxx: function getxxx() {
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("".concat(_AppStore__WEBPACK_IMPORTED_MODULE_3__["default"].state.siteUrl, "admin/sections/getSections")).then(function (e) {
+                state.sections = e.data;
               });
 
             case 2:
@@ -69731,6 +70058,15 @@ var actions = {
 
     });
     return formatter.format(number).replace('php', '').replace('₱', '');
+  },
+  resetForm: function resetForm(obj) {
+    var setAll = function setAll(obj, val) {
+      return Object.keys(obj).forEach(function (k) {
+        return obj[k] = val;
+      });
+    };
+
+    setAll(obj, "");
   }
 };
 /* harmony default export */ __webpack_exports__["default"] = (_objectSpread({

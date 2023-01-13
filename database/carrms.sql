@@ -1,34 +1,22 @@
--- phpMyAdmin SQL Dump
--- version 5.2.0
--- https://www.phpmyadmin.net/
---
--- Host: 127.0.0.1
--- Generation Time: Jan 03, 2023 at 08:20 AM
--- Server version: 10.4.25-MariaDB
--- PHP Version: 7.4.30
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Database: `carrms`
---
-
+-- --------------------------------------------------------
+-- Host:                         127.0.0.1
+-- Server version:               10.4.25-MariaDB - mariadb.org binary distribution
+-- Server OS:                    Win64
+-- HeidiSQL Version:             12.0.0.6468
 -- --------------------------------------------------------
 
---
--- Table structure for table `advisers`
---
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET NAMES utf8 */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
-CREATE TABLE `advisers` (
-  `id` int(11) NOT NULL,
+-- Dumping structure for table carrms.advisers
+CREATE TABLE IF NOT EXISTS `advisers` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `firstname` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `middlename` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `lastname` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -36,181 +24,123 @@ CREATE TABLE `advisers` (
   `address` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `status` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'active',
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
-  `updated_at` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  PRIMARY KEY (`id`),
+  KEY `firstname` (`firstname`),
+  KEY `middlename` (`middlename`),
+  KEY `lastname` (`lastname`),
+  KEY `created_at` (`created_at`),
+  KEY `updated_at` (`updated_at`),
+  KEY `gender` (`gender`),
+  KEY `address` (`address`),
+  KEY `status` (`status`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `advisers`
---
+-- Data exporting was unselected.
 
-INSERT INTO `advisers` (`id`, `firstname`, `middlename`, `lastname`, `gender`, `address`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'John', 'Dummy', 'Doe', 'Male', 'Tagbilaran', 'active', '2022-12-16 04:20:05', '2022-12-16 04:20:05'),
-(5, 'Kim', 'sdfsdfdsf', 'Orilla', 'Female', 'Haguilanan Grande, Balilihan, Bohol', 'active', '2022-12-21 04:18:24', '2022-12-21 04:18:24'),
-(10, 'Jane', 'Dummy', 'Smith', 'Female', 'Bohol', 'active', '2023-01-03 14:04:20', '2023-01-03 14:04:20');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `enrollment_head`
---
-
-CREATE TABLE `enrollment_head` (
-  `id` int(11) NOT NULL,
+-- Dumping structure for table carrms.enrollment_head
+CREATE TABLE IF NOT EXISTS `enrollment_head` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `sy_id` int(11) NOT NULL,
   `adviser_id` int(11) NOT NULL,
   `section_id` int(11) NOT NULL,
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
-  `updated_at` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+  `updated_at` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  PRIMARY KEY (`id`) USING BTREE,
+  KEY `created_at` (`created_at`) USING BTREE,
+  KEY `updated_at` (`updated_at`) USING BTREE,
+  KEY `firstname` (`adviser_id`) USING BTREE,
+  KEY `sy_id` (`sy_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
---
--- Dumping data for table `enrollment_head`
---
+-- Data exporting was unselected.
 
-INSERT INTO `enrollment_head` (`id`, `sy_id`, `adviser_id`, `section_id`, `created_at`, `updated_at`) VALUES
-(1, 0, 0, 0, '2022-12-16 04:20:05', '2022-12-21 02:47:43'),
-(12, 0, 0, 0, '2022-12-21 02:42:47', '2022-12-21 03:20:28'),
-(13, 0, 0, 0, '2022-12-21 02:42:47', '2022-12-21 03:20:29'),
-(14, 0, 0, 0, '2022-12-21 02:42:47', '2022-12-21 03:20:29'),
-(15, 0, 0, 0, '2022-12-21 02:42:47', '2022-12-21 03:20:30'),
-(18, 0, 0, 0, '2022-12-16 04:20:05', '2022-12-21 03:20:10'),
-(30, 0, 0, 0, '2023-01-03 12:24:17', '2023-01-03 12:24:17');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `enrollment_line`
---
-
-CREATE TABLE `enrollment_line` (
-  `id` int(11) NOT NULL,
+-- Dumping structure for table carrms.enrollment_line
+CREATE TABLE IF NOT EXISTS `enrollment_line` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `student_id` int(11) NOT NULL,
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
-  `updated_at` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+  `updated_at` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  PRIMARY KEY (`id`) USING BTREE,
+  KEY `created_at` (`created_at`) USING BTREE,
+  KEY `updated_at` (`updated_at`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
---
--- Dumping data for table `enrollment_line`
---
+-- Data exporting was unselected.
 
-INSERT INTO `enrollment_line` (`id`, `student_id`, `created_at`, `updated_at`) VALUES
-(1, 0, '2022-12-16 04:20:05', '2022-12-21 02:47:43'),
-(12, 0, '2022-12-21 02:42:47', '2022-12-21 03:20:28'),
-(13, 0, '2022-12-21 02:42:47', '2022-12-21 03:20:29'),
-(14, 0, '2022-12-21 02:42:47', '2022-12-21 03:20:29'),
-(15, 0, '2022-12-21 02:42:47', '2022-12-21 03:20:30'),
-(18, 0, '2022-12-16 04:20:05', '2022-12-21 03:20:10'),
-(30, 0, '2023-01-03 12:24:17', '2023-01-03 12:24:17');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `failed_jobs`
---
-
-CREATE TABLE `failed_jobs` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+-- Dumping structure for table carrms.failed_jobs
+CREATE TABLE IF NOT EXISTS `failed_jobs` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `failed_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- --------------------------------------------------------
+-- Data exporting was unselected.
 
---
--- Table structure for table `migrations`
---
-
-CREATE TABLE `migrations` (
-  `id` int(10) UNSIGNED NOT NULL,
+-- Dumping structure for table carrms.migrations
+CREATE TABLE IF NOT EXISTS `migrations` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `migration` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `batch` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `batch` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `migrations`
---
+-- Data exporting was unselected.
 
-INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
-(1, '0000_00_00_000000_create_websockets_statistics_entries_table', 1),
-(2, '2014_10_12_000000_create_users_table', 1),
-(3, '2014_10_12_100000_create_password_resets_table', 1),
-(4, '2019_08_19_000000_create_failed_jobs_table', 1);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `password_resets`
---
-
-CREATE TABLE `password_resets` (
+-- Dumping structure for table carrms.password_resets
+CREATE TABLE IF NOT EXISTS `password_resets` (
   `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `token` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL
+  `created_at` timestamp NULL DEFAULT NULL,
+  KEY `password_resets_email_index` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- --------------------------------------------------------
+-- Data exporting was unselected.
 
---
--- Table structure for table `schoolyears`
---
-
-CREATE TABLE `schoolyears` (
-  `id` int(11) NOT NULL,
+-- Dumping structure for table carrms.schoolyears
+CREATE TABLE IF NOT EXISTS `schoolyears` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `sy` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `status` float NOT NULL DEFAULT 0,
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
-  `updated_at` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+  `updated_at` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  PRIMARY KEY (`id`) USING BTREE,
+  KEY `created_at` (`created_at`) USING BTREE,
+  KEY `updated_at` (`updated_at`) USING BTREE,
+  KEY `firstname` (`sy`) USING BTREE,
+  KEY `middlename` (`status`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
---
--- Dumping data for table `schoolyears`
---
+-- Data exporting was unselected.
 
-INSERT INTO `schoolyears` (`id`, `sy`, `status`, `created_at`, `updated_at`) VALUES
-(12, '2021-2022', 0, '2023-01-03 11:42:27', '2023-01-03 12:07:29'),
-(13, '2022-2023', 1, '2023-01-03 11:43:40', '2023-01-03 12:07:29');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `sections`
---
-
-CREATE TABLE `sections` (
-  `id` int(11) NOT NULL,
+-- Dumping structure for table carrms.sections
+CREATE TABLE IF NOT EXISTS `sections` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `order` int(11) NOT NULL DEFAULT 1,
   `grade` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `level` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `section` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `adviser_id` int(11) DEFAULT NULL,
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
-  `updated_at` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+  `updated_at` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  PRIMARY KEY (`id`) USING BTREE,
+  KEY `created_at` (`created_at`) USING BTREE,
+  KEY `updated_at` (`updated_at`) USING BTREE,
+  KEY `middlename` (`section`) USING BTREE,
+  KEY `firstname` (`grade`) USING BTREE,
+  KEY `level` (`level`),
+  KEY `order` (`order`)
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
---
--- Dumping data for table `sections`
---
+-- Data exporting was unselected.
 
-INSERT INTO `sections` (`id`, `order`, `grade`, `level`, `section`, `adviser_id`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Preschool', 'Preschool', '1', NULL, '2022-12-16 04:20:05', '2022-12-21 02:47:43'),
-(12, 4, 'Grade 7', 'Junior High', '1', 10, '2022-12-21 02:42:47', '2023-01-03 15:19:10'),
-(13, 4, 'Grade 8', 'Junior High', '1', NULL, '2022-12-21 02:42:47', '2022-12-21 03:20:29'),
-(14, 4, 'Grade 9', 'Junior High', '1', NULL, '2022-12-21 02:42:47', '2022-12-21 03:20:29'),
-(15, 4, 'Grade 10', 'Junior High', '1', NULL, '2022-12-21 02:42:47', '2022-12-21 03:20:30'),
-(18, 2, 'Kinder 1', 'Kinder', '1', NULL, '2022-12-16 04:20:05', '2022-12-21 03:20:10'),
-(30, 5, 'Grade 12', 'Senior High', '1', NULL, '2023-01-03 12:24:17', '2023-01-03 12:24:17');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `students`
---
-
-CREATE TABLE `students` (
-  `id` int(11) NOT NULL,
+-- Dumping structure for table carrms.students
+CREATE TABLE IF NOT EXISTS `students` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `firstname` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `middlename` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `lastname` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -222,50 +152,45 @@ CREATE TABLE `students` (
   `guardian` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `guardian_address` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
-  `updated_at` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  PRIMARY KEY (`id`),
+  KEY `firstname` (`firstname`),
+  KEY `middlename` (`middlename`),
+  KEY `lastname` (`lastname`),
+  KEY `extname` (`extname`),
+  KEY `gender` (`gender`),
+  KEY `dob` (`dob`),
+  KEY `pob` (`pob`),
+  KEY `address` (`address`),
+  KEY `guardian` (`guardian`),
+  KEY `guardian_address` (`guardian_address`),
+  KEY `created_at` (`created_at`),
+  KEY `updated_at` (`updated_at`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `students`
---
+-- Data exporting was unselected.
 
-INSERT INTO `students` (`id`, `firstname`, `middlename`, `lastname`, `extname`, `gender`, `dob`, `pob`, `address`, `guardian`, `guardian_address`, `created_at`, `updated_at`) VALUES
-(3, 'test', 'test', 'test', NULL, 'Male', '2003-06-05', 'test', 'test', 'test', 'test', '2022-12-16 03:11:24', '2022-12-16 03:11:24'),
-(5, 'Juan', 'Test', 'Dela Cruz', 'Jr', 'Male', '1992-05-16', 'Test Place, 123 Test', 'Test Place, 123 Test', 'Maria Clara', 'Test Place, 123 Test', '2022-12-16 03:20:10', '2022-12-16 03:20:10'),
-(9, 'sdf', 'sdf', 'sdf', NULL, 'Male', '2021-03-05', 'sdf', 'sdf', 'sdf', 'sdf', '2022-12-21 05:01:46', '2022-12-21 05:01:46');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `subjects`
---
-
-CREATE TABLE `subjects` (
-  `id` int(11) NOT NULL,
+-- Dumping structure for table carrms.subjects
+CREATE TABLE IF NOT EXISTS `subjects` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `grade` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `subject_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `subject_description` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
-  `updated_at` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+  `updated_at` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  PRIMARY KEY (`id`) USING BTREE,
+  KEY `created_at` (`created_at`) USING BTREE,
+  KEY `updated_at` (`updated_at`) USING BTREE,
+  KEY `firstname` (`grade`) USING BTREE,
+  KEY `subject_name` (`subject_name`),
+  KEY `subject_description` (`subject_description`)
+) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
---
--- Dumping data for table `subjects`
---
+-- Data exporting was unselected.
 
-INSERT INTO `subjects` (`id`, `grade`, `subject_name`, `subject_description`, `created_at`, `updated_at`) VALUES
-(32, 'Grade 1', 'English 1', 'test', '2023-01-03 12:51:09', '2023-01-03 12:51:09'),
-(35, 'Grade 1', 'Math 1', 'test test', '2023-01-03 12:52:20', '2023-01-03 12:52:20'),
-(36, 'Grade 2', 'English 2', 'test', '2023-01-03 12:52:29', '2023-01-03 12:52:29');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `users`
---
-
-CREATE TABLE `users` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+-- Dumping structure for table carrms.users
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `username` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -274,224 +199,30 @@ CREATE TABLE `users` (
   `user_type` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `users_username_unique` (`username`),
+  UNIQUE KEY `users_email_unique` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `users`
---
+-- Data exporting was unselected.
 
-INSERT INTO `users` (`id`, `name`, `username`, `email`, `email_verified_at`, `password`, `user_type`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Test Admin', 'admin', 'admin@test.com', NULL, '$2y$10$5UKZ19tzX1eIz.Na8MrC3e0mv.bkg3XvTysaoXMCugUo2.q95aOTe', 'admin', NULL, '2022-10-23 02:08:21', '2022-10-23 02:08:21'),
-(5, 'AdviserTest', 'adviser', NULL, NULL, '$2y$10$5o3wNl9HnQq953zzxlifF.PI46FiX4Yu4TqJDXVEGYYt/aV/gikpW', 'adviser', NULL, '2022-12-20 21:44:43', '2022-12-20 21:44:44'),
-(6, 'Jane Dummy Smith', 'janedummy', NULL, NULL, '$2y$10$gYH85JQSLneALF0kTnyYLue39uWwltIKp5.libdZUct9QHBbBlif6', 'adviser', NULL, '2023-01-03 06:04:20', '2023-01-03 06:04:20');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `websockets_statistics_entries`
---
-
-CREATE TABLE `websockets_statistics_entries` (
-  `id` int(10) UNSIGNED NOT NULL,
+-- Dumping structure for table carrms.websockets_statistics_entries
+CREATE TABLE IF NOT EXISTS `websockets_statistics_entries` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `app_id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `peak_connection_count` int(11) NOT NULL,
   `websocket_message_count` int(11) NOT NULL,
   `api_message_count` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Indexes for dumped tables
---
+-- Data exporting was unselected.
 
---
--- Indexes for table `advisers`
---
-ALTER TABLE `advisers`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `firstname` (`firstname`),
-  ADD KEY `middlename` (`middlename`),
-  ADD KEY `lastname` (`lastname`),
-  ADD KEY `created_at` (`created_at`),
-  ADD KEY `updated_at` (`updated_at`),
-  ADD KEY `gender` (`gender`),
-  ADD KEY `address` (`address`),
-  ADD KEY `status` (`status`);
-
---
--- Indexes for table `enrollment_head`
---
-ALTER TABLE `enrollment_head`
-  ADD PRIMARY KEY (`id`) USING BTREE,
-  ADD KEY `created_at` (`created_at`) USING BTREE,
-  ADD KEY `updated_at` (`updated_at`) USING BTREE,
-  ADD KEY `firstname` (`adviser_id`) USING BTREE,
-  ADD KEY `sy_id` (`sy_id`);
-
---
--- Indexes for table `enrollment_line`
---
-ALTER TABLE `enrollment_line`
-  ADD PRIMARY KEY (`id`) USING BTREE,
-  ADD KEY `created_at` (`created_at`) USING BTREE,
-  ADD KEY `updated_at` (`updated_at`) USING BTREE;
-
---
--- Indexes for table `failed_jobs`
---
-ALTER TABLE `failed_jobs`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `migrations`
---
-ALTER TABLE `migrations`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `password_resets`
---
-ALTER TABLE `password_resets`
-  ADD KEY `password_resets_email_index` (`email`);
-
---
--- Indexes for table `schoolyears`
---
-ALTER TABLE `schoolyears`
-  ADD PRIMARY KEY (`id`) USING BTREE,
-  ADD KEY `created_at` (`created_at`) USING BTREE,
-  ADD KEY `updated_at` (`updated_at`) USING BTREE,
-  ADD KEY `firstname` (`sy`) USING BTREE,
-  ADD KEY `middlename` (`status`) USING BTREE;
-
---
--- Indexes for table `sections`
---
-ALTER TABLE `sections`
-  ADD PRIMARY KEY (`id`) USING BTREE,
-  ADD KEY `created_at` (`created_at`) USING BTREE,
-  ADD KEY `updated_at` (`updated_at`) USING BTREE,
-  ADD KEY `middlename` (`section`) USING BTREE,
-  ADD KEY `firstname` (`grade`) USING BTREE,
-  ADD KEY `level` (`level`),
-  ADD KEY `order` (`order`);
-
---
--- Indexes for table `students`
---
-ALTER TABLE `students`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `firstname` (`firstname`),
-  ADD KEY `middlename` (`middlename`),
-  ADD KEY `lastname` (`lastname`),
-  ADD KEY `extname` (`extname`),
-  ADD KEY `gender` (`gender`),
-  ADD KEY `dob` (`dob`),
-  ADD KEY `pob` (`pob`),
-  ADD KEY `address` (`address`),
-  ADD KEY `guardian` (`guardian`),
-  ADD KEY `guardian_address` (`guardian_address`),
-  ADD KEY `created_at` (`created_at`),
-  ADD KEY `updated_at` (`updated_at`);
-
---
--- Indexes for table `subjects`
---
-ALTER TABLE `subjects`
-  ADD PRIMARY KEY (`id`) USING BTREE,
-  ADD KEY `created_at` (`created_at`) USING BTREE,
-  ADD KEY `updated_at` (`updated_at`) USING BTREE,
-  ADD KEY `firstname` (`grade`) USING BTREE,
-  ADD KEY `subject_name` (`subject_name`),
-  ADD KEY `subject_description` (`subject_description`);
-
---
--- Indexes for table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `users_username_unique` (`username`),
-  ADD UNIQUE KEY `users_email_unique` (`email`);
-
---
--- Indexes for table `websockets_statistics_entries`
---
-ALTER TABLE `websockets_statistics_entries`
-  ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `advisers`
---
-ALTER TABLE `advisers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
---
--- AUTO_INCREMENT for table `enrollment_head`
---
-ALTER TABLE `enrollment_head`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
-
---
--- AUTO_INCREMENT for table `enrollment_line`
---
-ALTER TABLE `enrollment_line`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
-
---
--- AUTO_INCREMENT for table `failed_jobs`
---
-ALTER TABLE `failed_jobs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `migrations`
---
-ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT for table `schoolyears`
---
-ALTER TABLE `schoolyears`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
-
---
--- AUTO_INCREMENT for table `sections`
---
-ALTER TABLE `sections`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
-
---
--- AUTO_INCREMENT for table `students`
---
-ALTER TABLE `students`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
---
--- AUTO_INCREMENT for table `subjects`
---
-ALTER TABLE `subjects`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
-
---
--- AUTO_INCREMENT for table `users`
---
-ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
--- AUTO_INCREMENT for table `websockets_statistics_entries`
---
-ALTER TABLE `websockets_statistics_entries`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-COMMIT;
-
+/*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
+/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
+/*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=IFNULL(@OLD_SQL_NOTES, 1) */;

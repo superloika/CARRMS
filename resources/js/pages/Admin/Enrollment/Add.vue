@@ -44,13 +44,13 @@ export default {
     computed: {
         sections() {
             return this.AdminSectionsStore.state.sections.filter(e=>{
-                return e.adviser_id != null;
+                return e.adviser_id != null && e.level==this.$route.meta.level;
             });
         }
     },
 
     methods: {
-        async saveSection() {
+        async savexxx() {
             await axios.post(
                 `${this.AppStore.state.siteUrl}admin/sections/saveSection`,
                 {
@@ -67,11 +67,6 @@ export default {
             })
             ;
         },
-
-        resetForm(obj) {
-            let setAll = (obj, val) => Object.keys(obj).forEach(k => obj[k] = val);
-            setAll(obj, "");
-        }
     },
 
     created() {

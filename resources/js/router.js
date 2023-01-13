@@ -98,7 +98,54 @@ const router = new VueRouter({
                     component: ()=>import("./pages/Admin/Enrollment"),
                     meta: {
                         name: "Enrollment"
-                    }
+                    },
+                    children: [
+                        {
+                            path: "preschool",
+                            name: "admin.enrollment.preschool",
+                            component: ()=>import("./pages/Admin/Enrollment"),
+                            meta: {
+                                name: "Enrollment (Preschool)",
+                                level: "Preschool"
+                            }
+                        },
+                        {
+                            path: "kinder",
+                            name: "admin.enrollment.kinder",
+                            component: ()=>import("./pages/Admin/Enrollment"),
+                            meta: {
+                                name: "Enrollment (Kinder)",
+                                level: "Kinder"
+                            }
+                        },
+                        {
+                            path: "elementary",
+                            name: "admin.enrollment.elementary",
+                            component: ()=>import("./pages/Admin/Enrollment"),
+                            meta: {
+                                name: "Enrollment (Elementary)",
+                                level: "Elementary"
+                            }
+                        },
+                        {
+                            path: "jhs",
+                            name: "admin.enrollment.jhs",
+                            component: ()=>import("./pages/Admin/Enrollment"),
+                            meta: {
+                                name: "Enrollment (Junior High)",
+                                level: "Junior High"
+                            }
+                        },
+                        {
+                            path: "shs",
+                            name: "admin.enrollment.shs",
+                            component: ()=>import("./pages/Admin/Enrollment"),
+                            meta: {
+                                name: "Enrollment (Senior High)",
+                                level: "Senior High"
+                            }
+                        },
+                    ]
                 },
             ]
         },

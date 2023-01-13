@@ -7,20 +7,20 @@
             <v-spacer></v-spacer>
 
             <div>
-                <v-btn icon color="primary" @click="AdminSectionsStore.state.tabsMain=0"
-                    title="Sections List"
+                <v-btn icon color="primary" @click="AdminEnrollmentStore.state.tabsMain[level]=0"
+                    title="Enrolled Students List"
                 >
-                    <v-icon>mdi-file-outline</v-icon>
+                    <v-icon>mdi-file-multiple</v-icon>
                 </v-btn>
-                <v-btn icon color="primary" @click="AdminSectionsStore.state.tabsMain=1"
-                    title="Add Section"
+                <v-btn icon color="primary" @click="AdminEnrollmentStore.state.tabsMain[level]=1"
+                    title="Add Enrollment Data"
                 >
-                    <v-icon>mdi-file-plus-outline</v-icon>
+                    <v-icon>mdi-file-plus</v-icon>
                 </v-btn>
             </div>
         </v-app-bar>
 
-        <v-tabs-items v-model="AdminSectionsStore.state.tabsMain">
+        <v-tabs-items v-model="AdminEnrollmentStore.state.tabsMain[level]">
             <v-tab-item>
                 <List></List>
             </v-tab-item>
@@ -32,7 +32,6 @@
 </template>
 
 <script>
-import { cancel } from "raf";
 
 export default {
     components:{
@@ -42,6 +41,19 @@ export default {
     data() {
         return {
         };
+    },
+    computed:{
+        level() {
+            return this.$route.meta.level;
+        }
+    },
+    watch:{
+        // level() {
+        //     AdminEnrollmentStore.state.tabsMain=0;
+        // }
+    },
+    mounted() {
+        console.log('Enrollment component mounted');
     }
 };
 </script>
