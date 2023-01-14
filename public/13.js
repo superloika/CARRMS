@@ -46,6 +46,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -70,11 +76,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 }).then(function (e) {
                   _this.AppStore.toast(e.data, 2000, 'success');
 
-                  _this.resetForm(_this.form);
+                  _this.AppStore.resetForm(_this.form);
 
                   _this.AdminSectionsStore.getSections();
                 })["catch"](function (e) {
                   if (e.response) {
+                    console.log(e.response);
+
                     _this.AppStore.toast(e.response.data, 3000, 'error');
                   }
                 });
@@ -86,16 +94,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }, _callee);
       }))();
-    },
-    resetForm: function resetForm(obj) {
-      var setAll = function setAll(obj, val) {
-        return Object.keys(obj).forEach(function (k) {
-          return obj[k] = val;
-        });
-      };
+    } // resetForm(obj) {
+    //     let setAll = (obj, val) => Object.keys(obj).forEach(k => obj[k] = val);
+    //     setAll(obj, "");
+    // }
 
-      setAll(obj, "");
-    }
   }
 });
 
@@ -151,40 +154,60 @@ var render = function() {
         "v-container",
         { staticClass: "pt-6" },
         [
-          _c("v-select", {
-            attrs: {
-              outlined: "",
-              densex: "",
-              filledx: "",
-              label: "Grade",
-              items: _vm.AppStore.state.gradeLevels,
-              "item-text": "grade",
-              "item-value": "grade"
-            },
-            model: {
-              value: _vm.form.grade,
-              callback: function($$v) {
-                _vm.$set(_vm.form, "grade", $$v)
-              },
-              expression: "form.grade"
-            }
-          }),
-          _vm._v(" "),
-          _c("v-text-field", {
-            attrs: {
-              label: "Section Name",
-              outlined: "",
-              densex: "",
-              filledx: ""
-            },
-            model: {
-              value: _vm.form.section,
-              callback: function($$v) {
-                _vm.$set(_vm.form, "section", $$v)
-              },
-              expression: "form.section"
-            }
-          })
+          _c(
+            "v-row",
+            [
+              _c(
+                "v-col",
+                { attrs: { md: "6" } },
+                [
+                  _c("v-select", {
+                    attrs: {
+                      outlined: "",
+                      densex: "",
+                      filledx: "",
+                      label: "Grade",
+                      items: _vm.AppStore.state.gradeLevels,
+                      "item-text": "grade",
+                      "item-value": "grade"
+                    },
+                    model: {
+                      value: _vm.form.grade,
+                      callback: function($$v) {
+                        _vm.$set(_vm.form, "grade", $$v)
+                      },
+                      expression: "form.grade"
+                    }
+                  })
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-col",
+                { attrs: { md: "6" } },
+                [
+                  _c("v-text-field", {
+                    attrs: {
+                      label: "Section Name",
+                      outlined: "",
+                      densex: "",
+                      filledx: ""
+                    },
+                    model: {
+                      value: _vm.form.section,
+                      callback: function($$v) {
+                        _vm.$set(_vm.form, "section", $$v)
+                      },
+                      expression: "form.section"
+                    }
+                  })
+                ],
+                1
+              )
+            ],
+            1
+          )
         ],
         1
       )
