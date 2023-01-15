@@ -49,12 +49,88 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      form: {
-        section: null
-      }
+      selectedSection: null,
+      selectedToAdd: [],
+      tblLeftSearch: '',
+      tblRightSearch: ''
     };
   },
   computed: {
@@ -62,12 +138,24 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this = this;
 
       return this.AdminSectionsStore.state.sections.filter(function (e) {
-        return e.adviser_id != null && e.level == _this.$route.meta.level;
+        return e.adviser_id != null && e.level == _this.level;
       });
+    },
+    level: function level() {
+      return this.$route.meta.level;
+    },
+    students: function students() {
+      return this.AdminEnrollmentStore.state.studentsForEnrollment;
+    }
+  },
+  watch: {
+    level: function level() {
+      this.selectedSection = null;
+      this.selectedToAdd = [];
     }
   },
   methods: {
-    savexxx: function savexxx() {
+    saveStudentEnrollment: function saveStudentEnrollment() {
       var _this2 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
@@ -75,14 +163,27 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _context.next = 2;
-                return axios.post("".concat(_this2.AppStore.state.siteUrl, "admin/sections/saveSection"), {
-                  data: _this2.form
+                console.log(_this2.selectedSection);
+                console.log(_this2.selectedToAdd);
+                console.log(_this2.AdminSYStore.state.activeSY);
+                _context.next = 5;
+                return axios.post("".concat(_this2.AppStore.state.siteUrl, "admin/enrollment/saveStudentEnrollment"), {
+                  head: {
+                    sy_id: _this2.AdminSYStore.state.activeSYid,
+                    adviser_id: _this2.selectedSection.adviser_id,
+                    section_id: _this2.selectedSection.id,
+                    grade: _this2.selectedSection.grade
+                  },
+                  line: _this2.selectedToAdd.map(function (e) {
+                    return e.id;
+                  })
                 }).then(function (e) {
                   _this2.AppStore.toast(e.data, 2000, 'success');
 
-                  _this2.resetForm(_this2.form);
+                  _this2.AdminEnrollmentStore.getStudentsForEnrollment(_this2.selectedSection.grade); // this.selectedToAdd = [];
 
+
+                  // this.selectedToAdd = [];
                   _this2.AdminSectionsStore.getSections();
                 })["catch"](function (e) {
                   if (e.response) {
@@ -90,13 +191,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   }
                 });
 
-              case 2:
+              case 5:
               case "end":
                 return _context.stop();
             }
           }
         }, _callee);
       }))();
+    },
+    onChangeGradeSection: function onChangeGradeSection(section) {
+      console.log(section);
+      this.selectedToAdd = [];
+      this.AdminEnrollmentStore.getStudentsForEnrollment(section.grade);
     }
   },
   created: function created() {}
@@ -136,12 +242,15 @@ var render = function() {
           _c(
             "v-btn",
             {
-              attrs: { dense: "", iconx: "", text: "", color: "primary" },
-              on: {
-                click: function($event) {
-                  return _vm.saveSection()
-                }
-              }
+              attrs: {
+                dense: "",
+                iconx: "",
+                text: "",
+                color: "primary",
+                disabled:
+                  !_vm.selectedToAdd.length || _vm.selectedSection == null
+              },
+              on: { click: _vm.saveStudentEnrollment }
             },
             [_c("v-icon", [_vm._v("mdi-floppy")]), _vm._v(" Save\n        ")],
             1
@@ -154,56 +263,238 @@ var render = function() {
         "v-container",
         { staticClass: "pt-6" },
         [
-          _c("v-select", {
-            attrs: {
-              outlined: "",
-              densex: "",
-              filledx: "",
-              label: "Grade & Section",
-              items: _vm.sections,
-              "item-value": "id",
-              "return-object": "",
-              hint: "Only the sections with a class adviser are selectable",
-              "persistent-hint": ""
-            },
-            scopedSlots: _vm._u([
-              {
-                key: "item",
-                fn: function(data) {
-                  return [
-                    _vm._v(
-                      "\n                " +
-                        _vm._s(data.item.grade) +
-                        " - " +
-                        _vm._s(data.item.section) +
-                        "\n            "
-                    )
-                  ]
-                }
-              },
-              {
-                key: "selection",
-                fn: function(data) {
-                  return [
-                    _vm._v(
-                      "\n                " +
-                        _vm._s(data.item.grade) +
-                        " - " +
-                        _vm._s(data.item.section) +
-                        "\n            "
-                    )
-                  ]
-                }
-              }
-            ]),
-            model: {
-              value: _vm.form.section,
-              callback: function($$v) {
-                _vm.$set(_vm.form, "section", $$v)
-              },
-              expression: "form.section"
-            }
-          })
+          _c(
+            "v-row",
+            [
+              _c(
+                "v-col",
+                { attrs: { cols: "12" } },
+                [
+                  _c("v-select", {
+                    attrs: {
+                      outlined: "",
+                      densex: "",
+                      filledx: "",
+                      label: "Grade & Section",
+                      items: _vm.sections,
+                      "item-value": "id",
+                      "return-object": "",
+                      hint:
+                        "Only the sections with a class adviser are selectable",
+                      "persistent-hint": ""
+                    },
+                    on: { input: _vm.onChangeGradeSection },
+                    scopedSlots: _vm._u([
+                      {
+                        key: "item",
+                        fn: function(data) {
+                          return [
+                            _vm._v(
+                              "\n                        " +
+                                _vm._s(data.item.grade) +
+                                " - " +
+                                _vm._s(data.item.section) +
+                                "\n                    "
+                            )
+                          ]
+                        }
+                      },
+                      {
+                        key: "selection",
+                        fn: function(data) {
+                          return [
+                            _vm._v(
+                              "\n                        " +
+                                _vm._s(data.item.grade) +
+                                " - " +
+                                _vm._s(data.item.section) +
+                                "\n                    "
+                            )
+                          ]
+                        }
+                      }
+                    ]),
+                    model: {
+                      value: _vm.selectedSection,
+                      callback: function($$v) {
+                        _vm.selectedSection = $$v
+                      },
+                      expression: "selectedSection"
+                    }
+                  })
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-col",
+                { attrs: { cols: "12", md: "9" } },
+                [
+                  _c(
+                    "v-card",
+                    { key: _vm.level },
+                    [
+                      _c(
+                        "v-toolbar",
+                        { attrs: { elevation: "0" } },
+                        [
+                          _c("v-text-field", {
+                            attrs: {
+                              "hide-details": "",
+                              dense: "",
+                              flat: "",
+                              "solo-inverted": "",
+                              rounded: "",
+                              placeholder: "Search student here"
+                            },
+                            model: {
+                              value: _vm.tblLeftSearch,
+                              callback: function($$v) {
+                                _vm.tblLeftSearch = $$v
+                              },
+                              expression: "tblLeftSearch"
+                            }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-card-text",
+                        [
+                          _c("v-data-table", {
+                            attrs: {
+                              headers: [
+                                { text: "SID", value: "id" },
+                                { text: "First Name", value: "firstname" },
+                                { text: "Middle Name", value: "middlename" },
+                                { text: "Last Name", value: "lastname" },
+                                { text: "Ext. Name", value: "extname" },
+                                { text: "Prev. Grade Level", value: "grade" },
+                                {
+                                  text: "Prev. Final Remarks",
+                                  value: "final_remarks"
+                                }
+                              ],
+                              items: _vm.students,
+                              search: _vm.tblLeftSearch,
+                              "show-select": ""
+                            },
+                            scopedSlots: _vm._u(
+                              [
+                                {
+                                  key: "item.name",
+                                  fn: function(ref) {
+                                    var item = ref.item
+                                    return [
+                                      _vm._v(
+                                        "\n                                " +
+                                          _vm._s(item.firstname) +
+                                          " " +
+                                          _vm._s(item.middlename) +
+                                          " " +
+                                          _vm._s(item.lastname) +
+                                          "\n                            "
+                                      )
+                                    ]
+                                  }
+                                }
+                              ],
+                              null,
+                              true
+                            ),
+                            model: {
+                              value: _vm.selectedToAdd,
+                              callback: function($$v) {
+                                _vm.selectedToAdd = $$v
+                              },
+                              expression: "selectedToAdd"
+                            }
+                          })
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-col",
+                { attrs: { cols: "12", md: "3" } },
+                [
+                  _c(
+                    "v-card",
+                    { key: _vm.level },
+                    [
+                      _c(
+                        "v-toolbar",
+                        { attrs: { elevation: "0" } },
+                        [
+                          _c("v-toolbar-title", [
+                            _vm._v(
+                              "\n                            Selected Students\n                        "
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("v-spacer")
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-card-text",
+                        [
+                          _c("v-data-table", {
+                            attrs: {
+                              headers: [
+                                { text: "Student Name", value: "name" }
+                              ],
+                              items: _vm.selectedToAdd,
+                              "items-per-page": -1,
+                              search: _vm.tblRightSearch,
+                              "hide-default-footer": ""
+                            },
+                            scopedSlots: _vm._u(
+                              [
+                                {
+                                  key: "item.name",
+                                  fn: function(ref) {
+                                    var item = ref.item
+                                    return [
+                                      _vm._v(
+                                        "\n                                " +
+                                          _vm._s(item.firstname) +
+                                          " " +
+                                          _vm._s(item.middlename) +
+                                          " " +
+                                          _vm._s(item.lastname) +
+                                          "\n                            "
+                                      )
+                                    ]
+                                  }
+                                }
+                              ],
+                              null,
+                              true
+                            )
+                          })
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("v-col", { attrs: { cols: "12", md: "6" } })
+            ],
+            1
+          )
         ],
         1
       )

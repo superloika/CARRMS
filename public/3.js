@@ -239,7 +239,7 @@ var render = function() {
                     }
                   }
                 },
-                [_c("v-icon", [_vm._v("mdi-file-outline")])],
+                [_c("v-icon", [_vm._v("mdi-file-multiple")])],
                 1
               ),
               _vm._v(" "),
@@ -253,7 +253,7 @@ var render = function() {
                     }
                   }
                 },
-                [_c("v-icon", [_vm._v("mdi-file-plus-outline")])],
+                [_c("v-icon", [_vm._v("mdi-file-plus")])],
                 1
               )
             ],

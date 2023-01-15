@@ -10,12 +10,12 @@
                 <v-btn icon color="primary" @click="AdminStudentsStore.state.tabsMain=0"
                     title="Students List"
                 >
-                    <v-icon>mdi-file-outline</v-icon>
+                    <v-icon>mdi-file-multiple</v-icon>
                 </v-btn>
                 <v-btn icon color="primary" @click="AdminStudentsStore.state.tabsMain=1"
                     title="Add Student"
                 >
-                    <v-icon>mdi-file-plus-outline</v-icon>
+                    <v-icon>mdi-file-plus</v-icon>
                 </v-btn>
             </div>
         </v-app-bar>

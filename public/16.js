@@ -65,6 +65,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     return {
       searchKey: "",
       tblHeaders: [{
+        text: "LRN",
+        value: "lrn"
+      }, {
         text: "First Name",
         value: "firstname"
       }, {

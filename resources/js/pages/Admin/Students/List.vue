@@ -47,6 +47,7 @@ export default {
         return {
             searchKey: "",
             tblHeaders: [
+                { text: "LRN", value: "lrn" },
                 { text: "First Name", value: "firstname" },
                 { text: "Middle Name", value: "middlename" },
                 { text: "Last Name", value: "lastname" },

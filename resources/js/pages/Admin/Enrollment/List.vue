@@ -8,10 +8,26 @@
                 </v-chip>
             </v-toolbar-title>
             <v-spacer></v-spacer>
-            <v-text-field
-                class=""
-                placeholder="Search"
+            <v-select outlined label="Grade & Section"
+                v-model="selectedSection"
+                :items="sections"
+                item-value="id"
+                return-object
+                dense rounded hide-details=""
+                v-on:change="onChangeGradeSection"
                 style="max-width:200px;"
+            >
+                <template slot="item" slot-scope="data">
+                    {{ data.item.grade }} - {{ data.item.section }}
+                </template>
+                <template slot="selection" slot-scope="data">
+                    {{ data.item.grade }} - {{ data.item.section }}
+                </template>
+            </v-select>
+            <v-text-field
+                class="ml-2"
+                placeholder="Search"
+                style="max-width:250px;"
                 clearable
                 hide-details
                 solo-inverted
@@ -20,21 +36,30 @@
                 flat
                 v-model="searchKey"
             ></v-text-field>
+            <v-btn icon dense class="ml-2" @click="refresh()" title="Refresh">
+                <v-icon>mdi-refresh</v-icon>
+            </v-btn>
         </v-app-bar>
 
         <v-data-table
             :headers="tblHeaders"
-            :items="[]"
+            :items="AdminEnrollmentStore.state.studentsEnrolled"
             class="elevation-1"
             pagination.sync="pagination"
             :search="searchKey"
         >
+            <template v-slot:[`item.adviser_name`]="{item}">
+                {{ item.adviser_firstname }} {{ item.middlename }} {{ item.adviser_lastname }}
+            </template>
             <template v-slot:[`item.actions`]="{item}">
-                <v-btn small color="primary" title="Edit" disabled>
-                    <v-icon>mdi-pencil</v-icon> Edit
+                <v-btn icon color="primary" title="View Details" disabled>
+                    <v-icon>mdi-eye</v-icon>
                 </v-btn>
-                <v-btn small color="error" title="Delete" @click="deleteSection(item.id)">
-                    <v-icon>mdi-delete</v-icon> Delete
+                <v-btn icon color="primary" title="Edit" disabled>
+                    <v-icon>mdi-pencil</v-icon>
+                </v-btn>
+                <v-btn icon color="error" title="Delete" @click="deleteSection(item.id)">
+                    <v-icon>mdi-delete</v-icon>
                 </v-btn>
             </template>
         </v-data-table>
@@ -47,18 +72,59 @@ export default {
         return {
             searchKey: "",
             tblHeaders: [
-                { text: "Section Name", value: "section" },
+                { text: "LRN", value: "student_lrn" },
+                { text: "First Name", value: "student_firstname" },
+                { text: "Middle Name", value: "student_middlename" },
+                { text: "Last Name", value: "student_lastname" },
+                { text: "Ext. Name", value: "student_extname" },
+                { text: "Grade", value: "grade" },
+                { text: "Section", value: "section" },
+                { text: "Adviser", value: "adviser_name" },
+                { text: "Final Remarks", value: "final_remarks" },
                 { text: "Actions", value: "actions" },
             ],
+            selectedSection: null,
         };
     },
 
     methods:{
+        onChangeGradeSection() {
+            try {
+                this.AdminEnrollmentStore.getStudentsEnrolled(
+                    this.AdminSYStore.state.activeSYid,
+                    this.selectedSection.id,
+                    this.level
+                );
+            } catch (error) {
 
+            }
+        },
+        refresh() {
+            this.selectedSection='';
+            this.onChangeGradeSection();
+            this.searchKey="";
+        }
+    },
+
+    computed: {
+        sections() {
+            return this.AdminSectionsStore.state.sections.filter(e=>{
+                return e.adviser_id != null && e.level==this.level;
+            });
+        },
+        level() {
+            return this.$route.meta.level;
+        },
+    },
+
+    watch: {
+        level() {
+            this.refresh();
+        }
     },
 
     created(){
-        this.AdminSectionsStore.getSections();
+        this.refresh();
     }
 };
 </script>

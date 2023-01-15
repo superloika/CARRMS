@@ -45,6 +45,7 @@ Route::group(['prefix' => 'accounts'], function() {
 Route::group(['prefix'=>'admin'], function(){
     Route::group(['prefix'=>'sy'], function() {
         Route::get('activeSY', 'SYController@activeSY');
+        Route::get('prevSY', 'SYController@prevSY');
         Route::get('getSYs', 'SYController@getSYs');
         Route::post('saveSY', 'SYController@saveSY');
         Route::post('deleteSY', 'SYController@deleteSY');
@@ -70,6 +71,11 @@ Route::group(['prefix'=>'admin'], function(){
         Route::get('getSubjects', 'SubjectController@getSubjects');
         Route::post('saveSubject', 'SubjectController@saveSubject');
         Route::post('deleteSubject', 'SubjectController@deleteSubject');
+    });
+    Route::group(['prefix'=>'enrollment'], function() {
+        Route::post('getStudentsForEnrollment', 'EnrollmentController@getStudentsForEnrollment');
+        Route::post('saveStudentEnrollment', 'EnrollmentController@saveStudentEnrollment');
+        Route::post('getStudentsEnrolled', 'EnrollmentController@getStudentsEnrolled');
     });
 });
 

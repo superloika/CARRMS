@@ -21,16 +21,27 @@ class StudentController extends Controller
             $form = request()->data;
             extract($form);
 
+            // check if student's LRN already exists
+            if(
+                trim($lrn) != ''
+                && DB::table('students')->where('lrn',trim($lrn))->exists()
+            ){
+                return response()->json('LRN already exists', 303);
+            }
+
             // check if student already exists
             if(DB::table('students')->where('firstname',$firstname)
                 ->where('middlename',$middlename)
                 ->where('lastname',$lastname)
+                ->where('extname',$extname)
                 ->exists()
             ) {
                 return response()->json('Student already exists', 303);
             }
 
             DB::table('students')->insert([
+                'lrn'=>$lrn ?? null,
+                'firstname'=>$firstname,
                 'firstname'=>$firstname,
                 'middlename'=>$middlename,
                 'lastname'=>$lastname,

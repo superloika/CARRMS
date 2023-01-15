@@ -52,22 +52,100 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       searchKey: "",
       tblHeaders: [{
-        text: "Section Name",
+        text: "LRN",
+        value: "student_lrn"
+      }, {
+        text: "First Name",
+        value: "student_firstname"
+      }, {
+        text: "Middle Name",
+        value: "student_middlename"
+      }, {
+        text: "Last Name",
+        value: "student_lastname"
+      }, {
+        text: "Ext. Name",
+        value: "student_extname"
+      }, {
+        text: "Grade",
+        value: "grade"
+      }, {
+        text: "Section",
         value: "section"
+      }, {
+        text: "Adviser",
+        value: "adviser_name"
+      }, {
+        text: "Final Remarks",
+        value: "final_remarks"
       }, {
         text: "Actions",
         value: "actions"
-      }]
+      }],
+      selectedSection: null
     };
   },
-  methods: {},
+  methods: {
+    onChangeGradeSection: function onChangeGradeSection() {
+      try {
+        this.AdminEnrollmentStore.getStudentsEnrolled(this.AdminSYStore.state.activeSYid, this.selectedSection.id, this.level);
+      } catch (error) {}
+    },
+    refresh: function refresh() {
+      this.selectedSection = '';
+      this.onChangeGradeSection();
+      this.searchKey = "";
+    }
+  },
+  computed: {
+    sections: function sections() {
+      var _this = this;
+
+      return this.AdminSectionsStore.state.sections.filter(function (e) {
+        return e.adviser_id != null && e.level == _this.level;
+      });
+    },
+    level: function level() {
+      return this.$route.meta.level;
+    }
+  },
+  watch: {
+    level: function level() {
+      this.refresh();
+    }
+  },
   created: function created() {
-    this.AdminSectionsStore.getSections();
+    this.refresh();
   }
 });
 
@@ -112,8 +190,61 @@ var render = function() {
           _vm._v(" "),
           _c("v-spacer"),
           _vm._v(" "),
-          _c("v-text-field", {
+          _c("v-select", {
             staticStyle: { "max-width": "200px" },
+            attrs: {
+              outlined: "",
+              label: "Grade & Section",
+              items: _vm.sections,
+              "item-value": "id",
+              "return-object": "",
+              dense: "",
+              rounded: "",
+              "hide-details": ""
+            },
+            on: { change: _vm.onChangeGradeSection },
+            scopedSlots: _vm._u([
+              {
+                key: "item",
+                fn: function(data) {
+                  return [
+                    _vm._v(
+                      "\n                " +
+                        _vm._s(data.item.grade) +
+                        " - " +
+                        _vm._s(data.item.section) +
+                        "\n            "
+                    )
+                  ]
+                }
+              },
+              {
+                key: "selection",
+                fn: function(data) {
+                  return [
+                    _vm._v(
+                      "\n                " +
+                        _vm._s(data.item.grade) +
+                        " - " +
+                        _vm._s(data.item.section) +
+                        "\n            "
+                    )
+                  ]
+                }
+              }
+            ]),
+            model: {
+              value: _vm.selectedSection,
+              callback: function($$v) {
+                _vm.selectedSection = $$v
+              },
+              expression: "selectedSection"
+            }
+          }),
+          _vm._v(" "),
+          _c("v-text-field", {
+            staticClass: "ml-2",
+            staticStyle: { "max-width": "250px" },
             attrs: {
               placeholder: "Search",
               clearable: "",
@@ -130,7 +261,22 @@ var render = function() {
               },
               expression: "searchKey"
             }
-          })
+          }),
+          _vm._v(" "),
+          _c(
+            "v-btn",
+            {
+              staticClass: "ml-2",
+              attrs: { icon: "", dense: "", title: "Refresh" },
+              on: {
+                click: function($event) {
+                  return _vm.refresh()
+                }
+              }
+            },
+            [_c("v-icon", [_vm._v("mdi-refresh")])],
+            1
+          )
         ],
         1
       ),
@@ -139,12 +285,29 @@ var render = function() {
         staticClass: "elevation-1",
         attrs: {
           headers: _vm.tblHeaders,
-          items: [],
+          items: _vm.AdminEnrollmentStore.state.studentsEnrolled,
           "pagination.sync": "pagination",
           search: _vm.searchKey
         },
         scopedSlots: _vm._u(
           [
+            {
+              key: "item.adviser_name",
+              fn: function(ref) {
+                var item = ref.item
+                return [
+                  _vm._v(
+                    "\n            " +
+                      _vm._s(item.adviser_firstname) +
+                      " " +
+                      _vm._s(item.middlename) +
+                      " " +
+                      _vm._s(item.adviser_lastname) +
+                      "\n        "
+                  )
+                ]
+              }
+            },
             {
               key: "item.actions",
               fn: function(ref) {
@@ -154,33 +317,41 @@ var render = function() {
                     "v-btn",
                     {
                       attrs: {
-                        small: "",
+                        icon: "",
                         color: "primary",
-                        title: "Edit",
+                        title: "View Details",
                         disabled: ""
                       }
                     },
-                    [
-                      _c("v-icon", [_vm._v("mdi-pencil")]),
-                      _vm._v(" Edit\n            ")
-                    ],
+                    [_c("v-icon", [_vm._v("mdi-eye")])],
                     1
                   ),
                   _vm._v(" "),
                   _c(
                     "v-btn",
                     {
-                      attrs: { small: "", color: "error", title: "Delete" },
+                      attrs: {
+                        icon: "",
+                        color: "primary",
+                        title: "Edit",
+                        disabled: ""
+                      }
+                    },
+                    [_c("v-icon", [_vm._v("mdi-pencil")])],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-btn",
+                    {
+                      attrs: { icon: "", color: "error", title: "Delete" },
                       on: {
                         click: function($event) {
                           return _vm.deleteSection(item.id)
                         }
                       }
                     },
-                    [
-                      _c("v-icon", [_vm._v("mdi-delete")]),
-                      _vm._v(" Delete\n            ")
-                    ],
+                    [_c("v-icon", [_vm._v("mdi-delete")])],
                     1
                   )
                 ]

@@ -28,9 +28,11 @@ class SYController extends Controller
                 return response()->json('School year already exists', 303);
             }
 
+            DB::table('schoolyears')->where('status',1)->update(['status'=>0]);
             DB::table('schoolyears')->insert([
                 'sy'=>$sy,
             ]);
+
             return response()->json('Success', 200);
         } catch (\Throwable $th) {
             return response()->json($th->getMessage(), 500);
@@ -65,7 +67,16 @@ class SYController extends Controller
 
     public function activeSY() {
         try {
-            $res = DB::table('schoolyears')->where('status',1)->first();
+            $res = DB::table('schoolyears')->where('status',1)->latest()->first();
+            return response()->json($res, 200);
+        } catch (\Throwable $th) {
+            return response()->json($th->getMessage(), 500);
+        }
+    }
+
+    public function prevSY() {
+        try {
+            $res = DB::table('schoolyears')->where('status',0)->latest()->first();
             return response()->json($res, 200);
         } catch (\Throwable $th) {
             return response()->json($th->getMessage(), 500);

@@ -42,6 +42,8 @@ export default {
             ).then(e=>{
                 this.AppStore.toast(e.data,3000,'success');
                 this.resetForm(this.form);
+                this.AdminSYStore.activeSY();
+                this.AdminSYStore.prevSY();
                 this.AdminSYStore.getSYs();
             }).catch(e=>{
                 if(e.response) {

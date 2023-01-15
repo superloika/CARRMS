@@ -107,10 +107,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       form: {
+        lrn: '',
         firstname: '',
         middlename: '',
         lastname: '',
@@ -236,6 +242,17 @@ var render = function() {
         "v-container",
         { staticClass: "pt-6" },
         [
+          _c("v-text-field", {
+            attrs: { label: "LRN", outlined: "", densex: "", filledx: "" },
+            model: {
+              value: _vm.form.lrn,
+              callback: function($$v) {
+                _vm.$set(_vm.form, "lrn", $$v)
+              },
+              expression: "form.lrn"
+            }
+          }),
+          _vm._v(" "),
           _c("v-text-field", {
             attrs: {
               label: "First Name",

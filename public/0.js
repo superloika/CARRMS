@@ -59,12 +59,30 @@ __webpack_require__.r(__webpack_exports__);
       return this.$route.meta.level;
     }
   },
-  watch: {// level() {
-    //     AdminEnrollmentStore.state.tabsMain=0;
-    // }
+  watch: {
+    level: function level() {
+      this.AdminEnrollmentStore.state.studentsForEnrollment = [];
+      this.AdminEnrollmentStore.state.studentsEnrolled = []; // this.AdminEnrollmentStore.getStudentsEnrolled(
+      //     this.AdminSYStore.state.activeSYid,
+      //     null,
+      //     this.level
+      // );
+
+      this.AdminEnrollmentStore.state.tabsMain = {
+        'Preschool': 0,
+        'Kinder': 0,
+        'Elementary': 0,
+        'Junior High': 0,
+        'Senior High': 0
+      };
+    }
+  },
+  created: function created() {
+    // this.AdminStudentsStore.getStudents();
+    this.AdminSectionsStore.getSections();
   },
   mounted: function mounted() {
-    console.log('Enrollment component mounted');
+    console.log('Enrollment component mounted: ' + this.level);
   }
 });
 

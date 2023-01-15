@@ -67,9 +67,14 @@
             <!-- Side Nav Footer -->
             <template v-slot:append>
                 <v-footer color="primary">
-                    <v-col class="text-center pa-0">
+                    <v-col class="pa-0">
                         <div class="text-caption" >
-                            Active SY {{ AdminSYStore.state.activeSY}}
+                            <div>
+                                Prev SY: {{ AdminSYStore.state.prevSY}}
+                            </div>
+                            <div>
+                                Active SY: {{ AdminSYStore.state.activeSY}}
+                            </div>
                         </div>
                     </v-col>
                 </v-footer>
@@ -140,6 +145,7 @@ export default {
     },
     created() {
         this.AdminSYStore.activeSY();
+        this.AdminSYStore.prevSY();
     }
 };
 </script>

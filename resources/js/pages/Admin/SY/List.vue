@@ -31,17 +31,17 @@
                 <v-chip small color="warning" v-else-if="item.status==0">Inactive</v-chip>
             </template>
             <template v-slot:[`item.actions`]="{item}">
-                <v-btn icon dense color="primary" title="Activate"
+                <!-- <v-btn icon dense color="primary" title="Activate"
                     @click="toggleSY(item.id, 1)" :disabled="item.status==1">
                     <v-icon>mdi-check</v-icon>
-                </v-btn>
-                <v-btn icon dense color="warning" title="Deactivate"
+                </v-btn> -->
+                <!-- <v-btn icon dense color="warning" title="Deactivate"
                     @click="toggleSY(item.id, 0)" :disabled="item.status==0">
                     <v-icon>mdi-close</v-icon>
-                </v-btn>
+                </v-btn> -->
                 <v-btn icon dense color="error" title="Delete"
                     @click="deleteSY(item.id)"
-                    v-if="AppStore.isSuperAdmin()"
+                    :disabled="!AppStore.isSuperAdmin()"
                 >
                     <v-icon>mdi-delete</v-icon>
                 </v-btn>

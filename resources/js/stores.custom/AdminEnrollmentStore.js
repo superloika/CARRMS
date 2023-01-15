@@ -1,6 +1,7 @@
 import axios from "axios";
 import Vue from "vue";
 import AppStore from "./AppStore";
+import AdminSYStore from "./AdminSYStore";
 
 const state = Vue.observable({
     tabsMain: {
@@ -10,18 +11,39 @@ const state = Vue.observable({
         'Junior High': 0,
         'Senior High': 0,
     },
-    sections: [],
+    studentsForEnrollment: [],
+    studentsEnrolled: [],
 });
 
 
 const actions = {
-    async getxxx() {
-        await axios.get(
-            `${AppStore.state.siteUrl}admin/sections/getSections`
+    async getStudentsForEnrollment(grade) {
+        console.log('prevSYid:', AdminSYStore.state.prevSYid);
+        console.log('activeSYid:', AdminSYStore.state.activeSYid);
+        await axios.post(
+            `${AppStore.state.siteUrl}admin/enrollment/getStudentsForEnrollment`,
+            {
+                grade: grade,
+                prevSYid: AdminSYStore.state.prevSYid ?? null,
+                activeSYid: AdminSYStore.state.activeSYid,
+            }
         ).then(e=>{
-            state.sections = e.data;
+            state.studentsForEnrollment = e.data;
         });
     },
+    async getStudentsEnrolled(sy_id, section_id, level) {
+        await axios.post(
+            `${AppStore.state.siteUrl}admin/enrollment/getStudentsEnrolled`,
+            {
+                sy_id: sy_id,
+                section_id: section_id,
+                level: level
+            }
+        ).then(e=>{
+            state.studentsEnrolled = e.data;
+            console.log(e.data)
+        });
+    }
 };
 
 export default {

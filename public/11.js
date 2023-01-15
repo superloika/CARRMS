@@ -244,60 +244,19 @@ var render = function() {
                       attrs: {
                         icon: "",
                         dense: "",
-                        color: "primary",
-                        title: "Activate",
-                        disabled: item.status == 1
+                        color: "error",
+                        title: "Delete",
+                        disabled: !_vm.AppStore.isSuperAdmin()
                       },
                       on: {
                         click: function($event) {
-                          return _vm.toggleSY(item.id, 1)
+                          return _vm.deleteSY(item.id)
                         }
                       }
                     },
-                    [_c("v-icon", [_vm._v("mdi-check")])],
+                    [_c("v-icon", [_vm._v("mdi-delete")])],
                     1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "v-btn",
-                    {
-                      attrs: {
-                        icon: "",
-                        dense: "",
-                        color: "warning",
-                        title: "Deactivate",
-                        disabled: item.status == 0
-                      },
-                      on: {
-                        click: function($event) {
-                          return _vm.toggleSY(item.id, 0)
-                        }
-                      }
-                    },
-                    [_c("v-icon", [_vm._v("mdi-close")])],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _vm.AppStore.isSuperAdmin()
-                    ? _c(
-                        "v-btn",
-                        {
-                          attrs: {
-                            icon: "",
-                            dense: "",
-                            color: "error",
-                            title: "Delete"
-                          },
-                          on: {
-                            click: function($event) {
-                              return _vm.deleteSY(item.id)
-                            }
-                          }
-                        },
-                        [_c("v-icon", [_vm._v("mdi-delete")])],
-                        1
-                      )
-                    : _vm._e()
+                  )
                 ]
               }
             }

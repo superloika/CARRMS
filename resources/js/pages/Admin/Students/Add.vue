@@ -12,6 +12,11 @@
 
         <v-container class="pt-6">
             <v-text-field
+                label="LRN"
+                v-model="form.lrn"
+                outlined densex filledx
+            ></v-text-field>
+            <v-text-field
                 label="First Name"
                 v-model="form.firstname"
                 outlined densex filledx
@@ -94,6 +99,7 @@ export default {
     data() {
         return {
             form: {
+                lrn: '',
                 firstname: '',
                 middlename: '',
                 lastname: '',

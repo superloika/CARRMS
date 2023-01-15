@@ -64,6 +64,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                   _this.resetForm(_this.form);
 
+                  _this.AdminSYStore.activeSY();
+
+                  _this.AdminSYStore.prevSY();
+
                   _this.AdminSYStore.getSYs();
                 })["catch"](function (e) {
                   if (e.response) {
