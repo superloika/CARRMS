@@ -61,7 +61,7 @@
             <v-divider></v-divider>
 
             <!-- Side Navigation (Main Nav) -->
-            <NavSideAdmin v-if="AppStore.isAdmin()"></NavSideAdmin>
+            <NavSideAdmin v-if="AppStore.isSuperAdmin() || AppStore.isAdmin()"></NavSideAdmin>
             <NavSideAdviser v-else-if="AppStore.isAdviser()"></NavSideAdviser>
 
             <!-- Side Nav Footer -->
@@ -96,7 +96,7 @@
         <v-snackbar
             v-model="AppStore.state.snackBar.show"
             :timeout="AppStore.state.snackBar.timeout"
-            bottom left
+            top center
             :color="AppStore.state.snackBar.color"
         >
             {{ AppStore.state.snackBar.text }}

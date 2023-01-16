@@ -1,11 +1,20 @@
 <template>
     <v-sheet>
-        <!-- <div class="d-flex mb-4 justify-center">
-            <img src="/img/logo.png" alt="logo" srcset="">
+        <div class="d-flex mb-4 justify-center">
+            <!-- <v-img
+                lazy-src="/img/ca.jfif"
+                max-height="80"
+                max-width="80"
+                src="/img/ca.jfif"
+            ></v-img> -->
+            <!-- <img src="/img/ca.jfif" alt="logo" srcset=""> -->
             &nbsp;
-            <h6 class="pa-0 text-overline primary--text">{{ AppStore.state.AppName }}</h6>
-        </div> -->
-        <v-card max-width="300" min-width="300" elevation="1" tile>
+            <div class="pt-1">
+                <div class="pa-0 text-h3 primary--text">{{ AppStore.state.appName }}</div>
+                <div class="pa-0 text-caption primary--text">{{ AppStore.state.appLongName }}</div>
+            </div>
+        </div>
+        <v-card max-width="" min-width="300" elevation="1" tile>
             <v-card-title>
                 <v-icon class="mr-2">mdi-login</v-icon>
                 <span class="text-subtitle-1">Login</span>

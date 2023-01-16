@@ -2535,6 +2535,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     old_username: null,
@@ -5263,7 +5272,7 @@ var render = function() {
           _vm._v(" "),
           _c("v-divider"),
           _vm._v(" "),
-          _vm.AppStore.isAdmin()
+          _vm.AppStore.isSuperAdmin() || _vm.AppStore.isAdmin()
             ? _c("NavSideAdmin")
             : _vm.AppStore.isAdviser()
             ? _c("NavSideAdviser")
@@ -5290,8 +5299,8 @@ var render = function() {
         {
           attrs: {
             timeout: _vm.AppStore.state.snackBar.timeout,
-            bottom: "",
-            left: "",
+            top: "",
+            center: "",
             color: _vm.AppStore.state.snackBar.color
           },
           model: {
@@ -5365,11 +5374,24 @@ var render = function() {
   return _c(
     "v-sheet",
     [
+      _c("div", { staticClass: "d-flex mb-4 justify-center" }, [
+        _vm._v("\n         \n        "),
+        _c("div", { staticClass: "pt-1" }, [
+          _c("div", { staticClass: "pa-0 text-h3 primary--text" }, [
+            _vm._v(_vm._s(_vm.AppStore.state.appName))
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "pa-0 text-caption primary--text" }, [
+            _vm._v(_vm._s(_vm.AppStore.state.appLongName))
+          ])
+        ])
+      ]),
+      _vm._v(" "),
       _c(
         "v-card",
         {
           attrs: {
-            "max-width": "300",
+            "max-width": "",
             "min-width": "300",
             elevation: "1",
             tile: ""
@@ -5717,6 +5739,26 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "v-list-item",
+                { attrs: { link: "", to: "/admin/students" } },
+                [
+                  _c(
+                    "v-list-item-icon",
+                    { staticClass: "mr-2" },
+                    [_c("v-icon", [_vm._v("mdi-account-multiple")])],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-list-item-content",
+                    [_c("v-list-item-title", [_vm._v("Students")])],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-list-item",
                 { attrs: { link: "", to: "/admin/sy" } },
                 [
                   _c(
@@ -5749,26 +5791,6 @@ var render = function() {
                   _c(
                     "v-list-item-content",
                     [_c("v-list-item-title", [_vm._v("Subjects")])],
-                    1
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "v-list-item",
-                { attrs: { link: "", to: "/admin/students" } },
-                [
-                  _c(
-                    "v-list-item-icon",
-                    { staticClass: "mr-2" },
-                    [_c("v-icon", [_vm._v("mdi-account-multiple")])],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "v-list-item-content",
-                    [_c("v-list-item-title", [_vm._v("Students")])],
                     1
                   )
                 ],
@@ -6177,7 +6199,7 @@ var render = function() {
                         ]
                       ),
                       _vm._v(" "),
-                      _vm.AppStore.isSuperAdmin() || _vm.AppStore.isAdmin()
+                      _vm.AppStore.isSuperAdmin()
                         ? _c(
                             "v-list-item",
                             { attrs: { link: "", to: "/manage-accounts" } },
@@ -6464,12 +6486,12 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    this.AppStore.isSuperAdmin() == false && this.AppStore.isAdmin() == false
+    this.AppStore.isSuperAdmin() == false
       ? _c("div", { staticClass: "pa-4 error--text" }, [
           _vm._v(
-            "\r\n        " +
+            "\n        " +
               _vm._s(_vm.AppStore.state.guardMsgs.accessDenied) +
-              "\r\n    "
+              "\n    "
           )
         ])
       : _c(
@@ -6581,9 +6603,9 @@ var render = function() {
                               { attrs: { small: "", color: "default" } },
                               [
                                 _vm._v(
-                                  "\r\n                    " +
+                                  "\n                    " +
                                     _vm._s(item.user_type) +
-                                    "\r\n                "
+                                    "\n                "
                                 )
                               ]
                             )
@@ -6593,9 +6615,9 @@ var render = function() {
                               { attrs: { small: "", color: "accent" } },
                               [
                                 _vm._v(
-                                  "\r\n                    " +
+                                  "\n                    " +
                                     _vm._s(item.user_type) +
-                                    "\r\n                "
+                                    "\n                "
                                 )
                               ]
                             )
@@ -6605,9 +6627,9 @@ var render = function() {
                               { attrs: { small: "", color: "info" } },
                               [
                                 _vm._v(
-                                  "\r\n                    " +
+                                  "\n                    " +
                                     _vm._s(item.user_type) +
-                                    "\r\n                "
+                                    "\n                "
                                 )
                               ]
                             )
@@ -69652,7 +69674,8 @@ var actions = {
             case 0:
               console.log('prevSYid:', _AdminSYStore__WEBPACK_IMPORTED_MODULE_4__["default"].state.prevSYid);
               console.log('activeSYid:', _AdminSYStore__WEBPACK_IMPORTED_MODULE_4__["default"].state.activeSYid);
-              _context.next = 4;
+              state.studentsForEnrollment = [];
+              _context.next = 5;
               return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("".concat(_AppStore__WEBPACK_IMPORTED_MODULE_3__["default"].state.siteUrl, "admin/enrollment/getStudentsForEnrollment"), {
                 grade: grade,
                 prevSYid: (_AdminSYStore$state$p = _AdminSYStore__WEBPACK_IMPORTED_MODULE_4__["default"].state.prevSYid) !== null && _AdminSYStore$state$p !== void 0 ? _AdminSYStore$state$p : null,
@@ -69661,7 +69684,7 @@ var actions = {
                 state.studentsForEnrollment = e.data;
               });
 
-            case 4:
+            case 5:
             case "end":
               return _context.stop();
           }
@@ -69675,7 +69698,8 @@ var actions = {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
-              _context2.next = 2;
+              state.studentsEnrolled = [];
+              _context2.next = 3;
               return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("".concat(_AppStore__WEBPACK_IMPORTED_MODULE_3__["default"].state.siteUrl, "admin/enrollment/getStudentsEnrolled"), {
                 sy_id: sy_id,
                 section_id: section_id,
@@ -69685,7 +69709,7 @@ var actions = {
                 console.log(e.data);
               });
 
-            case 2:
+            case 3:
             case "end":
               return _context2.stop();
           }

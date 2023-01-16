@@ -1,7 +1,7 @@
 <template>
 <div>
     <div
-        v-if="this.AppStore.isSuperAdmin()==false && this.AppStore.isAdmin()==false"
+        v-if="this.AppStore.isSuperAdmin()==false"
         class="pa-4 error--text"
     >
         {{ AppStore.state.guardMsgs.accessDenied }}

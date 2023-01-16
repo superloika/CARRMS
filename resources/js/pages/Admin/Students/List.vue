@@ -2,7 +2,7 @@
     <div>
         <v-app-bar>
             <v-toolbar-title class="text-overline">
-                Student List
+                Students List
             </v-toolbar-title>
             <v-spacer></v-spacer>
             <v-text-field
@@ -26,6 +26,13 @@
             pagination.sync="pagination"
             :search="searchKey"
         >
+            <template v-slot:[`item.is_enrolled`]="{item}">
+                <span>
+                    <v-icon small color="success" v-if="item.is_enrolled==1">
+                        mdi-check
+                    </v-icon>
+                </span>
+            </template>
             <template v-slot:[`item.actions`]="{item}">
                 <v-btn icon dense color="primary" title="View More Details" disabled>
                     <v-icon>mdi-eye</v-icon>
@@ -33,7 +40,9 @@
                 <v-btn icon dense color="primary" title="Edit" disabled>
                     <v-icon>mdi-pencil</v-icon>
                 </v-btn>
-                <v-btn icon dense color="error" title="Delete" @click="deleteStudent(item.id)">
+                <v-btn icon dense color="error" title="Delete" @click="deleteStudent(item.id)"
+                    v-if="AppStore.isSuperAdmin()"
+                >
                     <v-icon>mdi-delete</v-icon>
                 </v-btn>
             </template>
@@ -54,6 +63,7 @@ export default {
                 { text: "Ext. Name", value: "extname" },
                 { text: "Gender", value: "gender" },
                 { text: "Address", value: "address" },
+                { text: "Is Enrolled", value: "is_enrolled" },
                 { text: "Actions", value: "actions" },
             ],
         };

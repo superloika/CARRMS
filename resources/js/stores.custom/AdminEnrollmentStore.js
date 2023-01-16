@@ -20,6 +20,7 @@ const actions = {
     async getStudentsForEnrollment(grade) {
         console.log('prevSYid:', AdminSYStore.state.prevSYid);
         console.log('activeSYid:', AdminSYStore.state.activeSYid);
+        state.studentsForEnrollment = [];
         await axios.post(
             `${AppStore.state.siteUrl}admin/enrollment/getStudentsForEnrollment`,
             {
@@ -32,6 +33,7 @@ const actions = {
         });
     },
     async getStudentsEnrolled(sy_id, section_id, level) {
+        state.studentsEnrolled = [];
         await axios.post(
             `${AppStore.state.siteUrl}admin/enrollment/getStudentsEnrolled`,
             {

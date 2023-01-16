@@ -74,7 +74,8 @@ export default {
                 this.AdminAdvisersStore.getAdvisers();
             }).catch(e=>{
                 if(e.response) {
-                    this.AppStore.toast(e.response.data,3000,'error');
+                    console.error(e.response.data);
+                    this.AppStore.toast("An error has occured",3000,'error');
                 }
             })
             ;

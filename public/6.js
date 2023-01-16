@@ -63,6 +63,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -197,11 +200,13 @@ var render = function() {
               fn: function(ref) {
                 var item = ref.item
                 return [
-                  item.status == "active"
+                  item.status == 1
                     ? _c("v-chip", { attrs: { small: "", color: "success" } }, [
-                        _vm._v(_vm._s(item.status))
+                        _vm._v("Active")
                       ])
-                    : _vm._e()
+                    : _c("v-chip", { attrs: { small: "", color: "error" } }, [
+                        _vm._v("Inactive")
+                      ])
                 ]
               }
             },
@@ -240,24 +245,26 @@ var render = function() {
                     1
                   ),
                   _vm._v(" "),
-                  _c(
-                    "v-btn",
-                    {
-                      attrs: {
-                        icon: "",
-                        dense: "",
-                        color: "error",
-                        title: "Delete"
-                      },
-                      on: {
-                        click: function($event) {
-                          return _vm.deleteAdviser(item.id)
-                        }
-                      }
-                    },
-                    [_c("v-icon", [_vm._v("mdi-delete")])],
-                    1
-                  )
+                  _vm.AppStore.isSuperAdmin()
+                    ? _c(
+                        "v-btn",
+                        {
+                          attrs: {
+                            icon: "",
+                            dense: "",
+                            color: "error",
+                            title: "Delete"
+                          },
+                          on: {
+                            click: function($event) {
+                              return _vm.deleteAdviser(item.id)
+                            }
+                          }
+                        },
+                        [_c("v-icon", [_vm._v("mdi-delete")])],
+                        1
+                      )
+                    : _vm._e()
                 ]
               }
             }

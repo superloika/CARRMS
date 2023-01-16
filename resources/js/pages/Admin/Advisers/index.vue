@@ -10,12 +10,12 @@
                 <v-btn icon color="primary" @click="AdminAdvisersStore.state.tabsMain=0"
                     title="Advisers List"
                 >
-                    <v-icon>mdi-file-outline</v-icon>
+                    <v-icon>mdi-file-multiple</v-icon>
                 </v-btn>
                 <v-btn icon color="primary" @click="AdminAdvisersStore.state.tabsMain=1"
                     title="Add Adviser"
                 >
-                    <v-icon>mdi-file-plus-outline</v-icon>
+                    <v-icon>mdi-file-plus</v-icon>
                 </v-btn>
             </div>
         </v-app-bar>

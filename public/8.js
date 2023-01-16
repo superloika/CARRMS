@@ -123,7 +123,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -339,13 +338,14 @@ var render = function() {
                         { attrs: { elevation: "0" } },
                         [
                           _c("v-text-field", {
+                            staticStyle: { "max-width": "250px" },
                             attrs: {
                               "hide-details": "",
                               dense: "",
                               flat: "",
                               "solo-inverted": "",
                               rounded: "",
-                              placeholder: "Search student here"
+                              placeholder: "Search student(s) here"
                             },
                             model: {
                               value: _vm.tblLeftSearch,
@@ -369,12 +369,7 @@ var render = function() {
                                 { text: "First Name", value: "firstname" },
                                 { text: "Middle Name", value: "middlename" },
                                 { text: "Last Name", value: "lastname" },
-                                { text: "Ext. Name", value: "extname" },
-                                { text: "Prev. Grade Level", value: "grade" },
-                                {
-                                  text: "Prev. Final Remarks",
-                                  value: "final_remarks"
-                                }
+                                { text: "Ext. Name", value: "extname" }
                               ],
                               items: _vm.students,
                               search: _vm.tblLeftSearch,

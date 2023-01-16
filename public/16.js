@@ -60,6 +60,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -85,6 +94,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }, {
         text: "Address",
         value: "address"
+      }, {
+        text: "Is Enrolled",
+        value: "is_enrolled"
       }, {
         text: "Actions",
         value: "actions"
@@ -154,7 +166,7 @@ var render = function() {
         "v-app-bar",
         [
           _c("v-toolbar-title", { staticClass: "text-overline" }, [
-            _vm._v("\n            Student List\n        ")
+            _vm._v("\n            Students List\n        ")
           ]),
           _vm._v(" "),
           _c("v-spacer"),
@@ -193,6 +205,31 @@ var render = function() {
         scopedSlots: _vm._u(
           [
             {
+              key: "item.is_enrolled",
+              fn: function(ref) {
+                var item = ref.item
+                return [
+                  _c(
+                    "span",
+                    [
+                      item.is_enrolled == 1
+                        ? _c(
+                            "v-icon",
+                            { attrs: { small: "", color: "success" } },
+                            [
+                              _vm._v(
+                                "\n                    mdi-check\n                "
+                              )
+                            ]
+                          )
+                        : _vm._e()
+                    ],
+                    1
+                  )
+                ]
+              }
+            },
+            {
               key: "item.actions",
               fn: function(ref) {
                 var item = ref.item
@@ -227,24 +264,26 @@ var render = function() {
                     1
                   ),
                   _vm._v(" "),
-                  _c(
-                    "v-btn",
-                    {
-                      attrs: {
-                        icon: "",
-                        dense: "",
-                        color: "error",
-                        title: "Delete"
-                      },
-                      on: {
-                        click: function($event) {
-                          return _vm.deleteStudent(item.id)
-                        }
-                      }
-                    },
-                    [_c("v-icon", [_vm._v("mdi-delete")])],
-                    1
-                  )
+                  _vm.AppStore.isSuperAdmin()
+                    ? _c(
+                        "v-btn",
+                        {
+                          attrs: {
+                            icon: "",
+                            dense: "",
+                            color: "error",
+                            title: "Delete"
+                          },
+                          on: {
+                            click: function($event) {
+                              return _vm.deleteStudent(item.id)
+                            }
+                          }
+                        },
+                        [_c("v-icon", [_vm._v("mdi-delete")])],
+                        1
+                      )
+                    : _vm._e()
                 ]
               }
             }

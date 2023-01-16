@@ -51,11 +51,6 @@ export default {
         level() {
             this.AdminEnrollmentStore.state.studentsForEnrollment = [];
             this.AdminEnrollmentStore.state.studentsEnrolled = [];
-            // this.AdminEnrollmentStore.getStudentsEnrolled(
-            //     this.AdminSYStore.state.activeSYid,
-            //     null,
-            //     this.level
-            // );
             this.AdminEnrollmentStore.state.tabsMain = {
                 'Preschool': 0,
                 'Kinder': 0,
@@ -71,6 +66,17 @@ export default {
     },
     mounted() {
         console.log('Enrollment component mounted: ' + this.level);
+    },
+    beforeDestroy() {
+        this.AdminEnrollmentStore.state.studentsForEnrollment = [];
+            this.AdminEnrollmentStore.state.studentsEnrolled = [];
+            this.AdminEnrollmentStore.state.tabsMain = {
+                'Preschool': 0,
+                'Kinder': 0,
+                'Elementary': 0,
+                'Junior High': 0,
+                'Senior High': 0,
+            };
     }
 };
 </script>

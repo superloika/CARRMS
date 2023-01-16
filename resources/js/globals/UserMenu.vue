@@ -59,7 +59,7 @@
                         </v-list-item>
                         <v-list-item
                             v-if="
-                                AppStore.isSuperAdmin() || AppStore.isAdmin()
+                                AppStore.isSuperAdmin()
                             "
                             link
                             to="/manage-accounts"

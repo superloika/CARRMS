@@ -31,7 +31,7 @@ class AdviserController extends Controller
                 return response()->json('Adviser already exists', 303);
             }
 
-            DB::table('advisers')->insert([
+            $adviser_id = DB::table('advisers')->insertGetId([
                 'firstname'=>$firstname,
                 'middlename'=>$middlename,
                 'lastname'=>$lastname,
@@ -40,8 +40,9 @@ class AdviserController extends Controller
             ]);
 
             DB::table('users')->insert([
+                'adviser_id'=>$adviser_id,
                 'name'=>$firstname. ' '. $middlename. ' '. $lastname,
-                'username'=>strtolower($firstname). strtolower($middlename),
+                'username'=>strtolower($firstname). strtolower($lastname),
                 'user_type'=>'adviser',
                 'password'=>Hash::make('123')
             ]);

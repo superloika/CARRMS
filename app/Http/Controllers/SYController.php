@@ -32,6 +32,7 @@ class SYController extends Controller
             DB::table('schoolyears')->insert([
                 'sy'=>$sy,
             ]);
+            DB::table('students')->update(['is_enrolled'=>0]);
 
             return response()->json('Success', 200);
         } catch (\Throwable $th) {

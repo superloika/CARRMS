@@ -41,8 +41,9 @@
                         <v-toolbar elevation="0">
                             <v-text-field
                                 hide-details dense flat solo-inverted rounded
-                                placeholder="Search student here"
+                                placeholder="Search student(s) here"
                                 v-model="tblLeftSearch"
+                                style="max-width:250px;"
                             >
                             </v-text-field>
                         </v-toolbar>
@@ -54,8 +55,6 @@
                                     {text:'Middle Name',value:'middlename'},
                                     {text:'Last Name',value:'lastname'},
                                     {text:'Ext. Name',value:'extname'},
-                                    {text:'Prev. Grade Level',value:'grade'},
-                                    {text:'Prev. Final Remarks',value:'final_remarks'},
                                 ]"
                                 :items="students"
                                 v-model="selectedToAdd"

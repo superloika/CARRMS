@@ -27,7 +27,8 @@
             :search="searchKey"
         >
             <template v-slot:[`item.status`]="{item}">
-                <v-chip small color="success" v-if="item.status=='active'">{{ item.status }}</v-chip>
+                <v-chip small color="success" v-if="item.status==1">Active</v-chip>
+                <v-chip small color="error" v-else>Inactive</v-chip>
             </template>
             <template v-slot:[`item.actions`]="{item}">
                 <v-btn icon dense color="primary" title="View More Details" disabled>
@@ -36,7 +37,9 @@
                 <v-btn icon dense color="primary" title="Edit" disabled>
                     <v-icon>mdi-pencil</v-icon>
                 </v-btn>
-                <v-btn icon dense color="error" title="Delete" @click="deleteAdviser(item.id)">
+                <v-btn icon dense color="error" title="Delete" @click="deleteAdviser(item.id)"
+                    v-if="AppStore.isSuperAdmin()"
+                >
                     <v-icon>mdi-delete</v-icon>
                 </v-btn>
             </template>
