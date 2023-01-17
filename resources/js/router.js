@@ -93,6 +93,22 @@ const router = new VueRouter({
                     }
                 },
                 {
+                    path: "strands",
+                    name: "admin.strands",
+                    component: ()=>import("./pages/Admin/Strands"),
+                    meta: {
+                        name: "Strands"
+                    }
+                },
+                {
+                    path: "subtags",
+                    name: "admin.subtags",
+                    component: ()=>import("./pages/Admin/Subtags"),
+                    meta: {
+                        name: "Subject Taggings"
+                    }
+                },
+                {
                     path: "enrollment",
                     name: "admin.enrollment",
                     component: ()=>import("./pages/Admin/Enrollment"),
@@ -101,12 +117,12 @@ const router = new VueRouter({
                     },
                     children: [
                         {
-                            path: "preschool",
-                            name: "admin.enrollment.preschool",
+                            path: "nursery",
+                            name: "admin.enrollment.nursery",
                             component: ()=>import("./pages/Admin/Enrollment"),
                             meta: {
-                                name: "Enrollment (Preschool)",
-                                level: "Preschool"
+                                name: "Enrollment (Nursery)",
+                                level: "Nursery"
                             }
                         },
                         {

@@ -27,10 +27,10 @@ class SectionController extends Controller
             $level='';
             // $orderAndLevel = DB::table('sections')->where('grade', $grade)->first(['order','level']);
             // dd($orderAndLevel);
-            foreach(['Preschool'] as $string) {
+            foreach(['Nursery'] as $string) {
                 if(strpos($grade, $string) !== false) {
                     $order=1;
-                    $level="Preschool";
+                    $level="Nursery";
                     break;
                 }
             }

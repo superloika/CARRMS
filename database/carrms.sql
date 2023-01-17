@@ -164,7 +164,7 @@ CREATE TABLE IF NOT EXISTS `sections` (
 
 -- Dumping data for table carrms.sections: ~15 rows (approximately)
 INSERT INTO `sections` (`id`, `order`, `grade`, `level`, `section`, `adviser_id`, `status`, `created_at`, `updated_at`) VALUES
-	(1, 1, 'Preschool', 'Preschool', '1', 1, 1, '2022-12-16 04:20:05', '2023-01-12 22:18:12'),
+	(1, 1, 'Nursery', 'Nursery', '1', 1, 1, '2022-12-16 04:20:05', '2023-01-12 22:18:12'),
 	(12, 4, 'Grade 7', 'Junior High', '1', 10, 1, '2022-12-21 02:42:47', '2023-01-03 15:19:10'),
 	(13, 4, 'Grade 8', 'Junior High', '1', 1, 1, '2022-12-21 02:42:47', '2023-01-12 22:24:11'),
 	(14, 4, 'Grade 9', 'Junior High', '1', 10, 1, '2022-12-21 02:42:47', '2023-01-12 22:24:14'),
@@ -219,12 +219,12 @@ CREATE TABLE IF NOT EXISTS `students` (
 
 -- Dumping data for table carrms.students: ~7 rows (approximately)
 INSERT INTO `students` (`id`, `lrn`, `firstname`, `middlename`, `lastname`, `extname`, `gender`, `dob`, `pob`, `address`, `guardian`, `guardian_address`, `current_grade`, `prev_grade`, `created_at`, `updated_at`) VALUES
-	(3, '', 'test', 'test', 'test', NULL, 'Male', '2003-06-05', 'test', 'test', 'test', 'test', 'Preschool', '', '2022-12-16 03:11:24', '2023-01-15 12:54:56'),
-	(5, '', 'Juan', 'Test', 'Dela Cruz', 'Jr', 'Male', '1992-05-16', 'Test Place, 123 Test', 'Test Place, 123 Test', 'Maria Clara', 'Test Place, 123 Test', 'Preschool', '', '2022-12-16 03:20:10', '2023-01-15 14:32:37'),
+	(3, '', 'test', 'test', 'test', NULL, 'Male', '2003-06-05', 'test', 'test', 'test', 'test', 'Nursery', '', '2022-12-16 03:11:24', '2023-01-15 12:54:56'),
+	(5, '', 'Juan', 'Test', 'Dela Cruz', 'Jr', 'Male', '1992-05-16', 'Test Place, 123 Test', 'Test Place, 123 Test', 'Maria Clara', 'Test Place, 123 Test', 'Nursery', '', '2022-12-16 03:20:10', '2023-01-15 14:32:37'),
 	(9, '', 'sdf', 'sdf', 'sdf', NULL, 'Male', '2021-03-05', 'sdf', 'sdf', 'sdf', 'sdf', 'Kinder 2', '', '2022-12-21 05:01:46', '2023-01-15 11:58:25'),
 	(11, NULL, 'Bob', 'Smith', 'Mitchel', NULL, 'Male', '1997-06-12', 'Philippines', 'Philippines', 'NA', 'NA', 'Kinder 2', '', '2023-01-15 03:14:19', '2023-01-15 11:50:05'),
-	(12, '111', 'Mike', 'Swift', 'Otwell', NULL, 'Male', '1997-05-06', 'Bohol, Philippines', 'Bohol, Philippines', 'NA', 'NA', 'Preschool', '', '2023-01-15 03:15:25', '2023-01-15 11:56:37'),
-	(13, '222', 'Taylor', 'Otwell', 'Otwell', NULL, 'Male', '1983-02-02', 'test', 'test', 'test', 'test', 'Preschool', '', '2023-01-15 03:16:06', '2023-01-15 11:56:37'),
+	(12, '111', 'Mike', 'Swift', 'Otwell', NULL, 'Male', '1997-05-06', 'Bohol, Philippines', 'Bohol, Philippines', 'NA', 'NA', 'Nursery', '', '2023-01-15 03:15:25', '2023-01-15 11:56:37'),
+	(13, '222', 'Taylor', 'Otwell', 'Otwell', NULL, 'Male', '1983-02-02', 'test', 'test', 'test', 'test', 'Nursery', '', '2023-01-15 03:16:06', '2023-01-15 11:56:37'),
 	(14, '101', 'Kael', 'Bradd', 'Williams', NULL, 'Male', '1996-08-08', 'Bohol', 'Bohol', 'NA', 'NA', 'Grade 8', '', '2023-01-15 12:09:04', '2023-01-15 12:10:16');
 
 -- Dumping structure for table carrms.subjects
@@ -251,7 +251,7 @@ INSERT INTO `subjects` (`id`, `grade`, `subject_name`, `subject_description`, `c
 	(38, 'Grade 1', 'Test Subject 1', 'Test Subject 1', '2023-01-12 20:09:43', '2023-01-12 20:09:43'),
 	(39, 'Grade 12', 'Gdfsdf sdfsdf', 'Gdfsdf sdfsdf', '2023-01-12 20:28:10', '2023-01-12 20:28:10'),
 	(40, 'Grade 11', 'dddd dddd dddd', 'dddd dddd dddd', '2023-01-12 20:28:33', '2023-01-12 20:28:33'),
-	(41, 'Preschool', 'teeeeeeeeeeest', 'teeeeeeeeeeest', '2023-01-12 20:59:28', '2023-01-12 20:59:28');
+	(41, 'Nursery', 'teeeeeeeeeeest', 'teeeeeeeeeeest', '2023-01-12 20:59:28', '2023-01-12 20:59:28');
 
 -- Dumping structure for table carrms.users
 CREATE TABLE IF NOT EXISTS `users` (

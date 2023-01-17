@@ -85,6 +85,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -105,7 +119,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }, {
         text: "Actions",
         value: "actions"
-      }]
+      }],
+      level: ""
     };
   },
   methods: {
@@ -169,6 +184,23 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }))();
     }
   },
+  computed: {
+    sections: function sections() {
+      var _this3 = this;
+
+      if (this.level == '' || this.level == null) {
+        return this.AdminSectionsStore.state.sections;
+      } else {
+        try {
+          return this.AdminSectionsStore.state.sections.filter(function (e) {
+            return e.level == _this3.level;
+          });
+        } catch (error) {
+          return [];
+        }
+      }
+    }
+  },
   created: function created() {
     this.AdminSectionsStore.getSections();
     this.AdminAdvisersStore.getAdvisers();
@@ -206,7 +238,29 @@ var render = function() {
           _vm._v(" "),
           _c("v-spacer"),
           _vm._v(" "),
+          _c("v-select", {
+            staticClass: "ml-2",
+            staticStyle: { "max-width": "300px" },
+            attrs: {
+              "hide-details": "",
+              dense: "",
+              outlined: "",
+              rounded: "",
+              placeholder: "Level",
+              clearable: "",
+              items: _vm.AppStore.state.levels
+            },
+            model: {
+              value: _vm.level,
+              callback: function($$v) {
+                _vm.level = $$v
+              },
+              expression: "level"
+            }
+          }),
+          _vm._v(" "),
           _c("v-text-field", {
+            staticClass: "ml-2",
             staticStyle: { "max-width": "200px" },
             attrs: {
               placeholder: "Search",
@@ -233,7 +287,7 @@ var render = function() {
         staticClass: "elevation-1",
         attrs: {
           headers: _vm.tblHeaders,
-          items: _vm.AdminSectionsStore.state.sections,
+          items: _vm.sections,
           "pagination.sync": "pagination",
           search: _vm.searchKey
         },
@@ -333,16 +387,13 @@ var render = function() {
                     "v-btn",
                     {
                       attrs: {
-                        small: "",
+                        icon: "",
                         color: "primary",
                         title: "Edit",
                         disabled: ""
                       }
                     },
-                    [
-                      _c("v-icon", [_vm._v("mdi-pencil")]),
-                      _vm._v(" Edit\n            ")
-                    ],
+                    [_c("v-icon", [_vm._v("mdi-pencil")])],
                     1
                   ),
                   _vm._v(" "),
@@ -350,17 +401,14 @@ var render = function() {
                     ? _c(
                         "v-btn",
                         {
-                          attrs: { small: "", color: "error", title: "Delete" },
+                          attrs: { icon: "", color: "error", title: "Delete" },
                           on: {
                             click: function($event) {
                               return _vm.deleteSection(item.id)
                             }
                           }
                         },
-                        [
-                          _c("v-icon", [_vm._v("mdi-delete")]),
-                          _vm._v(" Delete\n            ")
-                        ],
+                        [_c("v-icon", [_vm._v("mdi-delete")])],
                         1
                       )
                     : _vm._e()

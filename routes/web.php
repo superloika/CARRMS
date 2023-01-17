@@ -43,6 +43,9 @@ Route::group(['prefix' => 'accounts'], function() {
 
 // admin
 Route::group(['prefix'=>'admin'], function(){
+    // Route::group(['prefix'=>'gradelevels'], function() {
+    //     Route::get('getGradeLevels', 'GradeLevelController@getGradeLevels');
+    // });
     Route::group(['prefix'=>'sy'], function() {
         Route::get('activeSY', 'SYController@activeSY');
         Route::get('prevSY', 'SYController@prevSY');
@@ -76,6 +79,16 @@ Route::group(['prefix'=>'admin'], function(){
         Route::post('getStudentsForEnrollment', 'EnrollmentController@getStudentsForEnrollment');
         Route::post('saveStudentEnrollment', 'EnrollmentController@saveStudentEnrollment');
         Route::post('getStudentsEnrolled', 'EnrollmentController@getStudentsEnrolled');
+    });
+    Route::group(['prefix'=>'strands'], function() {
+        Route::get('getStrands', 'StrandController@getStrands');
+        Route::post('saveStrand', 'StrandController@saveStrand');
+        Route::post('deleteStrand', 'StrandController@deleteStrand');
+    });
+    Route::group(['prefix'=>'subtags'], function() {
+        Route::get('getSubtags', 'SubTagController@getSubtags');
+        Route::post('saveSubtag', 'SubTagController@saveSubtag');
+        Route::post('deleteSubtag', 'SubTagController@deleteSubtag');
     });
 });
 

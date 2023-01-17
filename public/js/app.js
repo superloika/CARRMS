@@ -2461,7 +2461,11 @@ __webpack_require__.r(__webpack_exports__);
   },
   watch: {},
   mounted: function mounted() {
-    console.log("BaseComponent mounted");
+    console.log("BaseComponent mounted"); // if(this.AuthUser.user_type=='super_admin' || this.AuthUser.user_type=='admin') {
+    //     this.$router.replace('admin/dashboard');
+    // } else {
+    //     this.$router.replace('adviser/dashboard');
+    // }
   },
   created: function created() {
     this.AdminSYStore.activeSY();
@@ -2573,6 +2577,24 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -5607,7 +5629,7 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "v-list-item",
-                { attrs: { link: "", to: "/admin/enrollment/preschool" } },
+                { attrs: { link: "", to: "/admin/enrollment/nursery" } },
                 [
                   _c(
                     "v-list-item-icon",
@@ -5618,7 +5640,7 @@ var render = function() {
                   _vm._v(" "),
                   _c(
                     "v-list-item-content",
-                    [_c("v-list-item-title", [_vm._v("Preschool")])],
+                    [_c("v-list-item-title", [_vm._v("Nursery")])],
                     1
                   )
                 ],
@@ -5779,6 +5801,26 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "v-list-item",
+                { attrs: { link: "", to: "/admin/strands" } },
+                [
+                  _c(
+                    "v-list-item-icon",
+                    { staticClass: "mr-2" },
+                    [_c("v-icon", [_vm._v("mdi-cube")])],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-list-item-content",
+                    [_c("v-list-item-title", [_vm._v("Strands")])],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-list-item",
                 { attrs: { link: "", to: "/admin/subjects" } },
                 [
                   _c(
@@ -5791,6 +5833,26 @@ var render = function() {
                   _c(
                     "v-list-item-content",
                     [_c("v-list-item-title", [_vm._v("Subjects")])],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-list-item",
+                { attrs: { link: "", to: "/admin/subtags" } },
+                [
+                  _c(
+                    "v-list-item-icon",
+                    { staticClass: "mr-2" },
+                    [_c("v-icon", [_vm._v("mdi-cube")])],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-list-item-content",
+                    [_c("v-list-item-title", [_vm._v("Subject Taggings")])],
                     1
                   )
                 ],
@@ -69414,6 +69476,24 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
         name: "Subjects"
       }
     }, {
+      path: "strands",
+      name: "admin.strands",
+      component: function component() {
+        return __webpack_require__.e(/*! import() */ 24).then(__webpack_require__.bind(null, /*! ./pages/Admin/Strands */ "./resources/js/pages/Admin/Strands/index.vue"));
+      },
+      meta: {
+        name: "Strands"
+      }
+    }, {
+      path: "subtags",
+      name: "admin.subtags",
+      component: function component() {
+        return __webpack_require__.e(/*! import() */ 27).then(__webpack_require__.bind(null, /*! ./pages/Admin/Subtags */ "./resources/js/pages/Admin/Subtags/index.vue"));
+      },
+      meta: {
+        name: "Subject Taggings"
+      }
+    }, {
       path: "enrollment",
       name: "admin.enrollment",
       component: function component() {
@@ -69423,14 +69503,14 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
         name: "Enrollment"
       },
       children: [{
-        path: "preschool",
-        name: "admin.enrollment.preschool",
+        path: "nursery",
+        name: "admin.enrollment.nursery",
         component: function component() {
           return __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ./pages/Admin/Enrollment */ "./resources/js/pages/Admin/Enrollment/index.vue"));
         },
         meta: {
-          name: "Enrollment (Preschool)",
-          level: "Preschool"
+          name: "Enrollment (Nursery)",
+          level: "Nursery"
         }
       }, {
         path: "kinder",
@@ -69528,8 +69608,10 @@ var map = {
 	"./AdminEnrollmentStore.js": "./resources/js/stores.custom/AdminEnrollmentStore.js",
 	"./AdminSYStore.js": "./resources/js/stores.custom/AdminSYStore.js",
 	"./AdminSectionsStore.js": "./resources/js/stores.custom/AdminSectionsStore.js",
+	"./AdminStrandsStore.js": "./resources/js/stores.custom/AdminStrandsStore.js",
 	"./AdminStudentsStore.js": "./resources/js/stores.custom/AdminStudentsStore.js",
 	"./AdminSubjectsStore.js": "./resources/js/stores.custom/AdminSubjectsStore.js",
+	"./AdminSubtagsStore.js": "./resources/js/stores.custom/AdminSubtagsStore.js",
 	"./AppStore.js": "./resources/js/stores.custom/AppStore.js",
 	"./ManageAccounts.js": "./resources/js/stores.custom/ManageAccounts.js",
 	"./SampleStore.js": "./resources/js/stores.custom/SampleStore.js"
@@ -69654,7 +69736,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 var state = vue__WEBPACK_IMPORTED_MODULE_2___default.a.observable({
   tabsMain: {
-    'Preschool': 0,
+    'Nursery': 0,
     'Kinder': 0,
     'Elementary': 0,
     'Junior High': 0,
@@ -69892,6 +69974,68 @@ var actions = {
 
 /***/ }),
 
+/***/ "./resources/js/stores.custom/AdminStrandsStore.js":
+/*!*********************************************************!*\
+  !*** ./resources/js/stores.custom/AdminStrandsStore.js ***!
+  \*********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _AppStore__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./AppStore */ "./resources/js/stores.custom/AppStore.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+
+
+var state = vue__WEBPACK_IMPORTED_MODULE_2___default.a.observable({
+  tabsMain: 0,
+  strands: []
+});
+var actions = {
+  getStrands: function getStrands() {
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("".concat(_AppStore__WEBPACK_IMPORTED_MODULE_3__["default"].state.siteUrl, "admin/strands/getStrands")).then(function (e) {
+                state.strands = e.data;
+              });
+
+            case 2:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }))();
+  }
+};
+/* harmony default export */ __webpack_exports__["default"] = (_objectSpread({
+  state: state
+}, actions));
+
+/***/ }),
+
 /***/ "./resources/js/stores.custom/AdminStudentsStore.js":
 /*!**********************************************************!*\
   !*** ./resources/js/stores.custom/AdminStudentsStore.js ***!
@@ -70016,6 +70160,68 @@ var actions = {
 
 /***/ }),
 
+/***/ "./resources/js/stores.custom/AdminSubtagsStore.js":
+/*!*********************************************************!*\
+  !*** ./resources/js/stores.custom/AdminSubtagsStore.js ***!
+  \*********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _AppStore__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./AppStore */ "./resources/js/stores.custom/AppStore.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+
+
+var state = vue__WEBPACK_IMPORTED_MODULE_2___default.a.observable({
+  tabsMain: 0,
+  subtags: []
+});
+var actions = {
+  getSubtags: function getSubtags() {
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("".concat(_AppStore__WEBPACK_IMPORTED_MODULE_3__["default"].state.siteUrl, "admin/subtags/getSubtags")).then(function (e) {
+                state.subtags = e.data;
+              });
+
+            case 2:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }))();
+  }
+};
+/* harmony default export */ __webpack_exports__["default"] = (_objectSpread({
+  state: state
+}, actions));
+
+/***/ }),
+
 /***/ "./resources/js/stores.custom/AppStore.js":
 /*!************************************************!*\
   !*** ./resources/js/stores.custom/AppStore.js ***!
@@ -70060,8 +70266,8 @@ var state = vue__WEBPACK_IMPORTED_MODULE_0___default.a.observable({
   showTopLoading: false,
   strDate: [new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().substr(0, 10)],
   gradeLevels: [{
-    grade: "Preschool",
-    level: "Preschool"
+    grade: "Nursery",
+    level: "Nursery"
   }, {
     grade: "Kinder 1",
     level: "Kinder"
@@ -70105,7 +70311,7 @@ var state = vue__WEBPACK_IMPORTED_MODULE_0___default.a.observable({
     grade: "Grade 12",
     level: "Senior High"
   }],
-  levels: ['Preschool', 'Kinder', 'Elementary', 'Junior High School', 'Senior High School']
+  levels: ['Nursery', 'Kinder', 'Elementary', 'Junior High', 'Senior High']
 });
 var actions = {
   toast: function toast(text, timeout) {

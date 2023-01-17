@@ -29,12 +29,12 @@
                     </v-list-item-content>
                 </template>
 
-                <v-list-item link to="/admin/enrollment/preschool">
+                <v-list-item link to="/admin/enrollment/nursery">
                     <v-list-item-icon class="mr-2">
                         <v-icon>mdi-account-multiple</v-icon>
                     </v-list-item-icon>
                     <v-list-item-content>
-                        <v-list-item-title>Preschool</v-list-item-title>
+                        <v-list-item-title>Nursery</v-list-item-title>
                     </v-list-item-content>
                 </v-list-item>
                 <v-list-item link to="/admin/enrollment/kinder">
@@ -99,12 +99,30 @@
                     </v-list-item-content>
                 </v-list-item>
 
+                <v-list-item link to="/admin/strands">
+                    <v-list-item-icon class="mr-2">
+                        <v-icon>mdi-cube</v-icon>
+                    </v-list-item-icon>
+                    <v-list-item-content>
+                        <v-list-item-title>Strands</v-list-item-title>
+                    </v-list-item-content>
+                </v-list-item>
+
                 <v-list-item link to="/admin/subjects">
                     <v-list-item-icon class="mr-2">
                         <v-icon>mdi-cube</v-icon>
                     </v-list-item-icon>
                     <v-list-item-content>
                         <v-list-item-title>Subjects</v-list-item-title>
+                    </v-list-item-content>
+                </v-list-item>
+
+                <v-list-item link to="/admin/subtags">
+                    <v-list-item-icon class="mr-2">
+                        <v-icon>mdi-cube</v-icon>
+                    </v-list-item-icon>
+                    <v-list-item-content>
+                        <v-list-item-title>Subject Taggings</v-list-item-title>
                     </v-list-item-content>
                 </v-list-item>
 

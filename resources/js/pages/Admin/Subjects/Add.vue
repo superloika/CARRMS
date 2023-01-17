@@ -12,17 +12,17 @@
 
         <v-container class="pt-6">
             <v-row>
-                <v-col cols="12" md="2">
-                    <v-select outlined densex label="Grade"
-                        :items="AppStore.state.gradeLevels"
-                        item-text="grade"
-                        item-value="grade"
-                        v-model="form.grade"
-                    >
-                    </v-select>
+
+
+                <v-col cols="12" md="12">
+                    <v-text-field
+                        label="Subject Code"
+                        v-model="form.subject_code"
+                        outlined densex
+                    ></v-text-field>
                 </v-col>
 
-                <v-col cols="12" md="4">
+                <v-col cols="12" md="12">
                     <v-text-field
                         label="Subject Name"
                         v-model="form.subject_name"
@@ -30,7 +30,7 @@
                     ></v-text-field>
                 </v-col>
 
-                <v-col cols="12" md="6">
+                <v-col cols="12" md="12">
                     <v-text-field
                         label="Subject Description"
                         v-model="form.subject_description"
@@ -38,6 +38,15 @@
                     ></v-text-field>
                 </v-col>
 
+                <v-col cols="12" md="12">
+                    <v-select outlined densex label="Subject Type"
+                        :items="['','Core','Applied','Specialized']"
+                        v-model="form.subject_type"
+                        hint="(Core, Applied, Specialized) Applicable in Senior High Subjects"
+                        persistent-hint
+                    >
+                    </v-select>
+                </v-col>
             </v-row>
         </v-container>
     </div>
@@ -49,9 +58,10 @@ export default {
     data() {
         return {
             form: {
+                subject_code: '',
                 subject_name: '',
                 subject_description: '',
-                grade: ''
+                subject_type: '',
             },
         };
     },
@@ -69,7 +79,8 @@ export default {
                 this.AdminSubjectsStore.getSubjects();
             }).catch(e=>{
                 if(e.response) {
-                    this.AppStore.toast(e.response.data,3000,'error');
+                    console.log(e.response);
+                    this.AppStore.toast("An error has occured",3000,'error');
                 }
             })
             ;

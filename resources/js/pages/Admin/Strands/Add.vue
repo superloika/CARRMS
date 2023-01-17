@@ -2,60 +2,60 @@
     <div>
         <v-app-bar>
             <v-toolbar-title class="text-overline primary--text">
-                Add Section
+                Add Strand
             </v-toolbar-title>
             <v-spacer></v-spacer>
-            <v-btn dense iconx text color="primary" @click="saveSection()">
+            <v-btn dense iconx text color="primary" @click="saveStrand()">
                 <v-icon>mdi-floppy</v-icon> Save
             </v-btn>
         </v-app-bar>
 
         <v-container class="pt-6">
             <v-row>
-                <v-col md="6">
-                    <v-select outlined densex filledx label="Grade"
-                        :items="AppStore.state.gradeLevels"
-                        item-text="grade"
-                        item-value="grade"
-                        v-model="form.grade"
-                    >
-                    </v-select>
-                </v-col>
-                <v-col md="6">
+                <v-col cols="12" md="4">
                     <v-text-field
-                        label="Section Name"
-                        v-model="form.section"
-                        outlined densex filledx
+                        label="Strand Name"
+                        v-model="form.strand_name"
+                        outlined densex
                     ></v-text-field>
                 </v-col>
+
+                <v-col cols="12" md="8">
+                    <v-text-field
+                        label="Strand Description"
+                        v-model="form.strand_description"
+                        outlined densex
+                    ></v-text-field>
+                </v-col>
+
             </v-row>
         </v-container>
     </div>
 </template>
 
-<script>
 
+<script>
 export default {
     data() {
         return {
             form: {
-                section: '',
-                grade: ''
+                strand_name: '',
+                strand_description: '',
             },
         };
     },
 
     methods: {
-        async saveSection() {
+        async saveStrand() {
             await axios.post(
-                `${this.AppStore.state.siteUrl}admin/sections/saveSection`,
+                `${this.AppStore.state.siteUrl}admin/strands/saveStrand`,
                 {
                     data: this.form
                 }
             ).then(e=>{
                 this.AppStore.toast(e.data,2000,'success');
                 this.AppStore.resetForm(this.form);
-                this.AdminSectionsStore.getSections();
+                this.AdminStrandsStore.getStrands();
             }).catch(e=>{
                 if(e.response) {
                     console.log(e.response);
@@ -64,11 +64,6 @@ export default {
             })
             ;
         },
-
-        // resetForm(obj) {
-        //     let setAll = (obj, val) => Object.keys(obj).forEach(k => obj[k] = val);
-        //     setAll(obj, "");
-        // }
     }
 };
 </script>

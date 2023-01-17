@@ -83,7 +83,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   if (e.response) {
                     console.log(e.response);
 
-                    _this.AppStore.toast(e.response.data, 3000, 'error');
+                    _this.AppStore.toast("An error has occured", 3000, 'error');
                   }
                 });
 

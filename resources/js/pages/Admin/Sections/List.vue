@@ -5,8 +5,22 @@
                 Sections List
             </v-toolbar-title>
             <v-spacer></v-spacer>
+            <v-select
+                hide-details
+                dense
+                outlined
+                rounded
+                placeholder="Level"
+                clearable
+                class="ml-2"
+                style="max-width:300px;"
+                :items="AppStore.state.levels"
+                v-model="level"
+            >
+
+            </v-select>
             <v-text-field
-                class=""
+                class="ml-2"
                 placeholder="Search"
                 style="max-width:200px;"
                 clearable
@@ -21,7 +35,7 @@
 
         <v-data-table
             :headers="tblHeaders"
-            :items="AdminSectionsStore.state.sections"
+            :items="sections"
             class="elevation-1"
             pagination.sync="pagination"
             :search="searchKey"
@@ -52,14 +66,14 @@
                 <!-- <v-btn small color="primary" title="Edit">
                     <v-icon>mdi-account</v-icon> Set Adviser
                 </v-btn> -->
-                <v-btn small color="primary" title="Edit" disabled>
-                    <v-icon>mdi-pencil</v-icon> Edit
+                <v-btn icon color="primary" title="Edit" disabled>
+                    <v-icon>mdi-pencil</v-icon>
                 </v-btn>
-                <v-btn small color="error" title="Delete"
+                <v-btn icon color="error" title="Delete"
                     @click="deleteSection(item.id)"
                     v-if="AppStore.isSuperAdmin()"
                 >
-                    <v-icon>mdi-delete</v-icon> Delete
+                    <v-icon>mdi-delete</v-icon>
                 </v-btn>
             </template>
         </v-data-table>
@@ -79,6 +93,7 @@ export default {
                 { text: "Class Adviser", value: "adviser" },
                 { text: "Actions", value: "actions" },
             ],
+            level: "",
         };
     },
 
@@ -110,6 +125,22 @@ export default {
                 this.AppStore.toast(e,3000,'error');
             })
             ;
+        }
+    },
+
+    computed: {
+        sections() {
+            if(this.level=='' || this.level==null) {
+                return this.AdminSectionsStore.state.sections;
+            } else {
+                try {
+                    return this.AdminSectionsStore.state.sections.filter(e=>{
+                        return e.level==this.level
+                    })
+                } catch (error) {
+                    return [];
+                }
+            }
         }
     },
 

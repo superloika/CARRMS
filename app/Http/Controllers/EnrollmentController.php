@@ -23,6 +23,7 @@ class EnrollmentController extends Controller
                     'students.extname as student_extname',
                     'sections.grade',
                     'sections.section',
+                    'sections.level',
                     'advisers.firstname as adviser_firstname',
                     'advisers.middlename as adviser_middlename',
                     'advisers.lastname as adviser_lastname',
@@ -80,7 +81,7 @@ class EnrollmentController extends Controller
                     //         $q->whereRaw('enrollment_line.student_id IS NOT NULL')
                     //         ->where('enrollment_head.sy_id', $prevSYid)
                     //         ->where(function($q2) use($grade){
-                    //             $arrG = ['Preschool','Kinder 1','Kinder 2',
+                    //             $arrG = ['Nursery','Kinder 1','Kinder 2',
                     //                 'Grade 1','Grade 2','Grade 3','Grade 4','Grade 5','Grade 6',
                     //                 'Grade 7','Grade 8','Grade 9','Grade 10','Grade 11','Grade 12'
                     //             ];

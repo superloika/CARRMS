@@ -15,58 +15,62 @@
 
         <v-container class="pt-6">
             <v-row>
-                <v-col cols="12">
-                    <v-select outlined densex filledx label="Grade & Section"
-                        v-model="selectedSection"
-                        :items="sections"
-                        item-value="id"
-                        return-object
-                        hint="Only the sections with a class adviser are selectable"
-                        persistent-hint
-                        v-on:input="onChangeGradeSection"
-                    >
-                        <template slot="item" slot-scope="data">
-                            {{ data.item.grade }} - {{ data.item.section }}
-                        </template>
-                        <template slot="selection" slot-scope="data">
-                            {{ data.item.grade }} - {{ data.item.section }}
-                        </template>
-                    </v-select>
-                </v-col>
-
-
-                <!-- SELECT STUDENTS -->
                 <v-col cols="12" md="9">
-                    <v-card :key="level">
-                        <v-toolbar elevation="0">
-                            <v-text-field
-                                hide-details dense flat solo-inverted rounded
-                                placeholder="Search student(s) here"
-                                v-model="tblLeftSearch"
-                                style="max-width:250px;"
+                    <v-row>
+                        <v-col cols="12">
+                            <v-select outlined densex filledx label="Add to Grade & Section"
+                                v-model="selectedSection"
+                                :items="sections"
+                                item-value="id"
+                                return-object
+                                hint="Only the sections with a class adviser are selectable"
+                                persistent-hint
+                                v-on:input="onChangeGradeSection"
                             >
-                            </v-text-field>
-                        </v-toolbar>
-                        <v-card-text>
-                            <v-data-table
-                                :headers="[
-                                    {text:'SID',value:'id'},
-                                    {text:'First Name',value:'firstname'},
-                                    {text:'Middle Name',value:'middlename'},
-                                    {text:'Last Name',value:'lastname'},
-                                    {text:'Ext. Name',value:'extname'},
-                                ]"
-                                :items="students"
-                                v-model="selectedToAdd"
-                                :search="tblLeftSearch"
-                                show-select
-                            >
-                                <template v-slot:[`item.name`]="{item}">
-                                    {{ item.firstname }} {{ item.middlename }} {{ item.lastname }}
+                                <template slot="item" slot-scope="data">
+                                    {{ data.item.grade }} - {{ data.item.section }}
                                 </template>
-                            </v-data-table>
-                        </v-card-text>
-                    </v-card>
+                                <template slot="selection" slot-scope="data">
+                                    {{ data.item.grade }} - {{ data.item.section }}
+                                </template>
+                            </v-select>
+                        </v-col>
+
+
+                        <!-- SELECT STUDENTS -->
+                        <v-col cols="12" md="12">
+                            <v-card :key="level">
+                                <v-toolbar elevation="0">
+                                    <v-text-field
+                                        hide-details dense flat solo-inverted rounded
+                                        placeholder="Search student(s) to add"
+                                        v-model="tblLeftSearch"
+                                        style="max-width:300px;"
+                                    >
+                                    </v-text-field>
+                                </v-toolbar>
+                                <v-card-text>
+                                    <v-data-table
+                                        :headers="[
+                                            {text:'SID',value:'id'},
+                                            {text:'First Name',value:'firstname'},
+                                            {text:'Middle Name',value:'middlename'},
+                                            {text:'Last Name',value:'lastname'},
+                                            {text:'Ext. Name',value:'extname'},
+                                        ]"
+                                        :items="students"
+                                        v-model="selectedToAdd"
+                                        :search="tblLeftSearch"
+                                        show-select
+                                    >
+                                        <template v-slot:[`item.name`]="{item}">
+                                            {{ item.firstname }} {{ item.middlename }} {{ item.lastname }}
+                                        </template>
+                                    </v-data-table>
+                                </v-card-text>
+                            </v-card>
+                        </v-col>
+                    </v-row>
                 </v-col>
 
                 <!-- SELECTED STUDENTS -->
@@ -94,10 +98,6 @@
                             </v-data-table>
                         </v-card-text>
                     </v-card>
-                </v-col>
-
-                <v-col cols="12" md="6">
-
                 </v-col>
             </v-row>
         </v-container>
@@ -158,7 +158,7 @@ export default {
             ).then(e=>{
                 this.AppStore.toast(e.data,2000,'success');
                 this.AdminEnrollmentStore.getStudentsForEnrollment(this.selectedSection.grade);
-                // this.selectedToAdd = [];
+                this.selectedToAdd = [];
                 this.AdminSectionsStore.getSections();
             }).catch(e=>{
                 if(e.response) {

@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[25],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/Admin/Enrollment/Preschool/Add.vue?vue&type=script&lang=js&":
-/*!************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/Admin/Enrollment/Preschool/Add.vue?vue&type=script&lang=js& ***!
-  \************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/Admin/Strands/Add.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/Admin/Strands/Add.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -49,28 +49,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       form: {
-        section: null
+        strand_name: '',
+        strand_description: ''
       }
     };
   },
-  computed: {
-    sections: function sections() {
-      return this.AdminSectionsStore.state.sections.filter(function (e) {
-        return e.adviser_id != null && e.level == 'Preschool';
-      });
-    } // preschoolGradeSections() {
-    //     return this.sections.filter(e=>{
-    //         return e.level='Preschool';
-    //     })
-    // }
-
-  },
   methods: {
-    saveSection: function saveSection() {
+    saveStrand: function saveStrand() {
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
@@ -79,17 +72,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return axios.post("".concat(_this.AppStore.state.siteUrl, "admin/sections/saveSection"), {
+                return axios.post("".concat(_this.AppStore.state.siteUrl, "admin/strands/saveStrand"), {
                   data: _this.form
                 }).then(function (e) {
                   _this.AppStore.toast(e.data, 2000, 'success');
 
-                  _this.resetForm(_this.form);
+                  _this.AppStore.resetForm(_this.form);
 
-                  _this.AdminSectionsStore.getSections();
+                  _this.AdminStrandsStore.getStrands();
                 })["catch"](function (e) {
                   if (e.response) {
-                    _this.AppStore.toast(e.response.data, 3000, 'error');
+                    console.log(e.response);
+
+                    _this.AppStore.toast("An error has occured", 3000, 'error');
                   }
                 });
 
@@ -101,16 +96,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee);
       }))();
     }
-  },
-  created: function created() {}
+  }
 });
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/Admin/Enrollment/Preschool/Add.vue?vue&type=template&id=8ebb23f2&":
-/*!****************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/Admin/Enrollment/Preschool/Add.vue?vue&type=template&id=8ebb23f2& ***!
-  \****************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/Admin/Strands/Add.vue?vue&type=template&id=7f6a4a06&":
+/*!***************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/Admin/Strands/Add.vue?vue&type=template&id=7f6a4a06& ***!
+  \***************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -131,7 +125,7 @@ var render = function() {
           _c(
             "v-toolbar-title",
             { staticClass: "text-overline primary--text" },
-            [_vm._v("\n            Add New Enrollment Data\n        ")]
+            [_vm._v("\n            Add Strand\n        ")]
           ),
           _vm._v(" "),
           _c("v-spacer"),
@@ -142,7 +136,7 @@ var render = function() {
               attrs: { dense: "", iconx: "", text: "", color: "primary" },
               on: {
                 click: function($event) {
-                  return _vm.saveSection()
+                  return _vm.saveStrand()
                 }
               }
             },
@@ -157,56 +151,51 @@ var render = function() {
         "v-container",
         { staticClass: "pt-6" },
         [
-          _c("v-select", {
-            attrs: {
-              outlined: "",
-              densex: "",
-              filledx: "",
-              label: "Grade & Section",
-              items: _vm.sections,
-              "item-value": "id",
-              "return-object": "",
-              hint: "Only the sections with a class adviser are selectable",
-              "persistent-hint": ""
-            },
-            scopedSlots: _vm._u([
-              {
-                key: "item",
-                fn: function(data) {
-                  return [
-                    _vm._v(
-                      "\n                " +
-                        _vm._s(data.item.grade) +
-                        " - " +
-                        _vm._s(data.item.section) +
-                        "\n            "
-                    )
-                  ]
-                }
-              },
-              {
-                key: "selection",
-                fn: function(data) {
-                  return [
-                    _vm._v(
-                      "\n                " +
-                        _vm._s(data.item.grade) +
-                        " - " +
-                        _vm._s(data.item.section) +
-                        "\n            "
-                    )
-                  ]
-                }
-              }
-            ]),
-            model: {
-              value: _vm.form.section,
-              callback: function($$v) {
-                _vm.$set(_vm.form, "section", $$v)
-              },
-              expression: "form.section"
-            }
-          })
+          _c(
+            "v-row",
+            [
+              _c(
+                "v-col",
+                { attrs: { cols: "12", md: "4" } },
+                [
+                  _c("v-text-field", {
+                    attrs: { label: "Strand Name", outlined: "", densex: "" },
+                    model: {
+                      value: _vm.form.strand_name,
+                      callback: function($$v) {
+                        _vm.$set(_vm.form, "strand_name", $$v)
+                      },
+                      expression: "form.strand_name"
+                    }
+                  })
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-col",
+                { attrs: { cols: "12", md: "8" } },
+                [
+                  _c("v-text-field", {
+                    attrs: {
+                      label: "Strand Description",
+                      outlined: "",
+                      densex: ""
+                    },
+                    model: {
+                      value: _vm.form.strand_description,
+                      callback: function($$v) {
+                        _vm.$set(_vm.form, "strand_description", $$v)
+                      },
+                      expression: "form.strand_description"
+                    }
+                  })
+                ],
+                1
+              )
+            ],
+            1
+          )
         ],
         1
       )
@@ -221,18 +210,18 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./resources/js/pages/Admin/Enrollment/Preschool/Add.vue":
-/*!***************************************************************!*\
-  !*** ./resources/js/pages/Admin/Enrollment/Preschool/Add.vue ***!
-  \***************************************************************/
+/***/ "./resources/js/pages/Admin/Strands/Add.vue":
+/*!**************************************************!*\
+  !*** ./resources/js/pages/Admin/Strands/Add.vue ***!
+  \**************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Add_vue_vue_type_template_id_8ebb23f2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Add.vue?vue&type=template&id=8ebb23f2& */ "./resources/js/pages/Admin/Enrollment/Preschool/Add.vue?vue&type=template&id=8ebb23f2&");
-/* harmony import */ var _Add_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Add.vue?vue&type=script&lang=js& */ "./resources/js/pages/Admin/Enrollment/Preschool/Add.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _Add_vue_vue_type_template_id_7f6a4a06___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Add.vue?vue&type=template&id=7f6a4a06& */ "./resources/js/pages/Admin/Strands/Add.vue?vue&type=template&id=7f6a4a06&");
+/* harmony import */ var _Add_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Add.vue?vue&type=script&lang=js& */ "./resources/js/pages/Admin/Strands/Add.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -242,8 +231,8 @@ __webpack_require__.r(__webpack_exports__);
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
   _Add_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _Add_vue_vue_type_template_id_8ebb23f2___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _Add_vue_vue_type_template_id_8ebb23f2___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _Add_vue_vue_type_template_id_7f6a4a06___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Add_vue_vue_type_template_id_7f6a4a06___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -253,38 +242,38 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/pages/Admin/Enrollment/Preschool/Add.vue"
+component.options.__file = "resources/js/pages/Admin/Strands/Add.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/pages/Admin/Enrollment/Preschool/Add.vue?vue&type=script&lang=js&":
-/*!****************************************************************************************!*\
-  !*** ./resources/js/pages/Admin/Enrollment/Preschool/Add.vue?vue&type=script&lang=js& ***!
-  \****************************************************************************************/
+/***/ "./resources/js/pages/Admin/Strands/Add.vue?vue&type=script&lang=js&":
+/*!***************************************************************************!*\
+  !*** ./resources/js/pages/Admin/Strands/Add.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Add_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./Add.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/Admin/Enrollment/Preschool/Add.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Add_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Add.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/Admin/Strands/Add.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Add_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/pages/Admin/Enrollment/Preschool/Add.vue?vue&type=template&id=8ebb23f2&":
-/*!**********************************************************************************************!*\
-  !*** ./resources/js/pages/Admin/Enrollment/Preschool/Add.vue?vue&type=template&id=8ebb23f2& ***!
-  \**********************************************************************************************/
+/***/ "./resources/js/pages/Admin/Strands/Add.vue?vue&type=template&id=7f6a4a06&":
+/*!*********************************************************************************!*\
+  !*** ./resources/js/pages/Admin/Strands/Add.vue?vue&type=template&id=7f6a4a06& ***!
+  \*********************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Add_vue_vue_type_template_id_8ebb23f2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./Add.vue?vue&type=template&id=8ebb23f2& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/Admin/Enrollment/Preschool/Add.vue?vue&type=template&id=8ebb23f2&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Add_vue_vue_type_template_id_8ebb23f2___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Add_vue_vue_type_template_id_7f6a4a06___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Add.vue?vue&type=template&id=7f6a4a06& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/Admin/Strands/Add.vue?vue&type=template&id=7f6a4a06&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Add_vue_vue_type_template_id_7f6a4a06___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Add_vue_vue_type_template_id_8ebb23f2___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Add_vue_vue_type_template_id_7f6a4a06___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

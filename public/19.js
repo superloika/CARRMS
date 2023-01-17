@@ -36,11 +36,112 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  computed: {
+    nursery: function nursery() {
+      try {
+        return this.AdminEnrollmentStore.state.studentsEnrolled.filter(function (e) {
+          return e.level == "Nursery";
+        });
+      } catch (error) {
+        return [];
+      }
+    },
+    kinder: function kinder() {
+      try {
+        return this.AdminEnrollmentStore.state.studentsEnrolled.filter(function (e) {
+          return e.level == "Kinder";
+        });
+      } catch (error) {
+        return [];
+      }
+    },
+    elementary: function elementary() {
+      try {
+        return this.AdminEnrollmentStore.state.studentsEnrolled.filter(function (e) {
+          return e.level == "Elementary";
+        });
+      } catch (error) {
+        return [];
+      }
+    },
+    jhs: function jhs() {
+      try {
+        return this.AdminEnrollmentStore.state.studentsEnrolled.filter(function (e) {
+          return e.level == "Junior High";
+        });
+      } catch (error) {
+        return [];
+      }
+    },
+    shs: function shs() {
+      try {
+        return this.AdminEnrollmentStore.state.studentsEnrolled.filter(function (e) {
+          return e.level == "Senior High";
+        });
+      } catch (error) {
+        return [];
+      }
+    }
+  },
   created: function created() {
-    this.AdminStudentsStore.getStudents(); // this.AdminAdvisersStore.getTeachers();
-
-    this.AdminAdvisersStore.getAdvisers();
+    // this.AdminStudentsStore.getStudents();
+    // this.AdminAdvisersStore.getTeachers();
+    // this.AdminAdvisersStore.getAdvisers();
+    this.AdminEnrollmentStore.getStudentsEnrolled(this.AdminSYStore.state.activeSYid, null, null);
+  },
+  beforeDestroy: function beforeDestroy() {
+    this.AdminEnrollmentStore.state.studentsEnrolled = [];
   }
 });
 
@@ -73,18 +174,22 @@ var render = function() {
             [
               _c(
                 "v-card",
-                { attrs: { color: "primary", dark: "", outlined: "" } },
+                {
+                  attrs: {
+                    color: "success",
+                    dark: "",
+                    outlined: "",
+                    link: "",
+                    to: "enrollment/nursery"
+                  }
+                },
                 [
                   _c("v-card-title", [
-                    _vm._v("\n                    Students\n                ")
+                    _vm._v("\n                    Nursery\n                ")
                   ]),
                   _vm._v(" "),
                   _c("v-card-text", [
-                    _c("h1", [
-                      _vm._v(
-                        _vm._s(_vm.AdminStudentsStore.state.students.length)
-                      )
-                    ])
+                    _c("h1", [_vm._v(_vm._s(_vm.nursery.length))])
                   ])
                 ],
                 1
@@ -99,18 +204,116 @@ var render = function() {
             [
               _c(
                 "v-card",
-                { attrs: { color: "primary", dark: "", outlined: "" } },
+                {
+                  attrs: {
+                    color: "success",
+                    dark: "",
+                    outlined: "",
+                    link: "",
+                    to: "enrollment/kinder"
+                  }
+                },
                 [
                   _c("v-card-title", [
-                    _vm._v("\n                    Advisers\n                ")
+                    _vm._v("\n                    Kinder\n                ")
                   ]),
                   _vm._v(" "),
                   _c("v-card-text", [
-                    _c("h1", [
-                      _vm._v(
-                        _vm._s(_vm.AdminAdvisersStore.state.advisers.length)
-                      )
-                    ])
+                    _c("h1", [_vm._v(_vm._s(_vm.kinder.length))])
+                  ])
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-col",
+            { attrs: { cols: "12", md: "3", lg: "2" } },
+            [
+              _c(
+                "v-card",
+                {
+                  attrs: {
+                    color: "success",
+                    dark: "",
+                    outlined: "",
+                    link: "",
+                    to: "enrollment/elementary"
+                  }
+                },
+                [
+                  _c("v-card-title", [
+                    _vm._v("\n                    Elementary\n                ")
+                  ]),
+                  _vm._v(" "),
+                  _c("v-card-text", [
+                    _c("h1", [_vm._v(_vm._s(_vm.elementary.length))])
+                  ])
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-col",
+            { attrs: { cols: "12", md: "3", lg: "2" } },
+            [
+              _c(
+                "v-card",
+                {
+                  attrs: {
+                    color: "success",
+                    dark: "",
+                    outlined: "",
+                    link: "",
+                    to: "enrollment/jhs"
+                  }
+                },
+                [
+                  _c("v-card-title", [
+                    _vm._v(
+                      "\n                    Junior High\n                "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("v-card-text", [
+                    _c("h1", [_vm._v(_vm._s(_vm.jhs.length))])
+                  ])
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-col",
+            { attrs: { cols: "12", md: "3", lg: "2" } },
+            [
+              _c(
+                "v-card",
+                {
+                  attrs: {
+                    color: "success",
+                    dark: "",
+                    outlined: "",
+                    link: "",
+                    to: "enrollment/shs"
+                  }
+                },
+                [
+                  _c("v-card-title", [
+                    _vm._v(
+                      "\n                    Senior High\n                "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("v-card-text", [
+                    _c("h1", [_vm._v(_vm._s(_vm.shs.length))])
                   ])
                 ],
                 1

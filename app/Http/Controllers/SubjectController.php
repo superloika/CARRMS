@@ -9,7 +9,7 @@ class SubjectController extends Controller
 {
     public function getSubjects() {
         try {
-            $res = DB::table('subjects')->latest()->get();
+            $res = DB::table('subjects')->get();
             return response()->json($res, 200);
         } catch (\Throwable $th) {
             return response()->json($th->getMessage(), 500);
@@ -22,14 +22,18 @@ class SubjectController extends Controller
             extract($data);
 
             if(
-                DB::table('subjects')->where('grade', $grade)->where('subject_name', $subject_name)->exists()
+                DB::table('subjects')
+                    ->where('subject_code', $subject_code)
+                    ->orWhere('subject_name', $subject_name)
+                    ->exists()
             ) {
-                return response()->json('Subject already exists', 500);
+                return response()->json('Subject code/name already exists', 500);
             } else {
                 DB::table('subjects')->insert([
-                    'grade'=>$grade,
+                    'subject_code'=>$subject_code,
                     'subject_name'=>$subject_name,
-                    'subject_description'=>$subject_description
+                    'subject_description'=>$subject_description,
+                    'subject_type'=>$subject_type,
                 ]);
             }
             return response()->json('Success', 200);

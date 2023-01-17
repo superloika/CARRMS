@@ -7,20 +7,20 @@
             <v-spacer></v-spacer>
 
             <div>
-                <v-btn icon color="primary" @click="AdminSectionsStore.state.tabsMain=0"
-                    title="Sections List"
+                <v-btn icon color="primary" @click="AdminSubtagsStore.state.tabsMain=0"
+                    title="Subject Taggings"
                 >
                     <v-icon>mdi-file-multiple</v-icon>
                 </v-btn>
-                <v-btn icon color="primary" @click="AdminSectionsStore.state.tabsMain=1"
-                    title="Add Section"
+                <v-btn icon color="primary" @click="AdminSubtagsStore.state.tabsMain=1"
+                    title="Add Tagging"
                 >
                     <v-icon>mdi-file-plus</v-icon>
                 </v-btn>
             </div>
         </v-app-bar>
 
-        <v-tabs-items v-model="AdminSectionsStore.state.tabsMain">
+        <v-tabs-items v-model="AdminSubtagsStore.state.tabsMain">
             <v-tab-item>
                 <List></List>
             </v-tab-item>
@@ -42,6 +42,11 @@ export default {
     data() {
         return {
         };
+    },
+    created() {
+        this.AdminSubtagsStore.getSubtags();
+        this.AdminSubjectsStore.getSubjects();
+        this.AdminStrandsStore.getStrands();
     }
 };
 </script>

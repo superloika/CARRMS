@@ -5,7 +5,7 @@ import AdminSYStore from "./AdminSYStore";
 
 const state = Vue.observable({
     tabsMain: {
-        'Preschool': 0,
+        'Nursery': 0,
         'Kinder': 0,
         'Elementary': 0,
         'Junior High': 0,

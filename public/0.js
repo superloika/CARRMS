@@ -64,7 +64,7 @@ __webpack_require__.r(__webpack_exports__);
       this.AdminEnrollmentStore.state.studentsForEnrollment = [];
       this.AdminEnrollmentStore.state.studentsEnrolled = [];
       this.AdminEnrollmentStore.state.tabsMain = {
-        'Preschool': 0,
+        'Nursery': 0,
         'Kinder': 0,
         'Elementary': 0,
         'Junior High': 0,
@@ -83,7 +83,7 @@ __webpack_require__.r(__webpack_exports__);
     this.AdminEnrollmentStore.state.studentsForEnrollment = [];
     this.AdminEnrollmentStore.state.studentsEnrolled = [];
     this.AdminEnrollmentStore.state.tabsMain = {
-      'Preschool': 0,
+      'Nursery': 0,
       'Kinder': 0,
       'Elementary': 0,
       'Junior High': 0,

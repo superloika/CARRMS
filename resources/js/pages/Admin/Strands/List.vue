@@ -2,24 +2,9 @@
     <div>
         <v-app-bar>
             <v-toolbar-title class="text-overline font-weight-bold">
-                Subject List
+                Strand List
             </v-toolbar-title>
             <v-spacer></v-spacer>
-            <!-- <v-select
-                hide-details
-                dense
-                outlined
-                rounded
-                placeholder="Grade Level"
-                clearable
-                class="ml-2"
-                style="max-width:200px;"
-                :items="AppStore.state.gradeLevels"
-                v-model="gradeLevel"
-                item-text="grade"
-                item-value="grade"
-            >
-            </v-select> -->
             <v-text-field
                 class="ml-2"
                 placeholder="Search"
@@ -36,7 +21,7 @@
 
         <v-data-table
             :headers="tblHeaders"
-            :items="subjects"
+            :items="strands"
             class="elevation-1"
             pagination.sync="pagination"
             :search="searchKey"
@@ -45,7 +30,7 @@
                 <v-btn icon color="primary" title="Edit" disabled>
                     <v-icon>mdi-pencil</v-icon>
                 </v-btn>
-                <v-btn icon color="error" title="Delete" @click="deleteSubject(item.id)"
+                <v-btn icon color="error" title="Delete" @click="deleteStrand(item.id)"
                     v-if="AppStore.isSuperAdmin()"
                 >
                     <v-icon>mdi-delete</v-icon>
@@ -61,27 +46,24 @@ export default {
         return {
             searchKey: "",
             tblHeaders: [
-                { text: "Subject Code", value: "subject_code" },
-                { text: "Subject Name", value: "subject_name" },
-                { text: "Subject Description", value: "subject_description" },
-                { text: "Subject Type", value: "subject_type" },
+                { text: "Strand Name", value: "strand_name" },
+                { text: "Strand Description", value: "strand_description" },
                 { text: "Actions", value: "actions" },
             ],
-            gradeLevel: '',
         };
     },
 
     methods:{
-        async deleteSubject(id) {
-            if(confirm('Are you sure you want to delete the selected subject?')){
+        async deleteStrand(id) {
+            if(confirm('Are you sure you want to delete the selected strand?')){
                 await axios.post(
-                    `${this.AppStore.state.siteUrl}admin/subjects/deleteSubject`,
+                    `${this.AppStore.state.siteUrl}admin/strands/deleteStrand`,
                     {
                         id: id
                     }
                 ).then(e=>{
                     this.AppStore.toast(e.data,3000,'success');
-                    this.AdminSubjectsStore.getSubjects();
+                    this.AdminStrandsStore.getStrands();
                 }).catch(e=>{
                     this.AppStore.toast(e,3000,'error');
                 })
@@ -91,24 +73,13 @@ export default {
     },
 
     computed: {
-        subjects() {
-            // if(this.gradeLevel=='' || this.gradeLevel==null) {
-            //     return this.AdminSubjectsStore.state.subjects;
-            // } else {
-            //     try {
-            //         return this.AdminSubjectsStore.state.subjects.filter(e=>{
-            //             return e.grade==this.gradeLevel
-            //         })
-            //     } catch (error) {
-            //         return [];
-            //     }
-            // }
-            return this.AdminSubjectsStore.state.subjects;
+        strands() {
+            return this.AdminStrandsStore.state.strands;
         }
     },
 
     created(){
-        this.AdminSubjectsStore.getSubjects();
+        this.AdminStrandsStore.getStrands();
     }
 };
 </script>

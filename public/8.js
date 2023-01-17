@@ -179,10 +179,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 }).then(function (e) {
                   _this2.AppStore.toast(e.data, 2000, 'success');
 
-                  _this2.AdminEnrollmentStore.getStudentsForEnrollment(_this2.selectedSection.grade); // this.selectedToAdd = [];
+                  _this2.AdminEnrollmentStore.getStudentsForEnrollment(_this2.selectedSection.grade);
 
+                  _this2.selectedToAdd = [];
 
-                  // this.selectedToAdd = [];
                   _this2.AdminSectionsStore.getSections();
                 })["catch"](function (e) {
                   if (e.response) {
@@ -267,92 +267,65 @@ var render = function() {
             [
               _c(
                 "v-col",
-                { attrs: { cols: "12" } },
-                [
-                  _c("v-select", {
-                    attrs: {
-                      outlined: "",
-                      densex: "",
-                      filledx: "",
-                      label: "Grade & Section",
-                      items: _vm.sections,
-                      "item-value": "id",
-                      "return-object": "",
-                      hint:
-                        "Only the sections with a class adviser are selectable",
-                      "persistent-hint": ""
-                    },
-                    on: { input: _vm.onChangeGradeSection },
-                    scopedSlots: _vm._u([
-                      {
-                        key: "item",
-                        fn: function(data) {
-                          return [
-                            _vm._v(
-                              "\n                        " +
-                                _vm._s(data.item.grade) +
-                                " - " +
-                                _vm._s(data.item.section) +
-                                "\n                    "
-                            )
-                          ]
-                        }
-                      },
-                      {
-                        key: "selection",
-                        fn: function(data) {
-                          return [
-                            _vm._v(
-                              "\n                        " +
-                                _vm._s(data.item.grade) +
-                                " - " +
-                                _vm._s(data.item.section) +
-                                "\n                    "
-                            )
-                          ]
-                        }
-                      }
-                    ]),
-                    model: {
-                      value: _vm.selectedSection,
-                      callback: function($$v) {
-                        _vm.selectedSection = $$v
-                      },
-                      expression: "selectedSection"
-                    }
-                  })
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "v-col",
                 { attrs: { cols: "12", md: "9" } },
                 [
                   _c(
-                    "v-card",
-                    { key: _vm.level },
+                    "v-row",
                     [
                       _c(
-                        "v-toolbar",
-                        { attrs: { elevation: "0" } },
+                        "v-col",
+                        { attrs: { cols: "12" } },
                         [
-                          _c("v-text-field", {
-                            staticStyle: { "max-width": "250px" },
+                          _c("v-select", {
                             attrs: {
-                              "hide-details": "",
-                              dense: "",
-                              flat: "",
-                              "solo-inverted": "",
-                              rounded: "",
-                              placeholder: "Search student(s) here"
+                              outlined: "",
+                              densex: "",
+                              filledx: "",
+                              label: "Add to Grade & Section",
+                              items: _vm.sections,
+                              "item-value": "id",
+                              "return-object": "",
+                              hint:
+                                "Only the sections with a class adviser are selectable",
+                              "persistent-hint": ""
                             },
-                            model: {
-                              value: _vm.tblLeftSearch,
-                              callback: function($$v) {
-                                _vm.tblLeftSearch = $$v
+                            on: { input: _vm.onChangeGradeSection },
+                            scopedSlots: _vm._u([
+                              {
+                                key: "item",
+                                fn: function(data) {
+                                  return [
+                                    _vm._v(
+                                      "\n                                " +
+                                        _vm._s(data.item.grade) +
+                                        " - " +
+                                        _vm._s(data.item.section) +
+                                        "\n                            "
+                                    )
+                                  ]
+                                }
                               },
-                              expression: "tblLeftSearch"
+                              {
+                                key: "selection",
+                                fn: function(data) {
+                                  return [
+                                    _vm._v(
+                                      "\n                                " +
+                                        _vm._s(data.item.grade) +
+                                        " - " +
+                                        _vm._s(data.item.section) +
+                                        "\n                            "
+                                    )
+                                  ]
+                                }
+                              }
+                            ]),
+                            model: {
+                              value: _vm.selectedSection,
+                              callback: function($$v) {
+                                _vm.selectedSection = $$v
+                              },
+                              expression: "selectedSection"
                             }
                           })
                         ],
@@ -360,52 +333,101 @@ var render = function() {
                       ),
                       _vm._v(" "),
                       _c(
-                        "v-card-text",
+                        "v-col",
+                        { attrs: { cols: "12", md: "12" } },
                         [
-                          _c("v-data-table", {
-                            attrs: {
-                              headers: [
-                                { text: "SID", value: "id" },
-                                { text: "First Name", value: "firstname" },
-                                { text: "Middle Name", value: "middlename" },
-                                { text: "Last Name", value: "lastname" },
-                                { text: "Ext. Name", value: "extname" }
-                              ],
-                              items: _vm.students,
-                              search: _vm.tblLeftSearch,
-                              "show-select": ""
-                            },
-                            scopedSlots: _vm._u(
-                              [
-                                {
-                                  key: "item.name",
-                                  fn: function(ref) {
-                                    var item = ref.item
-                                    return [
-                                      _vm._v(
-                                        "\n                                " +
-                                          _vm._s(item.firstname) +
-                                          " " +
-                                          _vm._s(item.middlename) +
-                                          " " +
-                                          _vm._s(item.lastname) +
-                                          "\n                            "
-                                      )
-                                    ]
-                                  }
-                                }
-                              ],
-                              null,
-                              true
-                            ),
-                            model: {
-                              value: _vm.selectedToAdd,
-                              callback: function($$v) {
-                                _vm.selectedToAdd = $$v
-                              },
-                              expression: "selectedToAdd"
-                            }
-                          })
+                          _c(
+                            "v-card",
+                            { key: _vm.level },
+                            [
+                              _c(
+                                "v-toolbar",
+                                { attrs: { elevation: "0" } },
+                                [
+                                  _c("v-text-field", {
+                                    staticStyle: { "max-width": "300px" },
+                                    attrs: {
+                                      "hide-details": "",
+                                      dense: "",
+                                      flat: "",
+                                      "solo-inverted": "",
+                                      rounded: "",
+                                      placeholder: "Search student(s) to add"
+                                    },
+                                    model: {
+                                      value: _vm.tblLeftSearch,
+                                      callback: function($$v) {
+                                        _vm.tblLeftSearch = $$v
+                                      },
+                                      expression: "tblLeftSearch"
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-card-text",
+                                [
+                                  _c("v-data-table", {
+                                    attrs: {
+                                      headers: [
+                                        { text: "SID", value: "id" },
+                                        {
+                                          text: "First Name",
+                                          value: "firstname"
+                                        },
+                                        {
+                                          text: "Middle Name",
+                                          value: "middlename"
+                                        },
+                                        {
+                                          text: "Last Name",
+                                          value: "lastname"
+                                        },
+                                        { text: "Ext. Name", value: "extname" }
+                                      ],
+                                      items: _vm.students,
+                                      search: _vm.tblLeftSearch,
+                                      "show-select": ""
+                                    },
+                                    scopedSlots: _vm._u(
+                                      [
+                                        {
+                                          key: "item.name",
+                                          fn: function(ref) {
+                                            var item = ref.item
+                                            return [
+                                              _vm._v(
+                                                "\n                                        " +
+                                                  _vm._s(item.firstname) +
+                                                  " " +
+                                                  _vm._s(item.middlename) +
+                                                  " " +
+                                                  _vm._s(item.lastname) +
+                                                  "\n                                    "
+                                              )
+                                            ]
+                                          }
+                                        }
+                                      ],
+                                      null,
+                                      true
+                                    ),
+                                    model: {
+                                      value: _vm.selectedToAdd,
+                                      callback: function($$v) {
+                                        _vm.selectedToAdd = $$v
+                                      },
+                                      expression: "selectedToAdd"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          )
                         ],
                         1
                       )
@@ -484,9 +506,7 @@ var render = function() {
                   )
                 ],
                 1
-              ),
-              _vm._v(" "),
-              _c("v-col", { attrs: { cols: "12", md: "6" } })
+              )
             ],
             1
           )

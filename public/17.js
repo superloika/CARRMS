@@ -63,13 +63,23 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       form: {
+        subject_code: '',
         subject_name: '',
         subject_description: '',
-        grade: ''
+        subject_type: ''
       }
     };
   },
@@ -93,7 +103,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   _this.AdminSubjectsStore.getSubjects();
                 })["catch"](function (e) {
                   if (e.response) {
-                    _this.AppStore.toast(e.response.data, 3000, 'error');
+                    console.log(e.response);
+
+                    _this.AppStore.toast("An error has occured", 3000, 'error');
                   }
                 });
 
@@ -174,23 +186,16 @@ var render = function() {
             [
               _c(
                 "v-col",
-                { attrs: { cols: "12", md: "2" } },
+                { attrs: { cols: "12", md: "12" } },
                 [
-                  _c("v-select", {
-                    attrs: {
-                      outlined: "",
-                      densex: "",
-                      label: "Grade",
-                      items: _vm.AppStore.state.gradeLevels,
-                      "item-text": "grade",
-                      "item-value": "grade"
-                    },
+                  _c("v-text-field", {
+                    attrs: { label: "Subject Code", outlined: "", densex: "" },
                     model: {
-                      value: _vm.form.grade,
+                      value: _vm.form.subject_code,
                       callback: function($$v) {
-                        _vm.$set(_vm.form, "grade", $$v)
+                        _vm.$set(_vm.form, "subject_code", $$v)
                       },
-                      expression: "form.grade"
+                      expression: "form.subject_code"
                     }
                   })
                 ],
@@ -199,7 +204,7 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "v-col",
-                { attrs: { cols: "12", md: "4" } },
+                { attrs: { cols: "12", md: "12" } },
                 [
                   _c("v-text-field", {
                     attrs: { label: "Subject Name", outlined: "", densex: "" },
@@ -217,7 +222,7 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "v-col",
-                { attrs: { cols: "12", md: "6" } },
+                { attrs: { cols: "12", md: "12" } },
                 [
                   _c("v-text-field", {
                     attrs: {
@@ -231,6 +236,32 @@ var render = function() {
                         _vm.$set(_vm.form, "subject_description", $$v)
                       },
                       expression: "form.subject_description"
+                    }
+                  })
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-col",
+                { attrs: { cols: "12", md: "12" } },
+                [
+                  _c("v-select", {
+                    attrs: {
+                      outlined: "",
+                      densex: "",
+                      label: "Subject Type",
+                      items: ["", "Core", "Applied", "Specialized"],
+                      hint:
+                        "(Core, Applied, Specialized) Applicable in Senior High Subjects",
+                      "persistent-hint": ""
+                    },
+                    model: {
+                      value: _vm.form.subject_type,
+                      callback: function($$v) {
+                        _vm.$set(_vm.form, "subject_type", $$v)
+                      },
+                      expression: "form.subject_type"
                     }
                   })
                 ],
