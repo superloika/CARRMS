@@ -76,7 +76,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -96,6 +95,9 @@ __webpack_require__.r(__webpack_exports__);
       }, {
         text: "Ext. Name",
         value: "student_extname"
+      }, {
+        text: "Gender",
+        value: "student_gender"
       }, {
         text: "Grade",
         value: "grade"
@@ -327,33 +329,21 @@ var render = function() {
                     1
                   ),
                   _vm._v(" "),
-                  _c(
-                    "v-btn",
-                    {
-                      attrs: {
-                        icon: "",
-                        color: "primary",
-                        title: "Edit",
-                        disabled: ""
-                      }
-                    },
-                    [_c("v-icon", [_vm._v("mdi-pencil")])],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "v-btn",
-                    {
-                      attrs: { icon: "", color: "error", title: "Delete" },
-                      on: {
-                        click: function($event) {
-                          return _vm.deleteSection(item.id)
-                        }
-                      }
-                    },
-                    [_c("v-icon", [_vm._v("mdi-delete")])],
-                    1
-                  )
+                  _vm.AppStore.isSuperAdmin()
+                    ? _c(
+                        "v-btn",
+                        {
+                          attrs: { icon: "", color: "error", title: "Delete" },
+                          on: {
+                            click: function($event) {
+                              return _vm.deleteSection(item.id)
+                            }
+                          }
+                        },
+                        [_c("v-icon", [_vm._v("mdi-delete")])],
+                        1
+                      )
+                    : _vm._e()
                 ]
               }
             }

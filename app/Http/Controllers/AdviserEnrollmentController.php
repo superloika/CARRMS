@@ -5,51 +5,27 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class EnrollmentController extends Controller
+class AdviserEnrollmentController extends Controller
 {
-    public function getStudentsEnrolled() {
+    public function getSections() {
         try {
             $sy_id = request()->sy_id;
-            $section_id = request()->section_id;
-            $level = request()->level;
-            // dd($sy_id);
+            $adviser_id = request()->adviser_id;
 
             $res = DB::table('enrollment_head')
                 ->select(
-                    'students.lrn as student_lrn',
-                    'students.firstname as student_firstname',
-                    'students.middlename as student_middlename',
-                    'students.lastname as student_lastname',
-                    'students.extname as student_extname',
-                    'students.gender as student_gender',
+                    'enrollment_head.*',
                     'sections.grade',
-                    'sections.section',
                     'sections.level',
-                    'advisers.firstname as adviser_firstname',
-                    'advisers.middlename as adviser_middlename',
-                    'advisers.lastname as adviser_lastname',
-                    'enrollment_line.final_remarks',
+                    'sections.section',
                 )
 
-                ->join('enrollment_line','enrollment_line.head_id','enrollment_head.id')
-                ->join('students','students.id', 'enrollment_line.student_id')
                 ->join('sections','sections.id', 'enrollment_head.section_id')
-                ->join('advisers','advisers.id', 'enrollment_head.adviser_id')
-                ->join('schoolyears','schoolyears.id', 'enrollment_head.sy_id')
 
                 ->where('enrollment_head.sy_id', $sy_id)
-
-                ->when($section_id!=null, function($q) use($section_id){
-                    $q->where('enrollment_head.section_id', $section_id);
-                })
-
-                ->when($level!=null, function($q) use($level){
-                    $q->where('sections.level', $level)
-                    ;
-                })
+                ->where('enrollment_head.adviser_id', $adviser_id)
 
                 ->get();
-                // ->latest('enrollment_head.created_at')->get();
 
             return response()->json($res, 200);
         } catch (\Throwable $th) {

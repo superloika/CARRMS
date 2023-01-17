@@ -55,10 +55,9 @@
                 <v-btn icon color="primary" title="View Details" disabled>
                     <v-icon>mdi-eye</v-icon>
                 </v-btn>
-                <v-btn icon color="primary" title="Edit" disabled>
-                    <v-icon>mdi-pencil</v-icon>
-                </v-btn>
-                <v-btn icon color="error" title="Delete" @click="deleteSection(item.id)">
+                <v-btn icon color="error" title="Delete" @click="deleteSection(item.id)"
+                    v-if="AppStore.isSuperAdmin()"
+                >
                     <v-icon>mdi-delete</v-icon>
                 </v-btn>
             </template>
@@ -77,6 +76,7 @@ export default {
                 { text: "Middle Name", value: "student_middlename" },
                 { text: "Last Name", value: "student_lastname" },
                 { text: "Ext. Name", value: "student_extname" },
+                { text: "Gender", value: "student_gender" },
                 { text: "Grade", value: "grade" },
                 { text: "Section", value: "section" },
                 { text: "Adviser", value: "adviser_name" },

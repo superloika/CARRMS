@@ -93,6 +93,14 @@ Route::group(['prefix'=>'admin'], function(){
 });
 
 
+// adviser
+Route::group(['prefix'=>'adviser'], function(){
+    Route::group(['prefix'=>'sections'], function() {
+        Route::post('getSections', 'AdviserEnrollmentController@getSections');
+    });
+});
+
+
 /**
  *
  */

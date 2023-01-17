@@ -142,12 +142,13 @@ export default {
     watch: {},
     mounted() {
         console.log("BaseComponent mounted");
-
-        // if(this.AuthUser.user_type=='super_admin' || this.AuthUser.user_type=='admin') {
-        //     this.$router.replace('admin/dashboard');
-        // } else {
-        //     this.$router.replace('adviser/dashboard');
-        // }
+        if(this.$route.meta.name=='Home') {
+            if(this.AuthUser.user_type=='super_admin' || this.AuthUser.user_type=='admin') {
+                this.$router.replace('admin/dashboard');
+            } else {
+                this.$router.replace('adviser/dashboard');
+            }
+        }
     },
     created() {
         this.AdminSYStore.activeSY();

@@ -8,14 +8,7 @@ const state = Vue.observable({
 
 
 const actions = {
-    async initCategories() {
-        console.log('initCategories() invoked');
-        await axios.get(
-            `${AppStore.state.siteUrl}categories`
-        ).then(e=>{
-            state.categories = e.data;
-        });
-    }
+
 };
 
 export default {
