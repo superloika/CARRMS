@@ -31,6 +31,7 @@ class EnrollmentController extends Controller
                     'advisers.middlename as adviser_middlename',
                     'advisers.lastname as adviser_lastname',
                     'enrollment_line.final_remarks',
+                    'enrollment_line.id as enrollment_line_id',
                 )
 
                 ->join('enrollment_line','enrollment_line.head_id','enrollment_head.id')
@@ -110,6 +111,8 @@ class EnrollmentController extends Controller
 
     public function saveStudentEnrollment() {
         try {
+            DB::beginTransaction();
+
             $head = request()->head;
             // dd($head);
             extract($head);
@@ -129,6 +132,11 @@ class EnrollmentController extends Controller
                 ]);
             }
 
+            // get section details
+            $section = DB::table('sections')->where('id',$section_id)->get(['grade','level'])->first();
+            $grade = $section->grade;
+            $level = $section->level;
+
             $added = 0;
             $existing = 0;
             foreach($line as $student_id) {
@@ -137,35 +145,49 @@ class EnrollmentController extends Controller
                     ->where('enrollment_head.sy_id', $sy_id)->where('enrollment_line.student_id',$student_id)
                     ->count()
                     ;
-                // dd($test);
                 if(
-                    // DB::table('enrollment_line')->where('head_id',$head_id)
-                    //     ->where('student_id',$student_id)->exists()
                     $occurence > 0
                 ) {
                     $existing += 1;
                 } else {
-                    DB::table('enrollment_line')->insert([
+                    $enrollment_line_id = DB::table('enrollment_line')->insertGetId([
                         'head_id'=>$head_id,
                         'student_id'=>$student_id,
                         'strand_id'=>$strand_id,
                     ]);
-                    // DB::table('students')->where('id',$student_id)->update([
-                    //     'current_grade' => $grade,
-                    //     'last_syid' => $sy_id,
-                    //     'last_grade' => $grade,
-                    //     'last_final_remarks' => 'pending',
-                    // ]);
+
                     DB::table('students')->where('id',$student_id)->update(['is_enrolled' => 1]);
                     $added += 1;
+
+                    $subtags = DB::table('subtags')
+                        ->where('grade', $grade)
+                        ->where('level',$level)
+                        ->when($strand_id!=null,function($q) use($strand_id){
+                            $q->where('strand_id',$strand_id);
+                        })
+                        ->get();
+                    foreach($subtags as $st) {
+                        DB::table('grades')->where('enrollment_line_id',"<>", $enrollment_line_id)
+                            ->where('subject_id',"<>", $st->subject_id)
+                            ->where('subject_id',"<>", $st->subject_id)
+                            ->where('sem',"<>",$st->sem)
+                            ->insert([
+                                'enrollment_line_id'=>$enrollment_line_id,
+                                'subject_id'=>$st->subject_id,
+                                'sem'=>$st->sem,
+                            ]);
+                    }
                 }
             }
             $total=$added+$existing;
             // $msg = "Added $added of $total selected, $existing existing";
             $msg = "Added $added of $total selected students";
 
+
+            DB::commit();
             return response()->json($msg, 200);
         } catch (\Throwable $th) {
+            DB::rollBack();
             return response()->json($th->getMessage(), 500);
         }
     }
@@ -174,8 +196,13 @@ class EnrollmentController extends Controller
         try {
             $head_id = request()->head_id;
             $student_id = request()->student_id;
+            $enrollment_line_id = request()->enrollment_line_id;
 
-            DB::table('enrollment_line')->where('head_id',$head_id)->where('student_id',$student_id)
+            // DB::table('enrollment_line')->where('head_id',$head_id)->where('student_id',$student_id)
+            //     ->delete();
+            DB::table('enrollment_line')->where('id',$enrollment_line_id)
+                ->delete();
+            DB::table('grades')->where('enrollment_line_id',$enrollment_line_id)
                 ->delete();
             DB::table('students')->where('id',$student_id)->update([
                 'is_enrolled'=>0

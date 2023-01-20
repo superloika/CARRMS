@@ -84,6 +84,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -134,7 +135,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.onChangeGradeSection();
       this.searchKey = "";
     },
-    deleteEnrollment: function deleteEnrollment(head_id, student_id) {
+    // async deleteEnrollment(head_id,student_id) {
+    deleteEnrollment: function deleteEnrollment(enrollment_line_id, student_id) {
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
@@ -149,8 +151,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 _context.next = 3;
                 return axios.post("".concat(_this.AppStore.state.siteUrl, "admin/enrollment/deleteEnrollment"), {
-                  head_id: head_id,
-                  student_id: student_id
+                  // head_id: head_id,
+                  student_id: student_id,
+                  enrollment_line_id: enrollment_line_id
                 }).then(function (e) {
                   _this.AppStore.toast(e.data, 2000, 'success');
 
@@ -376,7 +379,7 @@ var render = function() {
                           on: {
                             click: function($event) {
                               return _vm.deleteEnrollment(
-                                item.id,
+                                item.enrollment_line_id,
                                 item.student_id
                               )
                             }

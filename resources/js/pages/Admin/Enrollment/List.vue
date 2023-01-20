@@ -55,7 +55,8 @@
                 <v-btn icon color="primary" title="View Details" disabled>
                     <v-icon>mdi-eye</v-icon>
                 </v-btn>
-                <v-btn icon color="error" title="Delete" @click="deleteEnrollment(item.id,item.student_id)"
+                <v-btn icon color="error" title="Delete"
+                    @click="deleteEnrollment(item.enrollment_line_id,item.student_id)"
                     v-if="AppStore.isSuperAdmin()"
                 >
                     <v-icon>mdi-delete</v-icon>
@@ -106,13 +107,15 @@ export default {
             this.searchKey="";
         },
 
-        async deleteEnrollment(head_id,student_id) {
+        // async deleteEnrollment(head_id,student_id) {
+        async deleteEnrollment(enrollment_line_id, student_id) {
             if(confirm('Are you sure you want to delete the selected enrollment data?')){
                 await axios.post(
                     `${this.AppStore.state.siteUrl}admin/enrollment/deleteEnrollment`,
                     {
-                        head_id: head_id,
+                        // head_id: head_id,
                         student_id: student_id,
+                        enrollment_line_id: enrollment_line_id,
                     }
                 ).then(e=>{
                     this.AppStore.toast(e.data,2000,'success');
