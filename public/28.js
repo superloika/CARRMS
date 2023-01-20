@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[28],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/Admin/Subtags/Add.vue?vue&type=script&lang=js&":
-/*!***********************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/Admin/Subtags/Add.vue?vue&type=script&lang=js& ***!
-  \***********************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/ManageAccounts/AccountsEditPassword.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/ManageAccounts/AccountsEditPassword.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -11,8 +11,6 @@
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -81,105 +79,157 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
+    var _this = this;
+
     return {
-      form: {
-        grade: '',
-        level: '',
-        subject_id: '',
-        strand_id: '',
-        sem: ''
+      frmEditPw: false,
+      account: {
+        id: this.ManageAccounts.state.toEdit.id,
+        // old_password_hashed: this.ManageAccounts.state.toEdit.old_password_hashed,
+        old_password: '',
+        password: '',
+        password_confirmation: '',
+        rules: {
+          old_password: [function (v) {
+            return !!v || "Old password is required.";
+          }],
+          password: [function (v) {
+            return !!v || "Password is required.";
+          }, function (v) {
+            return v.length >= 3 || "Password must be 3 characters or above.";
+          }],
+          password_confirmation: [function (v) {
+            return !!v || "Please confirm your password.";
+          }, function (v) {
+            return v === _this.account.password || "Password confirmation is incorrect.";
+          }]
+        }
       },
-      searchedSubject: ''
+      updatingPassword: false,
+      errMsgs: [],
+      errMsgsShown: false,
+      errorMsgs: {}
     };
   },
+  watch: {},
   methods: {
-    saveSubtag: function saveSubtag() {
-      var _this = this;
+    updatePassword: function updatePassword() {
+      var _this2 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var errmsg;
+        var url, payload, response;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                if (!(_this.form.level == 'Senior High' && (_this.form.strand_id == '' || _this.form.sem == ''))) {
-                  _context.next = 6;
+                if (!_this2.$refs.form.validate()) {
+                  _context.next = 16;
                   break;
                 }
 
-                errmsg = '';
+                url = "".concat(_this2.AppStore.state.siteUrl, "accounts/update-password");
+                payload = {
+                  _method: "PATCH",
+                  id: _this2.account.id,
+                  // old_password_hashed: this.account.old_password_hashed,
+                  old_password: _this2.account.old_password,
+                  password: _this2.account.password,
+                  password_confirmation: _this2.account.password_confirmation
+                };
+                _context.prev = 3;
+                _this2.updatingPassword = true;
+                _context.next = 7;
+                return axios.post(url, payload);
 
-                if (_this.form.strand_id == '') {
-                  errmsg += "Strand is required\n";
-                }
+              case 7:
+                response = _context.sent;
 
-                if (_this.form.sem == '') {
-                  errmsg += "Semester is required\n";
-                }
-
-                alert(errmsg);
-                return _context.abrupt("return");
-
-              case 6:
-                _context.next = 8;
-                return axios.post("".concat(_this.AppStore.state.siteUrl, "admin/subtags/saveSubtag"), {
-                  data: _this.form
-                }).then(function (e) {
-                  _this.AppStore.toast(e.data, 2000, 'success'); // this.AppStore.resetForm(this.form);
-
-
-                  // this.AppStore.resetForm(this.form);
-                  _this.AdminSubtagsStore.getSubtags();
-                })["catch"](function (e) {
-                  if (e.response) {
-                    console.log(e.response);
-
-                    if (e.response.status == "409") {
-                      _this.AppStore.toast(e.response.data, 3000, 'error');
-                    } else {
-                      _this.AppStore.toast("An error has occured", 3000, 'error');
-                    }
+                if (response.data == true) {
+                  if (_this2.$route.meta.name === 'Account') {
+                    location.reload();
                   }
-                });
 
-              case 8:
+                  _this2.ManageAccounts.initUsers();
+
+                  _this2.ManageAccounts.state.modalEditIsOpen = false;
+
+                  _this2.AppStore.toast("Password updated", 1500);
+                } else if (response.data.invalidations != undefined || response.data.invalidations != null) {
+                  _this2.errMsgs = [];
+                  _this2.errorMsgs = {};
+                  _this2.errorMsgs = response.data.invalidations;
+                  Object.entries(response.data.invalidations).forEach(function (field) {
+                    _this2.errMsgs.push(field[1][0]);
+                  }); // this.AppStore.toast(this.errMsgs, 3000);
+
+                  _this2.errMsgsShown = true;
+                } else if (response.data.errorInfo != null || response.data.errorInfo != undefined) {
+                  _this2.AppStore.toast("An error occured", 2000);
+
+                  console.log(response.data.errorInfo);
+                }
+
+                _context.next = 15;
+                break;
+
+              case 11:
+                _context.prev = 11;
+                _context.t0 = _context["catch"](3);
+                console.log(_context.t0);
+
+                _this2.AppStore.toast(_context.t0, 3000);
+
+              case 15:
+                _this2.updatingPassword = false;
+
+              case 16:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee);
+        }, _callee, null, [[3, 11]]);
       }))();
     }
   },
-  computed: {},
-  watch: {
-    "form.grade": function formGrade() {
-      var _this2 = this;
-
-      console.log(this.form);
-      this.form.level = this.AppStore.state.gradeLevels.find(function (e) {
-        return e.grade == _this2.form.grade;
-      }).level; // this.form.subject_id = '';
-
-      this.form.strand_id = '';
-      this.form.sem = '';
-    },
-    "form.subject_id": function formSubject_id() {
-      if (_typeof(this.form.subject_id) != "object") {
-        this.form.subject_id = '';
-      }
-    }
+  mounted: function mounted() {
+    console.log('AccountsEditPassword component mounted');
   }
 });
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/Admin/Subtags/Add.vue?vue&type=template&id=58863132&":
-/*!***************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/Admin/Subtags/Add.vue?vue&type=template&id=58863132& ***!
-  \***************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/ManageAccounts/AccountsEditPassword.vue?vue&type=template&id=0f82d596&":
+/*!*********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/ManageAccounts/AccountsEditPassword.vue?vue&type=template&id=0f82d596& ***!
+  \*********************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -192,63 +242,50 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "div",
+    "v-container",
     [
       _c(
-        "v-app-bar",
-        [
-          _c(
-            "v-toolbar-title",
-            { staticClass: "text-overline primary--text" },
-            [_vm._v("\n            Add Subject Tagging\n        ")]
-          ),
-          _vm._v(" "),
-          _c("v-spacer"),
-          _vm._v(" "),
-          _c(
-            "v-btn",
-            {
-              attrs: { dense: "", iconx: "", text: "", color: "primary" },
-              on: {
-                click: function($event) {
-                  return _vm.saveSubtag()
-                }
-              }
+        "v-form",
+        {
+          ref: "form",
+          model: {
+            value: _vm.frmEditPw,
+            callback: function($$v) {
+              _vm.frmEditPw = $$v
             },
-            [_c("v-icon", [_vm._v("mdi-floppy")]), _vm._v(" Save\n        ")],
-            1
-          )
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "v-container",
-        { staticClass: "pt-6" },
+            expression: "frmEditPw"
+          }
+        },
         [
           _c(
             "v-row",
             [
               _c(
                 "v-col",
-                { attrs: { cols: "12", md: "4" } },
+                { attrs: { cols: "12", md: "4", sm: "6" } },
                 [
-                  _c("v-select", {
+                  _c("v-text-field", {
                     attrs: {
                       outlined: "",
-                      densex: "",
-                      filledx: "",
-                      label: "Grade",
-                      items: _vm.AppStore.state.gradeLevels,
-                      "item-text": "grade",
-                      "item-value": "grade"
+                      dense: "",
+                      text: "",
+                      label: "Old Password *",
+                      required: "",
+                      type: "password",
+                      rules: _vm.account.rules.old_password,
+                      error:
+                        _vm.errorMsgs.old_password != undefined ? true : false,
+                      "error-messages":
+                        _vm.errorMsgs.old_password != undefined
+                          ? _vm.errorMsgs.old_password
+                          : []
                     },
                     model: {
-                      value: _vm.form.grade,
+                      value: _vm.account.old_password,
                       callback: function($$v) {
-                        _vm.$set(_vm.form, "grade", $$v)
+                        _vm.$set(_vm.account, "old_password", $$v)
                       },
-                      expression: "form.grade"
+                      expression: "account.old_password"
                     }
                   })
                 ],
@@ -257,109 +294,100 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "v-col",
-                { attrs: { cols: "12", md: "8" } },
+                { attrs: { cols: "12", md: "4", sm: "6" } },
                 [
-                  _c("v-combobox", {
+                  _c("v-text-field", {
                     attrs: {
                       outlined: "",
-                      densex: "",
-                      filledx: "",
-                      label: "Subject",
-                      items: _vm.AdminSubjectsStore.state.subjects
+                      dense: "",
+                      text: "",
+                      label: "New Password *",
+                      required: "",
+                      type: "password",
+                      rules: _vm.account.rules.password,
+                      error: _vm.errorMsgs.password != undefined ? true : false,
+                      "error-messages":
+                        _vm.errorMsgs.password != undefined
+                          ? _vm.errorMsgs.password
+                          : []
                     },
-                    scopedSlots: _vm._u([
-                      {
-                        key: "selection",
-                        fn: function(ref) {
-                          var item = ref.item
-                          return [
-                            _vm._v(
-                              "\n                        " +
-                                _vm._s(item.subject_name) +
-                                "\n                    "
-                            )
-                          ]
-                        }
+                    model: {
+                      value: _vm.account.password,
+                      callback: function($$v) {
+                        _vm.$set(_vm.account, "password", $$v)
                       },
-                      {
-                        key: "item",
-                        fn: function(ref) {
-                          var on = ref.on
-                          var item = ref.item
-                          return [
-                            _c("v-list-item", _vm._g({}, on), [
-                              _vm._v(
-                                "\n                            " +
-                                  _vm._s(item.subject_name) +
-                                  "\n                        "
-                              )
-                            ])
-                          ]
+                      expression: "account.password"
+                    }
+                  })
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-col",
+                { attrs: { cols: "12", md: "4", sm: "6" } },
+                [
+                  _c("v-text-field", {
+                    attrs: {
+                      outlined: "",
+                      dense: "",
+                      text: "",
+                      label: "Confirm Password *",
+                      autocomplete: "false",
+                      required: "",
+                      type: "password",
+                      rules: _vm.account.rules.password_confirmation
+                    },
+                    model: {
+                      value: _vm.account.password_confirmation,
+                      callback: function($$v) {
+                        _vm.$set(_vm.account, "password_confirmation", $$v)
+                      },
+                      expression: "account.password_confirmation"
+                    }
+                  })
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-row",
+            { staticClass: "pt-0 pb-0", attrs: { "background-color": "red" } },
+            [
+              _c(
+                "v-col",
+                {
+                  staticClass: "pt-0 pb-0",
+                  attrs: { "background-color": "red" }
+                },
+                [
+                  _c(
+                    "v-btn",
+                    {
+                      staticClass:
+                        "float-lg-right float-md-right float-sm-right",
+                      attrs: {
+                        color: "primary",
+                        loading: _vm.updatingPassword,
+                        outlinedx: "",
+                        smallx: "",
+                        roundedx: ""
+                      },
+                      on: {
+                        click: function($event) {
+                          return _vm.updatePassword()
                         }
                       }
-                    ]),
-                    model: {
-                      value: _vm.form.subject_id,
-                      callback: function($$v) {
-                        _vm.$set(_vm.form, "subject_id", $$v)
-                      },
-                      expression: "form.subject_id"
-                    }
-                  })
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "v-col",
-                { attrs: { cols: "12", md: "4" } },
-                [
-                  _vm.form.level == "Senior High"
-                    ? _c("v-select", {
-                        attrs: {
-                          outlined: "",
-                          densex: "",
-                          filledx: "",
-                          label: "Strand",
-                          items: _vm.AdminStrandsStore.state.strands,
-                          "item-text": "strand_name",
-                          "item-value": "id"
-                        },
-                        model: {
-                          value: _vm.form.strand_id,
-                          callback: function($$v) {
-                            _vm.$set(_vm.form, "strand_id", $$v)
-                          },
-                          expression: "form.strand_id"
-                        }
-                      })
-                    : _vm._e()
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "v-col",
-                { attrs: { cols: "12", md: "4" } },
-                [
-                  _vm.form.level == "Senior High"
-                    ? _c("v-select", {
-                        attrs: {
-                          outlined: "",
-                          densex: "",
-                          filledx: "",
-                          label: "Semester",
-                          items: [1, 2]
-                        },
-                        model: {
-                          value: _vm.form.sem,
-                          callback: function($$v) {
-                            _vm.$set(_vm.form, "sem", $$v)
-                          },
-                          expression: "form.sem"
-                        }
-                      })
-                    : _vm._e()
+                    },
+                    [
+                      _vm._v(
+                        "\n                    Update Password\n                "
+                      )
+                    ]
+                  )
                 ],
                 1
               )
@@ -380,18 +408,18 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./resources/js/pages/Admin/Subtags/Add.vue":
-/*!**************************************************!*\
-  !*** ./resources/js/pages/Admin/Subtags/Add.vue ***!
-  \**************************************************/
+/***/ "./resources/js/pages/ManageAccounts/AccountsEditPassword.vue":
+/*!********************************************************************!*\
+  !*** ./resources/js/pages/ManageAccounts/AccountsEditPassword.vue ***!
+  \********************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Add_vue_vue_type_template_id_58863132___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Add.vue?vue&type=template&id=58863132& */ "./resources/js/pages/Admin/Subtags/Add.vue?vue&type=template&id=58863132&");
-/* harmony import */ var _Add_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Add.vue?vue&type=script&lang=js& */ "./resources/js/pages/Admin/Subtags/Add.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _AccountsEditPassword_vue_vue_type_template_id_0f82d596___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AccountsEditPassword.vue?vue&type=template&id=0f82d596& */ "./resources/js/pages/ManageAccounts/AccountsEditPassword.vue?vue&type=template&id=0f82d596&");
+/* harmony import */ var _AccountsEditPassword_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AccountsEditPassword.vue?vue&type=script&lang=js& */ "./resources/js/pages/ManageAccounts/AccountsEditPassword.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -400,9 +428,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _Add_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _Add_vue_vue_type_template_id_58863132___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _Add_vue_vue_type_template_id_58863132___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _AccountsEditPassword_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _AccountsEditPassword_vue_vue_type_template_id_0f82d596___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _AccountsEditPassword_vue_vue_type_template_id_0f82d596___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -412,38 +440,38 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/pages/Admin/Subtags/Add.vue"
+component.options.__file = "resources/js/pages/ManageAccounts/AccountsEditPassword.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/pages/Admin/Subtags/Add.vue?vue&type=script&lang=js&":
-/*!***************************************************************************!*\
-  !*** ./resources/js/pages/Admin/Subtags/Add.vue?vue&type=script&lang=js& ***!
-  \***************************************************************************/
+/***/ "./resources/js/pages/ManageAccounts/AccountsEditPassword.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************!*\
+  !*** ./resources/js/pages/ManageAccounts/AccountsEditPassword.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Add_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Add.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/Admin/Subtags/Add.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Add_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AccountsEditPassword_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./AccountsEditPassword.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/ManageAccounts/AccountsEditPassword.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AccountsEditPassword_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/pages/Admin/Subtags/Add.vue?vue&type=template&id=58863132&":
-/*!*********************************************************************************!*\
-  !*** ./resources/js/pages/Admin/Subtags/Add.vue?vue&type=template&id=58863132& ***!
-  \*********************************************************************************/
+/***/ "./resources/js/pages/ManageAccounts/AccountsEditPassword.vue?vue&type=template&id=0f82d596&":
+/*!***************************************************************************************************!*\
+  !*** ./resources/js/pages/ManageAccounts/AccountsEditPassword.vue?vue&type=template&id=0f82d596& ***!
+  \***************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Add_vue_vue_type_template_id_58863132___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Add.vue?vue&type=template&id=58863132& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/Admin/Subtags/Add.vue?vue&type=template&id=58863132&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Add_vue_vue_type_template_id_58863132___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AccountsEditPassword_vue_vue_type_template_id_0f82d596___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./AccountsEditPassword.vue?vue&type=template&id=0f82d596& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/ManageAccounts/AccountsEditPassword.vue?vue&type=template&id=0f82d596&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AccountsEditPassword_vue_vue_type_template_id_0f82d596___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Add_vue_vue_type_template_id_58863132___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AccountsEditPassword_vue_vue_type_template_id_0f82d596___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

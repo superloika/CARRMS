@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[8],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/Admin/Enrollment/Add.vue?vue&type=script&lang=js&":
-/*!**************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/Admin/Enrollment/Add.vue?vue&type=script&lang=js& ***!
-  \**************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/Admin/Advisers/List.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/Admin/Advisers/List.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -66,153 +66,79 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      selectedSection: null,
-      selectedToAdd: [],
-      tblLeftSearch: '',
-      tblRightSearch: ''
+      searchKey: "",
+      tblHeaders: [{
+        text: "First Name",
+        value: "firstname"
+      }, {
+        text: "Middle Name",
+        value: "middlename"
+      }, {
+        text: "Last Name",
+        value: "lastname"
+      }, {
+        text: "Gender",
+        value: "gender"
+      }, {
+        text: "Address",
+        value: "address"
+      }, {
+        text: "Status",
+        value: "status"
+      }, {
+        text: "Actions",
+        value: "actions"
+      }]
     };
   },
-  computed: {
-    sections: function sections() {
-      var _this = this;
-
-      return this.AdminSectionsStore.state.sections.filter(function (e) {
-        return e.adviser_id != null && e.level == _this.level;
-      });
-    },
-    level: function level() {
-      return this.$route.meta.level;
-    },
-    students: function students() {
-      return this.AdminEnrollmentStore.state.studentsForEnrollment;
-    }
-  },
-  watch: {
-    level: function level() {
-      this.selectedSection = null;
-      this.selectedToAdd = [];
-    }
-  },
   methods: {
-    saveStudentEnrollment: function saveStudentEnrollment() {
-      var _this2 = this;
+    deleteAdviser: function deleteAdviser(id) {
+      var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                console.log(_this2.selectedSection);
-                console.log(_this2.selectedToAdd);
-                console.log(_this2.AdminSYStore.state.activeSY);
-                _context.next = 5;
-                return axios.post("".concat(_this2.AppStore.state.siteUrl, "admin/enrollment/saveStudentEnrollment"), {
-                  head: {
-                    sy_id: _this2.AdminSYStore.state.activeSYid,
-                    adviser_id: _this2.selectedSection.adviser_id,
-                    section_id: _this2.selectedSection.id,
-                    grade: _this2.selectedSection.grade
-                  },
-                  line: _this2.selectedToAdd.map(function (e) {
-                    return e.id;
-                  })
+                if (!confirm('Are you sure you want to delete the selected adviser?')) {
+                  _context.next = 3;
+                  break;
+                }
+
+                _context.next = 3;
+                return axios.post("".concat(_this.AppStore.state.siteUrl, "admin/advisers/deleteAdviser"), {
+                  id: id
                 }).then(function (e) {
-                  _this2.AppStore.toast(e.data, 2000, 'success');
+                  _this.AppStore.toast(e.data, 3000, 'success');
 
-                  _this2.AdminEnrollmentStore.getStudentsForEnrollment(_this2.selectedSection.grade);
-
-                  _this2.selectedToAdd = [];
-
-                  _this2.AdminSectionsStore.getSections();
+                  _this.AdminAdvisersStore.getAdvisers();
                 })["catch"](function (e) {
-                  if (e.response) {
-                    _this2.AppStore.toast(e.response.data, 3000, 'error');
-                  }
+                  _this.AppStore.toast(e, 3000, 'error');
                 });
 
-              case 5:
+              case 3:
               case "end":
                 return _context.stop();
             }
           }
         }, _callee);
       }))();
-    },
-    onChangeGradeSection: function onChangeGradeSection(section) {
-      console.log(section);
-      this.selectedToAdd = [];
-      this.AdminEnrollmentStore.getStudentsForEnrollment(section.grade);
     }
   },
-  created: function created() {}
+  created: function created() {
+    this.AdminAdvisersStore.getAdvisers();
+  }
 });
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/Admin/Enrollment/Add.vue?vue&type=template&id=2360cfdf&":
-/*!******************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/Admin/Enrollment/Add.vue?vue&type=template&id=2360cfdf& ***!
-  \******************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/Admin/Advisers/List.vue?vue&type=template&id=523fdd0b&":
+/*!*****************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/Admin/Advisers/List.vue?vue&type=template&id=523fdd0b& ***!
+  \*****************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -230,289 +156,123 @@ var render = function() {
       _c(
         "v-app-bar",
         [
-          _c(
-            "v-toolbar-title",
-            { staticClass: "text-overline primary--text" },
-            [_vm._v("\n            Add New Enrollment Data\n        ")]
-          ),
+          _c("v-toolbar-title", { staticClass: "text-overline" }, [
+            _vm._v("\n            Advisers List\n        ")
+          ]),
           _vm._v(" "),
           _c("v-spacer"),
           _vm._v(" "),
-          _c(
-            "v-btn",
-            {
-              attrs: {
-                dense: "",
-                iconx: "",
-                text: "",
-                color: "primary",
-                disabled:
-                  !_vm.selectedToAdd.length || _vm.selectedSection == null
-              },
-              on: { click: _vm.saveStudentEnrollment }
+          _c("v-text-field", {
+            staticStyle: { "max-width": "200px" },
+            attrs: {
+              placeholder: "Search",
+              clearable: "",
+              "hide-details": "",
+              "solo-inverted": "",
+              rounded: "",
+              dense: "",
+              flat: ""
             },
-            [_c("v-icon", [_vm._v("mdi-floppy")]), _vm._v(" Save\n        ")],
-            1
-          )
+            model: {
+              value: _vm.searchKey,
+              callback: function($$v) {
+                _vm.searchKey = $$v
+              },
+              expression: "searchKey"
+            }
+          })
         ],
         1
       ),
       _vm._v(" "),
-      _c(
-        "v-container",
-        { staticClass: "pt-6" },
-        [
-          _c(
-            "v-row",
-            [
-              _c(
-                "v-col",
-                { attrs: { cols: "12", md: "9" } },
-                [
+      _c("v-data-table", {
+        staticClass: "elevation-1",
+        attrs: {
+          headers: _vm.tblHeaders,
+          items: _vm.AdminAdvisersStore.state.advisers,
+          "pagination.sync": "pagination",
+          search: _vm.searchKey
+        },
+        scopedSlots: _vm._u(
+          [
+            {
+              key: "item.status",
+              fn: function(ref) {
+                var item = ref.item
+                return [
+                  item.status == 1
+                    ? _c("v-chip", { attrs: { small: "", color: "success" } }, [
+                        _vm._v("Active")
+                      ])
+                    : _c("v-chip", { attrs: { small: "", color: "error" } }, [
+                        _vm._v("Inactive")
+                      ])
+                ]
+              }
+            },
+            {
+              key: "item.actions",
+              fn: function(ref) {
+                var item = ref.item
+                return [
                   _c(
-                    "v-row",
-                    [
-                      _c(
-                        "v-col",
-                        { attrs: { cols: "12" } },
-                        [
-                          _c("v-select", {
-                            attrs: {
-                              outlined: "",
-                              densex: "",
-                              filledx: "",
-                              label: "Add to Grade & Section",
-                              items: _vm.sections,
-                              "item-value": "id",
-                              "return-object": "",
-                              hint:
-                                "Only the sections with a class adviser are selectable",
-                              "persistent-hint": ""
-                            },
-                            on: { input: _vm.onChangeGradeSection },
-                            scopedSlots: _vm._u([
-                              {
-                                key: "item",
-                                fn: function(data) {
-                                  return [
-                                    _vm._v(
-                                      "\n                                " +
-                                        _vm._s(data.item.grade) +
-                                        " - " +
-                                        _vm._s(data.item.section) +
-                                        "\n                            "
-                                    )
-                                  ]
-                                }
-                              },
-                              {
-                                key: "selection",
-                                fn: function(data) {
-                                  return [
-                                    _vm._v(
-                                      "\n                                " +
-                                        _vm._s(data.item.grade) +
-                                        " - " +
-                                        _vm._s(data.item.section) +
-                                        "\n                            "
-                                    )
-                                  ]
-                                }
-                              }
-                            ]),
-                            model: {
-                              value: _vm.selectedSection,
-                              callback: function($$v) {
-                                _vm.selectedSection = $$v
-                              },
-                              expression: "selectedSection"
+                    "v-btn",
+                    {
+                      attrs: {
+                        icon: "",
+                        dense: "",
+                        color: "primary",
+                        title: "View More Details",
+                        disabled: ""
+                      }
+                    },
+                    [_c("v-icon", [_vm._v("mdi-eye")])],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-btn",
+                    {
+                      attrs: {
+                        icon: "",
+                        dense: "",
+                        color: "primary",
+                        title: "Edit",
+                        disabled: ""
+                      }
+                    },
+                    [_c("v-icon", [_vm._v("mdi-pencil")])],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _vm.AppStore.isSuperAdmin()
+                    ? _c(
+                        "v-btn",
+                        {
+                          attrs: {
+                            icon: "",
+                            dense: "",
+                            color: "error",
+                            title: "Delete"
+                          },
+                          on: {
+                            click: function($event) {
+                              return _vm.deleteAdviser(item.id)
                             }
-                          })
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-col",
-                        { attrs: { cols: "12", md: "12" } },
-                        [
-                          _c(
-                            "v-card",
-                            { key: _vm.level },
-                            [
-                              _c(
-                                "v-toolbar",
-                                { attrs: { elevation: "0" } },
-                                [
-                                  _c("v-text-field", {
-                                    staticStyle: { "max-width": "300px" },
-                                    attrs: {
-                                      "hide-details": "",
-                                      dense: "",
-                                      flat: "",
-                                      "solo-inverted": "",
-                                      rounded: "",
-                                      placeholder: "Search student(s) to add"
-                                    },
-                                    model: {
-                                      value: _vm.tblLeftSearch,
-                                      callback: function($$v) {
-                                        _vm.tblLeftSearch = $$v
-                                      },
-                                      expression: "tblLeftSearch"
-                                    }
-                                  })
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "v-card-text",
-                                [
-                                  _c("v-data-table", {
-                                    attrs: {
-                                      headers: [
-                                        { text: "SID", value: "id" },
-                                        {
-                                          text: "First Name",
-                                          value: "firstname"
-                                        },
-                                        {
-                                          text: "Middle Name",
-                                          value: "middlename"
-                                        },
-                                        {
-                                          text: "Last Name",
-                                          value: "lastname"
-                                        },
-                                        { text: "Ext. Name", value: "extname" }
-                                      ],
-                                      items: _vm.students,
-                                      search: _vm.tblLeftSearch,
-                                      "show-select": ""
-                                    },
-                                    scopedSlots: _vm._u(
-                                      [
-                                        {
-                                          key: "item.name",
-                                          fn: function(ref) {
-                                            var item = ref.item
-                                            return [
-                                              _vm._v(
-                                                "\n                                        " +
-                                                  _vm._s(item.firstname) +
-                                                  " " +
-                                                  _vm._s(item.middlename) +
-                                                  " " +
-                                                  _vm._s(item.lastname) +
-                                                  "\n                                    "
-                                              )
-                                            ]
-                                          }
-                                        }
-                                      ],
-                                      null,
-                                      true
-                                    ),
-                                    model: {
-                                      value: _vm.selectedToAdd,
-                                      callback: function($$v) {
-                                        _vm.selectedToAdd = $$v
-                                      },
-                                      expression: "selectedToAdd"
-                                    }
-                                  })
-                                ],
-                                1
-                              )
-                            ],
-                            1
-                          )
-                        ],
+                          }
+                        },
+                        [_c("v-icon", [_vm._v("mdi-delete")])],
                         1
                       )
-                    ],
-                    1
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "v-col",
-                { attrs: { cols: "12", md: "3" } },
-                [
-                  _c(
-                    "v-card",
-                    { key: _vm.level },
-                    [
-                      _c(
-                        "v-toolbar",
-                        { attrs: { elevation: "0" } },
-                        [
-                          _c("v-toolbar-title", [
-                            _vm._v(
-                              "\n                            Selected Students\n                        "
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _c("v-spacer")
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-card-text",
-                        [
-                          _c("v-data-table", {
-                            attrs: {
-                              headers: [
-                                { text: "Student Name", value: "name" }
-                              ],
-                              items: _vm.selectedToAdd,
-                              "items-per-page": -1,
-                              search: _vm.tblRightSearch,
-                              "hide-default-footer": ""
-                            },
-                            scopedSlots: _vm._u(
-                              [
-                                {
-                                  key: "item.name",
-                                  fn: function(ref) {
-                                    var item = ref.item
-                                    return [
-                                      _vm._v(
-                                        "\n                                " +
-                                          _vm._s(item.firstname) +
-                                          " " +
-                                          _vm._s(item.middlename) +
-                                          " " +
-                                          _vm._s(item.lastname) +
-                                          "\n                            "
-                                      )
-                                    ]
-                                  }
-                                }
-                              ],
-                              null,
-                              true
-                            )
-                          })
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  )
-                ],
-                1
-              )
-            ],
-            1
-          )
-        ],
-        1
-      )
+                    : _vm._e()
+                ]
+              }
+            }
+          ],
+          null,
+          true
+        )
+      })
     ],
     1
   )
@@ -524,17 +284,17 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./resources/js/pages/Admin/Enrollment/Add.vue":
-/*!*****************************************************!*\
-  !*** ./resources/js/pages/Admin/Enrollment/Add.vue ***!
-  \*****************************************************/
+/***/ "./resources/js/pages/Admin/Advisers/List.vue":
+/*!****************************************************!*\
+  !*** ./resources/js/pages/Admin/Advisers/List.vue ***!
+  \****************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Add_vue_vue_type_template_id_2360cfdf___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Add.vue?vue&type=template&id=2360cfdf& */ "./resources/js/pages/Admin/Enrollment/Add.vue?vue&type=template&id=2360cfdf&");
-/* harmony import */ var _Add_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Add.vue?vue&type=script&lang=js& */ "./resources/js/pages/Admin/Enrollment/Add.vue?vue&type=script&lang=js&");
+/* harmony import */ var _List_vue_vue_type_template_id_523fdd0b___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./List.vue?vue&type=template&id=523fdd0b& */ "./resources/js/pages/Admin/Advisers/List.vue?vue&type=template&id=523fdd0b&");
+/* harmony import */ var _List_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./List.vue?vue&type=script&lang=js& */ "./resources/js/pages/Admin/Advisers/List.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -544,9 +304,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _Add_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _Add_vue_vue_type_template_id_2360cfdf___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _Add_vue_vue_type_template_id_2360cfdf___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _List_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _List_vue_vue_type_template_id_523fdd0b___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _List_vue_vue_type_template_id_523fdd0b___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -556,38 +316,38 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/pages/Admin/Enrollment/Add.vue"
+component.options.__file = "resources/js/pages/Admin/Advisers/List.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/pages/Admin/Enrollment/Add.vue?vue&type=script&lang=js&":
-/*!******************************************************************************!*\
-  !*** ./resources/js/pages/Admin/Enrollment/Add.vue?vue&type=script&lang=js& ***!
-  \******************************************************************************/
+/***/ "./resources/js/pages/Admin/Advisers/List.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************!*\
+  !*** ./resources/js/pages/Admin/Advisers/List.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Add_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Add.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/Admin/Enrollment/Add.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Add_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_List_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./List.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/Admin/Advisers/List.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_List_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/pages/Admin/Enrollment/Add.vue?vue&type=template&id=2360cfdf&":
-/*!************************************************************************************!*\
-  !*** ./resources/js/pages/Admin/Enrollment/Add.vue?vue&type=template&id=2360cfdf& ***!
-  \************************************************************************************/
+/***/ "./resources/js/pages/Admin/Advisers/List.vue?vue&type=template&id=523fdd0b&":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/pages/Admin/Advisers/List.vue?vue&type=template&id=523fdd0b& ***!
+  \***********************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Add_vue_vue_type_template_id_2360cfdf___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Add.vue?vue&type=template&id=2360cfdf& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/Admin/Enrollment/Add.vue?vue&type=template&id=2360cfdf&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Add_vue_vue_type_template_id_2360cfdf___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_List_vue_vue_type_template_id_523fdd0b___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./List.vue?vue&type=template&id=523fdd0b& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/Admin/Advisers/List.vue?vue&type=template&id=523fdd0b&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_List_vue_vue_type_template_id_523fdd0b___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Add_vue_vue_type_template_id_2360cfdf___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_List_vue_vue_type_template_id_523fdd0b___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

@@ -45,10 +45,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     List: function List() {
-      return __webpack_require__.e(/*! import() */ 9).then(__webpack_require__.bind(null, /*! ./List.vue */ "./resources/js/pages/Admin/Enrollment/List.vue"));
+      return __webpack_require__.e(/*! import() */ 11).then(__webpack_require__.bind(null, /*! ./List.vue */ "./resources/js/pages/Admin/Enrollment/List.vue"));
     },
     Add: function Add() {
-      return __webpack_require__.e(/*! import() */ 8).then(__webpack_require__.bind(null, /*! ./Add.vue */ "./resources/js/pages/Admin/Enrollment/Add.vue"));
+      return __webpack_require__.e(/*! import() */ 10).then(__webpack_require__.bind(null, /*! ./Add.vue */ "./resources/js/pages/Admin/Enrollment/Add.vue"));
     }
   },
   data: function data() {
@@ -75,6 +75,7 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     // this.AdminStudentsStore.getStudents();
     this.AdminSectionsStore.getSections();
+    this.AdminStrandsStore.getStrands();
   },
   mounted: function mounted() {
     console.log('Enrollment component mounted: ' + this.level);

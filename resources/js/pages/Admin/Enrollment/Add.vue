@@ -6,7 +6,7 @@
             </v-toolbar-title>
             <v-spacer></v-spacer>
             <v-btn dense iconx text color="primary"
-                :disabled="!selectedToAdd.length || selectedSection==null"
+                :disabled="btnSaveStatus"
                 @click="saveStudentEnrollment"
             >
                 <v-icon>mdi-floppy</v-icon> Save
@@ -17,7 +17,7 @@
             <v-row>
                 <v-col cols="12" md="9">
                     <v-row>
-                        <v-col cols="12">
+                        <v-col>
                             <v-select outlined densex filledx label="Add to Grade & Section"
                                 v-model="selectedSection"
                                 :items="sections"
@@ -32,6 +32,22 @@
                                 </template>
                                 <template slot="selection" slot-scope="data">
                                     {{ data.item.grade }} - {{ data.item.section }}
+                                </template>
+                            </v-select>
+                        </v-col>
+
+                        <v-col cols="5" v-if="level=='Senior High'">
+                            <v-select outlined densex filledx label="Select Strand"
+                                v-model="selectedStrand"
+                                :items="strands"
+                                item-value="id"
+                                return-object
+                            >
+                                <template slot="item" slot-scope="data">
+                                    {{ data.item.strand_name }}
+                                </template>
+                                <template slot="selection" slot-scope="data">
+                                    {{ data.item.strand_name }}
                                 </template>
                             </v-select>
                         </v-col>
@@ -110,6 +126,7 @@ export default {
     data() {
         return {
             selectedSection: null,
+            selectedStrand: null,
             selectedToAdd: [],
             tblLeftSearch: '',
             tblRightSearch: '',
@@ -127,6 +144,15 @@ export default {
         },
         students() {
             return this.AdminEnrollmentStore.state.studentsForEnrollment;
+        },
+        strands() {
+            return this.AdminStrandsStore.state.strands;
+        },
+
+        btnSaveStatus() {
+            return !this.selectedToAdd.length || this.selectedSection==null
+                || (this.level=='Senior High' && this.selectedStrand==null)
+            ;
         }
     },
 
@@ -142,6 +168,9 @@ export default {
             console.log(this.selectedSection);
             console.log(this.selectedToAdd);
             console.log(this.AdminSYStore.state.activeSY);
+
+            const selectedStrandId = this.selectedStrand!=null?this.selectedStrand.id:null;
+
             await axios.post(
                 `${this.AppStore.state.siteUrl}admin/enrollment/saveStudentEnrollment`,
                 {
@@ -150,6 +179,7 @@ export default {
                         adviser_id: this.selectedSection.adviser_id,
                         section_id: this.selectedSection.id,
                         grade: this.selectedSection.grade,
+                        strand_id: selectedStrandId,
                     },
                     line: this.selectedToAdd.map(e=>{
                         return e.id
@@ -159,6 +189,7 @@ export default {
                 this.AppStore.toast(e.data,2000,'success');
                 this.AdminEnrollmentStore.getStudentsForEnrollment(this.selectedSection.grade);
                 this.selectedToAdd = [];
+                this.selectedStrand = null;
                 this.AdminSectionsStore.getSections();
             }).catch(e=>{
                 if(e.response) {
@@ -170,6 +201,7 @@ export default {
         onChangeGradeSection(section) {
             console.log(section);
             this.selectedToAdd = [];
+            this.selectedStrand = null;
             this.AdminEnrollmentStore.getStudentsForEnrollment(section.grade);
         }
     },

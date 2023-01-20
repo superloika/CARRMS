@@ -25,6 +25,8 @@ const opts = {
                 info: '#2196F3',
                 success: '#4CAF50',
                 primary: '#027843',
+                // primary: '#6b161f',
+
                 accent: "#7dd663",
             },
 

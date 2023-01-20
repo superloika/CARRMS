@@ -3236,7 +3236,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     AccountsAdd: function AccountsAdd() {
-      return __webpack_require__.e(/*! import() */ 20).then(__webpack_require__.bind(null, /*! ./AccountsAdd.vue */ "./resources/js/pages/ManageAccounts/AccountsAdd.vue"));
+      return __webpack_require__.e(/*! import() */ 27).then(__webpack_require__.bind(null, /*! ./AccountsAdd.vue */ "./resources/js/pages/ManageAccounts/AccountsAdd.vue"));
     },
     AccountsEdit: function AccountsEdit() {
       return __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ./AccountsEdit.vue */ "./resources/js/pages/ManageAccounts/AccountsEdit.vue"));
@@ -69351,6 +69351,7 @@ var opts = {
         info: '#2196F3',
         success: '#4CAF50',
         primary: '#027843',
+        // primary: '#6b161f',
         accent: "#7dd663"
       },
       dark: {// error: '#FF5252',
@@ -69409,7 +69410,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       path: "dashboard",
       name: "adviser.dashboard",
       component: function component() {
-        return __webpack_require__.e(/*! import() */ 23).then(__webpack_require__.bind(null, /*! ./pages/Adviser */ "./resources/js/pages/Adviser/index.vue"));
+        return __webpack_require__.e(/*! import() */ 26).then(__webpack_require__.bind(null, /*! ./pages/Adviser */ "./resources/js/pages/Adviser/index.vue"));
       },
       meta: {
         name: "Dashboard"
@@ -69429,7 +69430,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       path: "dashboard",
       name: "admin.dashboard",
       component: function component() {
-        return __webpack_require__.e(/*! import() */ 19).then(__webpack_require__.bind(null, /*! ./pages/Admin */ "./resources/js/pages/Admin/index.vue"));
+        return __webpack_require__.e(/*! import() */ 25).then(__webpack_require__.bind(null, /*! ./pages/Admin */ "./resources/js/pages/Admin/index.vue"));
       },
       meta: {
         name: "Dashboard"
@@ -69438,7 +69439,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       path: "sy",
       name: "admin.sy",
       component: function component() {
-        return __webpack_require__.e(/*! import() */ 12).then(__webpack_require__.bind(null, /*! ./pages/Admin/SY */ "./resources/js/pages/Admin/SY/index.vue"));
+        return __webpack_require__.e(/*! import() */ 14).then(__webpack_require__.bind(null, /*! ./pages/Admin/SY */ "./resources/js/pages/Admin/SY/index.vue"));
       },
       meta: {
         name: "School Year"
@@ -69447,7 +69448,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       path: "students",
       name: "admin.students",
       component: function component() {
-        return __webpack_require__.e(/*! import() */ 3).then(__webpack_require__.bind(null, /*! ./pages/Admin/Students */ "./resources/js/pages/Admin/Students/index.vue"));
+        return __webpack_require__.e(/*! import() */ 4).then(__webpack_require__.bind(null, /*! ./pages/Admin/Students */ "./resources/js/pages/Admin/Students/index.vue"));
       },
       meta: {
         name: "Students"
@@ -69456,7 +69457,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       path: "advisers",
       name: "admin.advisers",
       component: function component() {
-        return __webpack_require__.e(/*! import() */ 7).then(__webpack_require__.bind(null, /*! ./pages/Admin/Advisers */ "./resources/js/pages/Admin/Advisers/index.vue"));
+        return __webpack_require__.e(/*! import() */ 9).then(__webpack_require__.bind(null, /*! ./pages/Admin/Advisers */ "./resources/js/pages/Admin/Advisers/index.vue"));
       },
       meta: {
         name: "Advisers"
@@ -69474,7 +69475,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       path: "subjects",
       name: "admin.subjects",
       component: function component() {
-        return __webpack_require__.e(/*! import() */ 4).then(__webpack_require__.bind(null, /*! ./pages/Admin/Subjects */ "./resources/js/pages/Admin/Subjects/index.vue"));
+        return __webpack_require__.e(/*! import() */ 5).then(__webpack_require__.bind(null, /*! ./pages/Admin/Subjects */ "./resources/js/pages/Admin/Subjects/index.vue"));
       },
       meta: {
         name: "Subjects"
@@ -69483,7 +69484,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       path: "strands",
       name: "admin.strands",
       component: function component() {
-        return __webpack_require__.e(/*! import() */ 24).then(__webpack_require__.bind(null, /*! ./pages/Admin/Strands */ "./resources/js/pages/Admin/Strands/index.vue"));
+        return __webpack_require__.e(/*! import() */ 3).then(__webpack_require__.bind(null, /*! ./pages/Admin/Strands */ "./resources/js/pages/Admin/Strands/index.vue"));
       },
       meta: {
         name: "Strands"
@@ -69492,7 +69493,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       path: "subtags",
       name: "admin.subtags",
       component: function component() {
-        return __webpack_require__.e(/*! import() */ 27).then(__webpack_require__.bind(null, /*! ./pages/Admin/Subtags */ "./resources/js/pages/Admin/Subtags/index.vue"));
+        return __webpack_require__.e(/*! import() */ 6).then(__webpack_require__.bind(null, /*! ./pages/Admin/Subtags */ "./resources/js/pages/Admin/Subtags/index.vue"));
       },
       meta: {
         name: "Subject Taggings"

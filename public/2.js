@@ -48,10 +48,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     List: function List() {
-      return __webpack_require__.e(/*! import() */ 14).then(__webpack_require__.bind(null, /*! ./List.vue */ "./resources/js/pages/Admin/Sections/List.vue"));
+      return __webpack_require__.e(/*! import() */ 16).then(__webpack_require__.bind(null, /*! ./List.vue */ "./resources/js/pages/Admin/Sections/List.vue"));
     },
     Add: function Add() {
-      return __webpack_require__.e(/*! import() */ 13).then(__webpack_require__.bind(null, /*! ./Add.vue */ "./resources/js/pages/Admin/Sections/Add.vue"));
+      return __webpack_require__.e(/*! import() */ 15).then(__webpack_require__.bind(null, /*! ./Add.vue */ "./resources/js/pages/Admin/Sections/Add.vue"));
     }
   },
   data: function data() {

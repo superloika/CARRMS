@@ -55,7 +55,7 @@
                 <v-btn icon color="primary" title="View Details" disabled>
                     <v-icon>mdi-eye</v-icon>
                 </v-btn>
-                <v-btn icon color="error" title="Delete" @click="deleteSection(item.id)"
+                <v-btn icon color="error" title="Delete" @click="deleteEnrollment(item.id,item.student_id)"
                     v-if="AppStore.isSuperAdmin()"
                 >
                     <v-icon>mdi-delete</v-icon>
@@ -75,7 +75,7 @@ export default {
                 { text: "First Name", value: "student_firstname" },
                 { text: "Middle Name", value: "student_middlename" },
                 { text: "Last Name", value: "student_lastname" },
-                { text: "Ext. Name", value: "student_extname" },
+                // { text: "Ext. Name", value: "student_extname" },
                 { text: "Gender", value: "student_gender" },
                 { text: "Grade", value: "grade" },
                 { text: "Section", value: "section" },
@@ -99,11 +99,30 @@ export default {
 
             }
         },
+
         refresh() {
             this.selectedSection='';
             this.onChangeGradeSection();
             this.searchKey="";
-        }
+        },
+
+        async deleteEnrollment(head_id,student_id) {
+            if(confirm('Are you sure you want to delete the selected enrollment data?')){
+                await axios.post(
+                    `${this.AppStore.state.siteUrl}admin/enrollment/deleteEnrollment`,
+                    {
+                        head_id: head_id,
+                        student_id: student_id,
+                    }
+                ).then(e=>{
+                    this.AppStore.toast(e.data,2000,'success');
+                    this.onChangeGradeSection();
+                }).catch(e=>{
+                    this.AppStore.toast(e,3000,'error');
+                })
+                ;
+            }
+        },
     },
 
     computed: {

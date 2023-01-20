@@ -79,6 +79,7 @@ Route::group(['prefix'=>'admin'], function(){
         Route::post('getStudentsForEnrollment', 'EnrollmentController@getStudentsForEnrollment');
         Route::post('saveStudentEnrollment', 'EnrollmentController@saveStudentEnrollment');
         Route::post('getStudentsEnrolled', 'EnrollmentController@getStudentsEnrolled');
+        Route::post('deleteEnrollment', 'EnrollmentController@deleteEnrollment');
     });
     Route::group(['prefix'=>'strands'], function() {
         Route::get('getStrands', 'StrandController@getStrands');

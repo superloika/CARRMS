@@ -16,6 +16,8 @@ class EnrollmentController extends Controller
 
             $res = DB::table('enrollment_head')
                 ->select(
+                    'enrollment_head.*',
+                    'students.id as student_id',
                     'students.lrn as student_lrn',
                     'students.firstname as student_firstname',
                     'students.middlename as student_middlename',
@@ -146,6 +148,7 @@ class EnrollmentController extends Controller
                     DB::table('enrollment_line')->insert([
                         'head_id'=>$head_id,
                         'student_id'=>$student_id,
+                        'strand_id'=>$strand_id,
                     ]);
                     // DB::table('students')->where('id',$student_id)->update([
                     //     'current_grade' => $grade,
@@ -167,15 +170,21 @@ class EnrollmentController extends Controller
         }
     }
 
-    // public function deleteStudent() {
-    //     try {
-    //         $id = request()->id;
-    //         DB::table('students')->where('id',$id)->delete();
-    //         return response()->json('Student Deleted', 200);
-    //     } catch (\Throwable $th) {
-    //         return response()->json($th->getMessage(), 500);
-    //     }
-    // }
+    public function deleteEnrollment() {
+        try {
+            $head_id = request()->head_id;
+            $student_id = request()->student_id;
+
+            DB::table('enrollment_line')->where('head_id',$head_id)->where('student_id',$student_id)
+                ->delete();
+            DB::table('students')->where('id',$student_id)->update([
+                'is_enrolled'=>0
+            ]);
+            return response()->json('Enrollment data deleted', 200);
+        } catch (\Throwable $th) {
+            return response()->json($th->getMessage(), 500);
+        }
+    }
 
 
 }

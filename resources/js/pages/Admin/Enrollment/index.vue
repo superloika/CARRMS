@@ -60,23 +60,25 @@ export default {
             };
         }
     },
+
     created() {
         // this.AdminStudentsStore.getStudents();
         this.AdminSectionsStore.getSections();
+        this.AdminStrandsStore.getStrands();
     },
     mounted() {
         console.log('Enrollment component mounted: ' + this.level);
     },
     beforeDestroy() {
         this.AdminEnrollmentStore.state.studentsForEnrollment = [];
-            this.AdminEnrollmentStore.state.studentsEnrolled = [];
-            this.AdminEnrollmentStore.state.tabsMain = {
-                'Nursery': 0,
-                'Kinder': 0,
-                'Elementary': 0,
-                'Junior High': 0,
-                'Senior High': 0,
-            };
+        this.AdminEnrollmentStore.state.studentsEnrolled = [];
+        this.AdminEnrollmentStore.state.tabsMain = {
+            'Nursery': 0,
+            'Kinder': 0,
+            'Elementary': 0,
+            'Junior High': 0,
+            'Senior High': 0,
+        };
     }
 };
 </script>
