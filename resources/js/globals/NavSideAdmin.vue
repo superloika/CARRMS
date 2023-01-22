@@ -183,6 +183,21 @@
 export default {
     mounted() {
         console.log("NavSide mounted");
+    },
+    computed: {
+        current_route() {
+            return this.$route.path;
+        }
+    },
+
+    watch: {
+        current_route() {
+            this.AppStore.getNotifs(0);
+        }
+    },
+
+    created() {
+        this.AppStore.getNotifs(0);
     }
 };
 </script>

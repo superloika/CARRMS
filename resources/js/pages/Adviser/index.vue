@@ -1,12 +1,14 @@
 <template>
     <v-container>
         <v-row>
-            <v-col cols="12" md="4" v-for="section in this.AdviserEnrollmentStore.state.sections"
+            <v-col cols="12" md="4"
+                v-for="section in this.AdviserEnrollmentStore.state.sections"
                 :key="section.section_id"
             >
-                <v-card color="success" dark outlined link>
+                <v-card color="success" dark outlined link
+                    :to="'/adviser/enrollment/'+section.id"
+                >
                     <v-card-title>
-
                         {{ section.level }}
                     </v-card-title>
                     <v-card-text>

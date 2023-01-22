@@ -1,6 +1,16 @@
 <template>
     <v-container>
         <v-row>
+            <v-col cols="12" md="3" lg="2">
+                <v-card color="secondary" dark outlined>
+                    <v-card-title>
+                        Active S.Y.
+                    </v-card-title>
+                    <v-card-text>
+                        <h1>{{ AdminSYStore.state.activeSY }}</h1>
+                    </v-card-text>
+                </v-card>
+            </v-col>
             <!-- <v-col cols="12" md="3" lg="2">
                 <v-card color="primary" dark outlined>
                     <v-card-title>
@@ -71,6 +81,7 @@
                     </v-card-text>
                 </v-card>
             </v-col>
+
         </v-row>
     </v-container>
 </template>

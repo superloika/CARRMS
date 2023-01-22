@@ -52,7 +52,8 @@ const state = Vue.observable({
         'Elementary',
         'Junior High',
         'Senior High'
-    ]
+    ],
+    notifs: [],
 });
 
 
@@ -112,7 +113,21 @@ const actions = {
     resetForm(obj) {
         let setAll = (obj, val) => Object.keys(obj).forEach(k => obj[k] = val);
         setAll(obj, "");
-    }
+    },
+
+    async getNotifs(status) {
+        state.notifs = [];
+        await axios.post(
+            `${state.siteUrl}admin/notifs/getNotifs`,
+            {
+                // sy_id: sy_id,
+                status: status
+            }
+        ).then(e=>{
+            state.notifs = e.data;
+            console.log(e.data)
+        });
+    },
 
 };
 

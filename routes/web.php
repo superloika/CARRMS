@@ -91,6 +91,12 @@ Route::group(['prefix'=>'admin'], function(){
         Route::post('saveSubtag', 'SubTagController@saveSubtag');
         Route::post('deleteSubtag', 'SubTagController@deleteSubtag');
     });
+
+    //notifs
+    Route::group(['prefix'=>'notifs'], function() {
+        Route::post('getNotifs', 'NotifsController@getNotifs');
+        Route::post('markRead', 'NotifsController@markRead');
+    });
 });
 
 
@@ -98,6 +104,10 @@ Route::group(['prefix'=>'admin'], function(){
 Route::group(['prefix'=>'adviser'], function(){
     Route::group(['prefix'=>'sections'], function() {
         Route::post('getSections', 'AdviserEnrollmentController@getSections');
+        Route::post('getSectionDetails', 'AdviserEnrollmentController@getSectionDetails');
+        Route::post('getStudents', 'AdviserEnrollmentController@getStudents');
+        Route::post('getSubjects', 'AdviserEnrollmentController@getSubjects');
+        Route::post('updateGrades', 'AdviserEnrollmentController@updateGrades');
     });
 });
 

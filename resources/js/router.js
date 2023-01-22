@@ -33,6 +33,14 @@ const router = new VueRouter({
                         name: "Dashboard"
                     }
                 },
+                {
+                    path: "enrollment/:head_id",
+                    name: "adviser.enrollment",
+                    component: ()=>import("./pages/Adviser/Enrollment"),
+                    meta: {
+                        name: "Advisory"
+                    }
+                },
             ]
         },
         // /ADVISER =================================================
@@ -44,6 +52,14 @@ const router = new VueRouter({
             name: "admin",
             component: { render: h => h('router-view') },
             children: [
+                {
+                    path: "notifications",
+                    name: "admin.notifications",
+                    component: ()=>import("./pages/Notifs"),
+                    meta: {
+                        name: "Notifications"
+                    }
+                },
                 {
                     path: "dashboard",
                     name: "admin.dashboard",
@@ -214,7 +230,6 @@ const router = new VueRouter({
 
 
 router.beforeEach((to, from, next) => {
-    console.log('TOOOOOOOOOOOOOOOOOOOO:', to);
     next();
     // window.cancelTokenSource.cancel();
 });

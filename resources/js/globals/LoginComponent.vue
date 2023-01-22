@@ -1,12 +1,12 @@
 <template>
-    <v-sheet>
+    <v-sheet class="pa-4 rounded">
         <div class="d-flex mb-4 justify-center">
-            <!-- <v-img
+            <v-img
                 lazy-src="/img/ca.jfif"
                 max-height="80"
                 max-width="80"
                 src="/img/ca.jfif"
-            ></v-img> -->
+            ></v-img>
             <!-- <img src="/img/ca.jfif" alt="logo" srcset=""> -->
             &nbsp;
             <div class="pt-1">
@@ -14,7 +14,7 @@
                 <div class="pa-0 text-caption primary--text">{{ AppStore.state.appLongName }}</div>
             </div>
         </div>
-        <v-card max-width="" min-width="300" elevation="1" tile>
+        <v-card max-width="" min-width="300" elevation="0">
             <v-card-title>
                 <v-icon class="mr-2">mdi-login</v-icon>
                 <span class="text-subtitle-1">Login</span>

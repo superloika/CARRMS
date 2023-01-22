@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 20, 2023 at 09:09 PM
+-- Generation Time: Jan 22, 2023 at 03:28 AM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 7.4.30
 
@@ -69,7 +69,10 @@ CREATE TABLE `enrollment_head` (
 INSERT INTO `enrollment_head` (`id`, `sy_id`, `adviser_id`, `section_id`, `created_at`, `updated_at`) VALUES
 (87, 24, 11, 31, '2023-01-21 03:54:42', '2023-01-21 03:54:42'),
 (88, 24, 12, 18, '2023-01-21 03:59:22', '2023-01-21 03:59:22'),
-(89, 24, 11, 30, '2023-01-21 04:00:37', '2023-01-21 04:00:37');
+(89, 24, 11, 30, '2023-01-21 04:00:37', '2023-01-21 04:00:37'),
+(90, 24, 11, 1, '2023-01-21 20:35:43', '2023-01-21 20:35:43'),
+(91, 24, 12, 32, '2023-01-21 20:36:02', '2023-01-21 20:36:02'),
+(92, 24, 11, 33, '2023-01-21 20:36:09', '2023-01-21 20:36:09');
 
 -- --------------------------------------------------------
 
@@ -84,6 +87,22 @@ CREATE TABLE `enrollment_line` (
   `strand_id` int(11) DEFAULT NULL,
   `final_remarks` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'pending'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `enrollment_line`
+--
+
+INSERT INTO `enrollment_line` (`id`, `head_id`, `student_id`, `strand_id`, `final_remarks`) VALUES
+(178, 90, 3, NULL, 'pending'),
+(179, 90, 5, NULL, 'pending'),
+(180, 92, 16, NULL, 'pending'),
+(181, 88, 9, NULL, 'pending'),
+(182, 88, 11, NULL, 'pending'),
+(183, 88, 12, NULL, 'pending'),
+(184, 91, 13, NULL, 'pending'),
+(185, 91, 14, NULL, 'pending'),
+(187, 87, 1, 1, 'pending'),
+(188, 89, 15, 2, 'pending');
 
 -- --------------------------------------------------------
 
@@ -154,6 +173,26 @@ CREATE TABLE `grades` (
   `updated_at` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
+--
+-- Dumping data for table `grades`
+--
+
+INSERT INTO `grades` (`id`, `enrollment_line_id`, `subject_id`, `sem`, `first`, `second`, `third`, `fourth`, `final`, `remarks`, `created_at`, `updated_at`) VALUES
+(103, 178, 43, NULL, 80, 80, 80, 80, 80, '', '2023-01-22 06:51:54', '2023-01-22 09:18:41'),
+(104, 178, 46, NULL, 89, 88, 92, 90, 89.75, '', '2023-01-22 06:51:54', '2023-01-22 09:18:53'),
+(105, 179, 43, NULL, 75, 75, 75, 75, 75, '', '2023-01-22 06:51:54', '2023-01-22 09:19:13'),
+(106, 179, 46, NULL, 75, 75, 75, 75, 75, '', '2023-01-22 06:51:54', '2023-01-22 09:19:13'),
+(107, 180, 47, NULL, NULL, NULL, NULL, NULL, NULL, '', '2023-01-22 07:31:24', '2023-01-22 07:31:24'),
+(108, 181, 47, NULL, NULL, NULL, NULL, NULL, NULL, '', '2023-01-22 08:57:22', '2023-01-22 08:57:22'),
+(109, 182, 47, NULL, NULL, NULL, NULL, NULL, NULL, '', '2023-01-22 08:57:22', '2023-01-22 08:57:22'),
+(110, 183, 47, NULL, 75, NULL, NULL, NULL, 18.75, '', '2023-01-22 08:57:22', '2023-01-22 08:58:06'),
+(111, 184, 47, NULL, NULL, NULL, NULL, NULL, NULL, '', '2023-01-22 08:57:28', '2023-01-22 08:57:28'),
+(112, 185, 47, NULL, NULL, NULL, NULL, NULL, NULL, '', '2023-01-22 08:57:28', '2023-01-22 08:57:28'),
+(114, 187, 45, 1, 80, 85, NULL, NULL, 82.5, '', '2023-01-22 09:46:16', '2023-01-22 10:13:14'),
+(115, 187, 48, 2, NULL, NULL, 86, 88, 87, '', '2023-01-22 09:46:16', '2023-01-22 10:14:22'),
+(116, 188, 45, 1, NULL, NULL, NULL, NULL, NULL, '', '2023-01-22 09:46:31', '2023-01-22 09:46:31'),
+(117, 188, 48, 2, NULL, NULL, NULL, NULL, NULL, '', '2023-01-22 09:46:31', '2023-01-22 09:46:31');
+
 -- --------------------------------------------------------
 
 --
@@ -175,6 +214,40 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (2, '2014_10_12_000000_create_users_table', 1),
 (3, '2014_10_12_100000_create_password_resets_table', 1),
 (4, '2019_08_19_000000_create_failed_jobs_table', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `notifications`
+--
+
+CREATE TABLE `notifications` (
+  `id` int(11) NOT NULL,
+  `sy_id` tinyint(4) NOT NULL,
+  `message` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` tinyint(4) NOT NULL DEFAULT 0,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
+  `updated_at` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `notifications`
+--
+
+INSERT INTO `notifications` (`id`, `sy_id`, `message`, `status`, `created_at`, `updated_at`) VALUES
+(94, 24, 'Kim Kimmytest updated Rasmus Lerdorf\'s grade', 1, '2023-01-22 08:10:19', '2023-01-22 09:10:14'),
+(95, 24, 'Jane Doe updated Mike Otwell\'s grade', 1, '2023-01-22 08:58:06', '2023-01-22 09:10:19'),
+(96, 24, 'Jane Doe updated Vina Rebusa\'s grade', 1, '2023-01-22 08:58:37', '2023-01-22 09:10:21'),
+(97, 24, 'Kim Kimmytest updated Rasmus Lerdorf\'s grade', 1, '2023-01-22 09:13:54', '2023-01-22 09:14:08'),
+(98, 24, 'Kim Kimmytest updated Rasmus Lerdorf\'s grade', 1, '2023-01-22 09:18:23', '2023-01-22 09:19:53'),
+(99, 24, 'Kim Kimmytest updated test test\'s grade', 1, '2023-01-22 09:18:41', '2023-01-22 09:19:52'),
+(100, 24, 'Kim Kimmytest updated test test\'s grade', 1, '2023-01-22 09:18:53', '2023-01-22 09:19:47'),
+(101, 24, 'Kim Kimmytest updated Juan Dela Cruz\'s grade', 1, '2023-01-22 09:19:13', '2023-01-22 09:19:46'),
+(102, 24, 'Kim Kimmytest updated Rasmus Lerdorf\'s grade', 0, '2023-01-22 09:51:48', '2023-01-22 09:51:48'),
+(103, 24, 'Kim Kimmytest updated Rasmus Lerdorf\'s grade', 0, '2023-01-22 10:05:18', '2023-01-22 10:05:18'),
+(104, 24, 'Kim Kimmytest updated Rasmus Lerdorf\'s grade', 0, '2023-01-22 10:05:42', '2023-01-22 10:05:42'),
+(105, 24, 'Kim Kimmytest updated Rasmus Lerdorf\'s grade', 0, '2023-01-22 10:13:14', '2023-01-22 10:13:14'),
+(106, 24, 'Kim Kimmytest updated Rasmus Lerdorf\'s grade', 0, '2023-01-22 10:14:22', '2023-01-22 10:14:22');
 
 -- --------------------------------------------------------
 
@@ -245,8 +318,7 @@ INSERT INTO `sections` (`id`, `order`, `grade`, `level`, `section`, `adviser_id`
 (36, 3, 'Grade 4', 'Elementary', '1', 11, 1),
 (37, 3, 'Grade 5', 'Elementary', '1', 11, 1),
 (38, 3, 'Grade 6', 'Elementary', '1', 11, 1),
-(39, 4, 'Grade 8', 'Junior High', '2', 11, 1),
-(40, 1, 'Nursery', 'Nursery', '2', 11, 1);
+(39, 4, 'Grade 8', 'Junior High', '2', 11, 1);
 
 -- --------------------------------------------------------
 
@@ -301,16 +373,16 @@ CREATE TABLE `students` (
 --
 
 INSERT INTO `students` (`id`, `lrn`, `firstname`, `middlename`, `lastname`, `extname`, `gender`, `dob`, `pob`, `address`, `guardian`, `guardian_address`, `is_enrolled`, `current_grade`, `last_syid`, `last_grade`, `last_final_remarks`, `created_at`, `updated_at`) VALUES
-(1, '1010101', 'Rasmus', 'Chase', 'Lerdorf', NULL, 'Male', '1996-08-21', 'Bohol, Philippines', 'Bohol, Philippines', 'NA', 'NA', 0, '', NULL, '', '', '2023-01-17 05:08:00', '2023-01-21 04:07:11'),
-(3, '', 'test', 'test', 'test', NULL, 'Male', '2003-06-05', 'test', 'test', 'test', 'test', 0, '', 0, '', '', '2022-12-16 03:11:24', '2023-01-21 00:06:39'),
-(5, '', 'Juan', 'Test', 'Dela Cruz', 'Jr', 'Male', '1992-05-16', 'Test Place, 123 Test', 'Test Place, 123 Test', 'Maria Clara', 'Test Place, 123 Test', 0, '', 0, '', '', '2022-12-16 03:20:10', '2023-01-21 00:06:39'),
-(9, '', 'sdf', 'sdf', 'sdf', NULL, 'Male', '2021-03-05', 'sdf', 'sdf', 'sdf', 'sdf', 0, '', 0, '', '', '2022-12-21 05:01:46', '2023-01-21 00:06:39'),
-(11, NULL, 'Bob', 'Smith', 'Mitchel', NULL, 'Male', '1997-06-12', 'Philippines', 'Philippines', 'NA', 'NA', 0, '', 0, '', '', '2023-01-15 03:14:19', '2023-01-21 00:06:39'),
-(12, '111', 'Mike', 'Swift', 'Otwell', NULL, 'Male', '1997-05-06', 'Bohol, Philippines', 'Bohol, Philippines', 'NA', 'NA', 0, '', 0, '', '', '2023-01-15 03:15:25', '2023-01-21 00:06:39'),
-(13, '222', 'Taylor', 'Otwell', 'Otwell', NULL, 'Male', '1983-02-02', 'test', 'test', 'test', 'test', 0, '', 0, '', '', '2023-01-15 03:16:06', '2023-01-21 00:06:39'),
-(14, '101', 'Kael', 'Bradd', 'Williams', NULL, 'Male', '1996-08-08', 'Bohol', 'Bohol', 'NA', 'NA', 0, '', 0, '', '', '2023-01-15 12:09:04', '2023-01-21 00:06:39'),
-(15, '1011', 'Vina', 'Mae', 'Rebusa', NULL, 'Female', '1994-10-21', 'Bohol', 'Bohol', 'NA', 'NA', 0, '', 0, '', '', '2023-01-17 01:17:12', '2023-01-21 00:49:35'),
-(16, '222333', 'xxx', 'xxx', 'xxx', NULL, 'Male', '2022-02-02', 'xxx', 'xxx', 'xxx', 'xxx', 0, '', NULL, '', '', '2023-01-17 05:10:57', '2023-01-21 00:06:39');
+(1, '1010101', 'Rasmus', 'Chase', 'Lerdorf', NULL, 'Male', '1996-08-21', 'Bohol, Philippines', 'Bohol, Philippines', 'NA', 'NA', 1, '', NULL, '', '', '2023-01-17 05:08:00', '2023-01-22 09:46:16'),
+(3, '', 'test', 'test', 'test', NULL, 'Male', '2003-06-05', 'test', 'test', 'test', 'test', 1, '', 0, '', '', '2022-12-16 03:11:24', '2023-01-22 06:51:54'),
+(5, '', 'Juan', 'Test', 'Dela Cruz', 'Jr', 'Male', '1992-05-16', 'Test Place, 123 Test', 'Test Place, 123 Test', 'Maria Clara', 'Test Place, 123 Test', 1, '', 0, '', '', '2022-12-16 03:20:10', '2023-01-22 06:51:54'),
+(9, '', 'sdf', 'sdf', 'sdf', NULL, 'Male', '2021-03-05', 'sdf', 'sdf', 'sdf', 'sdf', 1, '', 0, '', '', '2022-12-21 05:01:46', '2023-01-22 08:57:22'),
+(11, NULL, 'Bob', 'Smith', 'Mitchel', NULL, 'Male', '1997-06-12', 'Philippines', 'Philippines', 'NA', 'NA', 1, '', 0, '', '', '2023-01-15 03:14:19', '2023-01-22 08:57:22'),
+(12, '111', 'Mike', 'Swift', 'Otwell', NULL, 'Male', '1997-05-06', 'Bohol, Philippines', 'Bohol, Philippines', 'NA', 'NA', 1, '', 0, '', '', '2023-01-15 03:15:25', '2023-01-22 08:57:22'),
+(13, '222', 'Taylor', 'Otwell', 'Otwell', NULL, 'Male', '1983-02-02', 'test', 'test', 'test', 'test', 1, '', 0, '', '', '2023-01-15 03:16:06', '2023-01-22 08:57:28'),
+(14, '101', 'Kael', 'Bradd', 'Williams', NULL, 'Male', '1996-08-08', 'Bohol', 'Bohol', 'NA', 'NA', 1, '', 0, '', '', '2023-01-15 12:09:04', '2023-01-22 08:57:28'),
+(15, '1011', 'Vina', 'Mae', 'Rebusa', NULL, 'Female', '1994-10-21', 'Bohol', 'Bohol', 'NA', 'NA', 1, '', 0, '', '', '2023-01-17 01:17:12', '2023-01-22 09:46:31'),
+(16, '222333', 'xxx', 'xxx', 'xxx', NULL, 'Male', '2022-02-02', 'xxx', 'xxx', 'xxx', 'xxx', 1, '', NULL, '', '', '2023-01-17 05:10:57', '2023-01-22 07:31:24');
 
 -- --------------------------------------------------------
 
@@ -331,8 +403,11 @@ CREATE TABLE `subjects` (
 --
 
 INSERT INTO `subjects` (`id`, `subject_code`, `subject_name`, `subject_description`, `subject_type`) VALUES
-(43, 'test1', 'Test 1', 'Test 1 description', NULL),
-(45, 'ORALCOM', 'Oral Communication', 'Oral Communication', 'Core');
+(43, 'test1', 'Test Subject Only', 'This is a Test Subject Only', NULL),
+(45, 'ORALCOM', 'Oral Communication', 'Oral Communication', 'Core'),
+(46, 'test2', 'Test2 Subject Only 2', 'Test2 Subject Only 2 Test2 Subject Only 2', NULL),
+(47, 'ENGLISH', 'English', 'English', NULL),
+(48, 'O2', 'Oral Communication 2', 'Oral Communication 2', 'Core');
 
 -- --------------------------------------------------------
 
@@ -356,7 +431,17 @@ CREATE TABLE `subtags` (
 INSERT INTO `subtags` (`id`, `grade`, `level`, `subject_id`, `strand_id`, `sem`) VALUES
 (50, 'Nursery', 'Nursery', 43, NULL, NULL),
 (51, 'Grade 11', 'Senior High', 45, 1, 1),
-(52, 'Grade 11', 'Senior High', 45, 2, 1);
+(52, 'Grade 11', 'Senior High', 45, 2, 1),
+(54, 'Nursery', 'Nursery', 46, NULL, NULL),
+(55, 'Grade 1', 'Elementary', 47, NULL, NULL),
+(56, 'Kinder 1', 'Kinder', 47, NULL, NULL),
+(57, 'Kinder 2', 'Kinder', 47, NULL, NULL),
+(58, 'Grade 11', 'Senior High', 48, 1, 2),
+(59, 'Grade 11', 'Senior High', 48, 2, 2),
+(60, 'Grade 12', 'Senior High', 45, 1, 1),
+(61, 'Grade 12', 'Senior High', 45, 2, 1),
+(62, 'Grade 12', 'Senior High', 48, 1, 2),
+(63, 'Grade 12', 'Senior High', 48, 2, 2);
 
 -- --------------------------------------------------------
 
@@ -457,12 +542,27 @@ ALTER TABLE `gradelevels`
 -- Indexes for table `grades`
 --
 ALTER TABLE `grades`
-  ADD PRIMARY KEY (`id`) USING BTREE;
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD KEY `enrollment_line_id` (`enrollment_line_id`),
+  ADD KEY `subject_id` (`subject_id`),
+  ADD KEY `sem` (`sem`),
+  ADD KEY `first` (`first`),
+  ADD KEY `second` (`second`),
+  ADD KEY `third` (`third`),
+  ADD KEY `fourth` (`fourth`),
+  ADD KEY `final` (`final`),
+  ADD KEY `remarks` (`remarks`);
 
 --
 -- Indexes for table `migrations`
 --
 ALTER TABLE `migrations`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `notifications`
+--
+ALTER TABLE `notifications`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -534,7 +634,12 @@ ALTER TABLE `subjects`
 -- Indexes for table `subtags`
 --
 ALTER TABLE `subtags`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `grade` (`grade`),
+  ADD KEY `level` (`level`),
+  ADD KEY `subject_id` (`subject_id`),
+  ADD KEY `strand_id` (`strand_id`),
+  ADD KEY `sem` (`sem`);
 
 --
 -- Indexes for table `users`
@@ -569,13 +674,13 @@ ALTER TABLE `advisers`
 -- AUTO_INCREMENT for table `enrollment_head`
 --
 ALTER TABLE `enrollment_head`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=90;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
 
 --
 -- AUTO_INCREMENT for table `enrollment_line`
 --
 ALTER TABLE `enrollment_line`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=167;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=189;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -593,13 +698,19 @@ ALTER TABLE `gradelevels`
 -- AUTO_INCREMENT for table `grades`
 --
 ALTER TABLE `grades`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=98;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=118;
 
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `notifications`
+--
+ALTER TABLE `notifications`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=107;
 
 --
 -- AUTO_INCREMENT for table `schoolyears`
@@ -629,13 +740,13 @@ ALTER TABLE `students`
 -- AUTO_INCREMENT for table `subjects`
 --
 ALTER TABLE `subjects`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT for table `subtags`
 --
 ALTER TABLE `subtags`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
 -- AUTO_INCREMENT for table `users`

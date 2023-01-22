@@ -150,6 +150,7 @@ export default {
             }
         }
     },
+
     created() {
         this.AdminSYStore.activeSY();
         this.AdminSYStore.prevSY();

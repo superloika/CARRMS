@@ -15,13 +15,14 @@ class AdviserEnrollmentController extends Controller
             $res = DB::table('enrollment_head')
                 ->select(
                     'enrollment_head.*',
-                    'sections.grade',
                     'sections.level',
+                    'sections.grade',
                     'sections.section',
                 )
+                ->distinct('enrollment_head.id')
 
                 ->join('sections','sections.id', 'enrollment_head.section_id')
-
+                ->join('enrollment_line','enrollment_line.head_id','enrollment_head.id')
                 ->where('enrollment_head.sy_id', $sy_id)
                 ->where('enrollment_head.adviser_id', $adviser_id)
 
@@ -33,125 +34,145 @@ class AdviserEnrollmentController extends Controller
         }
     }
 
-    public function getStudentsForEnrollment() {
+    public function getSectionDetails() {
         try {
-            $grade = request()->grade;
-            $prevSYid = request()->prevSYid;
-            $activeSYid = request()->activeSYid;
-
-            if($grade != null) {
-                $res = DB::table('students')
-                    ->where('is_enrolled',0)
-                    // ->select('students.*','sections.grade','enrollment_line.final_remarks')
-                    // ->leftJoin('enrollment_line', 'enrollment_line.student_id','students.id')
-                    // ->leftJoin('enrollment_head','enrollment_head.id','enrollment_line.head_id')
-                    // ->leftJoin('sections','sections.id','enrollment_head.section_id')
-
-
-                    // ->orWhere(function($q) use($activeSYid){
-                    //     $q->whereRaw('enrollment_line.student_id IS NULL')
-                    //     ->where('enrollment_head.sy_id',"=",$activeSYid)
-                    //     ;
-                    // })
-
-                    // ->orWhere(function($q) use($prevSYid, $grade){
-                    //         $q->whereRaw('enrollment_line.student_id IS NOT NULL')
-                    //         ->where('enrollment_head.sy_id', $prevSYid)
-                    //         ->where(function($q2) use($grade){
-                    //             $arrG = ['Nursery','Kinder 1','Kinder 2',
-                    //                 'Grade 1','Grade 2','Grade 3','Grade 4','Grade 5','Grade 6',
-                    //                 'Grade 7','Grade 8','Grade 9','Grade 10','Grade 11','Grade 12'
-                    //             ];
-                    //             for($i=1; $i<count($arrG); $i++) {
-                    //                 $q2->when($grade==$arrG[$i-1], function($q) use($grade, $arrG, $i){
-                    //                     $q->where('enrollment_line.final_remarks',"=","failed")
-                    //                         ->where('sections.grade',$grade)
-                    //                     ;
-                    //                 });
-                    //             }
-                    //         })
-                    //         ;
-                    // })
-                    ->get()
-                    ;
-                return response()->json($res, 200);
-            }
+            $head_id = request()->head_id;
+            $res=DB::table('enrollment_head')
+                ->select(
+                    'enrollment_head.*',
+                    'sections.level',
+                    'sections.grade',
+                    'sections.section',
+                    'advisers.firstname as adviser_firstname',
+                    'advisers.middlename as adviser_middlename',
+                    'advisers.lastname as adviser_lastname'
+                )
+                ->join('sections','sections.id','enrollment_head.section_id')
+                ->join('advisers','advisers.id','enrollment_head.adviser_id')
+                ->where('enrollment_head.id', $head_id)
+                ->where('enrollment_head.adviser_id', auth()->user()->adviser_id)
+                ->get()->first();
+            return response()->json($res,200);
         } catch (\Throwable $th) {
-            return response()->json($th->getMessage(), 500);
+            return response()->json($th->getMessage(),500);
+        }
+
+    }
+
+    public function getStudents() {
+        try {
+            $head_id = request()->head_id;
+            $res=DB::table('enrollment_line')
+                ->select('enrollment_line.*',
+                    'students.lrn',
+                    'students.firstname',
+                    'students.middlename',
+                    'students.lastname',
+                    'students.gender',
+                )
+                ->join('students','students.id','enrollment_line.student_id')
+                ->join('enrollment_head','enrollment_head.id','enrollment_line.head_id')
+                ->where('enrollment_line.head_id', $head_id)
+                ->where('enrollment_head.adviser_id', auth()->user()->adviser_id)
+                ->get();
+            return response()->json($res,200);
+        } catch (\Throwable $th) {
+            return response()->json($th->getMessage(),500);
+        }
+
+    }
+
+    public function getSubjects() {
+        try {
+            $ELID = request()->enrollment_line_id;
+            $res = DB::table('grades')
+                ->select('grades.*',
+                    'subjects.subject_name'
+                )
+                ->join('subjects','subjects.id','grades.subject_id')
+                ->where('grades.enrollment_line_id', $ELID)
+                ->get();
+
+            return response()->json($res,200);
+        } catch (\Throwable $th) {
+            return response()->json($th->getMessage(),500);
         }
     }
 
-
-    public function saveStudentEnrollment() {
+    public function updateGrades() {
         try {
-            $head = request()->head;
-            // dd($head);
-            extract($head);
-            $line = request()->line;
+            $subjects = request()->subjects;
+            $level = request()->level;
+            $adviser_name = request()->adviser_name;
+            $sy_id = request()->sy_id;
 
-            $head_id = DB::table('enrollment_head')
-                ->where('sy_id', $sy_id)
-                ->where('adviser_id', $adviser_id)
-                ->where('section_id', $section_id)
-                ->pluck('id')->first();
+            foreach($subjects as $s) {
 
-            if($head_id==null) {
-                $head_id = DB::table('enrollment_head')->insertGetId([
-                    'sy_id'=> $sy_id,
-                    'adviser_id'=> $adviser_id,
-                    'section_id'=> $section_id,
-                ]);
-            }
+                // grade calc for non senior high
+                if($level != 'Senior High') {
+                    $first = $s['first'] ?? 0;
+                    $second = $s['second'] ?? 0;
+                    $third = $s['third'] ?? 0;
+                    $fourth = $s['fourth'] ?? 0;
+                    $final = ($first+$second+$third+$fourth) / 4;
 
-            $added = 0;
-            $existing = 0;
-            foreach($line as $student_id) {
-                $occurence = DB::table('enrollment_line')
-                    ->join('enrollment_head','enrollment_head.id','enrollment_line.head_id')
-                    ->where('enrollment_head.sy_id', $sy_id)->where('enrollment_line.student_id',$student_id)
-                    ->count()
-                    ;
-                // dd($test);
-                if(
-                    // DB::table('enrollment_line')->where('head_id',$head_id)
-                    //     ->where('student_id',$student_id)->exists()
-                    $occurence > 0
-                ) {
-                    $existing += 1;
-                } else {
-                    DB::table('enrollment_line')->insert([
-                        'head_id'=>$head_id,
-                        'student_id'=>$student_id,
+                    DB::table('grades')
+                    ->where('id',$s['id'])
+                    ->update([
+                        'first'=>$s['first'],
+                        'second'=>$s['second'],
+                        'third'=>$s['third'],
+                        'fourth'=>$s['fourth'],
+                        'final'=> $final,
                     ]);
-                    // DB::table('students')->where('id',$student_id)->update([
-                    //     'current_grade' => $grade,
-                    //     'last_syid' => $sy_id,
-                    //     'last_grade' => $grade,
-                    //     'last_final_remarks' => 'pending',
-                    // ]);
-                    DB::table('students')->where('id',$student_id)->update(['is_enrolled' => 1]);
-                    $added += 1;
+                } else if($level == 'Senior High') {
+                    if($s['sem']==1) {
+                        $first = $s['first'] ?? 0;
+                        $second = $s['second'] ?? 0;
+                        $final_sem1 = ($first+$second) / 2;
+
+                        DB::table('grades')
+                        ->where('id',$s['id'])
+                        ->update([
+                                'first'=>$s['first'],
+                                'second'=>$s['second'],
+                                'final'=> $final_sem1,
+                            ]);
+                    } else if($s['sem']==2) {
+                        $third = $s['third'] ?? 0;
+                        $fourth = $s['fourth'] ?? 0;
+                        $final_sem2 = ($third+$fourth) / 2;
+
+                        DB::table('grades')
+                        ->where('id',$s['id'])
+                        ->update([
+                                'third'=>$s['third'],
+                                'fourth'=>$s['fourth'],
+                                'final'=> $final_sem2,
+                            ]);
+                    }
                 }
             }
-            $total=$added+$existing;
-            // $msg = "Added $added of $total selected, $existing existing";
-            $msg = "Added $added of $total selected students";
 
-            return response()->json($msg, 200);
+            $student = DB::table('enrollment_line')
+                ->select('students.firstname','students.middlename','students.lastname')
+                ->join('students','students.id','enrollment_line.student_id')
+                ->where('enrollment_line.id',$subjects[0]['enrollment_line_id'])
+                ->get()->first();
+            $student_name = $student->firstname. " ". $student->lastname;
+
+            DB::table('notifications')->insert([
+                'sy_id'=>$sy_id,
+                'message'=>"$adviser_name updated $student_name's grade"
+            ]);
+
+            return response()->json('Done',200);
         } catch (\Throwable $th) {
-            return response()->json($th->getMessage(), 500);
+            return response()->json($th->getMessage(),500);
         }
     }
 
-    // public function deleteStudent() {
-    //     try {
-    //         $id = request()->id;
-    //         DB::table('students')->where('id',$id)->delete();
-    //         return response()->json('Student Deleted', 200);
-    //     } catch (\Throwable $th) {
-    //         return response()->json($th->getMessage(), 500);
-    //     }
-    // }
+
 
 
 }

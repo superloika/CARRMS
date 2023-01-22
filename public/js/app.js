@@ -2765,6 +2765,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     console.log("NavSide mounted");
+  },
+  computed: {
+    current_route: function current_route() {
+      return this.$route.path;
+    }
+  },
+  watch: {
+    current_route: function current_route() {
+      this.AppStore.getNotifs(0);
+    }
+  },
+  created: function created() {
+    this.AppStore.getNotifs(0);
   }
 });
 
@@ -2933,6 +2946,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2951,11 +2982,15 @@ __webpack_require__.r(__webpack_exports__);
     userInitial: function userInitial() {
       var name = this.AuthUser.name;
       return name[0].toString().toUpperCase();
+    },
+    notifsLength: function notifsLength() {
+      return this.AppStore.state.notifs.length;
     }
   },
   mounted: function mounted() {
     console.log("UserMenu mounted");
-  }
+  },
+  created: function created() {}
 });
 
 /***/ }),
@@ -5399,30 +5434,38 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "v-sheet",
+    { staticClass: "pa-4 rounded" },
     [
-      _c("div", { staticClass: "d-flex mb-4 justify-center" }, [
-        _vm._v("\n         \n        "),
-        _c("div", { staticClass: "pt-1" }, [
-          _c("div", { staticClass: "pa-0 text-h3 primary--text" }, [
-            _vm._v(_vm._s(_vm.AppStore.state.appName))
-          ]),
+      _c(
+        "div",
+        { staticClass: "d-flex mb-4 justify-center" },
+        [
+          _c("v-img", {
+            attrs: {
+              "lazy-src": "/img/ca.jfif",
+              "max-height": "80",
+              "max-width": "80",
+              src: "/img/ca.jfif"
+            }
+          }),
           _vm._v(" "),
-          _c("div", { staticClass: "pa-0 text-caption primary--text" }, [
-            _vm._v(_vm._s(_vm.AppStore.state.appLongName))
+          _vm._v("\n         \n        "),
+          _c("div", { staticClass: "pt-1" }, [
+            _c("div", { staticClass: "pa-0 text-h3 primary--text" }, [
+              _vm._v(_vm._s(_vm.AppStore.state.appName))
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "pa-0 text-caption primary--text" }, [
+              _vm._v(_vm._s(_vm.AppStore.state.appLongName))
+            ])
           ])
-        ])
-      ]),
+        ],
+        1
+      ),
       _vm._v(" "),
       _c(
         "v-card",
-        {
-          attrs: {
-            "max-width": "",
-            "min-width": "300",
-            elevation: "1",
-            tile: ""
-          }
-        },
+        { attrs: { "max-width": "", "min-width": "300", elevation: "0" } },
         [
           _c(
             "v-card-title",
@@ -6102,38 +6145,85 @@ var render = function() {
                     "div",
                     { staticClass: "d-flex" },
                     [
-                      _c(
-                        "v-btn",
-                        _vm._g(
-                          _vm._b(
-                            { attrs: { icon: "" } },
-                            "v-btn",
-                            attrs,
-                            false
-                          ),
-                          on
-                        ),
-                        [
-                          _c(
-                            "v-avatar",
-                            { attrs: { color: "primary", size: "35" } },
+                      _vm.notifsLength
+                        ? _c(
+                            "v-badge",
+                            {
+                              attrs: {
+                                bordered: "",
+                                color: "error",
+                                overlap: "",
+                                dot: ""
+                              }
+                            },
                             [
                               _c(
-                                "span",
-                                { staticClass: "white--text text-h6" },
+                                "v-btn",
+                                _vm._g(
+                                  _vm._b(
+                                    { attrs: { icon: "" } },
+                                    "v-btn",
+                                    attrs,
+                                    false
+                                  ),
+                                  on
+                                ),
                                 [
-                                  _vm._v(
-                                    "\n                            " +
-                                      _vm._s(_vm.userInitial) +
-                                      "\n                        "
+                                  _c(
+                                    "v-avatar",
+                                    { attrs: { color: "primary", size: "35" } },
+                                    [
+                                      _c(
+                                        "span",
+                                        { staticClass: "white--text text-h6" },
+                                        [
+                                          _vm._v(
+                                            "\n                                " +
+                                              _vm._s(_vm.userInitial) +
+                                              "\n                            "
+                                          )
+                                        ]
+                                      )
+                                    ]
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          )
+                        : _c(
+                            "v-btn",
+                            _vm._g(
+                              _vm._b(
+                                { attrs: { icon: "" } },
+                                "v-btn",
+                                attrs,
+                                false
+                              ),
+                              on
+                            ),
+                            [
+                              _c(
+                                "v-avatar",
+                                { attrs: { color: "primary", size: "35" } },
+                                [
+                                  _c(
+                                    "span",
+                                    { staticClass: "white--text text-h6" },
+                                    [
+                                      _vm._v(
+                                        "\n                            " +
+                                          _vm._s(_vm.userInitial) +
+                                          "\n                        "
+                                      )
+                                    ]
                                   )
                                 ]
                               )
-                            ]
-                          )
-                        ],
-                        1
-                      ),
+                            ],
+                            1
+                          ),
                       _vm._v(" "),
                       _c(
                         "div",
@@ -6255,6 +6345,23 @@ var render = function() {
                     "v-list-item-group",
                     { attrs: { color: "primary" } },
                     [
+                      _vm.notifsLength
+                        ? _c(
+                            "v-list-item",
+                            {
+                              staticClass: "error--text",
+                              attrs: { link: "", to: "/admin/notifications" }
+                            },
+                            [
+                              _vm._v(
+                                "\n                        View " +
+                                  _vm._s(_vm.notifsLength) +
+                                  " undread notification(s)\n                    "
+                              )
+                            ]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
                       _c(
                         "v-list-item",
                         { attrs: { link: "", to: "/account" } },
@@ -6293,7 +6400,7 @@ var render = function() {
                         block: "",
                         text: "",
                         outlined: "",
-                        color: "error",
+                        rounded: "",
                         loading: _vm.isLoggingOut
                       },
                       on: {
@@ -69415,6 +69522,15 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       meta: {
         name: "Dashboard"
       }
+    }, {
+      path: "enrollment/:head_id",
+      name: "adviser.enrollment",
+      component: function component() {
+        return __webpack_require__.e(/*! import() */ 31).then(__webpack_require__.bind(null, /*! ./pages/Adviser/Enrollment */ "./resources/js/pages/Adviser/Enrollment/index.vue"));
+      },
+      meta: {
+        name: "Advisory"
+      }
     }]
   }, // /ADVISER =================================================
   // ADMIN ====================================================
@@ -69427,6 +69543,15 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       }
     },
     children: [{
+      path: "notifications",
+      name: "admin.notifications",
+      component: function component() {
+        return __webpack_require__.e(/*! import() */ 33).then(__webpack_require__.bind(null, /*! ./pages/Notifs */ "./resources/js/pages/Notifs.vue"));
+      },
+      meta: {
+        name: "Notifications"
+      }
+    }, {
       path: "dashboard",
       name: "admin.dashboard",
       component: function component() {
@@ -69595,7 +69720,6 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   }]
 });
 router.beforeEach(function (to, from, next) {
-  console.log('TOOOOOOOOOOOOOOOOOOOO:', to);
   next(); // window.cancelTokenSource.cancel();
 });
 /* harmony default export */ __webpack_exports__["default"] = (router);
@@ -70263,7 +70387,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 var state = vue__WEBPACK_IMPORTED_MODULE_2___default.a.observable({
-  sections: []
+  sections: [],
+  sectionDetails: {},
+  sectionStudents: [],
+  viewDialog: null,
+  selectedELID: null,
+  selectedStudentSubjects: []
 });
 var actions = {
   getSections: function getSections(sy_id, adviser_id) {
@@ -70289,6 +70418,74 @@ var actions = {
         }
       }, _callee);
     }))();
+  },
+  getSectionDetails: function getSectionDetails(head_id) {
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.next = 2;
+              return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("".concat(_AppStore__WEBPACK_IMPORTED_MODULE_3__["default"].state.siteUrl, "adviser/sections/getSectionDetails"), {
+                head_id: head_id
+              }).then(function (e) {
+                state.sectionDetails = e.data;
+                console.log(e.data);
+              });
+
+            case 2:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2);
+    }))();
+  },
+  getStudents: function getStudents(head_id) {
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              state.sectionStudents = [];
+              _context3.next = 3;
+              return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("".concat(_AppStore__WEBPACK_IMPORTED_MODULE_3__["default"].state.siteUrl, "adviser/sections/getStudents"), {
+                head_id: head_id
+              }).then(function (e) {
+                state.sectionStudents = e.data;
+                console.log(e.data);
+              });
+
+            case 3:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      }, _callee3);
+    }))();
+  },
+  getSubjects: function getSubjects(enrollment_line_id) {
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+        while (1) {
+          switch (_context4.prev = _context4.next) {
+            case 0:
+              state.selectedStudentSubjects = [];
+              _context4.next = 3;
+              return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("".concat(_AppStore__WEBPACK_IMPORTED_MODULE_3__["default"].state.siteUrl, "adviser/sections/getSubjects"), {
+                enrollment_line_id: enrollment_line_id
+              }).then(function (e) {
+                state.selectedStudentSubjects = e.data;
+                console.log(e.data);
+              });
+
+            case 3:
+            case "end":
+              return _context4.stop();
+          }
+        }
+      }, _callee4);
+    }))();
   }
 };
 /* harmony default export */ __webpack_exports__["default"] = (_objectSpread({
@@ -70306,8 +70503,10 @@ var actions = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_1__);
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -70315,9 +70514,15 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
 var host = "http://".concat(window.location.host, "/"); // const localStorage = window.localStorage;
 
-var state = vue__WEBPACK_IMPORTED_MODULE_0___default.a.observable({
+var state = vue__WEBPACK_IMPORTED_MODULE_1___default.a.observable({
   appName: 'CARRMS',
   appLongName: "Carmel Academy Registrar\'s Record Management System",
   siteUrl: host,
@@ -70386,7 +70591,8 @@ var state = vue__WEBPACK_IMPORTED_MODULE_0___default.a.observable({
     grade: "Grade 12",
     level: "Senior High"
   }],
-  levels: ['Nursery', 'Kinder', 'Elementary', 'Junior High', 'Senior High']
+  levels: ['Nursery', 'Kinder', 'Elementary', 'Junior High', 'Senior High'],
+  notifs: []
 });
 var actions = {
   toast: function toast(text, timeout) {
@@ -70447,6 +70653,30 @@ var actions = {
     };
 
     setAll(obj, "");
+  },
+  getNotifs: function getNotifs(status) {
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              state.notifs = [];
+              _context.next = 3;
+              return axios.post("".concat(state.siteUrl, "admin/notifs/getNotifs"), {
+                // sy_id: sy_id,
+                status: status
+              }).then(function (e) {
+                state.notifs = e.data;
+                console.log(e.data);
+              });
+
+            case 3:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }))();
   }
 };
 /* harmony default export */ __webpack_exports__["default"] = (_objectSpread({

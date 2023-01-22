@@ -86,6 +86,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   computed: {
     nursery: function nursery() {
@@ -168,6 +179,30 @@ var render = function() {
       _c(
         "v-row",
         [
+          _c(
+            "v-col",
+            { attrs: { cols: "12", md: "3", lg: "2" } },
+            [
+              _c(
+                "v-card",
+                { attrs: { color: "secondary", dark: "", outlined: "" } },
+                [
+                  _c("v-card-title", [
+                    _vm._v(
+                      "\n                    Active S.Y.\n                "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("v-card-text", [
+                    _c("h1", [_vm._v(_vm._s(_vm.AdminSYStore.state.activeSY))])
+                  ])
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
           _c(
             "v-col",
             { attrs: { cols: "12", md: "3", lg: "2" } },

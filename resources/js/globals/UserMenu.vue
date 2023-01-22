@@ -3,7 +3,22 @@
         <v-menu v-model="menu" :close-on-content-click="true" offset-y>
             <template v-slot:activator="{ on, attrs }">
                 <div class="d-flex">
-                    <v-btn icon v-bind="attrs" v-on="on">
+                    <v-badge
+                        bordered
+                        color="error"
+                        overlap
+                        dot
+                        v-if="notifsLength"
+                    >
+                        <v-btn icon v-bind="attrs" v-on="on">
+                            <v-avatar color="primary" size="35">
+                                <span class="white--text text-h6">
+                                    {{ userInitial }}
+                                </span>
+                            </v-avatar>
+                        </v-btn>
+                    </v-badge>
+                    <v-btn v-else icon v-bind="attrs" v-on="on">
                         <v-avatar color="primary" size="35">
                             <span class="white--text text-h6">
                                 {{ userInitial }}
@@ -54,6 +69,9 @@
 
                 <v-list roundedx densex>
                     <v-list-item-group color="primary">
+                        <v-list-item class="error--text" link to="/admin/notifications" v-if="notifsLength">
+                            View {{ notifsLength }} undread notification(s)
+                        </v-list-item>
                         <v-list-item link to="/account">
                             Account Settings
                         </v-list-item>
@@ -75,7 +93,7 @@
                         block
                         text
                         outlined
-                        color="error"
+                        rounded
                         @click.stop="logout()"
                         :loading="isLoggingOut"
                     >
@@ -130,11 +148,19 @@ export default {
         userInitial() {
             let name = this.AuthUser.name;
             return name[0].toString().toUpperCase();
+        },
+
+        notifsLength() {
+            return this.AppStore.state.notifs.length;
         }
     },
 
     mounted() {
         console.log("UserMenu mounted");
+    },
+
+    created(){
+
     }
 };
 </script>

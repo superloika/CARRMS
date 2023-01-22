@@ -30,6 +30,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
     this.AdviserEnrollmentStore.getSections(this.AdminSYStore.state.activeSYid, this.AuthUser.adviser_id);
@@ -66,12 +68,18 @@ var render = function() {
               _c(
                 "v-card",
                 {
-                  attrs: { color: "success", dark: "", outlined: "", link: "" }
+                  attrs: {
+                    color: "success",
+                    dark: "",
+                    outlined: "",
+                    link: "",
+                    to: "/adviser/enrollment/" + section.id
+                  }
                 },
                 [
                   _c("v-card-title", [
                     _vm._v(
-                      "\n\n                    " +
+                      "\n                    " +
                         _vm._s(section.level) +
                         "\n                "
                     )
