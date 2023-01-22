@@ -5,6 +5,27 @@
                 Subject Taggings
             </v-toolbar-title>
             <v-spacer></v-spacer>
+
+            <v-select outlined dense hide-details rounded
+                label="Level"
+                :items="AppStore.state.levels"
+                v-model="filterLevel"
+                style="max-width:200px;"
+                class="ml-2"
+            >
+            </v-select>
+
+            <v-select outlined dense hide-details rounded
+                label="Grade"
+                :items="gradeLevels"
+                v-model="filterGrade"
+                item-text="grade"
+                item-value="grade"
+                style="max-width:200px;"
+                class="ml-2"
+            >
+            </v-select>
+
             <v-text-field
                 class="ml-2"
                 placeholder="Search"
@@ -54,6 +75,9 @@ export default {
                 { text: "Semester", value: "sem" },
                 { text: "Actions", value: "actions" },
             ],
+
+            filterLevel: '',
+            filterGrade: '',
         };
     },
 
@@ -77,13 +101,45 @@ export default {
     },
 
     computed: {
+        gradeLevels() {
+            if(this.filterLevel!='') {
+                return this.AppStore.state.gradeLevels.filter(e=>{
+                    return e.level==this.filterLevel;
+                })
+            } else {
+                return [];
+            }
+        },
+
         subtags() {
-            return this.AdminSubtagsStore.state.subtags;
+            try {
+                let a = this.AdminSubtagsStore.state.subtags;
+                if(this.filterLevel!='') {
+                    a = a.filter(e=>{
+                        return e.level==this.filterLevel;
+                    });
+                }
+                if(this.filterGrade!='') {
+                    a = a.filter(e=>{
+                        return e.grade==this.filterGrade;
+                    });
+                }
+                return a;
+            } catch (error) {
+                console.error(error);
+                return [];
+            }
         }
     },
 
     created(){
         this.AdminSubtagsStore.getSubtags();
+    },
+
+    watch: {
+        filterLevel() {
+            this.filterGrade = '';
+        }
     }
 };
 </script>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 22, 2023 at 03:28 AM
+-- Generation Time: Jan 22, 2023 at 04:00 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 7.4.30
 
@@ -39,13 +39,24 @@ CREATE TABLE `advisers` (
   `updated_at` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `advisers`
+-- Table structure for table `defaults`
 --
 
-INSERT INTO `advisers` (`id`, `firstname`, `middlename`, `lastname`, `gender`, `address`, `status`, `created_at`, `updated_at`) VALUES
-(11, 'Kim', 'Kimmy', 'Kimmytest', 'Female', 'Haguilanan Grande, Balilihan, Bohol', 1, '2023-01-17 04:45:11', '2023-01-17 04:52:25'),
-(12, 'Jane', 'Smith', 'Doe', 'Female', 'Bohol', 1, '2023-01-17 05:12:08', '2023-01-17 05:12:08');
+CREATE TABLE `defaults` (
+  `id` int(11) NOT NULL,
+  `setting_name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `setting_value` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `defaults`
+--
+
+INSERT INTO `defaults` (`id`, `setting_name`, `setting_value`) VALUES
+(1, 'passing_grade', '75');
 
 -- --------------------------------------------------------
 
@@ -62,18 +73,6 @@ CREATE TABLE `enrollment_head` (
   `updated_at` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
---
--- Dumping data for table `enrollment_head`
---
-
-INSERT INTO `enrollment_head` (`id`, `sy_id`, `adviser_id`, `section_id`, `created_at`, `updated_at`) VALUES
-(87, 24, 11, 31, '2023-01-21 03:54:42', '2023-01-21 03:54:42'),
-(88, 24, 12, 18, '2023-01-21 03:59:22', '2023-01-21 03:59:22'),
-(89, 24, 11, 30, '2023-01-21 04:00:37', '2023-01-21 04:00:37'),
-(90, 24, 11, 1, '2023-01-21 20:35:43', '2023-01-21 20:35:43'),
-(91, 24, 12, 32, '2023-01-21 20:36:02', '2023-01-21 20:36:02'),
-(92, 24, 11, 33, '2023-01-21 20:36:09', '2023-01-21 20:36:09');
-
 -- --------------------------------------------------------
 
 --
@@ -87,22 +86,6 @@ CREATE TABLE `enrollment_line` (
   `strand_id` int(11) DEFAULT NULL,
   `final_remarks` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'pending'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
-
---
--- Dumping data for table `enrollment_line`
---
-
-INSERT INTO `enrollment_line` (`id`, `head_id`, `student_id`, `strand_id`, `final_remarks`) VALUES
-(178, 90, 3, NULL, 'pending'),
-(179, 90, 5, NULL, 'pending'),
-(180, 92, 16, NULL, 'pending'),
-(181, 88, 9, NULL, 'pending'),
-(182, 88, 11, NULL, 'pending'),
-(183, 88, 12, NULL, 'pending'),
-(184, 91, 13, NULL, 'pending'),
-(185, 91, 14, NULL, 'pending'),
-(187, 87, 1, 1, 'pending'),
-(188, 89, 15, 2, 'pending');
 
 -- --------------------------------------------------------
 
@@ -173,26 +156,6 @@ CREATE TABLE `grades` (
   `updated_at` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
---
--- Dumping data for table `grades`
---
-
-INSERT INTO `grades` (`id`, `enrollment_line_id`, `subject_id`, `sem`, `first`, `second`, `third`, `fourth`, `final`, `remarks`, `created_at`, `updated_at`) VALUES
-(103, 178, 43, NULL, 80, 80, 80, 80, 80, '', '2023-01-22 06:51:54', '2023-01-22 09:18:41'),
-(104, 178, 46, NULL, 89, 88, 92, 90, 89.75, '', '2023-01-22 06:51:54', '2023-01-22 09:18:53'),
-(105, 179, 43, NULL, 75, 75, 75, 75, 75, '', '2023-01-22 06:51:54', '2023-01-22 09:19:13'),
-(106, 179, 46, NULL, 75, 75, 75, 75, 75, '', '2023-01-22 06:51:54', '2023-01-22 09:19:13'),
-(107, 180, 47, NULL, NULL, NULL, NULL, NULL, NULL, '', '2023-01-22 07:31:24', '2023-01-22 07:31:24'),
-(108, 181, 47, NULL, NULL, NULL, NULL, NULL, NULL, '', '2023-01-22 08:57:22', '2023-01-22 08:57:22'),
-(109, 182, 47, NULL, NULL, NULL, NULL, NULL, NULL, '', '2023-01-22 08:57:22', '2023-01-22 08:57:22'),
-(110, 183, 47, NULL, 75, NULL, NULL, NULL, 18.75, '', '2023-01-22 08:57:22', '2023-01-22 08:58:06'),
-(111, 184, 47, NULL, NULL, NULL, NULL, NULL, NULL, '', '2023-01-22 08:57:28', '2023-01-22 08:57:28'),
-(112, 185, 47, NULL, NULL, NULL, NULL, NULL, NULL, '', '2023-01-22 08:57:28', '2023-01-22 08:57:28'),
-(114, 187, 45, 1, 80, 85, NULL, NULL, 82.5, '', '2023-01-22 09:46:16', '2023-01-22 10:13:14'),
-(115, 187, 48, 2, NULL, NULL, 86, 88, 87, '', '2023-01-22 09:46:16', '2023-01-22 10:14:22'),
-(116, 188, 45, 1, NULL, NULL, NULL, NULL, NULL, '', '2023-01-22 09:46:31', '2023-01-22 09:46:31'),
-(117, 188, 48, 2, NULL, NULL, NULL, NULL, NULL, '', '2023-01-22 09:46:31', '2023-01-22 09:46:31');
-
 -- --------------------------------------------------------
 
 --
@@ -230,25 +193,6 @@ CREATE TABLE `notifications` (
   `updated_at` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
---
--- Dumping data for table `notifications`
---
-
-INSERT INTO `notifications` (`id`, `sy_id`, `message`, `status`, `created_at`, `updated_at`) VALUES
-(94, 24, 'Kim Kimmytest updated Rasmus Lerdorf\'s grade', 1, '2023-01-22 08:10:19', '2023-01-22 09:10:14'),
-(95, 24, 'Jane Doe updated Mike Otwell\'s grade', 1, '2023-01-22 08:58:06', '2023-01-22 09:10:19'),
-(96, 24, 'Jane Doe updated Vina Rebusa\'s grade', 1, '2023-01-22 08:58:37', '2023-01-22 09:10:21'),
-(97, 24, 'Kim Kimmytest updated Rasmus Lerdorf\'s grade', 1, '2023-01-22 09:13:54', '2023-01-22 09:14:08'),
-(98, 24, 'Kim Kimmytest updated Rasmus Lerdorf\'s grade', 1, '2023-01-22 09:18:23', '2023-01-22 09:19:53'),
-(99, 24, 'Kim Kimmytest updated test test\'s grade', 1, '2023-01-22 09:18:41', '2023-01-22 09:19:52'),
-(100, 24, 'Kim Kimmytest updated test test\'s grade', 1, '2023-01-22 09:18:53', '2023-01-22 09:19:47'),
-(101, 24, 'Kim Kimmytest updated Juan Dela Cruz\'s grade', 1, '2023-01-22 09:19:13', '2023-01-22 09:19:46'),
-(102, 24, 'Kim Kimmytest updated Rasmus Lerdorf\'s grade', 0, '2023-01-22 09:51:48', '2023-01-22 09:51:48'),
-(103, 24, 'Kim Kimmytest updated Rasmus Lerdorf\'s grade', 0, '2023-01-22 10:05:18', '2023-01-22 10:05:18'),
-(104, 24, 'Kim Kimmytest updated Rasmus Lerdorf\'s grade', 0, '2023-01-22 10:05:42', '2023-01-22 10:05:42'),
-(105, 24, 'Kim Kimmytest updated Rasmus Lerdorf\'s grade', 0, '2023-01-22 10:13:14', '2023-01-22 10:13:14'),
-(106, 24, 'Kim Kimmytest updated Rasmus Lerdorf\'s grade', 0, '2023-01-22 10:14:22', '2023-01-22 10:14:22');
-
 -- --------------------------------------------------------
 
 --
@@ -275,13 +219,6 @@ CREATE TABLE `schoolyears` (
   `updated_at` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
---
--- Dumping data for table `schoolyears`
---
-
-INSERT INTO `schoolyears` (`id`, `sy`, `status`, `created_at`, `updated_at`) VALUES
-(24, '2022-2023', 1, '2023-01-21 03:38:39', '2023-01-21 03:38:39');
-
 -- --------------------------------------------------------
 
 --
@@ -298,28 +235,6 @@ CREATE TABLE `sections` (
   `status` tinyint(4) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
---
--- Dumping data for table `sections`
---
-
-INSERT INTO `sections` (`id`, `order`, `grade`, `level`, `section`, `adviser_id`, `status`) VALUES
-(1, 1, 'Nursery', 'Nursery', '1', 11, 1),
-(12, 4, 'Grade 7', 'Junior High', '1', 11, 1),
-(13, 4, 'Grade 8', 'Junior High', '1', 11, 1),
-(14, 4, 'Grade 9', 'Junior High', '1', 11, 1),
-(15, 4, 'Grade 10', 'Junior High', '1', 11, 1),
-(18, 2, 'Kinder 1', 'Kinder', '1', 12, 1),
-(30, 5, 'Grade 12', 'Senior High', '1', 11, 1),
-(31, 5, 'Grade 11', 'Senior High', '1', 11, 1),
-(32, 2, 'Kinder 2', 'Kinder', '1', 12, 1),
-(33, 3, 'Grade 1', 'Elementary', '1', 11, 1),
-(34, 3, 'Grade 2', 'Elementary', '1', 11, 1),
-(35, 3, 'Grade 3', 'Elementary', '1', 11, 1),
-(36, 3, 'Grade 4', 'Elementary', '1', 11, 1),
-(37, 3, 'Grade 5', 'Elementary', '1', 11, 1),
-(38, 3, 'Grade 6', 'Elementary', '1', 11, 1),
-(39, 4, 'Grade 8', 'Junior High', '2', 11, 1);
-
 -- --------------------------------------------------------
 
 --
@@ -331,14 +246,6 @@ CREATE TABLE `strands` (
   `strand_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `strand_description` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `strands`
---
-
-INSERT INTO `strands` (`id`, `strand_name`, `strand_description`) VALUES
-(1, 'HUMSS', 'HUMANITIES AND SOCIAL SCIENCES'),
-(2, 'ABM', 'ACOUNTANCY AND BUSINESS MANAGEMENT');
 
 -- --------------------------------------------------------
 
@@ -368,22 +275,6 @@ CREATE TABLE `students` (
   `updated_at` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `students`
---
-
-INSERT INTO `students` (`id`, `lrn`, `firstname`, `middlename`, `lastname`, `extname`, `gender`, `dob`, `pob`, `address`, `guardian`, `guardian_address`, `is_enrolled`, `current_grade`, `last_syid`, `last_grade`, `last_final_remarks`, `created_at`, `updated_at`) VALUES
-(1, '1010101', 'Rasmus', 'Chase', 'Lerdorf', NULL, 'Male', '1996-08-21', 'Bohol, Philippines', 'Bohol, Philippines', 'NA', 'NA', 1, '', NULL, '', '', '2023-01-17 05:08:00', '2023-01-22 09:46:16'),
-(3, '', 'test', 'test', 'test', NULL, 'Male', '2003-06-05', 'test', 'test', 'test', 'test', 1, '', 0, '', '', '2022-12-16 03:11:24', '2023-01-22 06:51:54'),
-(5, '', 'Juan', 'Test', 'Dela Cruz', 'Jr', 'Male', '1992-05-16', 'Test Place, 123 Test', 'Test Place, 123 Test', 'Maria Clara', 'Test Place, 123 Test', 1, '', 0, '', '', '2022-12-16 03:20:10', '2023-01-22 06:51:54'),
-(9, '', 'sdf', 'sdf', 'sdf', NULL, 'Male', '2021-03-05', 'sdf', 'sdf', 'sdf', 'sdf', 1, '', 0, '', '', '2022-12-21 05:01:46', '2023-01-22 08:57:22'),
-(11, NULL, 'Bob', 'Smith', 'Mitchel', NULL, 'Male', '1997-06-12', 'Philippines', 'Philippines', 'NA', 'NA', 1, '', 0, '', '', '2023-01-15 03:14:19', '2023-01-22 08:57:22'),
-(12, '111', 'Mike', 'Swift', 'Otwell', NULL, 'Male', '1997-05-06', 'Bohol, Philippines', 'Bohol, Philippines', 'NA', 'NA', 1, '', 0, '', '', '2023-01-15 03:15:25', '2023-01-22 08:57:22'),
-(13, '222', 'Taylor', 'Otwell', 'Otwell', NULL, 'Male', '1983-02-02', 'test', 'test', 'test', 'test', 1, '', 0, '', '', '2023-01-15 03:16:06', '2023-01-22 08:57:28'),
-(14, '101', 'Kael', 'Bradd', 'Williams', NULL, 'Male', '1996-08-08', 'Bohol', 'Bohol', 'NA', 'NA', 1, '', 0, '', '', '2023-01-15 12:09:04', '2023-01-22 08:57:28'),
-(15, '1011', 'Vina', 'Mae', 'Rebusa', NULL, 'Female', '1994-10-21', 'Bohol', 'Bohol', 'NA', 'NA', 1, '', 0, '', '', '2023-01-17 01:17:12', '2023-01-22 09:46:31'),
-(16, '222333', 'xxx', 'xxx', 'xxx', NULL, 'Male', '2022-02-02', 'xxx', 'xxx', 'xxx', 'xxx', 1, '', NULL, '', '', '2023-01-17 05:10:57', '2023-01-22 07:31:24');
-
 -- --------------------------------------------------------
 
 --
@@ -397,17 +288,6 @@ CREATE TABLE `subjects` (
   `subject_description` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `subject_type` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
-
---
--- Dumping data for table `subjects`
---
-
-INSERT INTO `subjects` (`id`, `subject_code`, `subject_name`, `subject_description`, `subject_type`) VALUES
-(43, 'test1', 'Test Subject Only', 'This is a Test Subject Only', NULL),
-(45, 'ORALCOM', 'Oral Communication', 'Oral Communication', 'Core'),
-(46, 'test2', 'Test2 Subject Only 2', 'Test2 Subject Only 2 Test2 Subject Only 2', NULL),
-(47, 'ENGLISH', 'English', 'English', NULL),
-(48, 'O2', 'Oral Communication 2', 'Oral Communication 2', 'Core');
 
 -- --------------------------------------------------------
 
@@ -423,25 +303,6 @@ CREATE TABLE `subtags` (
   `strand_id` int(11) DEFAULT NULL,
   `sem` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
-
---
--- Dumping data for table `subtags`
---
-
-INSERT INTO `subtags` (`id`, `grade`, `level`, `subject_id`, `strand_id`, `sem`) VALUES
-(50, 'Nursery', 'Nursery', 43, NULL, NULL),
-(51, 'Grade 11', 'Senior High', 45, 1, 1),
-(52, 'Grade 11', 'Senior High', 45, 2, 1),
-(54, 'Nursery', 'Nursery', 46, NULL, NULL),
-(55, 'Grade 1', 'Elementary', 47, NULL, NULL),
-(56, 'Kinder 1', 'Kinder', 47, NULL, NULL),
-(57, 'Kinder 2', 'Kinder', 47, NULL, NULL),
-(58, 'Grade 11', 'Senior High', 48, 1, 2),
-(59, 'Grade 11', 'Senior High', 48, 2, 2),
-(60, 'Grade 12', 'Senior High', 45, 1, 1),
-(61, 'Grade 12', 'Senior High', 45, 2, 1),
-(62, 'Grade 12', 'Senior High', 48, 1, 2),
-(63, 'Grade 12', 'Senior High', 48, 2, 2);
 
 -- --------------------------------------------------------
 
@@ -469,9 +330,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `adviser_id`, `name`, `username`, `email`, `email_verified_at`, `password`, `user_type`, `remember_token`, `created_at`, `updated_at`) VALUES
 (1, NULL, 'Test Admin', 'admin', 'admin@test.com', NULL, '$2y$10$5UKZ19tzX1eIz.Na8MrC3e0mv.bkg3XvTysaoXMCugUo2.q95aOTe', 'admin', NULL, '2022-10-23 02:08:21', '2022-10-23 02:08:21'),
-(2, NULL, 'Super Admin', 'super', '', NULL, '$2y$10$5UKZ19tzX1eIz.Na8MrC3e0mv.bkg3XvTysaoXMCugUo2.q95aOTe', 'super_admin', NULL, '2022-10-23 02:08:21', '2022-10-23 02:08:21'),
-(7, 11, 'Kim Kimmy Kimmytest', 'kimkimmytest', NULL, NULL, '$2y$10$D0oqPf0GsSidTCebHlWwhukKf8Vt/k8Kvn2.bRo9amtpZlqgqVSii', 'adviser', NULL, '2023-01-16 20:45:11', '2023-01-16 20:45:11'),
-(8, 12, 'Jane Smith Doe', 'janedoe', NULL, NULL, '$2y$10$BLKumL1dOScwi3cMRB3bVOsUyhuOOFZLUEBFn1DjOHJxp3PyPbBPu', 'adviser', NULL, '2023-01-16 21:12:08', '2023-01-16 21:12:08');
+(2, NULL, 'Super Admin', 'super', '', NULL, '$2y$10$5UKZ19tzX1eIz.Na8MrC3e0mv.bkg3XvTysaoXMCugUo2.q95aOTe', 'super_admin', NULL, '2022-10-23 02:08:21', '2022-10-23 02:08:21');
 
 -- --------------------------------------------------------
 
@@ -504,6 +363,12 @@ ALTER TABLE `advisers`
   ADD KEY `gender` (`gender`),
   ADD KEY `address` (`address`),
   ADD KEY `status` (`status`);
+
+--
+-- Indexes for table `defaults`
+--
+ALTER TABLE `defaults`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `enrollment_head`
@@ -710,7 +575,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `notifications`
 --
 ALTER TABLE `notifications`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=107;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=123;
 
 --
 -- AUTO_INCREMENT for table `schoolyears`
@@ -740,13 +605,13 @@ ALTER TABLE `students`
 -- AUTO_INCREMENT for table `subjects`
 --
 ALTER TABLE `subjects`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT for table `subtags`
 --
 ALTER TABLE `subtags`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 
 --
 -- AUTO_INCREMENT for table `users`

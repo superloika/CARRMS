@@ -106,6 +106,12 @@ class AdviserEnrollmentController extends Controller
             $adviser_name = request()->adviser_name;
             $sy_id = request()->sy_id;
 
+            // get passing grade
+            $passing_grade = DB::table('defaults')->where('setting_name','passing_grade')
+                ->pluck('setting_value')->first();
+            $passing_grade = floatval($passing_grade);
+            // dd($passing_grade);
+
             foreach($subjects as $s) {
 
                 // grade calc for non senior high
@@ -115,6 +121,12 @@ class AdviserEnrollmentController extends Controller
                     $third = $s['third'] ?? 0;
                     $fourth = $s['fourth'] ?? 0;
                     $final = ($first+$second+$third+$fourth) / 4;
+                    $remarks='';
+                    if($final < $passing_grade) {
+                        $remarks = 'FAILED';
+                    } else {
+                        $remarks = 'PASSED';
+                    }
 
                     DB::table('grades')
                     ->where('id',$s['id'])
@@ -124,31 +136,46 @@ class AdviserEnrollmentController extends Controller
                         'third'=>$s['third'],
                         'fourth'=>$s['fourth'],
                         'final'=> $final,
+                        'remarks'=>$remarks
                     ]);
                 } else if($level == 'Senior High') {
                     if($s['sem']==1) {
                         $first = $s['first'] ?? 0;
                         $second = $s['second'] ?? 0;
-                        $final_sem1 = ($first+$second) / 2;
+                        $final = ($first+$second) / 2;
+                        $remarks='';
+                        if($final < $passing_grade) {
+                            $remarks = 'FAILED';
+                        } else {
+                            $remarks = 'PASSED';
+                        }
 
                         DB::table('grades')
                         ->where('id',$s['id'])
                         ->update([
                                 'first'=>$s['first'],
                                 'second'=>$s['second'],
-                                'final'=> $final_sem1,
+                                'final'=> $final,
+                                'remarks'=>$remarks
                             ]);
                     } else if($s['sem']==2) {
                         $third = $s['third'] ?? 0;
                         $fourth = $s['fourth'] ?? 0;
-                        $final_sem2 = ($third+$fourth) / 2;
+                        $final = ($third+$fourth) / 2;
+                        $remarks='';
+                        if($final < $passing_grade) {
+                            $remarks = 'FAILED';
+                        } else {
+                            $remarks = 'PASSED';
+                        }
 
                         DB::table('grades')
                         ->where('id',$s['id'])
                         ->update([
                                 'third'=>$s['third'],
                                 'fourth'=>$s['fourth'],
-                                'final'=> $final_sem2,
+                                'final'=> $final,
+                                'remarks'=>$remarks
                             ]);
                     }
                 }

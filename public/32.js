@@ -116,6 +116,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -354,6 +372,29 @@ var render = function() {
                         })
                       ],
                       1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "v-col",
+                      [
+                        _c("v-text-field", {
+                          attrs: {
+                            outlined: "",
+                            dense: "",
+                            "hide-details": "",
+                            label: "Remarks",
+                            readonly: ""
+                          },
+                          model: {
+                            value: subject.remarks,
+                            callback: function($$v) {
+                              _vm.$set(subject, "remarks", $$v)
+                            },
+                            expression: "subject.remarks"
+                          }
+                        })
+                      ],
+                      1
                     )
                   ],
                   1
@@ -452,6 +493,29 @@ var render = function() {
                                 _vm.$set(subject, "final", $$v)
                               },
                               expression: "subject.final"
+                            }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-col",
+                        [
+                          _c("v-text-field", {
+                            attrs: {
+                              outlined: "",
+                              dense: "",
+                              "hide-details": "",
+                              label: "Remarks",
+                              readonly: ""
+                            },
+                            model: {
+                              value: subject.remarks,
+                              callback: function($$v) {
+                                _vm.$set(subject, "remarks", $$v)
+                              },
+                              expression: "subject.remarks"
                             }
                           })
                         ],
@@ -557,6 +621,29 @@ var render = function() {
                                 _vm.$set(subject, "final", $$v)
                               },
                               expression: "subject.final"
+                            }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-col",
+                        [
+                          _c("v-text-field", {
+                            attrs: {
+                              outlined: "",
+                              dense: "",
+                              "hide-details": "",
+                              label: "Remarks",
+                              readonly: ""
+                            },
+                            model: {
+                              value: subject.remarks,
+                              callback: function($$v) {
+                                _vm.$set(subject, "remarks", $$v)
+                              },
+                              expression: "subject.remarks"
                             }
                           })
                         ],

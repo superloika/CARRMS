@@ -59,6 +59,27 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -84,7 +105,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }, {
         text: "Actions",
         value: "actions"
-      }]
+      }],
+      filterLevel: '',
+      filterGrade: ''
     };
   },
   methods: {
@@ -122,12 +145,49 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   },
   computed: {
+    gradeLevels: function gradeLevels() {
+      var _this2 = this;
+
+      if (this.filterLevel != '') {
+        return this.AppStore.state.gradeLevels.filter(function (e) {
+          return e.level == _this2.filterLevel;
+        });
+      } else {
+        return [];
+      }
+    },
     subtags: function subtags() {
-      return this.AdminSubtagsStore.state.subtags;
+      var _this3 = this;
+
+      try {
+        var a = this.AdminSubtagsStore.state.subtags;
+
+        if (this.filterLevel != '') {
+          a = a.filter(function (e) {
+            return e.level == _this3.filterLevel;
+          });
+        }
+
+        if (this.filterGrade != '') {
+          a = a.filter(function (e) {
+            return e.grade == _this3.filterGrade;
+          });
+        }
+
+        return a;
+      } catch (error) {
+        console.error(error);
+        return [];
+      }
     }
   },
   created: function created() {
     this.AdminSubtagsStore.getSubtags();
+  },
+  watch: {
+    filterLevel: function filterLevel() {
+      this.filterGrade = '';
+    }
   }
 });
 
@@ -161,6 +221,48 @@ var render = function() {
           ),
           _vm._v(" "),
           _c("v-spacer"),
+          _vm._v(" "),
+          _c("v-select", {
+            staticClass: "ml-2",
+            staticStyle: { "max-width": "200px" },
+            attrs: {
+              outlined: "",
+              dense: "",
+              "hide-details": "",
+              rounded: "",
+              label: "Level",
+              items: _vm.AppStore.state.levels
+            },
+            model: {
+              value: _vm.filterLevel,
+              callback: function($$v) {
+                _vm.filterLevel = $$v
+              },
+              expression: "filterLevel"
+            }
+          }),
+          _vm._v(" "),
+          _c("v-select", {
+            staticClass: "ml-2",
+            staticStyle: { "max-width": "200px" },
+            attrs: {
+              outlined: "",
+              dense: "",
+              "hide-details": "",
+              rounded: "",
+              label: "Grade",
+              items: _vm.gradeLevels,
+              "item-text": "grade",
+              "item-value": "grade"
+            },
+            model: {
+              value: _vm.filterGrade,
+              callback: function($$v) {
+                _vm.filterGrade = $$v
+              },
+              expression: "filterGrade"
+            }
+          }),
           _vm._v(" "),
           _c("v-text-field", {
             staticClass: "ml-2",

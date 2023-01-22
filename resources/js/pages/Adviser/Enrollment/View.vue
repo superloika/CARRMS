@@ -42,6 +42,12 @@
                         >
                         </v-text-field>
                     </v-col>
+                    <v-col>
+                        <v-text-field outlined dense hide-details label="Remarks" v-model="subject.remarks"
+                            readonly
+                        >
+                        </v-text-field>
+                    </v-col>
                 </v-row>
             </div>
 
@@ -65,6 +71,12 @@
                     </v-col>
                     <v-col>
                         <v-text-field outlined dense hide-details label="Final" v-model="subject.final"
+                            readonly
+                        >
+                        </v-text-field>
+                    </v-col>
+                    <v-col>
+                        <v-text-field outlined dense hide-details label="Remarks" v-model="subject.remarks"
                             readonly
                         >
                         </v-text-field>
@@ -94,6 +106,12 @@
                     </v-col>
                     <v-col>
                         <v-text-field outlined dense hide-details label="Final" v-model="subject.final"
+                            readonly
+                        >
+                        </v-text-field>
+                    </v-col>
+                    <v-col>
+                        <v-text-field outlined dense hide-details label="Remarks" v-model="subject.remarks"
                             readonly
                         >
                         </v-text-field>

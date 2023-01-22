@@ -70,7 +70,7 @@
                 <v-list roundedx densex>
                     <v-list-item-group color="primary">
                         <v-list-item class="error--text" link to="/admin/notifications" v-if="notifsLength">
-                            View {{ notifsLength }} undread notification(s)
+                            <small>View {{ notifsLength }} unread notification(s)</small>
                         </v-list-item>
                         <v-list-item link to="/account">
                             Account Settings

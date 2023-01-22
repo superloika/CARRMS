@@ -234,36 +234,6 @@ var render = function() {
               fn: function(ref) {
                 var item = ref.item
                 return [
-                  _c(
-                    "v-btn",
-                    {
-                      attrs: {
-                        icon: "",
-                        dense: "",
-                        color: "primary",
-                        title: "View More Details",
-                        disabled: ""
-                      }
-                    },
-                    [_c("v-icon", [_vm._v("mdi-eye")])],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "v-btn",
-                    {
-                      attrs: {
-                        icon: "",
-                        dense: "",
-                        color: "primary",
-                        title: "Edit",
-                        disabled: ""
-                      }
-                    },
-                    [_c("v-icon", [_vm._v("mdi-pencil")])],
-                    1
-                  ),
-                  _vm._v(" "),
                   _vm.AppStore.isSuperAdmin()
                     ? _c(
                         "v-btn",

@@ -34,12 +34,12 @@
                 </span>
             </template>
             <template v-slot:[`item.actions`]="{item}">
-                <v-btn icon dense color="primary" title="View More Details" disabled>
+                <!-- <v-btn icon dense color="primary" title="View More Details" disabled>
                     <v-icon>mdi-eye</v-icon>
                 </v-btn>
                 <v-btn icon dense color="primary" title="Edit" disabled>
                     <v-icon>mdi-pencil</v-icon>
-                </v-btn>
+                </v-btn> -->
                 <v-btn icon dense color="error" title="Delete" @click="deleteStudent(item.id)"
                     v-if="AppStore.isSuperAdmin()"
                 >

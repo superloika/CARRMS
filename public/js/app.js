@@ -2762,6 +2762,33 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     console.log("NavSide mounted");
@@ -5980,7 +6007,7 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "v-list-item",
-                { attrs: { link: "", to: "/admin/reports/list-of-students" } },
+                { attrs: { link: "", to: "/reports/list-of-students" } },
                 [
                   _c(
                     "v-list-item-icon",
@@ -5992,6 +6019,70 @@ var render = function() {
                   _c(
                     "v-list-item-content",
                     [_c("v-list-item-title", [_vm._v("List of Students")])],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-list-item",
+                { attrs: { link: "", to: "/reports/permarecord" } },
+                [
+                  _c(
+                    "v-list-item-icon",
+                    { staticClass: "mr-2" },
+                    [_c("v-icon", [_vm._v("mdi-file")])],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-list-item-content",
+                    [
+                      _c("v-list-item-title", [
+                        _vm._v("Student Permanent Record")
+                      ])
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-list-item",
+                { attrs: { link: "", to: "/reports/coe" } },
+                [
+                  _c(
+                    "v-list-item-icon",
+                    { staticClass: "mr-2" },
+                    [_c("v-icon", [_vm._v("mdi-file")])],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-list-item-content",
+                    [_c("v-list-item-title", [_vm._v("COE")])],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-list-item",
+                { attrs: { link: "", to: "/reports/goodmoral" } },
+                [
+                  _c(
+                    "v-list-item-icon",
+                    { staticClass: "mr-2" },
+                    [_c("v-icon", [_vm._v("mdi-file")])],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-list-item-content",
+                    [_c("v-list-item-title", [_vm._v("Good Moral")])],
                     1
                   )
                 ],
@@ -6353,11 +6444,13 @@ var render = function() {
                               attrs: { link: "", to: "/admin/notifications" }
                             },
                             [
-                              _vm._v(
-                                "\n                        View " +
-                                  _vm._s(_vm.notifsLength) +
-                                  " undread notification(s)\n                    "
-                              )
+                              _c("small", [
+                                _vm._v(
+                                  "View " +
+                                    _vm._s(_vm.notifsLength) +
+                                    " unread notification(s)"
+                                )
+                              ])
                             ]
                           )
                         : _vm._e(),
@@ -69685,6 +69778,53 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       }]
     }]
   }, // /ADMIN ====================================================
+  // REPORTS =================================================
+  {
+    path: "/reports",
+    name: "reports",
+    component: {
+      render: function render(h) {
+        return h('router-view');
+      }
+    },
+    children: [{
+      path: "list-of-students",
+      name: "reports.student_enrollment",
+      component: function component() {
+        return __webpack_require__.e(/*! import() */ 34).then(__webpack_require__.bind(null, /*! ./pages/Reports/StudentEnrollment.vue */ "./resources/js/pages/Reports/StudentEnrollment.vue"));
+      },
+      meta: {
+        name: "List of Students"
+      }
+    }, {
+      path: "permarecord",
+      name: "reports.permarecord",
+      component: function component() {
+        return __webpack_require__.e(/*! import() */ 35).then(__webpack_require__.bind(null, /*! ./pages/Reports/PermaRecord.vue */ "./resources/js/pages/Reports/PermaRecord.vue"));
+      },
+      meta: {
+        name: "Student Permanent Record"
+      }
+    }, {
+      path: "coe",
+      name: "reports.coe",
+      component: function component() {
+        return __webpack_require__.e(/*! import() */ 36).then(__webpack_require__.bind(null, /*! ./pages/Reports/COE.vue */ "./resources/js/pages/Reports/COE.vue"));
+      },
+      meta: {
+        name: "Certificate of Enrollment"
+      }
+    }, {
+      path: "goodmoral",
+      name: "reports.goodmoral",
+      component: function component() {
+        return __webpack_require__.e(/*! import() */ 37).then(__webpack_require__.bind(null, /*! ./pages/Reports/GoodMoral.vue */ "./resources/js/pages/Reports/GoodMoral.vue"));
+      },
+      meta: {
+        name: "Good Moral"
+      }
+    }]
+  }, // /REPORTS =================================================
   // OTHER PAGES ===============================================
   {
     path: "/",
@@ -69745,6 +69885,7 @@ var map = {
 	"./AdviserEnrollmentStore.js": "./resources/js/stores.custom/AdviserEnrollmentStore.js",
 	"./AppStore.js": "./resources/js/stores.custom/AppStore.js",
 	"./ManageAccounts.js": "./resources/js/stores.custom/ManageAccounts.js",
+	"./ReportsStore.js": "./resources/js/stores.custom/ReportsStore.js",
 	"./SampleStore.js": "./resources/js/stores.custom/SampleStore.js"
 };
 
@@ -70592,7 +70733,10 @@ var state = vue__WEBPACK_IMPORTED_MODULE_1___default.a.observable({
     level: "Senior High"
   }],
   levels: ['Nursery', 'Kinder', 'Elementary', 'Junior High', 'Senior High'],
-  notifs: []
+  // unread admin notifs
+  notifs: [],
+  // default passing grade
+  passingGrade: 75
 });
 var actions = {
   toast: function toast(text, timeout) {
@@ -70660,8 +70804,7 @@ var actions = {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              state.notifs = [];
-              _context.next = 3;
+              _context.next = 2;
               return axios.post("".concat(state.siteUrl, "admin/notifs/getNotifs"), {
                 // sy_id: sy_id,
                 status: status
@@ -70670,7 +70813,7 @@ var actions = {
                 console.log(e.data);
               });
 
-            case 3:
+            case 2:
             case "end":
               return _context.stop();
           }
@@ -70831,6 +70974,121 @@ var actions = {
     if (confirm("Delete ".concat(account.name, " (").concat(account.username, ")?"))) {
       this.deleteAccount(account);
     }
+  }
+};
+/* harmony default export */ __webpack_exports__["default"] = (_objectSpread({
+  state: state
+}, actions));
+
+/***/ }),
+
+/***/ "./resources/js/stores.custom/ReportsStore.js":
+/*!****************************************************!*\
+  !*** ./resources/js/stores.custom/ReportsStore.js ***!
+  \****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _AppStore__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./AppStore */ "./resources/js/stores.custom/AppStore.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+
+
+var state = vue__WEBPACK_IMPORTED_MODULE_2___default.a.observable({
+  studentEnrollment: [],
+  permaRecord: {
+    profile: {}
+  },
+  generateCOE: {}
+});
+var actions = {
+  studentEnrollment: function studentEnrollment(sy_id, level) {
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              state.studentEnrollment = [];
+              _context.next = 3;
+              return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("".concat(_AppStore__WEBPACK_IMPORTED_MODULE_3__["default"].state.siteUrl, "reports/studentEnrollment"), {
+                sy_id: sy_id,
+                level: level
+              }).then(function (e) {
+                state.studentEnrollment = e.data;
+                console.log(e.data);
+              });
+
+            case 3:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }))();
+  },
+  permaRecord: function permaRecord(student_id, level) {
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.next = 2;
+              return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("".concat(_AppStore__WEBPACK_IMPORTED_MODULE_3__["default"].state.siteUrl, "reports/permaRecord"), {
+                student_id: student_id,
+                level: level
+              }).then(function (e) {
+                state.permaRecord = e.data;
+                console.log(e.data);
+              });
+
+            case 2:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2);
+    }))();
+  },
+  generateCOE: function generateCOE(student_id) {
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              _context3.next = 2;
+              return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("".concat(_AppStore__WEBPACK_IMPORTED_MODULE_3__["default"].state.siteUrl, "reports/generateCOE"), {
+                student_id: student_id
+              }).then(function (e) {
+                state.generateCOE = e.data;
+                console.log(e.data);
+              });
+
+            case 2:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      }, _callee3);
+    }))();
   }
 };
 /* harmony default export */ __webpack_exports__["default"] = (_objectSpread({

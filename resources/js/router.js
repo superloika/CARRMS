@@ -184,6 +184,50 @@ const router = new VueRouter({
         // /ADMIN ====================================================
 
 
+        // REPORTS =================================================
+        {
+            path: "/reports",
+            name: "reports",
+            component: { render: h => h('router-view') },
+            children: [
+                {
+                    path: "list-of-students",
+                    name: "reports.student_enrollment",
+                    component: ()=>import("./pages/Reports/StudentEnrollment.vue"),
+                    meta: {
+                        name: "List of Students"
+                    }
+                },
+                {
+                    path: "permarecord",
+                    name: "reports.permarecord",
+                    component: ()=>import("./pages/Reports/PermaRecord.vue"),
+                    meta: {
+                        name: "Student Permanent Record"
+                    }
+                },
+                {
+                    path: "coe",
+                    name: "reports.coe",
+                    component: ()=>import("./pages/Reports/COE.vue"),
+                    meta: {
+                        name: "Certificate of Enrollment"
+                    }
+                },
+                {
+                    path: "goodmoral",
+                    name: "reports.goodmoral",
+                    component: ()=>import("./pages/Reports/GoodMoral.vue"),
+                    meta: {
+                        name: "Good Moral"
+                    }
+                },
+
+            ]
+        },
+        // /REPORTS =================================================
+
+
         // OTHER PAGES ===============================================
         {
             path: "/",

@@ -11,14 +11,17 @@
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+//
+//
+//
+//
+//
 //
 //
 //
@@ -165,12 +168,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       this.form.strand_id = '';
       this.form.sem = '';
-    },
-    "form.subject_id": function formSubject_id() {
-      if (_typeof(this.form.subject_id) != "object") {
-        this.form.subject_id = '';
-      }
-    }
+    } // "form.subject_id": function() {
+    //     if(typeof(this.form.subject_id)!="object") {
+    //         this.form.subject_id = '';
+    //     }
+    // },
+
   }
 });
 
@@ -262,32 +265,20 @@ var render = function() {
                   _c("v-combobox", {
                     attrs: {
                       outlined: "",
-                      densex: "",
-                      filledx: "",
                       label: "Subject",
-                      items: _vm.AdminSubjectsStore.state.subjects
+                      "hide-details": "",
+                      items: _vm.AdminSubjectsStore.state.subjects,
+                      "item-text": "subject_name",
+                      "item-value": "id",
+                      "return-object": true
                     },
                     scopedSlots: _vm._u([
                       {
-                        key: "selection",
-                        fn: function(ref) {
-                          var item = ref.item
-                          return [
-                            _vm._v(
-                              "\n                        " +
-                                _vm._s(item.subject_name) +
-                                "\n                    "
-                            )
-                          ]
-                        }
-                      },
-                      {
                         key: "item",
                         fn: function(ref) {
-                          var on = ref.on
                           var item = ref.item
                           return [
-                            _c("v-list-item", _vm._g({}, on), [
+                            _c("div", [
                               _vm._v(
                                 "\n                            " +
                                   _vm._s(item.subject_name) +

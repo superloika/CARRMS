@@ -22,17 +22,21 @@
                     </v-select>
                 </v-col>
                 <v-col cols="12" md="8">
-                    <v-combobox outlined densex filledx label="Subject"
+                    <v-combobox outlined label="Subject"
+                        hide-details
                         :items="AdminSubjectsStore.state.subjects"
+                        item-text="subject_name"
+                        item-value="id"
+                        :return-object="true"
                         v-model="form.subject_id"
                     >
-                        <template v-slot:selection="{ item }">
-                            {{item.subject_name}}
-                        </template>
-                        <template v-slot:item="{ on, item }">
-                            <v-list-item v-on="on">
+                        <!-- <template v-slot:selection="{ item }">
+                            <div>{{item.subject_name}}</div>
+                        </template> -->
+                        <template v-slot:item="{ item }">
+                            <div>
                                 {{item.subject_name}}
-                            </v-list-item>
+                            </div>
                         </template>
                     </v-combobox>
                 </v-col>
@@ -54,6 +58,7 @@
                     >
                     </v-select>
                 </v-col>
+
             </v-row>
         </v-container>
     </div>
@@ -121,11 +126,11 @@ export default {
             this.form.strand_id = '';
             this.form.sem = '';
         },
-        "form.subject_id": function() {
-            if(typeof(this.form.subject_id)!="object") {
-                this.form.subject_id = '';
-            }
-        },
+        // "form.subject_id": function() {
+        //     if(typeof(this.form.subject_id)!="object") {
+        //         this.form.subject_id = '';
+        //     }
+        // },
     }
 };
 </script>

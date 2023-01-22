@@ -46,6 +46,7 @@ const state = Vue.observable({
         {grade:"Grade 11",level: "Senior High"},
         {grade:"Grade 12",level: "Senior High"},
     ],
+
     levels: [
         'Nursery',
         'Kinder',
@@ -53,7 +54,12 @@ const state = Vue.observable({
         'Junior High',
         'Senior High'
     ],
+
+    // unread admin notifs
     notifs: [],
+
+    // default passing grade
+    passingGrade: 75,
 });
 
 
@@ -116,7 +122,7 @@ const actions = {
     },
 
     async getNotifs(status) {
-        state.notifs = [];
+        // state.notifs = [];
         await axios.post(
             `${state.siteUrl}admin/notifs/getNotifs`,
             {

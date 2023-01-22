@@ -112,6 +112,14 @@ Route::group(['prefix'=>'adviser'], function(){
 });
 
 
+// reports
+Route::group(['prefix'=>'reports'], function(){
+    Route::post('studentEnrollment', 'ReportsController@studentEnrollment');
+    Route::post('permaRecord', 'ReportsController@permaRecord');
+    Route::post('generateCOE', 'ReportsController@generateCOE');
+});
+
+
 /**
  *
  */
