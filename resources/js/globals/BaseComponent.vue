@@ -37,7 +37,9 @@
         </v-system-bar> -->
 
         <!-- SIDE NAV -->
-        <v-navigation-drawer v-model="navDrawerState" app color="primary darken-1" dark>
+        <v-navigation-drawer v-model="navDrawerState" app color="primary darken-1" dark
+            v-if="AppStore.state.printMode==false"
+        >
             <v-list color="primary darken-1">
                 <v-list-item>
                     <v-list-item-content>

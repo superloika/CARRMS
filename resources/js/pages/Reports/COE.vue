@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-app-bar>
+        <v-app-bar v-if="AppStore.state.printMode==false">
             <v-toolbar-title class="text-overline">
                 <!-- {{ $route.meta.name }} -->
                 Certificate of Enrollment
@@ -28,11 +28,17 @@
 
             <v-btn color="primary" class="ml-2" @click="generate"
                 :disabled="false">Generate</v-btn>
+
+            <v-btn color="primary" class="ml-2" @click="print"
+                :disabled="
+                    ReportsStore.state.generateCOE.student_firstname==null
+                    || ReportsStore.state.generateCOE.student_firstname==''
+                ">Print</v-btn>
         </v-app-bar>
 
         <v-container>
 
-            <v-card class="pa-2">
+            <v-card class="pa-2" :elevation="AppStore.state.printMode==true?'0':'1'">
                 <!-- <v-sheet align="center" justify="center" > -->
                     <div class="d-flex justify-center">
                         <div class="pr-6">
@@ -94,7 +100,7 @@ export default {
     data() {
         return {
             student: '',
-            date: new Date().toDateString(),
+            date: new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'}),
         };
     },
 
@@ -105,6 +111,17 @@ export default {
     methods:{
         generate() {
             this.ReportsStore.generateCOE(this.student.id);
+        },
+
+        print() {
+            this.AppStore.state.printMode=true;
+            // window.print();
+            setTimeout(()=>{
+                window.print();
+            }, 100)
+            setTimeout(()=>{
+                this.AppStore.state.printMode=false;
+            }, 1000)
         }
     },
 

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-app-bar>
+        <v-app-bar v-if="AppStore.state.printMode==false">
             <v-toolbar-title class="text-overline">
                 Good Moral
             </v-toolbar-title>
@@ -25,8 +25,13 @@
                 </template>
             </v-combobox>
 
-            <v-btn color="primary" class="ml-2" @click="generate"
-                :disabled="false">Generate</v-btn>
+            <v-btn color="primary" class="ml-2" @click="generate">Generate</v-btn>
+
+            <v-btn color="primary" class="ml-2" @click="print"
+                :disabled="
+                    ReportsStore.state.generateCOE.student_firstname==null
+                    || ReportsStore.state.generateCOE.student_firstname==''
+                ">Print</v-btn>
         </v-app-bar>
 
         <v-container>
@@ -70,15 +75,23 @@
                                 <tbody>
                                     <tr>
                                         <td>Very good moral character</td>
-                                        <td style="width:10%"></td>
+                                        <td style="width:10%">
+                                            <input type="checkbox">
+                                        </td>
                                         <td>Fair in moral character</td>
-                                        <td style="width:10%"></td>
+                                        <td style="width:10%">
+                                            <input type="checkbox">
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>Good moral character</td>
-                                        <td style="width:10%"></td>
+                                        <td style="width:10%">
+                                            <input type="checkbox">
+                                        </td>
                                         <td>Needs moral and extra attention</td>
-                                        <td style="width:10%"></td>
+                                        <td style="width:10%">
+                                            <input type="checkbox">
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -109,7 +122,7 @@ export default {
     data() {
         return {
             student: '',
-            date: new Date().toDateString(),
+            date: new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'}),
         };
     },
 
@@ -120,6 +133,17 @@ export default {
     methods:{
         generate() {
             this.ReportsStore.generateCOE(this.student.id);
+        },
+
+        print() {
+            this.AppStore.state.printMode=true;
+            // window.print();
+            setTimeout(()=>{
+                window.print();
+            }, 100)
+            setTimeout(()=>{
+                this.AppStore.state.printMode=false;
+            }, 1000)
         }
     },
 

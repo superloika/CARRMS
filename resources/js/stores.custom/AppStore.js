@@ -60,6 +60,10 @@ const state = Vue.observable({
 
     // default passing grade
     passingGrade: 75,
+
+    // print mode
+    printMode: false,
+
 });
 
 
