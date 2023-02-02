@@ -2,7 +2,7 @@
     <div>
         <v-app-bar>
             <v-toolbar-title class="text-overline font-weight-bold">
-                Subject Taggings
+                <!-- Subject Taggings -->
             </v-toolbar-title>
             <v-spacer></v-spacer>
 

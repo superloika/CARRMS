@@ -24,10 +24,11 @@ const opts = {
                 error: '#FF5252',
                 info: '#2196F3',
                 success: '#4CAF50',
-                primary: '#027843',
+                primary: '#800000',
+                // primary: '#027843',
                 // primary: '#6b161f',
-
-                accent: "#7dd663",
+                accent: "#851d1d",
+                // accent: "#7dd663",
             },
 
 

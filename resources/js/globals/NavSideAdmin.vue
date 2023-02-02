@@ -25,7 +25,7 @@
                         <v-icon>mdi-file-multiple</v-icon>
                     </v-list-item-icon>
                     <v-list-item-content>
-                        <v-list-item-title>Enrollment Data</v-list-item-title>
+                        <v-list-item-title>Students</v-list-item-title>
                     </v-list-item-content>
                 </template>
 
@@ -86,7 +86,7 @@
                         <v-icon>mdi-account-multiple</v-icon>
                     </v-list-item-icon>
                     <v-list-item-content>
-                        <v-list-item-title>Students</v-list-item-title>
+                        <v-list-item-title>Students Masterfile</v-list-item-title>
                     </v-list-item-content>
                 </v-list-item>
 
@@ -122,7 +122,7 @@
                         <v-icon>mdi-cube</v-icon>
                     </v-list-item-icon>
                     <v-list-item-content>
-                        <v-list-item-title>Subject Taggings</v-list-item-title>
+                        <v-list-item-title>Subject Tagging</v-list-item-title>
                     </v-list-item-content>
                 </v-list-item>
 
@@ -172,6 +172,17 @@
                         <v-list-item-title>Student Permanent Record</v-list-item-title>
                     </v-list-item-content>
                 </v-list-item>
+            </v-list-group>
+
+            <v-list-group no-action color="dark">
+                <template v-slot:activator>
+                    <v-list-item-icon class="mr-2">
+                        <v-icon>mdi-file-multiple</v-icon>
+                    </v-list-item-icon>
+                    <v-list-item-content>
+                        <v-list-item-title>Certificates</v-list-item-title>
+                    </v-list-item-content>
+                </template>
 
                 <v-list-item link to="/reports/coe">
                     <v-list-item-icon class="mr-2">

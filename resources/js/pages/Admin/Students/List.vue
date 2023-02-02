@@ -2,7 +2,7 @@
     <div>
         <v-app-bar>
             <v-toolbar-title class="text-overline">
-                Students List
+                <!-- Students List -->
             </v-toolbar-title>
             <v-spacer></v-spacer>
             <v-text-field

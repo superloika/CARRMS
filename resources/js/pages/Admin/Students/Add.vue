@@ -2,7 +2,7 @@
     <div>
         <v-app-bar>
             <v-toolbar-title class="text-overline primary--text">
-                Add Student
+                Add New Student Record
             </v-toolbar-title>
             <v-spacer></v-spacer>
             <v-btn dense iconx text color="primary" @click="saveStudent()">

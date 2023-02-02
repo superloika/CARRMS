@@ -2,7 +2,7 @@
     <div>
         <v-app-bar>
             <v-toolbar-title class="text-overline font-weight-bold">
-                Enrollment Data
+                Students
                 <v-chip small color="accent">
                     {{ AdminSYStore.state.activeSY }}
                 </v-chip>

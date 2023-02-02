@@ -5,7 +5,12 @@
                 Add Subject Tagging
             </v-toolbar-title>
             <v-spacer></v-spacer>
-            <v-btn dense iconx text color="primary" @click="saveSubtag()">
+            <v-btn dense iconx text color="primary" @click="test()">
+                <v-icon>mdi-floppy</v-icon> test
+            </v-btn>
+            <v-btn dense iconx text color="primary" @click="saveSubtag()"
+                :disabled="form.grade==null || form.grade=='' || form.subject_id == null || form.subject_id == ''"
+            >
                 <v-icon>mdi-floppy</v-icon> Save
             </v-btn>
         </v-app-bar>
@@ -29,6 +34,7 @@
                         item-value="id"
                         :return-object="true"
                         v-model="form.subject_id"
+                        multiple deletable-chips small-chips
                     >
                         <!-- <template v-slot:selection="{ item }">
                             <div>{{item.subject_name}}</div>
@@ -111,6 +117,10 @@ export default {
             ;
         },
 
+        test() {
+            console.log(this.form.subject_id);
+        }
+
     },
 
     computed: {
@@ -122,7 +132,7 @@ export default {
             console.log(this.form);
             this.form.level =
                 this.AppStore.state.gradeLevels.find(e=>e.grade==this.form.grade).level;
-            // this.form.subject_id = '';
+            this.form.subject_id = '';
             this.form.strand_id = '';
             this.form.sem = '';
         },

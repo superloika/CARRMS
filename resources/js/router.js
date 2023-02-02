@@ -81,7 +81,7 @@ const router = new VueRouter({
                     name: "admin.students",
                     component: ()=>import("./pages/Admin/Students"),
                     meta: {
-                        name: "Students"
+                        name: "Students Masterfile"
                     }
                 },
                 {
@@ -121,7 +121,7 @@ const router = new VueRouter({
                     name: "admin.subtags",
                     component: ()=>import("./pages/Admin/Subtags"),
                     meta: {
-                        name: "Subject Taggings"
+                        name: "Subject Tagging"
                     }
                 },
                 {
@@ -137,7 +137,7 @@ const router = new VueRouter({
                             name: "admin.enrollment.nursery",
                             component: ()=>import("./pages/Admin/Enrollment"),
                             meta: {
-                                name: "Enrollment (Nursery)",
+                                name: "Nursery",
                                 level: "Nursery"
                             }
                         },
@@ -146,7 +146,7 @@ const router = new VueRouter({
                             name: "admin.enrollment.kinder",
                             component: ()=>import("./pages/Admin/Enrollment"),
                             meta: {
-                                name: "Enrollment (Kinder)",
+                                name: "Kinder",
                                 level: "Kinder"
                             }
                         },
@@ -155,7 +155,7 @@ const router = new VueRouter({
                             name: "admin.enrollment.elementary",
                             component: ()=>import("./pages/Admin/Enrollment"),
                             meta: {
-                                name: "Enrollment (Elementary)",
+                                name: "Elementary",
                                 level: "Elementary"
                             }
                         },
@@ -164,7 +164,7 @@ const router = new VueRouter({
                             name: "admin.enrollment.jhs",
                             component: ()=>import("./pages/Admin/Enrollment"),
                             meta: {
-                                name: "Enrollment (Junior High)",
+                                name: "Junior High",
                                 level: "Junior High"
                             }
                         },
@@ -173,7 +173,7 @@ const router = new VueRouter({
                             name: "admin.enrollment.shs",
                             component: ()=>import("./pages/Admin/Enrollment"),
                             meta: {
-                                name: "Enrollment (Senior High)",
+                                name: "Senior High",
                                 level: "Senior High"
                             }
                         },

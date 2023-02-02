@@ -42,7 +42,7 @@ class AdviserController extends Controller
             DB::table('users')->insert([
                 'adviser_id'=>$adviser_id,
                 'name'=>$firstname. ' '. $middlename. ' '. $lastname,
-                'username'=>strtolower($firstname). strtolower($lastname),
+                'username'=>str_replace(" ", "", strtolower($firstname). strtolower($lastname)),
                 'user_type'=>'adviser',
                 'password'=>Hash::make('123')
             ]);
@@ -57,6 +57,7 @@ class AdviserController extends Controller
         try {
             $id = request()->id;
             DB::table('advisers')->where('id',$id)->delete();
+            DB::table('users')->where('adviser_id',$id)->delete();
             return response()->json('Adviser Deleted', 200);
         } catch (\Throwable $th) {
             return response()->json($th->getMessage(), 500);
