@@ -34,10 +34,10 @@
                 </span>
             </template>
             <template v-slot:[`item.actions`]="{item}">
-                <!-- <v-btn icon dense color="primary" title="View More Details" disabled>
+                <v-btn icon dense color="primary" title="Details" @click="details(item.id)">
                     <v-icon>mdi-eye</v-icon>
                 </v-btn>
-                <v-btn icon dense color="primary" title="Edit" disabled>
+                <!-- <v-btn icon dense color="primary" title="Edit" disabled>
                     <v-icon>mdi-pencil</v-icon>
                 </v-btn> -->
                 <v-btn icon dense color="error" title="Delete" @click="deleteStudent(item.id)"
@@ -86,6 +86,11 @@ export default {
                 ;
             }
         },
+
+        details(student_id) {
+            this.AdminStudentsStore.state.studentDetailsID = student_id;
+            this.AdminStudentsStore.state.tabsMain= 3;
+        }
     },
 
     created(){

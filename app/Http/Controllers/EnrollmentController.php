@@ -16,7 +16,10 @@ class EnrollmentController extends Controller
 
             $res = DB::table('enrollment_head')
                 ->select(
-                    'enrollment_head.*',
+                    'enrollment_head.id as head_id',
+                    'enrollment_head.sy_id',
+                    'enrollment_head.adviser_id',
+                    'enrollment_head.section_id',
                     'students.id as student_id',
                     'students.lrn as student_lrn',
                     'students.firstname as student_firstname',
@@ -32,6 +35,7 @@ class EnrollmentController extends Controller
                     'advisers.lastname as adviser_lastname',
                     'enrollment_line.final_remarks',
                     'enrollment_line.id as enrollment_line_id',
+                    'enrollment_line.id',
                 )
 
                 ->join('enrollment_line','enrollment_line.head_id','enrollment_head.id')

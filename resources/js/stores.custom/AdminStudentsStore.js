@@ -5,6 +5,8 @@ import AppStore from "./AppStore";
 const state = Vue.observable({
     tabsMain: 0,
     students: [],
+
+    studentDetailsID: null,
 });
 
 

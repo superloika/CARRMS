@@ -50,7 +50,12 @@
         >
             <template v-slot:[`item.actions`]="{item}">
                 <v-btn icon color="primary" title="View"
-                    @click.stop="viewDialog(item.id)"
+                    @click.stop="
+                        viewDialog(
+                            item.id,
+                            `${item.firstname} ${item.middlename} ${item.lastname}`
+                        )
+                    "
                 >
                     <v-icon>mdi-eye</v-icon>
                 </v-btn>
@@ -67,7 +72,7 @@
 <script>
 export default {
     components: {
-        ViewDialog: () => import('./View.vue')
+        ViewDialog: () => import('./ViewSG.vue')
     },
 
     data() {
@@ -79,7 +84,7 @@ export default {
                 { text: "Middle Name", value: "middlename" },
                 { text: "Last Name", value: "lastname" },
                 { text: "Gender", value: "gender" },
-                { text: "Final Remarks", value: "final_remarks" },
+                // { text: "Final Remarks", value: "final_remarks" },
                 { text: "Actions", value: "actions" },
             ],
             gender: 'All',
@@ -87,8 +92,9 @@ export default {
     },
 
     methods:{
-        viewDialog(enrollment_line_id) {
+        viewDialog(enrollment_line_id, studentName) {
             this.AdviserEnrollmentStore.state.selectedELID=enrollment_line_id;
+            this.AdviserEnrollmentStore.state.studentName=studentName;
             this.AdviserEnrollmentStore.state.viewDialog=true;
         }
     },

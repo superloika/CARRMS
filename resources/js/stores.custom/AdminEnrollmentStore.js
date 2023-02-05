@@ -13,6 +13,9 @@ const state = Vue.observable({
     },
     studentsForEnrollment: [],
     studentsEnrolled: [],
+
+    viewDialog: null,
+    selectedELID: null,
 });
 
 

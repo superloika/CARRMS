@@ -55,8 +55,11 @@ Route::group(['prefix'=>'admin'], function(){
         Route::post('toggleSY', 'SYController@toggleSY');
     });
     Route::group(['prefix'=>'students'], function() {
+        Route::post('import', 'StudentController@import');
+
         Route::get('getStudents', 'StudentController@getStudents');
         Route::post('saveStudent', 'StudentController@saveStudent');
+        Route::post('updateStudent', 'StudentController@updateStudent');
         Route::post('deleteStudent', 'StudentController@deleteStudent');
     });
     Route::group(['prefix'=>'advisers'], function() {

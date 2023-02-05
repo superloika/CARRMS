@@ -1,7 +1,9 @@
 <template>
     <v-card>
         <v-app-bar elevation="0">
-            <v-toolbar-title>Subjects and Grades</v-toolbar-title>
+            <v-toolbar-title>
+                {{ AdviserEnrollmentStore.state.studentName }} - Subjects and Grades
+            </v-toolbar-title>
             <v-spacer></v-spacer>
             <v-btn color="primary" @click="updateGrades">Update</v-btn>
         </v-app-bar>

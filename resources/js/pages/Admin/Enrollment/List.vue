@@ -49,12 +49,20 @@
             :search="searchKey"
         >
             <template v-slot:[`item.adviser_name`]="{item}">
-                {{ item.adviser_firstname }} {{ item.middlename }} {{ item.adviser_lastname }}
+                {{ item.adviser_firstname }} {{ item.adviser_middlename }} {{ item.adviser_lastname }}
             </template>
             <template v-slot:[`item.actions`]="{item}">
-                <v-btn icon color="primary" title="View Details" disabled>
+                <v-btn icon color="primary" title="View"
+                    @click.stop="
+                        viewDialog(
+                            item.enrollment_line_id,
+                            `${item.student_firstname} ${item.student_middlename} ${item.student_lastname}`
+                        )
+                    "
+                >
                     <v-icon>mdi-eye</v-icon>
                 </v-btn>
+
                 <v-btn icon color="error" title="Delete"
                     @click="deleteEnrollment(item.enrollment_line_id,item.student_id)"
                     v-if="AppStore.isSuperAdmin()"
@@ -63,11 +71,20 @@
                 </v-btn>
             </template>
         </v-data-table>
+
+        <v-dialog v-model="AdminEnrollmentStore.state.viewDialog" max-width="80%">
+            <ViewDialog :key="AdminEnrollmentStore.state.selectedELID"></ViewDialog>
+        </v-dialog>
     </div>
 </template>
 
 <script>
 export default {
+    components: {
+        // ViewDialog: () => import('../../Adviser/Enrollment/View.vue'),
+        ViewDialog: () => import('./ViewSG.vue'),
+    },
+
     data() {
         return {
             searchKey: "",
@@ -81,7 +98,7 @@ export default {
                 { text: "Grade", value: "grade" },
                 { text: "Section", value: "section" },
                 { text: "Adviser", value: "adviser_name" },
-                { text: "Final Remarks", value: "final_remarks" },
+                // { text: "Final Remarks", value: "final_remarks" },
                 { text: "Actions", value: "actions" },
             ],
             selectedSection: null,
@@ -126,6 +143,12 @@ export default {
                 ;
             }
         },
+
+        viewDialog(enrollment_line_id, studentName) {
+            this.AdminEnrollmentStore.state.selectedELID=enrollment_line_id;
+            this.AdminEnrollmentStore.state.studentName = studentName;
+            this.AdminEnrollmentStore.state.viewDialog=true;
+        }
     },
 
     computed: {

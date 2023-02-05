@@ -8,7 +8,7 @@
 
             <v-spacer></v-spacer>
 
-            <v-combobox outlined label="Student"
+            <v-combobox outlined label="Student" placeholder="Search by last name"
                 hide-details dense
                 :items="AdminStudentsStore.state.students"
                 item-text="lastname"
@@ -26,8 +26,8 @@
                 </template>
             </v-combobox>
 
-            <v-btn color="primary" class="ml-2" @click="generate"
-                :disabled="false">Generate</v-btn>
+            <!-- <v-btn color="primary" class="ml-2" @click="generate"
+                :disabled="student==''">Generate</v-btn> -->
 
             <v-btn color="primary" class="ml-2" @click="print"
                 :disabled="
@@ -106,6 +106,14 @@ export default {
 
     computed:{
 
+    },
+
+    watch: {
+        student() {
+            if(this.student!='') {
+                this.generate();
+            }
+        }
     },
 
     methods:{

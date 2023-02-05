@@ -5,9 +5,9 @@
                 Add Subject Tagging
             </v-toolbar-title>
             <v-spacer></v-spacer>
-            <v-btn dense iconx text color="primary" @click="test()">
+            <!-- <v-btn dense iconx text color="primary" @click="test()">
                 <v-icon>mdi-floppy</v-icon> test
-            </v-btn>
+            </v-btn> -->
             <v-btn dense iconx text color="primary" @click="saveSubtag()"
                 :disabled="form.grade==null || form.grade=='' || form.subject_id == null || form.subject_id == ''"
             >

@@ -182,7 +182,10 @@ class AdviserEnrollmentController extends Controller
             }
 
             $student = DB::table('enrollment_line')
-                ->select('students.firstname','students.middlename','students.lastname')
+                ->select(
+                    'students.firstname','students.middlename','students.lastname',
+                    'enrollment_line.final_remarks'
+                )
                 ->join('students','students.id','enrollment_line.student_id')
                 ->where('enrollment_line.id',$subjects[0]['enrollment_line_id'])
                 ->get()->first();
