@@ -73,6 +73,7 @@
                                             {text:'Middle Name',value:'middlename'},
                                             {text:'Last Name',value:'lastname'},
                                             {text:'Ext. Name',value:'extname'},
+                                            {text:'Actions',value:'actions'},
                                         ]"
                                         :items="students"
                                         v-model="selectedToAdd"
@@ -81,6 +82,20 @@
                                     >
                                         <template v-slot:[`item.name`]="{item}">
                                             {{ item.firstname }} {{ item.middlename }} {{ item.lastname }}
+                                        </template>
+
+                                        <template v-slot:[`item.actions`]="{item}">
+                                            <v-btn icon color="primary" title="View"
+                                                @click.stop="
+                                                    viewDialog(
+                                                        item.enrollment_line_id,
+                                                        item.enrollment_head_id,
+                                                        `${item.firstname} ${item.middlename} ${item.lastname}`
+                                                    )
+                                                "
+                                            >
+                                                <v-icon>mdi-eye</v-icon>
+                                            </v-btn>
                                         </template>
                                     </v-data-table>
                                 </v-card-text>
@@ -203,6 +218,12 @@ export default {
             this.selectedToAdd = [];
             this.selectedStrand = null;
             this.AdminEnrollmentStore.getStudentsForEnrollment(section.grade);
+        },
+        viewDialog(enrollment_line_id,enrollment_head_id, studentName) {
+            this.AdminEnrollmentStore.state.selectedELID=enrollment_line_id;
+            this.AdminEnrollmentStore.state.studentName = studentName;
+            this.AdminEnrollmentStore.state.viewDialog=true;
+            this.AdviserEnrollmentStore.getSectionDetails(enrollment_head_id);
         }
     },
 

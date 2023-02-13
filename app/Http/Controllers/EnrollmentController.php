@@ -72,12 +72,24 @@ class EnrollmentController extends Controller
 
             if($grade != null) {
                 $res = DB::table('students')
+                    ->select('students.id',
+                        'students.lrn',
+                        'students.firstname',
+                        'students.middlename',
+                        'students.lastname',
+                        'students.extname',
+                        DB::raw("
+                            (SELECT enrollment_line.id FROM enrollment_line
+                            where enrollment_line.student_id=students.id
+                            ORDER BY enrollment_line.id DESC LIMIT 1) as enrollment_line_id"
+                        ),
+                        DB::raw("
+                            (SELECT enrollment_line.head_id FROM enrollment_line
+                            where enrollment_line.student_id=students.id
+                            ORDER BY enrollment_line.id DESC LIMIT 1) as enrollment_head_id"
+                        )
+                    )
                     ->where('is_enrolled',0)
-                    // ->select('students.*','sections.grade','enrollment_line.final_remarks')
-                    // ->leftJoin('enrollment_line', 'enrollment_line.student_id','students.id')
-                    // ->leftJoin('enrollment_head','enrollment_head.id','enrollment_line.head_id')
-                    // ->leftJoin('sections','sections.id','enrollment_head.section_id')
-
 
                     // ->orWhere(function($q) use($activeSYid){
                     //     $q->whereRaw('enrollment_line.student_id IS NULL')
@@ -105,6 +117,8 @@ class EnrollmentController extends Controller
                     // })
                     ->get()
                     ;
+
+                    // $res = DB::select("SELECT students.*,enrollment_line.id as enrollment_line_id FROM students OUTER APPLY (SELECT * FROM enrollment_line WHERE enrollment_line.student_id = students.id LIMIT 1)");
                 return response()->json($res, 200);
             }
         } catch (\Throwable $th) {

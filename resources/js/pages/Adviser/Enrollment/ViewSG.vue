@@ -5,7 +5,7 @@
                 {{ AdviserEnrollmentStore.state.studentName }} - Subjects and Grades
             </v-toolbar-title>
             <v-spacer></v-spacer>
-            <v-btn color="primary" @click="updateGrades">Update</v-btn>
+            <v-btn color="primary" @click="updateGrades">Compute</v-btn>
         </v-app-bar>
         <v-card-title></v-card-title>
         <v-card-text>

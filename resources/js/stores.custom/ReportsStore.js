@@ -13,13 +13,14 @@ const state = Vue.observable({
 
 
 const actions = {
-    async studentEnrollment(sy_id,level) {
+    async studentEnrollment(sy_id,level,grade='') {
         state.studentEnrollment = [];
         await axios.post(
             `${AppStore.state.siteUrl}reports/studentEnrollment`,
             {
                 sy_id: sy_id,
                 level: level,
+                grade: grade,
             }
         ).then(e=>{
             state.studentEnrollment = e.data;

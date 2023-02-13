@@ -50,7 +50,7 @@ class AdviserEnrollmentController extends Controller
                 ->join('sections','sections.id','enrollment_head.section_id')
                 ->join('advisers','advisers.id','enrollment_head.adviser_id')
                 ->where('enrollment_head.id', $head_id)
-                ->where('enrollment_head.adviser_id', auth()->user()->adviser_id)
+                // ->where('enrollment_head.adviser_id', auth()->user()->adviser_id)
                 ->get()->first();
             return response()->json($res,200);
         } catch (\Throwable $th) {

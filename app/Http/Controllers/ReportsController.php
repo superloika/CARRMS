@@ -11,6 +11,7 @@ class ReportsController extends Controller
         try {
             $sy_id = request()->sy_id;
             $level = request()->level;
+            $grade = request()->grade;
 
             $res = DB::table('enrollment_line')
                 ->select(
@@ -38,7 +39,9 @@ class ReportsController extends Controller
 
                 ->where('enrollment_head.sy_id', $sy_id)
                 ->where('sections.level', $level)
-
+                ->when($grade != '', function($q) use($grade){
+                    $q->where('sections.grade', $grade);
+                })
                 ->get();
 
             $data = [];

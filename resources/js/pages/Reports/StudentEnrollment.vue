@@ -22,6 +22,16 @@
                 style="max-width:200px"
             >
             </v-select>
+            <v-select outlined dense hide-details rounded
+                label="Grade"
+                :items="gradeLevels"
+                v-model="grade"
+                item-text="grade"
+                item-value="grade"
+                style="max-width:200px;"
+                class="ml-2"
+            >
+            </v-select>
             <!-- <v-btn color="primary" class="ml-2" @click="generate"
                 :disabled="sy_id=='' || level==''">Generate</v-btn> -->
             <v-btn color="primary" class="ml-2" @click="print"
@@ -98,19 +108,29 @@ export default {
         return {
             sy_id: '',
             level: '',
+            grade: '',
         };
     },
 
     computed:{
         keys() {
             return Object.keys(this.ReportsStore.state.studentEnrollment);
-        }
+        },
+        gradeLevels() {
+            if(this.level!='') {
+                return this.AppStore.state.gradeLevels.filter(e=>{
+                    return e.level==this.level;
+                })
+            } else {
+                return [];
+            }
+        },
     },
 
     methods:{
         generate() {
             // this.ReportsStore.studentEnrollment(24, 'Senior High')
-            this.ReportsStore.studentEnrollment(this.sy_id, this.level);
+            this.ReportsStore.studentEnrollment(this.sy_id, this.level, this.grade);
         },
 
         print() {
@@ -129,7 +149,13 @@ export default {
             this.level = '';
         },
         level() {
+            this.grade = '';
             if(this.level != '') {
+                this.generate();
+            }
+        },
+        grade() {
+            if(this.grade != '') {
                 this.generate();
             }
         }
