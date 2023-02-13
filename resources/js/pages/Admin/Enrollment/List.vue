@@ -148,6 +148,7 @@ export default {
             this.AdminEnrollmentStore.state.selectedELID=enrollment_line_id;
             this.AdminEnrollmentStore.state.studentName = studentName;
             this.AdminEnrollmentStore.state.viewDialog=true;
+            this.AdviserEnrollmentStore.sectionDetails = {};
         }
     },
 

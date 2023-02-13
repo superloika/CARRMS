@@ -5,7 +5,7 @@
                 {{ AdminEnrollmentStore.state.studentName }} - Subjects and Grades
             </v-toolbar-title>
             <v-spacer></v-spacer>
-            <v-chip v-if="AdviserEnrollmentStore.state.sectionDetails" color="">
+            <v-chip v-if="AdviserEnrollmentStore.state.sectionDetails.grade != null" color="">
                 Previous Grade Level: {{ AdviserEnrollmentStore.state.sectionDetails.grade }}
             </v-chip>
         </v-app-bar>
