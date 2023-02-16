@@ -80,13 +80,21 @@ class EnrollmentController extends Controller
                         'students.extname',
                         DB::raw("
                             (SELECT enrollment_line.id FROM enrollment_line
-                            where enrollment_line.student_id=students.id
+                            WHERE enrollment_line.student_id=students.id
                             ORDER BY enrollment_line.id DESC LIMIT 1) as enrollment_line_id"
                         ),
                         DB::raw("
                             (SELECT enrollment_line.head_id FROM enrollment_line
-                            where enrollment_line.student_id=students.id
+                            WHERE enrollment_line.student_id=students.id
                             ORDER BY enrollment_line.id DESC LIMIT 1) as enrollment_head_id"
+                        )
+                        ,
+                        DB::raw("
+                            (SELECT sections.level FROM enrollment_line
+                            JOIN enrollment_head ON enrollment_head.id=enrollment_line.head_id
+                            JOIN sections ON sections.id=enrollment_head.section_id
+                            WHERE enrollment_line.student_id=students.id
+                            ORDER BY enrollment_line.id DESC LIMIT 1) as level"
                         )
                     )
                     ->where('is_enrolled',0)

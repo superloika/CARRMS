@@ -4,6 +4,7 @@
             <v-toolbar-title>
                 {{ $route.meta.name }}
             </v-toolbar-title>
+
             <v-spacer></v-spacer>
 
             <div>

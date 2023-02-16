@@ -6,7 +6,7 @@
             </v-toolbar-title>
             <v-spacer></v-spacer>
             <v-chip v-if="AdviserEnrollmentStore.state.sectionDetails.grade != null" color="">
-                Previous Grade Level: {{ AdviserEnrollmentStore.state.sectionDetails.grade }}
+                Previous Grade Level on Record: {{ AdviserEnrollmentStore.state.sectionDetails.grade }}
             </v-chip>
         </v-app-bar>
         <v-card-title></v-card-title>
@@ -156,8 +156,15 @@ export default {
             return [];
         },
 
+        // level() {
+        //     return this.$route.meta.level
+        // },
         level() {
-            return this.$route.meta.level
+            if(this.AdviserEnrollmentStore.state.sectionDetails.level != null) {
+                return this.AdviserEnrollmentStore.state.sectionDetails.level;
+            } else {
+                return  this.$route.meta.level;
+            }
         },
 
     },
@@ -176,6 +183,7 @@ export default {
 
     beforeDestroy() {
         this.AdviserEnrollmentStore.state.selectedStudentSubjects = [];
+        this.AdviserEnrollmentStore.state.sectionDetails={};
     }
 }
 </script>

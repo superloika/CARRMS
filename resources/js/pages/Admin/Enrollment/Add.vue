@@ -94,7 +94,7 @@
                                                     )
                                                 "
                                             >
-                                                <v-icon>mdi-eye</v-icon> View
+                                                <v-icon>mdi-eye</v-icon> View Previous Record
                                             </v-btn>
                                         </template>
                                     </v-data-table>

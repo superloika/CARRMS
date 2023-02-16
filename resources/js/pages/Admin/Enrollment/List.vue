@@ -52,7 +52,7 @@
                 {{ item.adviser_firstname }} {{ item.adviser_middlename }} {{ item.adviser_lastname }}
             </template>
             <template v-slot:[`item.actions`]="{item}">
-                <v-btn icon color="primary" title="View"
+                <v-btn iconx small text color="primary" title="View"
                     @click.stop="
                         viewDialog(
                             item.enrollment_line_id,
@@ -60,7 +60,7 @@
                         )
                     "
                 >
-                    <v-icon>mdi-eye</v-icon>
+                    <v-icon>mdi-eye</v-icon> View
                 </v-btn>
 
                 <v-btn icon color="error" title="Delete"
