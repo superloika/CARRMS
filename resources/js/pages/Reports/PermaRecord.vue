@@ -8,7 +8,7 @@
 
             <v-spacer></v-spacer>
 
-            <v-combobox outlined label="Student" placeholder="Search by last name"
+            <!-- <v-combobox outlined label="Student" placeholder="Search by last name"
                 hide-details dense
                 :items="AdminStudentsStore.state.students"
                 item-text="lastname"
@@ -17,13 +17,27 @@
                 v-model="student"
             >
                 <template v-slot:selection="{ item }">
-                    <div>{{item.lastname}}, {{item.firstname}} {{item.middlename}}</div>
+                    <div>{{item.lastname}}, {{item.firstname}} {{item.middlename}} ({{ item.lrn }})</div>
                 </template>
                 <template v-slot:item="{ item }">
                     <div>
-                        {{item.lastname}}, {{item.firstname}} {{item.middlename}}
+                        {{item.lastname}}, {{item.firstname}} {{item.middlename}} ({{ item.lrn }})
                     </div>
                 </template>
+            </v-combobox> -->
+            <v-combobox outlined label="Search student here" placeholder="Search by name or LRN"
+                hide-details dense
+                :items="AdminStudentsStore.state.students"
+                item-text="searchKey"
+                item-value="id"
+                :return-object="true"
+                v-model="student"
+            >
+                <!-- <template v-slot:item="{ item }">
+                    <div>
+                        {{item.lastname}}, {{item.firstname}} {{item.middlename}} ({{ item.lrn }})
+                    </div>
+                </template> -->
             </v-combobox>
 
             <v-select outlined dense hide-details rounded filledx label="Level"
@@ -43,12 +57,32 @@
 
         <v-container v-if="showOutput">
             <v-card class="pa-2">
-                <v-sheet class="text-align-center" align="center" justify="center">
-                    <div class="text-h6">Student Permanent Record</div>
-                    <div class="">{{ level }}</div>
-                    <br>
-                    <!-- <v-divider></v-divider> -->
-                </v-sheet>
+                <br>
+                <v-row>
+                    <v-col md="4">
+                        <v-sheet style="background-colorx:blue;" align="right" justify="right">
+                            <v-img src="/img/ca.jfif"
+                                height="100"
+                                width="100"
+                            >
+                            </v-img>
+                        </v-sheet>
+                    </v-col>
+                    <v-col md="4">
+                        <v-sheet class="text-align-center" align="center" justify="center">
+                            <div class="font-weight-bold">DEPARTMENT OF EDUCATION</div>
+                            <div class="text-caption">Region VII, Central Visayas</div>
+                            <div class="font-weight-bold">CARMEL ACADEMY</div>
+                            <div class="text-caption">Balilihan, Bohol</div>
+                            <br>
+                            <div class="font-weight-bold">STUDENT PERMANENT RECORD</div>
+                            <div class="">{{ level }}</div>
+                            <br>
+                            <!-- <v-divider></v-divider> -->
+                        </v-sheet>
+                    </v-col>
+                    <v-col md="4"></v-col>
+                </v-row>
 
                 <v-card-text class="black--text">
                     <v-row>

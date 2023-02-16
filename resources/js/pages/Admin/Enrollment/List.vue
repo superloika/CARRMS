@@ -15,7 +15,7 @@
                 return-object
                 dense rounded hide-details=""
                 v-on:change="onChangeGradeSection"
-                style="max-width:200px;"
+                style="max-width:300px;"
             >
                 <template slot="item" slot-scope="data">
                     {{ data.item.grade }} - {{ data.item.section }}

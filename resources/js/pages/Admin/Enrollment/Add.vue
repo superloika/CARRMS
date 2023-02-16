@@ -72,7 +72,7 @@
                                             {text:'First Name',value:'firstname'},
                                             {text:'Middle Name',value:'middlename'},
                                             {text:'Last Name',value:'lastname'},
-                                            {text:'Ext. Name',value:'extname'},
+                                            //{text:'Ext. Name',value:'extname'},
                                             {text:'Actions',value:'actions'},
                                         ]"
                                         :items="students"
@@ -85,7 +85,7 @@
                                         </template>
 
                                         <template v-slot:[`item.actions`]="{item}">
-                                            <v-btn icon color="primary" title="View"
+                                            <v-btn iconx small text color="primary" title="View"
                                                 @click.stop="
                                                     viewDialog(
                                                         item.enrollment_line_id,
@@ -94,7 +94,7 @@
                                                     )
                                                 "
                                             >
-                                                <v-icon>mdi-eye</v-icon>
+                                                <v-icon>mdi-eye</v-icon> View
                                             </v-btn>
                                         </template>
                                     </v-data-table>

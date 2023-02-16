@@ -11,7 +11,12 @@ class StudentController extends Controller
 {
     public function getStudents() {
         try {
-            $res = DB::table('students')->latest()->get();
+            $res = DB::table('students')
+            ->select(
+                'students.*',
+                DB::raw("CONCAT(`firstname`,' ',`middlename`,' ',`lastname`,' - ',`lrn`) as searchKey")
+            )
+            ->latest()->get();
             return response()->json($res, 200);
         } catch (\Throwable $th) {
             return response()->json($th->getMessage(), 500);

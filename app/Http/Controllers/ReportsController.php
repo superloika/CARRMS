@@ -69,7 +69,8 @@ class ReportsController extends Controller
 
             $data = [];
 
-            $student = DB::table('students')->where('id',$student_id)->first();
+            $student = DB::table('students')
+                ->where('id',$student_id)->first();
             $data['profile'] = $student;
 
             $scholasticRec = DB::table('enrollment_line')

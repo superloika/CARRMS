@@ -8,22 +8,22 @@
 
             <v-spacer></v-spacer>
 
-            <v-combobox outlined label="Student" placeholder="Search by last name"
+            <v-combobox outlined label="Search student here" placeholder="Search by name or LRN"
                 hide-details dense
                 :items="AdminStudentsStore.state.students"
-                item-text="lastname"
+                item-text="searchKey"
                 item-value="id"
                 :return-object="true"
                 v-model="student"
             >
-                <template v-slot:selection="{ item }">
+                <!-- <template v-slot:selection="{ item }">
                     <div>{{item.lastname}}, {{item.firstname}} {{item.middlename}}</div>
                 </template>
                 <template v-slot:item="{ item }">
                     <div>
                         {{item.lastname}}, {{item.firstname}} {{item.middlename}}
                     </div>
-                </template>
+                </template> -->
             </v-combobox>
 
             <!-- <v-btn color="primary" class="ml-2" @click="generate"

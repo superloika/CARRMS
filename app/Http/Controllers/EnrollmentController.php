@@ -90,31 +90,6 @@ class EnrollmentController extends Controller
                         )
                     )
                     ->where('is_enrolled',0)
-
-                    // ->orWhere(function($q) use($activeSYid){
-                    //     $q->whereRaw('enrollment_line.student_id IS NULL')
-                    //     ->where('enrollment_head.sy_id',"=",$activeSYid)
-                    //     ;
-                    // })
-
-                    // ->orWhere(function($q) use($prevSYid, $grade){
-                    //         $q->whereRaw('enrollment_line.student_id IS NOT NULL')
-                    //         ->where('enrollment_head.sy_id', $prevSYid)
-                    //         ->where(function($q2) use($grade){
-                    //             $arrG = ['Nursery','Kinder 1','Kinder 2',
-                    //                 'Grade 1','Grade 2','Grade 3','Grade 4','Grade 5','Grade 6',
-                    //                 'Grade 7','Grade 8','Grade 9','Grade 10','Grade 11','Grade 12'
-                    //             ];
-                    //             for($i=1; $i<count($arrG); $i++) {
-                    //                 $q2->when($grade==$arrG[$i-1], function($q) use($grade, $arrG, $i){
-                    //                     $q->where('enrollment_line.final_remarks',"=","failed")
-                    //                         ->where('sections.grade',$grade)
-                    //                     ;
-                    //                 });
-                    //             }
-                    //         })
-                    //         ;
-                    // })
                     ->get()
                     ;
 
@@ -125,6 +100,68 @@ class EnrollmentController extends Controller
             return response()->json($th->getMessage(), 500);
         }
     }
+
+    // public function getStudentsForEnrollment1() {
+    //     try {
+    //         $grade = request()->grade;
+    //         $prevSYid = request()->prevSYid;
+    //         $activeSYid = request()->activeSYid;
+
+    //         if($grade != null) {
+    //             $res = DB::table('students')
+    //                 ->select('students.id',
+    //                     'students.lrn',
+    //                     'students.firstname',
+    //                     'students.middlename',
+    //                     'students.lastname',
+    //                     'students.extname',
+    //                     DB::raw("
+    //                         (SELECT enrollment_line.id FROM enrollment_line
+    //                         where enrollment_line.student_id=students.id
+    //                         ORDER BY enrollment_line.id DESC LIMIT 1) as enrollment_line_id"
+    //                     ),
+    //                     DB::raw("
+    //                         (SELECT enrollment_line.head_id FROM enrollment_line
+    //                         where enrollment_line.student_id=students.id
+    //                         ORDER BY enrollment_line.id DESC LIMIT 1) as enrollment_head_id"
+    //                     )
+    //                 )
+    //                 ->where('is_enrolled',0)
+
+    //                 // ->orWhere(function($q) use($activeSYid){
+    //                 //     $q->whereRaw('enrollment_line.student_id IS NULL')
+    //                 //     ->where('enrollment_head.sy_id',"=",$activeSYid)
+    //                 //     ;
+    //                 // })
+
+    //                 // ->orWhere(function($q) use($prevSYid, $grade){
+    //                 //         $q->whereRaw('enrollment_line.student_id IS NOT NULL')
+    //                 //         ->where('enrollment_head.sy_id', $prevSYid)
+    //                 //         ->where(function($q2) use($grade){
+    //                 //             $arrG = ['Nursery','Kinder 1','Kinder 2',
+    //                 //                 'Grade 1','Grade 2','Grade 3','Grade 4','Grade 5','Grade 6',
+    //                 //                 'Grade 7','Grade 8','Grade 9','Grade 10','Grade 11','Grade 12'
+    //                 //             ];
+    //                 //             for($i=1; $i<count($arrG); $i++) {
+    //                 //                 $q2->when($grade==$arrG[$i-1], function($q) use($grade, $arrG, $i){
+    //                 //                     $q->where('enrollment_line.final_remarks',"=","failed")
+    //                 //                         ->where('sections.grade',$grade)
+    //                 //                     ;
+    //                 //                 });
+    //                 //             }
+    //                 //         })
+    //                 //         ;
+    //                 // })
+    //                 ->get()
+    //                 ;
+
+    //                 // $res = DB::select("SELECT students.*,enrollment_line.id as enrollment_line_id FROM students OUTER APPLY (SELECT * FROM enrollment_line WHERE enrollment_line.student_id = students.id LIMIT 1)");
+    //             return response()->json($res, 200);
+    //         }
+    //     } catch (\Throwable $th) {
+    //         return response()->json($th->getMessage(), 500);
+    //     }
+    // }
 
 
     public function saveStudentEnrollment() {
