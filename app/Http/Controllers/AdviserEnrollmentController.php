@@ -120,12 +120,16 @@ class AdviserEnrollmentController extends Controller
                     $second = $s['second'] ?? 0;
                     $third = $s['third'] ?? 0;
                     $fourth = $s['fourth'] ?? 0;
-                    $final = ($first+$second+$third+$fourth) / 4;
+                    // dd($fourth);
+                    $final = null;
                     $remarks='';
-                    if($final < $passing_grade) {
-                        $remarks = 'FAILED';
-                    } else {
-                        $remarks = 'PASSED';
+                    if($first && $second && $third && $fourth){
+                        $final = round(($first+$second+$third+$fourth) / 4);
+                        if($final < $passing_grade) {
+                            $remarks = 'FAILED';
+                        } else {
+                            $remarks = 'PASSED';
+                        }
                     }
 
                     DB::table('grades')
@@ -142,12 +146,15 @@ class AdviserEnrollmentController extends Controller
                     if($s['sem']==1) {
                         $first = $s['first'] ?? 0;
                         $second = $s['second'] ?? 0;
-                        $final = ($first+$second) / 2;
+                        $final = null;
                         $remarks='';
-                        if($final < $passing_grade) {
-                            $remarks = 'FAILED';
-                        } else {
-                            $remarks = 'PASSED';
+                        if($first && $second){
+                            $final = round(($first+$second) / 2);
+                            if($final < $passing_grade) {
+                                $remarks = 'FAILED';
+                            } else {
+                                $remarks = 'PASSED';
+                            }
                         }
 
                         DB::table('grades')
@@ -161,12 +168,15 @@ class AdviserEnrollmentController extends Controller
                     } else if($s['sem']==2) {
                         $third = $s['third'] ?? 0;
                         $fourth = $s['fourth'] ?? 0;
-                        $final = ($third+$fourth) / 2;
+                        $final = null;
                         $remarks='';
-                        if($final < $passing_grade) {
-                            $remarks = 'FAILED';
-                        } else {
-                            $remarks = 'PASSED';
+                        if($third && $fourth){
+                            $final=round(($third+$fourth) / 2);
+                            if($final < $passing_grade) {
+                                $remarks = 'FAILED';
+                            } else {
+                                $remarks = 'PASSED';
+                            }
                         }
 
                         DB::table('grades')

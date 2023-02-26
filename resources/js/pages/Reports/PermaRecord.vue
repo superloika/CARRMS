@@ -180,13 +180,15 @@
                                                 <td>{{ subj.remarks }}</td>
                                             </tr>
                                         </tbody>
-                                        <!-- <tfoot>
-                                            <tr>
-                                                <th colspan="5">General average</th>
-                                                <th></th>
-                                                <th></th>
+                                        <tfoot>
+                                            <tr v-if="generalAverage(s.subjects)>0">
+                                                <td colspan="5"><em>General Average</em></td>
+                                                <td>{{ generalAverage(s.subjects).toFixed(2).replace('.00','') }}</td>
+                                                <td>
+                                                    {{ generalAverage(s.subjects) >= 75 ? 'PASSED' : 'FAILED' }}
+                                                </td>
                                             </tr>
-                                        </tfoot> -->
+                                        </tfoot>
                                     </table>
                                 </v-col>
 
@@ -360,6 +362,16 @@ export default {
             setTimeout(()=>{
                 this.AppStore.state.printMode=false;
             }, 1000)
+        },
+        generalAverage(s) {
+            let sum = 0.00;
+            s.forEach(e => {
+                if(e.final != null) {
+                    sum += e.final;
+                }
+            });
+
+            return sum/s.length;
         }
     },
 

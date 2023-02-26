@@ -49,7 +49,7 @@
             :search="searchKey"
         >
             <template v-slot:[`item.actions`]="{item}">
-                <v-btn icon color="primary" title="View"
+                <v-btn iconx dense text color="primary" title="View"
                     @click.stop="
                         viewDialog(
                             item.id,
@@ -57,7 +57,7 @@
                         )
                     "
                 >
-                    <v-icon>mdi-eye</v-icon>
+                    <v-icon>mdi-eye</v-icon> View
                 </v-btn>
 
             </template>

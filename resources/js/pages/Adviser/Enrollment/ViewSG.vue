@@ -5,7 +5,7 @@
                 {{ AdviserEnrollmentStore.state.studentName }} - Subjects and Grades
             </v-toolbar-title>
             <v-spacer></v-spacer>
-            <v-btn color="primary" @click="updateGrades">Compute</v-btn>
+            <v-btn color="primary" @click="updateGrades">Submit</v-btn>
         </v-app-bar>
         <v-card-title></v-card-title>
         <v-card-text>
@@ -23,18 +23,21 @@
                     <v-col>
                         <v-text-field outlined dense hide-details label="2nd" v-model="subject.second"
                             type="number" min="0" max="100" :rules="[numberRule]"
+                            :disabled="subject.first=='' || subject.first==null"
                         >
                         </v-text-field>
                     </v-col>
                     <v-col>
                         <v-text-field outlined dense hide-details label="3rd" v-model="subject.third"
                             type="number" min="0" max="100" :rules="[numberRule]"
+                            :disabled="subject.second=='' || subject.second==null"
                         >
                         </v-text-field>
                     </v-col>
                     <v-col>
                         <v-text-field outlined dense hide-details label="4th" v-model="subject.fourth"
                             type="number" min="0" max="100" :rules="[numberRule]"
+                            :disabled="subject.third=='' || subject.third==null"
                         >
                         </v-text-field>
                     </v-col>
@@ -68,6 +71,7 @@
                     <v-col>
                         <v-text-field outlined dense hide-details label="2nd" v-model="subject.second"
                             type="number" min="0" max="100" :rules="[numberRule]"
+                            :disabled="subject.first=='' || subject.first==null"
                         >
                         </v-text-field>
                     </v-col>
@@ -130,7 +134,7 @@ export default {
     data() {
         return {
             numberRule: v  => {
-                if (!v.trim()) return true;
+                // if (v.trim()) return true;
                 if (!isNaN(parseFloat(v)) && v >= 0 && v <= 100) return true;
                 return 'Number has to be between 0 and 100';
             },
@@ -141,6 +145,9 @@ export default {
         subjects() {
             return this.AdviserEnrollmentStore.state.selectedStudentSubjects;
         },
+        // origSubjects() {
+        //     return [...this.AdviserEnrollmentStore.state.selectedStudentSubjects];
+        // },
         subjects_sem1() {
             if(this.AdviserEnrollmentStore.state.sectionDetails.level=='Senior High') {
                 return this.subjects.filter(e=>{
@@ -175,7 +182,7 @@ export default {
                 this.AdviserEnrollmentStore.getSubjects(this.AdviserEnrollmentStore.state.selectedELID);
                 this.AppStore.toast(e.data,2000,'success');
             });
-        }
+        },
     },
 
     created() {
