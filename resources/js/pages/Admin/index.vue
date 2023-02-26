@@ -7,7 +7,7 @@
                         Active S.Y.
                     </v-card-title>
                     <v-card-text>
-                        <h1>{{ AdminSYStore.state.activeSY }}</h1>
+                        <h3>{{ AdminSYStore.state.activeSY }}</h3>
                     </v-card-text>
                 </v-card>
             </v-col>

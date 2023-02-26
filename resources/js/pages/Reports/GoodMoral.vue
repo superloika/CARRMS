@@ -36,7 +36,7 @@
 
         <v-container>
 
-            <v-card class="pa-2">
+            <v-card class="pa-2" elevation="0">
                 <!-- <v-sheet align="center" justify="center" > -->
                     <div class="d-flex justify-center">
                         <div class="pr-6">
@@ -62,10 +62,16 @@
                         <v-sheet>
                             <p class="font-weight-bold">To Whom It May Concern:</p>
                             <br>
-                            <p>This is to certify that <strong>{{ ReportsStore.state.generateCOE.student_firstname }}
+                            <p>
+                                &ensp; &emsp;
+                                This is to certify that <strong>{{ ReportsStore.state.generateCOE.student_firstname }}
                                 {{ ReportsStore.state.generateCOE.student_middlename }}
-                                {{ ReportsStore.state.generateCOE.student_lastname }}</strong> was a bonafide student in
-                                this institution as <strong>{{ReportsStore.state.generateCOE.grade }}</strong> student
+                                {{ ReportsStore.state.generateCOE.student_lastname }}</strong>
+                                {{ ReportsStore.state.generateCOE.sy==AdminSYStore.state.activeSY?'is':'was' }}
+                                a bonafide student in
+                                this institution as <strong>{{ReportsStore.state.generateCOE.grade }}</strong>
+                                {{ ReportsStore.state.generateCOE.level != 'Junior High' ||
+                                ReportsStore.state.generateCOE.level != 'Senior High' ? 'pupil' : 'student' }}
                                 for the school year <strong>{{ ReportsStore.state.generateCOE.sy }}</strong>.
                             </p>
                             <p>This is to certify futher that during his studies here in this school, we observed him
@@ -105,11 +111,15 @@
                             <br>
                         </v-sheet>
                     </v-container>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
                     <v-sheet align="right">
-                        <span>
+                        <div>
                             <p class="font-weight-bold pa-0 ma-0" style="text-decoration:underline">EMETERIO C. JAVINEZ JR., LPT, MAED</p>
-                            <em>School Principal</em>
-                        </span>
+                            <em class="pr-16 mr-6">School Principal</em>
+                        </div>
                     </v-sheet>
                 </v-container>
             </v-card>

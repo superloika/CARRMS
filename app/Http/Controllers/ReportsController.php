@@ -130,6 +130,7 @@ class ReportsController extends Controller
                 ->select(
                     'enrollment_line.*',
                     'sections.grade',
+                    'sections.level',
                     'schoolyears.sy',
                     'students.firstname as student_firstname',
                     'students.middlename as student_middlename',

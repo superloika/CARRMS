@@ -59,7 +59,7 @@
             <v-card class="pa-2">
                 <br>
                 <v-row>
-                    <v-col md="4">
+                    <v-col cols="3">
                         <v-sheet style="background-colorx:blue;" align="right" justify="right">
                             <v-img src="/img/ca.jfif"
                                 height="100"
@@ -68,7 +68,7 @@
                             </v-img>
                         </v-sheet>
                     </v-col>
-                    <v-col md="4">
+                    <v-col cols="6">
                         <v-sheet class="text-align-center" align="center" justify="center">
                             <div class="font-weight-bold">DEPARTMENT OF EDUCATION</div>
                             <div class="text-caption">Region VII, Central Visayas</div>
@@ -81,57 +81,66 @@
                             <!-- <v-divider></v-divider> -->
                         </v-sheet>
                     </v-col>
-                    <v-col md="4"></v-col>
+                    <v-col cols="3">
+                        <v-sheet style="background-colorx:blue;" align="left" justify="left">
+                            <v-img src="/img/deped_seal.webp"
+                                height="100"
+                                width="100"
+                            >
+                            </v-img>
+                        </v-sheet>
+                    </v-col>
                 </v-row>
 
                 <v-card-text class="black--text">
                     <v-row>
-                        <v-col md="12" align="center" justify="center" style="background-color:#f2f2f2;">
+                        <v-col cols="12" align="center" justify="center" style="background-color:#f2f2f2;">
                             <strong>Learner's Information</strong>
                         </v-col>
 
-                        <v-col md="4">
+                        <v-col cols="4">
                             <span>LAST NAME: </span><strong>{{ pr.profile.lastname }}</strong>
                         </v-col>
-                        <v-col md="4">
+                        <v-col cols="4">
                             <span>FIRST NAME: </span><strong>{{ pr.profile.firstname }}</strong>
                         </v-col>
-                        <v-col md="4">
+                        <v-col cols="4">
                             <span>MIDDLE NAME: </span><strong>{{ pr.profile.middlename }}</strong>
                         </v-col>
 
-                        <v-col md="3">
+                        <v-col cols="4">
                             <span>LRN: </span><strong>{{ pr.profile.lrn }}</strong>
                         </v-col>
-                        <v-col md="3">
+                        <v-col cols="4">
                             <span>Date of Birth: </span><strong>{{ pr.profile.dob }}</strong>
                         </v-col>
-                        <v-col md="3">
+                        <v-col cols="4">
                             <span>Sex: </span><strong>{{ pr.profile.gender }}</strong>
                         </v-col>
-                        <v-col md="3">
+                        <!-- <v-col cols="3">
                             <span>Date of Admission: </span><strong></strong>
-                        </v-col>
+                        </v-col> -->
                     </v-row>
 
                     <!-- scholastic record -->
                     <v-row>
-                        <v-col md="12" align="center" justify="center" style="background-color:#f2f2f2;">
+                        <v-col cols="12" align="center" justify="center" style="background-color:#f2f2f2;">
                             <strong>Scholastic Record</strong>
                         </v-col>
 
+                        <!-- below Senior High -->
                         <div v-if="level!='Senior High'">
                             <v-row v-for="s in ReportsStore.state.permaRecord.scholasticRec" :key="s.grade_id">
-                                <v-col md="3">
+                                <v-col md="3" sm="3">
                                     <span>SCHOOL: </span><strong>CARMEL ACADEMY</strong>
                                 </v-col>
-                                <v-col md="3">
+                                <v-col md="3" sm="3">
                                     <span>SCHOOL ID: </span><strong>407537</strong>
                                 </v-col>
-                                <v-col md="2">
+                                <v-col md="2" sm="2">
                                     <span>GRADE LEVEL: </span><strong>{{ s.grade }}</strong>
                                 </v-col>
-                                <v-col md="2">
+                                <v-col md="2" sm="2">
                                     <span>SY: </span><strong>{{ s.sy }}</strong>
                                 </v-col>
                                 <!-- <v-col md="4">
@@ -140,13 +149,13 @@
                                 <v-col md="4">
                                     <span>TRACK/STRAND: </span><strong>{{ s.strand_name }}</strong>
                                 </v-col> -->
-                                <v-col md="2">
+                                <v-col md="2" sm="2">
                                     <span>SECTION: </span><strong>{{ s.section }} </strong>
                                 </v-col>
 
                                 <!-- subjects table -->
-                                <v-col md="12">
-                                    <table>
+                                <v-col cols="12">
+                                    <table style="width:100%">
                                         <thead>
                                             <tr>
                                                 <th>Subjects</th>
@@ -179,33 +188,37 @@
                                     </table>
                                 </v-col>
 
-                                <v-col md="12">
-                                    <span>REMARKS: _________________________________________________________</span>
+                                <v-col cols="12">
+                                    <span>REMARKS: </span>
                                 </v-col>
-                                <v-col md="4">
+                                <v-col cols="4">
                                     <span>Prepared By:</span>
                                 </v-col>
-                                <v-col md="4">
+                                <v-col cols="5">
                                     <span>Certified True and Correct:</span>
                                 </v-col>
-                                <v-col md="4">
-                                    <span>Date Checked (MM/DD/YYYY)</span>
+                                <v-col cols="3">
+                                    <span>Date Checked</span>
                                 </v-col>
-                                <v-col md="4" align="center" justify="center">
+                                <v-col cols="4" align="center" justify="center">
                                     <strong style="border-bottom:1px solid #ccc;">
-                                        {{ s.adviser_firstname }} {{ s.adviser_middlename }} {{ s.adviser_lastname }}
+                                        {{ s.adviser_firstname.toUpperCase() }}
+                                        {{ s.adviser_middlename.toUpperCase() }}
+                                        {{ s.adviser_lastname.toUpperCase() }}
                                     </strong>
-                                    <br><span>Signature of Adviser over Printed Name</span>
+                                    <br><span><small>Adviser</small></span>
                                 </v-col>
-                                <v-col md="4" align="center" justify="center">
+                                <v-col cols="5" align="center" justify="center">
                                     <strong style="border-bottom:1px solid #ccc;">
-                                        EMETERIO C. JAVINEZ JR.,LPT,MAED, Principal</strong>
-                                    <br><span>Signature of Authorized Person over Printed Name, Designation</span>
+                                        EMETERIO C. JAVINEZ JR.,LPT,MAED</strong>
+                                    <br><span><small>
+                                        Principal
+                                    </small></span>
                                 </v-col>
-                                <v-col md="4">
-                                    <span>___________________________</span>
+                                <v-col cols="3">
+                                    <span>____________</span>
                                 </v-col>
-                                <v-col md="12" class="py-4"><v-divider></v-divider></v-col>
+                                <v-col cols="12" class="py-4"><v-divider></v-divider></v-col>
                             </v-row>
                         </div>
 
@@ -213,30 +226,30 @@
                             <v-row v-for="s in ReportsStore.state.permaRecord.scholasticRec" :key="s.grade_id">
                                 <v-col>
                                     <v-row v-for="sem in [1, 2]" :key="sem">
-                                        <v-col md="3">
+                                        <v-col cols="3">
                                             <span>SCHOOL: </span><strong>CARMEL ACADEMY</strong>
                                         </v-col>
-                                        <v-col md="3">
+                                        <v-col cols="3">
                                             <span>SCHOOL ID: </span><strong>407537</strong>
                                         </v-col>
-                                        <v-col md="3">
+                                        <v-col cols="3">
                                             <span>GRADE LEVEL: </span><strong>{{ s.grade }}</strong>
                                         </v-col>
-                                        <v-col md="3">
+                                        <v-col cols="3">
                                             <span>SY: </span><strong>{{ s.sy }}</strong>
                                         </v-col>
-                                        <v-col md="4">
+                                        <v-col cols="4">
                                             <span>SEM: </span><strong>{{ sem }}</strong>
                                         </v-col>
-                                        <v-col md="4">
+                                        <v-col cols="4">
                                             <span>TRACK/STRAND: </span><strong>{{ s.strand_name }}</strong>
                                         </v-col>
-                                        <v-col md="4">
+                                        <v-col cols="4">
                                             <span>SECTION: </span><strong>{{ s.section }} </strong>
                                         </v-col>
 
                                         <!-- subjects table -->
-                                        <v-col md="12">
+                                        <v-col cols="12">
                                             <table>
                                                 <thead>
                                                     <tr>
@@ -272,33 +285,35 @@
                                             </table>
                                         </v-col>
 
-                                        <v-col md="12">
-                                            <span>REMARKS: _________________________________________________________</span>
+                                        <v-col cols="12">
+                                            <span>REMARKS: </span>
                                         </v-col>
-                                        <v-col md="4">
+                                        <v-col cols="4">
                                             <span>Prepared By:</span>
                                         </v-col>
-                                        <v-col md="4">
+                                        <v-col cols="5">
                                             <span>Certified True and Correct:</span>
                                         </v-col>
-                                        <v-col md="4">
-                                            <span>Date Checked (MM/DD/YYYY)</span>
+                                        <v-col cols="3">
+                                            <span>Date Checked</span>
                                         </v-col>
-                                        <v-col md="4" align="center" justify="center">
+                                        <v-col cols="4" align="center" justify="center">
                                             <strong style="border-bottom:1px solid #ccc;">
                                                 {{ s.adviser_firstname }} {{ s.adviser_middlename }} {{ s.adviser_lastname }}
                                             </strong>
-                                            <br><span>Signature of Adviser over Printed Name</span>
+                                            <br><span>Adviser</span>
                                         </v-col>
-                                        <v-col md="4" align="center" justify="center">
+                                        <v-col cols="5" align="center" justify="center">
                                             <strong style="border-bottom:1px solid #ccc;">
-                                                EMETERIO C. JAVINEZ JR.,LPT,MAED, Principal</strong>
-                                            <br><span>Signature of Authorized Person over Printed Name, Designation</span>
+                                                EMETERIO C. JAVINEZ JR.,LPT,MAED</strong>
+                                            <br><span><small>
+                                                Principal
+                                            </small></span>
                                         </v-col>
-                                        <v-col md="4">
-                                            <span>___________________________</span>
+                                        <v-col cols="3">
+                                            <span>____________</span>
                                         </v-col>
-                                        <v-col md="12" class="py-4"><v-divider></v-divider></v-col>
+                                        <v-col cols="12" class="py-4"><v-divider></v-divider></v-col>
                                     </v-row>
                                 </v-col>
                             </v-row>

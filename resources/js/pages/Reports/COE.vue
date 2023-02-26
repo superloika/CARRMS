@@ -68,26 +68,38 @@
                         <v-sheet>
                             <p class="font-weight-bold">To Whom It May Concern:</p>
                             <br>
-                            <p>This is to certify that <strong>{{ ReportsStore.state.generateCOE.student_firstname }}
+                            <p>
+                                &ensp; &emsp;
+                                This is to certify that <strong>{{ ReportsStore.state.generateCOE.student_firstname }}
                                 {{ ReportsStore.state.generateCOE.student_middlename }}
-                                {{ ReportsStore.state.generateCOE.student_lastname }}</strong> is officially enrolled in Carmel
-                                Academy, Balilihan, Bohol as <strong>{{ReportsStore.state.generateCOE.grade }}</strong> student
+                                {{ ReportsStore.state.generateCOE.student_lastname }}</strong>
+                                {{ ReportsStore.state.generateCOE.sy==AdminSYStore.state.activeSY?'is':'was' }}
+                                officially enrolled in Carmel
+                                Academy, Balilihan, Bohol as <strong>{{ReportsStore.state.generateCOE.grade }}</strong>
+                                {{ ReportsStore.state.generateCOE.level != 'Junior High' ||
+                                ReportsStore.state.generateCOE.level != 'Senior High' ? 'pupil' : 'student' }}
                                 for <strong>S.Y. {{ ReportsStore.state.generateCOE.sy }}</strong>.
                             </p>
                             <p>This certification is issued upon the request of the above mentioned
                                 name for whatever legal purpose it may serve.
                             </p>
-                            <p>Issued this <strong>{{ date }}</strong> at CARMEL ACADEMY, Del Carmen Norte,
+                            <p>Issued this <strong>{{ date }}</strong> at Carmel Academy, Del Carmen Norte,
                                 Balilihan, Bohol.
                             </p>
                             <br>
                         </v-sheet>
                     </v-container>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
                     <v-sheet align="right">
-                        <span>
-                            <p class="font-weight-bold pa-0 ma-0" style="text-decoration:underline">EMETERIO C. JAVINEZ JR., LPT, MAED</p>
-                            <em>School Principal</em>
-                        </span>
+                        <div>
+                            <p class="font-weight-bold pa-0 ma-0" style="text-decoration:underline">
+                                EMETERIO C. JAVINEZ JR., LPT, MAED
+                            </p>
+                            <em class="pr-16 mr-6">School Principal</em>
+                        </div>
                     </v-sheet>
                 </v-container>
             </v-card>

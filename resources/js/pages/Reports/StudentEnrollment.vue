@@ -41,23 +41,41 @@
         <!-- <v-container v-if="level!='Senior High'"> -->
         <v-container>
             <v-card class="pa-2" v-if="keys.length">
-                <v-sheet class="text-align-center" align="center" justify="center">
-                    <div class="text-h6">List of Students</div>
-                    <div class="">{{ level }}</div>
-                    <div class="">{{ AdminSYStore.state.activeSY }}</div>
-                    <br>
-                    <v-divider></v-divider>
-                </v-sheet>
+                <v-row>
+                    <v-col cols="4">
+                        <v-sheet style="background-colorx:blue;" align="right" justify="right">
+                            <v-img src="/img/ca.jfif"
+                                height="80"
+                                width="80"
+                            >
+                            </v-img>
+                        </v-sheet>
+                    </v-col>
+                    <v-col cols="4">
+                        <v-sheet class="text-align-center" align="center" justify="center">
+                            <div class="text-h6">List of Students</div>
+                            <div class="">{{ level }}</div>
+                            <div class="">{{ AdminSYStore.state.activeSY }}</div>
+                            <br>
+
+                        </v-sheet>
+                    </v-col>
+                    <v-col cols="4">
+
+                    </v-col>
+                </v-row>
+                <br>
+                <br>
                 <v-card-text >
                     <v-row v-for="k in keys" :key="k">
-                        <v-col>
+                        <v-col cols="12">
                             <v-row>
-                                <v-col xs="12" sm="12" md="12" lg="12" class="mb-0 pb-0">
-                                    <div class="text-h6">
+                                <v-col cols="12" class="mb-0 pb-0">
+                                    <div class="text-h6" style="border-bottom: 1px solid #c2c2c2">
                                         {{ k }}
                                     </div>
                                 </v-col>
-                                <v-col xs="6" sm="6" md="6" lg="6" style="borderx:1px dotted #cccccc;" class="">
+                                <v-col cols="6" style="borderx:1px dotted #cccccc;" class="">
                                     <div class="font-weight-bold">
                                         Male
                                     </div>
@@ -72,7 +90,7 @@
                                         </tbody>
                                     </table>
                                 </v-col>
-                                <v-col xs="6" sm="6" md="6" lg="6" style="borderx:1px dotted #cccccc;" class="">
+                                <v-col cols="6" style="borderx:1px dotted #cccccc;" class="">
                                     <div class="font-weight-bold">
                                         Female
                                     </div>
@@ -88,10 +106,27 @@
                                     </table>
                                 </v-col>
                             </v-row>
-                        <br>
+                            <v-row class="pt-6">
+                                <v-col cols="6">
+                                    <div style="text-align:center">
+                                        <p class="font-weight-bold pa-0 ma-0">
+                                            {{ extractAdviserName(ReportsStore.state.studentEnrollment[k]).toUpperCase() }}
+                                        </p>
+                                        <p class="pa-0 ma-0"><small>Adviser</small></p>
+                                    </div>
+                                </v-col>
+                                <v-col cols="6">
+                                    <div style="text-align:center">
+                                        <p class="font-weight-bold pa-0 ma-0">
+                                            EMETERIO C. JAVINEZ JR.,LPT,MAED
+                                        </p>
+                                        <p class="pa-0 ma-0"><small>Principal</small></p>
+                                    </div>
+                                </v-col>
+                            </v-row>
+                            <br>
                         </v-col>
                     </v-row>
-
                 </v-card-text>
 
             </v-card>
@@ -141,7 +176,19 @@ export default {
             setTimeout(()=>{
                 this.AppStore.state.printMode=false;
             }, 1000)
-        }
+        },
+
+        extractAdviserName(obj) {
+            const f = obj['Female'];
+            const m = obj['Male'];
+            console.log(f,m);
+            if(f!=undefined) {
+                return `${f[0].adviser_firstname} ${f[0].adviser_middlename} ${f[0].adviser_lastname}`;
+            } else if(m!=undefined) {
+                return `${m[0].adviser_firstname} ${m[0].adviser_middlename} ${m[0].adviser_lastname}`;
+            }
+        },
+
     },
 
     watch: {
