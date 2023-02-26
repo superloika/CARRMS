@@ -11,9 +11,9 @@ const state = Vue.observable({
 
 
 const actions = {
-    async getStudents() {
+    async getStudents(level='') {
         await axios.get(
-            `${AppStore.state.siteUrl}admin/students/getStudents`
+            `${AppStore.state.siteUrl}admin/students/getStudents?level=${level}`
         ).then(e=>{
             state.students = e.data;
         });

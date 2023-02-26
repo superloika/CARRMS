@@ -25,20 +25,6 @@
                     </div>
                 </template>
             </v-combobox> -->
-            <v-combobox outlined label="Search student here" placeholder="Search by name or LRN"
-                hide-details dense
-                :items="AdminStudentsStore.state.students"
-                item-text="searchKey"
-                item-value="id"
-                :return-object="true"
-                v-model="student"
-            >
-                <!-- <template v-slot:item="{ item }">
-                    <div>
-                        {{item.lastname}}, {{item.firstname}} {{item.middlename}} ({{ item.lrn }})
-                    </div>
-                </template> -->
-            </v-combobox>
 
             <v-select outlined dense hide-details rounded filledx label="Level"
                 :items="AppStore.state.levels"
@@ -48,6 +34,22 @@
             >
             </v-select>
 
+            <v-combobox outlined label="Search student here" placeholder="Search by name or LRN"
+                hide-details dense
+                :items="AdminStudentsStore.state.students"
+                item-text="searchKey"
+                item-value="id"
+                :return-object="true"
+                v-model="student"
+                class="ml-2"
+            >
+                <!-- <template v-slot:item="{ item }">
+                    <div>
+                        {{item.lastname}}, {{item.firstname}} {{item.middlename}} ({{ item.lrn }})
+                    </div>
+                </template> -->
+            </v-combobox>
+
             <!-- <v-btn color="primary" class="ml-2" @click="generate"
                 :disabled="false">Generate</v-btn> -->
 
@@ -56,7 +58,7 @@
         </v-app-bar>
 
         <v-container v-if="showOutput">
-            <v-card class="pa-2">
+            <v-card class="pa-2" elevation="0">
                 <br>
                 <v-row>
                     <v-col cols="3">
@@ -363,18 +365,19 @@ export default {
 
     watch: {
         student() {
-            this.level = '';
-        },
-        level() {
-            if(this.level != '') {
+            if(this.student != '') {
                 this.generate();
             }
+        },
+        level() {
+            this.student = '';
+            this.AdminStudentsStore.getStudents(this.level);
         }
     },
 
     created(){
         this.AdminSYStore.getSYs();
-        this.AdminStudentsStore.getStudents();
+        // this.AdminStudentsStore.getStudents();
     },
 
     beforeDestroy() {

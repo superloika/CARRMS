@@ -40,7 +40,7 @@
 
         <!-- <v-container v-if="level!='Senior High'"> -->
         <v-container>
-            <v-card class="pa-2" v-if="keys.length">
+            <v-card class="pa-2" v-if="keys.length" elevation="0">
                 <v-row>
                     <v-col cols="4">
                         <v-sheet style="background-colorx:blue;" align="right" justify="right">

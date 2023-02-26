@@ -10,6 +10,35 @@
                 </v-list-item-content>
             </v-list-item>
 
+            <v-list-group no-action color="dark">
+                <template v-slot:activator>
+                    <v-list-item-icon class="mr-2">
+                        <v-icon>mdi-file-multiple</v-icon>
+                    </v-list-item-icon>
+                    <v-list-item-content>
+                        <v-list-item-title>Reports</v-list-item-title>
+                    </v-list-item-content>
+                </template>
+
+                <v-list-item link to="/reports/list-of-students">
+                    <v-list-item-icon class="mr-2">
+                        <v-icon>mdi-account-multiple</v-icon>
+                    </v-list-item-icon>
+                    <v-list-item-content>
+                        <v-list-item-title>List of Students</v-list-item-title>
+                    </v-list-item-content>
+                </v-list-item>
+
+                <v-list-item link to="/reports/permarecord">
+                    <v-list-item-icon class="mr-2">
+                        <v-icon>mdi-file</v-icon>
+                    </v-list-item-icon>
+                    <v-list-item-content>
+                        <v-list-item-title>Student Permanent Record</v-list-item-title>
+                    </v-list-item-content>
+                </v-list-item>
+            </v-list-group>
+
             <v-list-item link to="/about">
                 <v-list-item-icon class="mr-2">
                     <v-icon>mdi-information</v-icon>

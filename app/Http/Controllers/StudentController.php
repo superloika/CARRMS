@@ -11,12 +11,30 @@ class StudentController extends Controller
 {
     public function getStudents() {
         try {
+            $level = request()->level ?? '';
+            // dd($level);
             $res = DB::table('students')
-            ->select(
-                'students.*',
-                DB::raw("CONCAT(`firstname`,' ',`middlename`,' ',`lastname`,' - ',`lrn`) as searchKey")
-            )
-            ->latest()->get();
+            ->when($level=='', function($q){
+                $q->select(
+                    'students.*',
+                    DB::raw("CONCAT(`firstname`,' ',`middlename`,' ',`lastname`,' - ',`lrn`) as searchKey")
+                )
+                ;
+            })
+            ->when($level!='', function($q) use($level){
+                $q->select(
+                    'students.*',
+                    DB::raw("CONCAT(`firstname`,' ',`middlename`,' ',`lastname`,' - ',`lrn`) as searchKey")
+                )
+                ->join('enrollment_line','enrollment_line.student_id','students.id')
+                ->join('enrollment_head','enrollment_head.id','enrollment_line.head_id')
+                ->join('sections','sections.id','enrollment_head.section_id')
+                ->where('sections.level', $level)
+                // ->limit(1)
+                ->distinct()
+                ;
+            })
+            ->orderBy('id','desc')->get();
             return response()->json($res, 200);
         } catch (\Throwable $th) {
             return response()->json($th->getMessage(), 500);
