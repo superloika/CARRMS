@@ -10,6 +10,7 @@ const state = Vue.observable({
     viewDialog: null,
     selectedELID: null,
     selectedStudentSubjects: [],
+    selectedStudentSubjectsOrig: [],
 });
 
 
@@ -54,6 +55,7 @@ const actions = {
     },
     async getSubjects(enrollment_line_id) {
         state.selectedStudentSubjects = [];
+        state.selectedStudentSubjectsOrig = [];
         await axios.post(
             `${AppStore.state.siteUrl}adviser/sections/getSubjects`,
             {
@@ -61,6 +63,7 @@ const actions = {
             }
         ).then(e=>{
             state.selectedStudentSubjects = e.data;
+            state.selectedStudentSubjectsOrig = JSON.parse(JSON.stringify(e.data));
             console.log(e.data)
         });
     },
