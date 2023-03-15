@@ -160,7 +160,7 @@
                                     <table style="width:100%">
                                         <thead>
                                             <tr>
-                                                <th style="width:60%">Subjects</th>
+                                                <th style="width:60%;text-align:left">Subjects</th>
                                                 <th>1st</th>
                                                 <th>2nd</th>
                                                 <th>3rd</th>
@@ -171,7 +171,7 @@
                                         </thead>
                                         <tbody>
                                             <tr v-for="subj in s.subjects" :key="subj.id">
-                                                <td style="width:60%">{{ subj.subject_name }}</td>
+                                                <td style="width:60%;text-align:left">{{ subj.subject_name }}</td>
                                                 <td>{{ subj.first }}</td>
                                                 <td>{{ subj.second }}</td>
                                                 <td>{{ subj.third }}</td>
@@ -258,7 +258,7 @@
                                                 <thead>
                                                     <tr>
                                                         <th>Type</th>
-                                                        <th style="width:50%">Subjects</th>
+                                                        <th style="width:50%;text-align:left">Subjects</th>
                                                         <th v-if="sem==1">1st</th>
                                                         <th v-if="sem==1">2nd</th>
                                                         <th v-if="sem==2">3rd</th>
@@ -270,7 +270,7 @@
                                                 <tbody>
                                                     <tr v-for="subj in s.subjects[sem]" :key="subj.id">
                                                         <td>{{ subj.subject_type }}</td>
-                                                        <td style="width:50%">{{ subj.subject_name }}</td>
+                                                        <td style="width:50%;text-align:left">{{ subj.subject_name }}</td>
                                                         <td v-if="sem==1">{{ subj.first }}</td>
                                                         <td v-if="sem==1">{{ subj.second }}</td>
                                                         <td v-if="sem==2">{{ subj.third }}</td>
