@@ -74,7 +74,10 @@
                                 ReportsStore.state.generateCOE.level != 'Senior High' ? 'pupil' : 'student' }}
                                 for the school year <strong>{{ ReportsStore.state.generateCOE.sy }}</strong>.
                             </p>
-                            <p>This is to certify futher that during his studies here in this school, we observed him
+                            <p>This is to certify futher that during
+                                {{ ReportsStore.state.generateCOE.gender=='Male' ? 'his' : 'her' }}
+                                studies here in this school, we observed
+                                {{ ReportsStore.state.generateCOE.gender=='Male' ? 'him' : 'her' }}
                                 as a student of:
                             </p>
                             <table>

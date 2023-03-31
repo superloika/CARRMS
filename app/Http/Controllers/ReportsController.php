@@ -134,7 +134,8 @@ class ReportsController extends Controller
                     'schoolyears.sy',
                     'students.firstname as student_firstname',
                     'students.middlename as student_middlename',
-                    'students.lastname as student_lastname'
+                    'students.lastname as student_lastname',
+                    'students.gender'
                 )
                 ->join('enrollment_head','enrollment_head.id','enrollment_line.head_id')
                 ->join('schoolyears','schoolyears.id','enrollment_head.sy_id')
